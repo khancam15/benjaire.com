@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benjaire Systems — Technical Services</title>
+<meta name="description" content="How Benjaire delivers systems architecture, integration, and operational infrastructure services.">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://benjaire.com/systems.html">
+<meta property="og:title" content="Benjaire Systems — Technical Services">
+<meta property="og:description" content="Architecture, integration, and reliability services that reduce operational friction and create lasting leverage.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f5f8fc; --surface: #ffffff; --border: rgba(15,23,42,0.12);
+  --blue: #1e5bb8; --text-hi: #0f172a; --text-mid: #475569; --text-lo: #64748b;
+  --mono: 'IBM Plex Mono', monospace; --sans: 'Public Sans', sans-serif; --head: 'Manrope', sans-serif;
+}
+body { font-family: var(--sans); color: var(--text-hi); background: radial-gradient(circle at center top, rgba(30,91,184,0.09), transparent 42%), var(--bg); line-height: 1.65; }
+
+#scrollProgress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; border: 0; z-index: 200; appearance: none; }
+#scrollProgress::-webkit-progress-bar { background: rgba(15,23,42,0.08); }
+#scrollProgress::-webkit-progress-value { background: var(--blue); }
+#scrollProgress::-moz-progress-bar { background: var(--blue); }
+
+.wrapper { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+nav { position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
+.nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: var(--head); font-weight: 800; font-size: 18px; letter-spacing: 0.04em; text-decoration: none; color: var(--text-hi); }
+.links { display: flex; gap: 20px; }
+.links a { font-family: var(--mono); font-size: 12px; text-decoration: none; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; }
+.links a:hover { color: var(--blue); }
+.links a.active { color: var(--blue); }
+
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-hi); transition: transform 0.25s, opacity 0.25s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu { position: fixed; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 28px 24px; display: flex; flex-direction: column; gap: 20px; transform: translateY(-110%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 99; pointer-events: none; }
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+.mobile-menu a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; }
+.mobile-menu a.active { color: var(--blue); }
+
+.hero { padding: 72px 0 0; }
+.eyebrow { font-family: var(--mono); font-size: 11px; color: var(--blue); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
+h1 { font-family: var(--head); font-size: clamp(36px, 7vw, 64px); line-height: 1.05; margin-bottom: 18px; }
+.lead { max-width: 760px; color: var(--text-mid); font-size: 18px; }
+
+.hero-media { position: relative; margin: 36px 0 0; height: 380px; overflow: hidden; border: 1px solid var(--border); }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(8%) contrast(1.05); transition: transform 1s ease; }
+.hero-media:hover img { transform: scale(1.02); }
+.hero-media-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.35) 0%, transparent 55%), linear-gradient(to right, rgba(245,248,252,0.1) 0%, transparent 25%); pointer-events: none; }
+.hero-media-cap { position: absolute; bottom: 16px; left: 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; background: rgba(15,23,42,0.55); padding: 4px 10px; backdrop-filter: blur(4px); }
+
+.columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 48px 0 54px; }
+.panel { background: var(--surface); border: 1px solid var(--border); padding: 22px; }
+.panel h3 { font-family: var(--head); font-size: 22px; margin-bottom: 10px; }
+.panel p { color: var(--text-mid); }
+.insight { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 10px; }
+.insight summary { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-mid); cursor: pointer; }
+.insight p { margin-top: 8px; color: var(--text-mid); font-size: 13px; }
+
+.section { border-top: 1px solid var(--border); padding: 34px 0; }
+.section h2 { font-family: var(--head); font-size: 28px; margin-bottom: 12px; }
+.metrics { margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap; }
+.metric { border: 1px solid var(--border); background: var(--surface); padding: 10px 12px; font-family: var(--mono); color: var(--text-mid); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+.footer { border-top: 1px solid var(--border); margin-top: 30px; padding: 20px 0 34px; color: var(--text-lo); font-family: var(--mono); font-size: 12px; }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .columns { grid-template-columns: 1fr; }
+  .links { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero-media { height: 240px; }
+}
+</style>
+</head>
+<body>
+<progress id="scrollProgress" max="100" value="0" aria-label="Page scroll progress"></progress>
+<nav>
+  <div class="wrapper nav-inner">
+    <a class="logo" href="index.html">Benjaire</a>
+    <div class="links">
+      <a href="index.html#home">Home</a>
+      <a href="commerce.html">Commerce</a>
+      <a href="technology.html">Technology</a>
+      <a href="systems.html" class="active">Systems</a>
+    </div>
+    <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#home">Home</a>
+  <a href="commerce.html">Commerce</a>
+  <a href="technology.html">Technology</a>
+  <a href="systems.html" class="active">Systems</a>
+</div>
+
+<main class="wrapper">
+  <section class="hero reveal">
+    <div class="eyebrow">Venture 03</div>
+    <h1>Systems and Technical Services</h1>
+    <p class="lead">The Systems venture helps organizations strengthen their technical backbone. We design and implement integrations, architecture patterns, and operating standards that increase speed while reducing operational failure points.</p>
+    <div class="hero-media">
+      <img
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=85"
+        alt="Server infrastructure and data center operations — Benjaire Systems"
+        loading="eager"
+      >
+      <div class="hero-media-overlay"></div>
+      <div class="hero-media-cap">Systems · Technical Services</div>
+    </div>
+  </section>
+
+  <section class="columns">
+    <article class="panel reveal">
+      <h3>Architecture</h3>
+      <p>We assess system boundaries, data flow, and dependency risks, then define architecture paths that support growth without constant rework.</p>
+      <details class="insight">
+        <summary>Execution Note</summary>
+        <p>Architecture decisions are sequenced to reduce migration risk and protect service continuity.</p>
+      </details>
+    </article>
+    <article class="panel reveal" style="transition-delay:.05s;">
+      <h3>Integration</h3>
+      <p>We connect internal tools, external platforms, and reporting layers so teams can execute from a single, reliable source of truth.</p>
+      <details class="insight">
+        <summary>Execution Note</summary>
+        <p>Integration work includes data contracts and ownership mapping to avoid downstream drift.</p>
+      </details>
+    </article>
+    <article class="panel reveal" style="transition-delay:.1s;">
+      <h3>Operational Reliability</h3>
+      <p>Runbooks, incident response practices, and observability standards are established so issues are handled quickly and consistently.</p>
+      <details class="insight">
+        <summary>Execution Note</summary>
+        <p>Critical paths are instrumented first, with alert quality tuned to reduce false positives.</p>
+      </details>
+    </article>
+    <article class="panel reveal" style="transition-delay:.15s;">
+      <h3>Service Design</h3>
+      <p>Each service is scoped to real business outcomes with clear ownership, measurable targets, and rollout plans for adoption.</p>
+      <details class="insight">
+        <summary>Execution Note</summary>
+        <p>Service adoption plans include enablement assets and operational SLAs from day one.</p>
+      </details>
+    </article>
+  </section>
+
+  <section class="section reveal">
+    <h2>Outcomes We Target</h2>
+    <p>Systems should reduce friction and create leverage. We prioritize improvements that raise execution speed, reliability, and team clarity across core operations.</p>
+    <div class="metrics">
+      <div class="metric">Lower Failure Rates</div>
+      <div class="metric">Faster Process Cycle Time</div>
+      <div class="metric">Higher Operational Visibility</div>
+      <div class="metric">Simpler Day-to-Day Execution</div>
+    </div>
+    <details class="insight">
+      <summary>Measurement Lens</summary>
+      <p>Success is tracked through cycle-time reduction, incident recovery quality, and operational transparency.</p>
+    </details>
+  </section>
+
+  <div class="footer">Benjaire Systems — Infrastructure that scales with confidence.</div>
+</main>
+
+<script>
+const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+const sp = document.getElementById('scrollProgress');
+function syncSP() { const st = window.scrollY, m = document.documentElement.scrollHeight - window.innerHeight; sp.value = m > 0 ? (st/m)*100 : 0; }
+window.addEventListener('scroll', syncSP, { passive: true }); window.addEventListener('resize', syncSP); syncSP();
+const nt = document.getElementById('navToggle'), mm = document.getElementById('mobileMenu');
+nt.addEventListener('click', () => { nt.classList.toggle('open'); mm.classList.toggle('open'); });
+mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nt.classList.remove('open'); mm.classList.remove('open'); }));
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benjaire Technology — AI Systems</title>
+<meta name="description" content="How Benjaire builds applied AI systems for real operations, automation, and decision workflows.">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://benjaire.com/technology.html">
+<meta property="og:title" content="Benjaire Technology — Applied AI for Real Operations">
+<meta property="og:description" content="We build agentic AI systems that replace manual, repeatable workflows — deployed safely in production environments.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f5f8fc; --surface: #ffffff; --border: rgba(15,23,42,0.12);
+  --blue: #1e5bb8; --text-hi: #0f172a; --text-mid: #475569; --text-lo: #64748b;
+  --mono: 'IBM Plex Mono', monospace; --sans: 'Public Sans', sans-serif; --head: 'Manrope', sans-serif;
+}
+body { font-family: var(--sans); color: var(--text-hi); background: radial-gradient(circle at top left, rgba(30,91,184,0.08), transparent 40%), var(--bg); line-height: 1.65; }
+
+#scrollProgress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; border: 0; z-index: 200; appearance: none; }
+#scrollProgress::-webkit-progress-bar { background: rgba(15,23,42,0.08); }
+#scrollProgress::-webkit-progress-value { background: var(--blue); }
+#scrollProgress::-moz-progress-bar { background: var(--blue); }
+
+.wrapper { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+nav { position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
+.nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: var(--head); font-weight: 800; font-size: 18px; letter-spacing: 0.04em; text-decoration: none; color: var(--text-hi); }
+.links { display: flex; gap: 20px; }
+.links a { font-family: var(--mono); font-size: 12px; text-decoration: none; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; }
+.links a:hover { color: var(--blue); }
+.links a.active { color: var(--blue); }
+
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-hi); transition: transform 0.25s, opacity 0.25s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu { position: fixed; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 28px 24px; display: flex; flex-direction: column; gap: 20px; transform: translateY(-110%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 99; pointer-events: none; }
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+.mobile-menu a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; }
+.mobile-menu a.active { color: var(--blue); }
+
+.hero { padding: 72px 0 0; }
+.eyebrow { font-family: var(--mono); font-size: 11px; color: var(--blue); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
+h1 { font-family: var(--head); font-size: clamp(36px, 7vw, 64px); line-height: 1.05; margin-bottom: 18px; }
+.lead { max-width: 760px; color: var(--text-mid); font-size: 18px; }
+
+.hero-media { position: relative; margin: 36px 0 0; height: 380px; overflow: hidden; border: 1px solid var(--border); }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(10%) contrast(1.04); transition: transform 1s ease; }
+.hero-media:hover img { transform: scale(1.02); }
+.hero-media-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.3) 0%, transparent 55%), linear-gradient(to right, rgba(245,248,252,0.1) 0%, transparent 30%); pointer-events: none; }
+.hero-media-cap { position: absolute; bottom: 16px; left: 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; background: rgba(15,23,42,0.55); padding: 4px 10px; backdrop-filter: blur(4px); }
+
+.timeline { display: grid; gap: 14px; margin: 48px 0 54px; }
+.step { background: var(--surface); border: 1px solid var(--border); padding: 18px 20px; }
+.step .label { font-family: var(--mono); color: var(--blue); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+.step h3 { font-family: var(--head); font-size: 20px; margin-bottom: 8px; }
+.step p { color: var(--text-mid); }
+
+.insight { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 10px; }
+.insight summary { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-mid); cursor: pointer; }
+.insight p { margin-top: 8px; color: var(--text-mid); font-size: 13px; }
+
+.section { border-top: 1px solid var(--border); padding: 34px 0; }
+.section h2 { font-family: var(--head); font-size: 28px; margin-bottom: 12px; }
+.section p { color: var(--text-mid); max-width: 860px; }
+.footer { border-top: 1px solid var(--border); margin-top: 30px; padding: 20px 0 34px; color: var(--text-lo); font-family: var(--mono); font-size: 12px; }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .links { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero-media { height: 240px; }
+}
+</style>
+</head>
+<body>
+<progress id="scrollProgress" max="100" value="0" aria-label="Page scroll progress"></progress>
+<nav>
+  <div class="wrapper nav-inner">
+    <a class="logo" href="index.html">Benjaire</a>
+    <div class="links">
+      <a href="index.html#home">Home</a>
+      <a href="commerce.html">Commerce</a>
+      <a href="technology.html" class="active">Technology</a>
+      <a href="systems.html">Systems</a>
+    </div>
+    <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#home">Home</a>
+  <a href="commerce.html">Commerce</a>
+  <a href="technology.html" class="active">Technology</a>
+  <a href="systems.html">Systems</a>
+</div>
+
+<main class="wrapper">
+  <section class="hero reveal">
+    <div class="eyebrow">Venture 02</div>
+    <h1>Technology and AI Systems</h1>
+    <p class="lead">This venture focuses on applied AI that improves real workflows, not demos. We identify repetitive high-friction work, design clear system boundaries, and deploy automation that teams can trust in day-to-day operations.</p>
+    <div class="hero-media">
+      <img
+        src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=85"
+        alt="Electronics and circuit board technology — Benjaire AI Systems"
+        loading="eager"
+      >
+      <div class="hero-media-overlay"></div>
+      <div class="hero-media-cap">Technology · AI Systems</div>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <article class="step reveal">
+      <div class="label">01 Discovery</div>
+      <h3>Workflow Mapping</h3>
+      <p>We map current-state tasks, identify bottlenecks, and select targets where automation creates measurable impact without introducing excessive risk.</p>
+      <details class="insight">
+        <summary>Execution Note</summary>
+        <p>We prioritize flows with frequent repetition, clear inputs, and measurable service-level expectations.</p>
+      </details>
+    </article>
+    <article class="step reveal" style="transition-delay:.06s;">
+      <div class="label">02 Build</div>
+      <h3>Agent and Tooling Design</h3>
+      <p>We define prompts, guardrails, integrations, and escalation paths so automated steps remain auditable and aligned to business rules.</p>
+      <details class="insight">
+        <summary>Execution Note</summary>
+        <p>Every automation has fallback logic and human override controls before production release.</p>
+      </details>
+    </article>
+    <article class="step reveal" style="transition-delay:.12s;">
+      <div class="label">03 Operate</div>
+      <h3>Monitoring and Iteration</h3>
+      <p>Performance is tracked through quality, latency, and cost metrics. We iterate quickly while preserving reliability for production workloads.</p>
+      <details class="insight">
+        <summary>Execution Note</summary>
+        <p>Model and workflow quality are reviewed continuously with clear rollback pathways for regressions.</p>
+      </details>
+    </article>
+  </section>
+
+  <section class="section reveal">
+    <h2>Typical Use Cases</h2>
+    <p>Internal support copilots, document processing pipelines, automated reporting, and decision-assist systems for operations, finance, and customer workflows.</p>
+  </section>
+
+  <section class="section reveal" style="transition-delay:.06s;">
+    <h2>Principles</h2>
+    <p>We optimize for maintainability and outcomes. Every deployment should reduce operational drag, improve response quality, and support the team rather than adding fragile complexity.</p>
+    <details class="insight">
+      <summary>Delivery Standard</summary>
+      <p>Solutions are successful when teams adopt them quickly and operational risk trends downward over time.</p>
+    </details>
+  </section>
+
+  <div class="footer">Benjaire Technology — Practical systems for real operations.</div>
+</main>
+
+<script>
+const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+const sp = document.getElementById('scrollProgress');
+function syncSP() { const st = window.scrollY, m = document.documentElement.scrollHeight - window.innerHeight; sp.value = m > 0 ? (st/m)*100 : 0; }
+window.addEventListener('scroll', syncSP, { passive: true }); window.addEventListener('resize', syncSP); syncSP();
+const nt = document.getElementById('navToggle'), mm = document.getElementById('mobileMenu');
+nt.addEventListener('click', () => { nt.classList.toggle('open'); mm.classList.toggle('open'); });
+mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nt.classList.remove('open'); mm.classList.remove('open'); }));
+</script>
+</body>
+</html>

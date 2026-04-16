@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benjaire Services — What We Offer</title>
+<meta name="description" content="Professional services from Benjaire: AI system builds, technical architecture, ecommerce operations consulting, and systems integration for businesses ready to scale.">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://benjaire.com/services.html">
+<meta property="og:title" content="Benjaire Services — What We Offer">
+<meta property="og:description" content="AI systems, technical architecture, and ecommerce consulting from Benjaire. We build operational leverage for businesses that demand long-term results.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f5f8fc; --surface: #ffffff; --border: rgba(15,23,42,0.12);
+  --blue: #1e5bb8; --blue-dim: rgba(30,91,184,0.08);
+  --text-hi: #0f172a; --text-mid: #475569; --text-lo: #64748b;
+  --mono: 'IBM Plex Mono', monospace; --sans: 'Public Sans', sans-serif; --head: 'Manrope', sans-serif;
+}
+body { font-family: var(--sans); color: var(--text-hi); background: radial-gradient(circle at 60% top, rgba(30,91,184,0.07), transparent 44%), var(--bg); line-height: 1.65; }
+
+#scrollProgress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; border: 0; z-index: 200; appearance: none; }
+#scrollProgress::-webkit-progress-bar { background: rgba(15,23,42,0.08); }
+#scrollProgress::-webkit-progress-value { background: var(--blue); }
+#scrollProgress::-moz-progress-bar { background: var(--blue); }
+
+.wrapper { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+nav { position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
+.nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: var(--head); font-weight: 800; font-size: 18px; letter-spacing: 0.04em; text-decoration: none; color: var(--text-hi); }
+.links { display: flex; gap: 20px; }
+.links a { font-family: var(--mono); font-size: 12px; text-decoration: none; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; }
+.links a:hover { color: var(--blue); }
+.links a.active { color: var(--blue); }
+
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-hi); transition: transform 0.25s, opacity 0.25s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu { position: fixed; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 28px 24px; display: flex; flex-direction: column; gap: 20px; transform: translateY(-110%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 99; pointer-events: none; }
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+.mobile-menu a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; }
+.mobile-menu a.active { color: var(--blue); }
+
+/* HERO */
+.hero { padding: 72px 0 0; }
+.eyebrow { font-family: var(--mono); font-size: 11px; color: var(--blue); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
+h1 { font-family: var(--head); font-size: clamp(36px, 7vw, 64px); line-height: 1.05; margin-bottom: 18px; }
+.lead { max-width: 760px; color: var(--text-mid); font-size: 18px; line-height: 1.7; }
+
+/* Hero image */
+.hero-media { position: relative; margin: 36px 0 0; height: 380px; overflow: hidden; border: 1px solid var(--border); }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(10%) contrast(1.03); transition: transform 1s ease; }
+.hero-media:hover img { transform: scale(1.02); }
+.hero-media-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.28) 0%, transparent 50%); pointer-events: none; }
+.hero-media-cap { position: absolute; bottom: 16px; left: 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; background: rgba(15,23,42,0.55); padding: 4px 10px; backdrop-filter: blur(4px); }
+
+/* SERVICE TIERS */
+.tiers { margin: 56px 0; display: grid; gap: 0; border: 1px solid var(--border); }
+.tier { display: grid; grid-template-columns: 280px 1fr; border-bottom: 1px solid var(--border); }
+.tier:last-child { border-bottom: none; }
+.tier-left { padding: 32px 28px; border-right: 1px solid var(--border); background: var(--blue-dim); display: flex; flex-direction: column; gap: 12px; }
+.tier-tag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--blue); }
+.tier-name { font-family: var(--head); font-size: 22px; font-weight: 700; color: var(--text-hi); line-height: 1.2; }
+.tier-type { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-lo); border: 1px solid var(--border); padding: 3px 8px; align-self: flex-start; }
+.tier-right { padding: 32px 36px; display: flex; flex-direction: column; gap: 14px; }
+.tier-desc { color: var(--text-mid); font-size: 15px; line-height: 1.7; max-width: 580px; }
+.tier-items { display: flex; flex-direction: column; gap: 8px; }
+.tier-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text-hi); }
+.tier-item::before { content: '—'; font-family: var(--mono); color: var(--blue); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+
+/* ENGAGEMENT MODEL */
+.engage { border-top: 1px solid var(--border); padding: 52px 0; }
+.engage h2 { font-family: var(--head); font-size: 28px; margin-bottom: 10px; }
+.engage-lead { color: var(--text-mid); font-size: 16px; max-width: 720px; margin-bottom: 32px; line-height: 1.7; }
+.steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); }
+.e-step { padding: 24px 20px; border-right: 1px solid var(--border); }
+.e-step:last-child { border-right: none; }
+.e-step-num { font-family: var(--mono); font-size: 11px; color: var(--blue); letter-spacing: 0.12em; margin-bottom: 8px; }
+.e-step-name { font-family: var(--head); font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text-hi); }
+.e-step-desc { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+/* STANDARDS */
+.standards { border-top: 1px solid var(--border); padding: 44px 0; }
+.standards h2 { font-family: var(--head); font-size: 28px; margin-bottom: 20px; }
+.standard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.standard-item { background: var(--surface); border: 1px solid var(--border); padding: 20px 22px; }
+.standard-item h4 { font-family: var(--head); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.standard-item p { color: var(--text-mid); font-size: 14px; line-height: 1.65; }
+
+/* CTA STRIPE */
+.cta-stripe { margin-top: 40px; background: var(--text-hi); padding: 40px 36px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.cta-stripe-text h3 { font-family: var(--head); font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+.cta-stripe-text p { font-size: 14px; color: rgba(255,255,255,0.65); }
+.btn-light { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-hi); background: #ffffff; border: none; padding: 14px 28px; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s; white-space: nowrap; }
+.btn-light:hover { opacity: 0.88; }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding: 20px 0 34px; color: var(--text-lo); font-family: var(--mono); font-size: 12px; }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .links { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero-media { height: 240px; }
+  .tiers { border: none; gap: 16px; }
+  .tier { grid-template-columns: 1fr; border: 1px solid var(--border); }
+  .tier-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .tier-right { padding: 24px; }
+  .steps-row { grid-template-columns: 1fr 1fr; }
+  .e-step:nth-child(2) { border-right: none; }
+  .e-step { border-bottom: 1px solid var(--border); }
+  .e-step:nth-child(3), .e-step:nth-child(4) { border-bottom: none; }
+  .standard-grid { grid-template-columns: 1fr; }
+  .cta-stripe { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .steps-row { grid-template-columns: 1fr; }
+  .e-step { border-right: none; border-bottom: 1px solid var(--border); }
+  .e-step:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+<progress id="scrollProgress" max="100" value="0" aria-label="Page scroll progress"></progress>
+<nav>
+  <div class="wrapper nav-inner">
+    <a class="logo" href="index.html">Benjaire</a>
+    <div class="links">
+      <a href="index.html#home">Home</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="index.html#ventures">Ventures</a>
+      <a href="index.html#principles">Principles</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#home">Home</a>
+  <a href="services.html" class="active">Services</a>
+  <a href="index.html#ventures">Ventures</a>
+  <a href="index.html#principles">Principles</a>
+  <a href="index.html#contact">Contact</a>
+</div>
+
+<main class="wrapper">
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="eyebrow">What We Offer</div>
+    <h1>Services</h1>
+    <p class="lead">Benjaire delivers external services through two primary lanes: AI systems builds for businesses looking to automate real workflows, and technical infrastructure engagements for organizations that need operational clarity and reliability at scale.</p>
+    <div class="hero-media">
+      <img
+        src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1600&q=85"
+        alt="Professional workspace and technology consulting — Benjaire Services"
+        loading="eager"
+      >
+      <div class="hero-media-overlay"></div>
+      <div class="hero-media-cap">Professional Services · New York</div>
+    </div>
+  </section>
+
+  <!-- SERVICE TIERS -->
+  <div class="tiers reveal" style="transition-delay:.08s;">
+
+    <div class="tier">
+      <div class="tier-left">
+        <div class="tier-tag">Service 01</div>
+        <div class="tier-name">AI Systems Build</div>
+        <div class="tier-type">Technology</div>
+      </div>
+      <div class="tier-right">
+        <p class="tier-desc">We design, build, and deploy agentic AI systems that handle repetitive, high-volume workflows. Every system ships with clear guardrails, monitoring, and human override controls — built for teams that need to trust what they run.</p>
+        <div class="tier-items">
+          <div class="tier-item">Workflow mapping and automation target selection</div>
+          <div class="tier-item">Agent design with prompt engineering and tooling</div>
+          <div class="tier-item">Integration with existing tools and data sources</div>
+          <div class="tier-item">Production deployment with observability and rollback support</div>
+          <div class="tier-item">Post-launch iteration and quality tracking</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <div class="tier-left">
+        <div class="tier-tag">Service 02</div>
+        <div class="tier-name">Systems Architecture</div>
+        <div class="tier-type">Infrastructure</div>
+      </div>
+      <div class="tier-right">
+        <p class="tier-desc">We assess technical environments, identify fragility points, and define architecture roadmaps that improve reliability and cut operational friction. The work is practical: scoped decisions, sequenced rollout, and clear ownership.</p>
+        <div class="tier-items">
+          <div class="tier-item">Current-state system audit and dependency mapping</div>
+          <div class="tier-item">Architecture roadmap with prioritized improvement path</div>
+          <div class="tier-item">Integration design for internal tools and external platforms</div>
+          <div class="tier-item">Incident response framework and observability standards</div>
+          <div class="tier-item">Runbooks and operational documentation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier">
+      <div class="tier-left">
+        <div class="tier-tag">Service 03</div>
+        <div class="tier-name">Ecommerce Operations</div>
+        <div class="tier-type">Commerce Consulting</div>
+      </div>
+      <div class="tier-right">
+        <p class="tier-desc">We help brands and operators build ecommerce businesses with real operating leverage — not just traffic tactics. The focus is on margin, inventory health, and channel infrastructure that holds as volume grows.</p>
+        <div class="tier-items">
+          <div class="tier-item">Channel strategy and contribution margin analysis</div>
+          <div class="tier-item">Inventory and supplier planning model build-out</div>
+          <div class="tier-item">Marketplace listing and operational standards review</div>
+          <div class="tier-item">Weekly performance scorecard design and implementation</div>
+          <div class="tier-item">Fulfillment reliability and exception handling frameworks</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ENGAGEMENT MODEL -->
+  <section class="engage reveal">
+    <h2>How Engagements Work</h2>
+    <p class="engage-lead">We run focused, time-bounded projects with defined deliverables. No retainers built on vague scope. Every engagement starts with a clear output and ends with something your team can actually operate.</p>
+    <div class="steps-row">
+      <div class="e-step">
+        <div class="e-step-num">01</div>
+        <div class="e-step-name">Scope Call</div>
+        <p class="e-step-desc">30 minutes to understand the problem, define the right service, and confirm fit. We move fast here.</p>
+      </div>
+      <div class="e-step">
+        <div class="e-step-num">02</div>
+        <div class="e-step-name">Proposal</div>
+        <p class="e-step-desc">A single-page engagement document: deliverables, timeline, and investment. No ambiguity.</p>
+      </div>
+      <div class="e-step">
+        <div class="e-step-num">03</div>
+        <div class="e-step-name">Execution</div>
+        <p class="e-step-desc">We work directly with your team. Weekly updates, fast decisions, no middleman overhead.</p>
+      </div>
+      <div class="e-step">
+        <div class="e-step-num">04</div>
+        <div class="e-step-name">Handoff</div>
+        <p class="e-step-desc">Full documentation, working systems, and a team that knows how to run what we built.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPERATING STANDARDS -->
+  <section class="standards reveal">
+    <h2>What We Hold Ourselves To</h2>
+    <div class="standard-grid">
+      <div class="standard-item">
+        <h4>Outcomes, Not Effort</h4>
+        <p>Engagements are scoped to results. We do not bill for hours that do not move the project forward. If something is not working, we surface it early and adjust.</p>
+      </div>
+      <div class="standard-item">
+        <h4>Documentation That Lasts</h4>
+        <p>Every system we build ships with documentation your team can follow without us. No dependency on Benjaire for ongoing operation of what we deliver.</p>
+      </div>
+      <div class="standard-item">
+        <h4>Conservative Risk Profile</h4>
+        <p>We flag tradeoffs clearly. We do not recommend systems or changes we would not run ourselves. High-risk proposals get honest scoping, not optimistic projections.</p>
+      </div>
+      <div class="standard-item">
+        <h4>Direct Communication</h4>
+        <p>One point of contact. Status updates that say something real. If there is a problem, you hear about it from us before it surfaces elsewhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIPE -->
+  <div class="cta-stripe reveal">
+    <div class="cta-stripe-text">
+      <h3>Ready to scope a project?</h3>
+      <p>Send a message and we will follow up within one business day.</p>
+    </div>
+    <a href="index.html#contact" class="btn-light">Get in Touch →</a>
+  </div>
+
+  <div class="footer">Benjaire Services — Practical work. Durable results.</div>
+</main>
+
+<script>
+const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+const sp = document.getElementById('scrollProgress');
+function syncSP() { const st = window.scrollY, m = document.documentElement.scrollHeight - window.innerHeight; sp.value = m > 0 ? (st/m)*100 : 0; }
+window.addEventListener('scroll', syncSP, { passive: true }); window.addEventListener('resize', syncSP); syncSP();
+const nt = document.getElementById('navToggle'), mm = document.getElementById('mobileMenu');
+nt.addEventListener('click', () => { nt.classList.toggle('open'); mm.classList.toggle('open'); });
+mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nt.classList.remove('open'); mm.classList.remove('open'); }));
+</script>
+</body>
+</html>
