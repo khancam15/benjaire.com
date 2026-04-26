@@ -1,0 +1,35 @@
+name: Security Audit
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**/*.html"
+      - "security-audit.sh"
+      - ".github/workflows/security-audit.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "**/*.html"
+      - "security-audit.sh"
+      - ".github/workflows/security-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure audit script is executable
+        run: chmod +x security-audit.sh
+
+      - name: Run security audit
+        run: ./security-audit.sh
