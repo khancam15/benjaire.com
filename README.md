@@ -1,4 +1,4 @@
-# benjaire.com
+# Benjaire.com
 
 Personal website for Benjaire, a multi-venture holding company operating at the intersection of technology, commerce, and innovation.
 
