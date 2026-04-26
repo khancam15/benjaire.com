@@ -1,19 +1,90 @@
+# ─── OS FILES ───────────────────────────────────────────────────────────────
 # macOS
-.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+._*
 
 # Windows
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
-# Logs
-*.log
+# Linux
+*~
 
-# Editor directories and files
-.vscode/
+# ─── EDITOR / IDE ────────────────────────────────────────────────────────────
 .idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Environment variables
+# VS Code — keep shared settings but exclude files that may contain tokens
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ─── SECRETS & CREDENTIALS ───────────────────────────────────────────────────
+# Environment variable files (all variants)
 .env
+.env.*
+!.env.example
+!.env.sample
 
-# Build directories
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+# AWS / cloud credentials
+.aws/
+.gcloud/
+credentials
+*_credentials.json
+service-account*.json
+
+# API key files
+*.secret
+*.secrets
+secrets.json
+secrets.yaml
+secrets.yml
+config/secrets.*
+
+# ─── LOGS & DIAGNOSTICS ──────────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ─── BUILD OUTPUT ────────────────────────────────────────────────────────────
 dist/
 build/
+out/
+.cache/
+
+# ─── PACKAGE MANAGERS (if tooling is ever added) ─────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# ─── MISC ────────────────────────────────────────────────────────────────────
+*.bak
+*.tmp
+*.orig
