@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Benjaire — Computer &amp; Technology Services</title>
 <meta name="description" content="Benjaire is a computer and technology services company operating across commerce, AI systems, and technical infrastructure. Based in New York.">
 
@@ -705,7 +707,7 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); }
       <label class="form-label" for="c-msg">Message</label>
       <textarea id="c-msg" class="form-textarea" placeholder="What are you working on?"></textarea>
     </div>
-    <button class="btn-primary reveal" style="transition-delay:.12s;" onclick="handleSend()">Send Message</button>
+    <button class="btn-primary reveal" style="transition-delay:.12s;" onclick="handleSend(event)">Send Message</button>
   </div>
 </section>
 
@@ -717,8 +719,8 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); }
     <span class="footer-copy">© 2026 Benjaire · New York</span>
     <span class="footer-copy">2248 Broadway #1548, New York, NY 10024</span>
     <div class="footer-links">
-      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
       <a href="#">Privacy</a>
     </div>
   </div>
@@ -784,11 +786,12 @@ window.addEventListener('scroll', syncScrollProgress, { passive: true });
 window.addEventListener('resize', syncScrollProgress);
 syncScrollProgress();
 
-function handleSend () {
+function handleSend (event) {
   const btn = event.currentTarget;
   const name  = document.getElementById('c-name').value.trim();
   const email = document.getElementById('c-email').value.trim();
-  if (!name || !email) {
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!name || !email || !emailValid) {
     btn.textContent = 'Please fill in required fields.';
     btn.style.background = '#334155';
     setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; }, 2400);
