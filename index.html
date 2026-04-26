@@ -707,7 +707,7 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); }
       <label class="form-label" for="c-msg">Message</label>
       <textarea id="c-msg" class="form-textarea" placeholder="What are you working on?"></textarea>
     </div>
-    <button class="btn-primary reveal" style="transition-delay:.12s;" onclick="handleSend(event)">Send Message</button>
+    <button id="contactSendBtn" class="btn-primary reveal" style="transition-delay:.12s;">Send Message</button>
   </div>
 </section>
 
@@ -806,6 +806,11 @@ function handleSend (event) {
     btn.style.color = '';
     ['c-name','c-email','c-msg'].forEach(id => document.getElementById(id).value = '');
   }, 3200);
+}
+
+const contactSendBtn = document.getElementById('contactSendBtn');
+if (contactSendBtn) {
+  contactSendBtn.addEventListener('click', handleSend);
 }
 
 // Hamburger
