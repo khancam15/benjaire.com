@@ -74,6 +74,8 @@ dist/
 build/
 out/
 .cache/
+__pycache__/
+*.pyc
 
 # ─── PACKAGE MANAGERS (if tooling is ever added) ─────────────────────────────
 node_modules/

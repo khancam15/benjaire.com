@@ -6,195 +6,455 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Benjaire Commerce — Ecommerce Operations</title>
-<meta name="description" content="How Benjaire approaches ecommerce operations: channel strategy, sourcing, inventory, and growth systems.">
-
-<!-- Open Graph / Social -->
+<meta name="description" content="Benjaire builds ecommerce operations for long-term margin growth, channel discipline, and resilient fulfillment. Built to compound — not just convert.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://benjaire.com/commerce.html">
 <meta property="og:title" content="Benjaire Commerce — Ecommerce Operations">
-<meta property="og:description" content="Channel strategy, sourcing, inventory, and growth systems built for long-term operating discipline.">
+<meta property="og:description" content="Channel strategy, sourcing, inventory, and performance systems built for long-term operating discipline.">
 <meta property="og:image" content="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80">
 <meta name="twitter:card" content="summary_large_image">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --bg: #f5f8fc; --surface: #ffffff; --border: rgba(15,23,42,0.12);
-  --blue: #1e5bb8; --text-hi: #0f172a; --text-mid: #475569; --text-lo: #64748b;
-  --mono: 'IBM Plex Mono', monospace; --sans: 'Public Sans', sans-serif; --head: 'Manrope', sans-serif;
+  --bg: #03070f; --bg2: #060d1b; --surface: #0a1120;
+  --border: rgba(56,189,248,0.09); --border-hi: rgba(56,189,248,0.20);
+  --blue: #2563eb; --cyan: #06b6d4;
+  --glow-b: rgba(37,99,235,0.40); --glow-c: rgba(6,182,212,0.30);
+  --text-hi: #f1f5f9; --text-mid: #94a3b8; --text-lo: #475569;
+  --mono: 'IBM Plex Mono', monospace; --sans: 'Public Sans', sans-serif; --cond: 'Manrope', sans-serif;
 }
-body { font-family: var(--sans); color: var(--text-hi); background: radial-gradient(circle at top right, rgba(30,91,184,0.08), transparent 38%), var(--bg); line-height: 1.65; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-hi); font-family: var(--sans); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; cursor: none; }
+input, textarea, select { cursor: text; }
 
-#scrollProgress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; border: 0; z-index: 200; appearance: none; }
-#scrollProgress::-webkit-progress-bar { background: rgba(15,23,42,0.08); }
-#scrollProgress::-webkit-progress-value { background: var(--blue); }
-#scrollProgress::-moz-progress-bar { background: var(--blue); }
+#cursor-dot { position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); transform: translate(-50%,-50%); mix-blend-mode: screen; }
+#cursor-ring { position: fixed; top: 0; left: 0; z-index: 9998; pointer-events: none; width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(6,182,212,0.45); transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.16,1,.3,1), height .35s cubic-bezier(.16,1,.3,1), border-color .35s; }
+body.cursor-hover #cursor-ring { width: 60px; height: 60px; border-color: rgba(6,182,212,.70); }
 
-.wrapper { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+#scrollProgress { position: fixed; top: 0; left: 0; width: 100%; height: 2px; border: 0; z-index: 300; appearance: none; }
+#scrollProgress::-webkit-progress-bar { background: transparent; }
+#scrollProgress::-webkit-progress-value { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+#scrollProgress::-moz-progress-bar { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+::-webkit-scrollbar { width: 3px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--cyan)); border-radius: 2px; }
 
-nav { position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
-.nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-family: var(--head); font-weight: 800; font-size: 18px; letter-spacing: 0.04em; text-decoration: none; color: var(--text-hi); }
-.links { display: flex; gap: 20px; }
-.links a { font-family: var(--mono); font-size: 12px; text-decoration: none; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; }
-.links a:hover { color: var(--blue); }
-.links a.active { color: var(--blue); }
-
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(3,7,15,.82); border-bottom: 1px solid var(--border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.nav-logo { font-family: var(--cond); font-size: 18px; font-weight: 800; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; background: linear-gradient(135deg,#fff 0%,var(--cyan) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color .2s; cursor: none; }
+.nav-links a:hover { color: var(--cyan); } .nav-links a.active { color: var(--text-hi); }
+.nav-cta { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--bg); background: var(--cyan); border: none; padding: 10px 22px; cursor: none; text-decoration: none; position: relative; overflow: hidden; transition: box-shadow .3s; }
+.nav-cta::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.18); transform: translateX(-100%); transition: transform .4s; }
+.nav-cta:hover::before { transform: translateX(0); } .nav-cta:hover { box-shadow: 0 0 24px var(--glow-c); }
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-hi); transition: transform 0.25s, opacity 0.25s; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-hi); transition: transform .25s, opacity .25s; }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-.mobile-menu { position: fixed; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 28px 24px; display: flex; flex-direction: column; gap: 20px; transform: translateY(-110%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 99; pointer-events: none; }
+.mobile-menu { position: fixed; top: 64px; left: 0; right: 0; background: rgba(6,13,26,.97); border-bottom: 1px solid var(--border); backdrop-filter: blur(24px); padding: 28px 24px; display: flex; flex-direction: column; gap: 22px; transform: translateY(-110%); opacity: 0; transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .35s ease; z-index: 99; pointer-events: none; }
 .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
-.mobile-menu a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
-.mobile-menu a:hover, .mobile-menu a.active { color: var(--blue); }
+.mobile-menu a { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color .2s; }
+.mobile-menu a:hover { color: var(--cyan); } .mobile-menu a.active { color: var(--text-hi); } .mobile-menu .mobile-cta { color: var(--cyan); }
 
-.hero { padding: 72px 0 0; }
-.eyebrow { font-family: var(--mono); font-size: 11px; color: var(--blue); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
-h1 { font-family: var(--head); font-size: clamp(36px, 7vw, 64px); line-height: 1.05; margin-bottom: 18px; }
-.lead { max-width: 740px; color: var(--text-mid); font-size: 18px; margin-bottom: 0; }
+.section-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.section-tag-line { width: 28px; height: 1px; background: linear-gradient(90deg, var(--blue), var(--cyan)); flex-shrink: 0; }
+.section-tag-text { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); }
 
-/* Hero Image */
-.hero-media { position: relative; margin: 36px 0 0; height: 380px; overflow: hidden; border: 1px solid var(--border); }
-.hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(12%) contrast(1.03); transition: transform 1s ease; }
-.hero-media:hover img { transform: scale(1.02); }
-.hero-media-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.25) 0%, transparent 50%), linear-gradient(to right, rgba(245,248,252,0.15) 0%, transparent 40%); pointer-events: none; }
-.hero-media-cap { position: absolute; bottom: 16px; left: 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; background: rgba(15,23,42,0.55); padding: 4px 10px; backdrop-filter: blur(4px); }
+.btn-primary { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--bg); background: linear-gradient(130deg, var(--blue) 0%, var(--cyan) 100%); border: none; padding: 15px 34px; cursor: none; text-decoration: none; display: inline-block; position: relative; overflow: hidden; transition: box-shadow .35s, transform .2s; }
+.btn-primary::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.16); transform: translateX(-110%) skewX(-12deg); transition: transform .55s; }
+.btn-primary:hover::before { transform: translateX(115%) skewX(-12deg); }
+.btn-primary:hover { box-shadow: 0 0 40px var(--glow-b); transform: translateY(-2px); }
+.btn-secondary { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-mid); background: transparent; border: 1px solid var(--border-hi); padding: 15px 34px; cursor: none; text-decoration: none; display: inline-block; transition: border-color .3s, color .3s, box-shadow .3s, transform .2s; }
+.btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 24px var(--glow-c); transform: translateY(-2px); }
 
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 48px 0 56px; }
-.card { background: var(--surface); border: 1px solid var(--border); padding: 22px; }
-.card h3 { font-family: var(--head); font-size: 18px; margin-bottom: 10px; }
-.card p { color: var(--text-mid); font-size: 15px; }
-.insight { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 10px; }
-.insight summary { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-mid); cursor: pointer; }
-.insight p { margin-top: 8px; color: var(--text-mid); font-size: 13px; }
+/* ─── PAGE HERO ─── */
+.page-hero { padding-top: 64px; display: grid; grid-template-columns: 1fr 1fr; min-height: 72vh; border-bottom: 1px solid var(--border); }
+.page-hero-text { padding: 72px 56px 72px 48px; display: flex; flex-direction: column; justify-content: center; gap: 28px; border-right: 1px solid var(--border); }
+.page-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); }
+.page-h1 { font-family: var(--cond); font-size: clamp(52px,7.5vw,96px); font-weight: 800; line-height: .88; letter-spacing: -.02em; text-transform: uppercase; background: linear-gradient(135deg, var(--text-hi) 0%, var(--text-mid) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-lead { font-size: 17px; line-height: 1.78; color: var(--text-mid); max-width: 460px; }
+.hero-markers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.hero-marker { border: 1px solid var(--border-hi); background: rgba(6,182,212,.04); padding: 14px 16px; }
+.hero-marker-num { font-family: var(--mono); font-size: 10px; color: var(--cyan); letter-spacing: .14em; margin-bottom: 6px; }
+.hero-marker-label { font-family: var(--cond); font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--text-hi); letter-spacing: .04em; line-height: 1.2; }
+.page-hero-media { position: relative; overflow: hidden; background: var(--surface); }
+.page-hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(65%) brightness(.62) contrast(1.12); transition: transform .8s cubic-bezier(.16,1,.3,1); }
+.page-hero-media:hover img { transform: scale(1.04); }
+.page-hero-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(3,7,15,.25), rgba(3,7,15,.70) 100%); pointer-events: none; }
+.media-cap { position: absolute; bottom: 20px; left: 24px; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.65); background: rgba(3,7,15,.65); padding: 5px 12px; backdrop-filter: blur(6px); border: 1px solid var(--border); z-index: 1; }
 
-.section { border-top: 1px solid var(--border); padding: 34px 0; }
-.section h2 { font-family: var(--head); font-size: 28px; margin-bottom: 12px; }
-.section p { color: var(--text-mid); max-width: 860px; }
-.list { margin-top: 14px; display: grid; gap: 10px; }
-.list li { list-style: none; background: var(--surface); border: 1px solid var(--border); padding: 14px; color: var(--text-mid); }
+/* ─── FOCUS AREAS ─── */
+.focus-section { border-bottom: 1px solid var(--border); background: var(--bg); }
+.section-header { padding: 64px 48px 48px; border-bottom: 1px solid var(--border); }
+.section-h2 { font-family: var(--cond); font-size: clamp(36px,5vw,56px); font-weight: 800; text-transform: uppercase; line-height: .92; color: var(--text-hi); }
+.section-sub { font-size: 15px; line-height: 1.78; color: var(--text-mid); max-width: 560px; margin-top: 18px; }
+.focus-grid { display: grid; grid-template-columns: repeat(3,1fr); }
+.focus-card { padding: 44px 40px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden; transition: background .35s; }
+.focus-card:last-child { border-right: none; }
+.focus-card:hover { background: rgba(37,99,235,.03); }
+.focus-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--blue), var(--cyan), transparent); opacity: 0; transition: opacity .4s; }
+.focus-card:hover::before { opacity: 1; }
+.focus-num { font-family: var(--mono); font-size: 11px; color: var(--cyan); letter-spacing: .14em; }
+.focus-name { font-family: var(--cond); font-size: 26px; font-weight: 700; text-transform: uppercase; color: var(--text-hi); line-height: 1.05; letter-spacing: .03em; }
+.focus-desc { font-size: 15px; line-height: 1.72; color: var(--text-mid); flex: 1; }
+.focus-detail { border-top: 1px solid var(--border); padding-top: 14px; }
+.focus-detail summary { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-lo); cursor: pointer; }
+.focus-detail p { margin-top: 8px; font-size: 13px; color: var(--text-lo); line-height: 1.65; }
 
-.footer { border-top: 1px solid var(--border); margin-top: 30px; padding: 20px 0 34px; color: var(--text-lo); font-family: var(--mono); font-size: 12px; }
+/* ─── OPERATING MODEL ─── */
+.model-section { border-bottom: 1px solid var(--border); background: var(--bg2); display: grid; grid-template-columns: 1fr 1fr; }
+.model-left { padding: 72px 56px 72px 48px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 32px; justify-content: center; position: relative; overflow: hidden; }
+.model-left::before { content: ''; position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(37,99,235,.07) 0%, transparent 70%); pointer-events: none; }
+.model-h2 { font-family: var(--cond); font-size: clamp(32px,4.5vw,52px); font-weight: 800; text-transform: uppercase; line-height: .92; color: var(--text-hi); position: relative; z-index: 1; }
+.model-h2 em { font-style: normal; background: linear-gradient(135deg, var(--blue), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.model-body { font-size: 15px; line-height: 1.78; color: var(--text-mid); position: relative; z-index: 1; }
+.model-right { padding: 72px 48px; display: flex; flex-direction: column; gap: 0; }
+.model-item { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: start; padding: 26px 0; border-bottom: 1px solid var(--border); transition: padding-left .3s cubic-bezier(.16,1,.3,1); }
+.model-item:hover { padding-left: 8px; }
+.model-item:first-child { padding-top: 0; }
+.model-item:last-child { border-bottom: none; padding-bottom: 0; }
+.model-num { font-family: var(--mono); font-size: 11px; color: var(--blue); letter-spacing: .1em; padding-top: 3px; opacity: .6; transition: opacity .2s; }
+.model-item:hover .model-num { opacity: 1; }
+.model-name { font-family: var(--cond); font-size: 17px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-hi); margin-bottom: 6px; }
+.model-desc { font-size: 14px; line-height: 1.65; color: var(--text-mid); }
 
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.65s ease, transform 0.65s ease; }
+/* ─── PERFORMANCE METRICS ─── */
+.metrics-section { border-bottom: 1px solid var(--border); background: var(--bg); }
+.metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+.metric-cell { padding: 40px 36px; border-right: 1px solid var(--border); position: relative; overflow: hidden; transition: background .3s; }
+.metric-cell:last-child { border-right: none; }
+.metric-cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--cyan)); transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.16,1,.3,1); }
+.metric-cell:hover::before { transform: scaleX(1); }
+.metric-cell:hover { background: rgba(6,182,212,.02); }
+.metric-label { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-lo); margin-bottom: 12px; }
+.metric-value { font-family: var(--cond); font-size: 18px; font-weight: 700; text-transform: uppercase; color: var(--text-hi); letter-spacing: .04em; }
+.metric-desc { font-size: 13px; color: var(--text-mid); margin-top: 8px; line-height: 1.6; }
+
+/* ─── VENTURE NAVIGATION ─── */
+.venture-nav { display: grid; grid-template-columns: repeat(3,1fr); border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); background: var(--bg2); }
+.vn-item { padding: 32px 36px; border-right: 1px solid var(--border); text-decoration: none; display: flex; flex-direction: column; gap: 10px; transition: background .3s; position: relative; }
+.vn-item:last-child { border-right: none; }
+.vn-item:hover { background: rgba(37,99,235,.04); }
+.vn-item.current { background: rgba(6,182,212,.04); }
+.vn-item::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--cyan)); opacity: 0; transition: opacity .35s; }
+.vn-item.current::after { opacity: 1; }
+.vn-num { font-family: var(--mono); font-size: 10px; color: var(--text-lo); letter-spacing: .14em; }
+.vn-name { font-family: var(--cond); font-size: 20px; font-weight: 700; text-transform: uppercase; color: var(--text-mid); letter-spacing: .04em; transition: color .2s; }
+.vn-item.current .vn-name { color: var(--cyan); }
+.vn-item:hover .vn-name { color: var(--text-hi); }
+.vn-arrow { font-size: 12px; color: var(--text-lo); transition: color .2s, transform .2s; align-self: flex-end; margin-top: auto; }
+.vn-item:hover .vn-arrow { color: var(--cyan); transform: translateX(4px); }
+
+/* ─── CTA ─── */
+.page-cta { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 320px; align-items: center; padding: 88px 48px; gap: 48px; background: var(--bg2); }
+.page-cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 80% at 20% 50%, rgba(37,99,235,.07), transparent 65%); }
+.page-cta::after { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(56,189,248,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,.018) 1px, transparent 1px); background-size: 52px 52px; }
+.cta-overline { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 18px; position: relative; z-index: 1; }
+.cta-h2 { font-family: var(--cond); font-size: clamp(40px,5.5vw,68px); font-weight: 800; text-transform: uppercase; line-height: .90; position: relative; z-index: 1; }
+.cta-h2 .solid { color: var(--text-hi); display: block; }
+.cta-h2 .grad { display: block; background: linear-gradient(135deg, var(--blue), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cta-actions { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+
+/* ─── FOOTER ─── */
+.site-footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(--bg2); }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--text-lo); letter-spacing: .08em; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-lo); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--cyan); }
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
 .reveal.in { opacity: 1; transform: none; }
 
-@media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; }
-  .links { display: none; }
-  .nav-hamburger { display: flex; }
-  .hero-media { height: 260px; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: opacity .4s; transform: none; }
+  .btn-primary::before, .nav-cta::before { display: none; }
+}
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; } .nav-links { display: none; } .nav-cta { display: none; } .nav-hamburger { display: flex; }
+  body { cursor: auto; } #cursor-dot, #cursor-ring { display: none; }
+  .page-hero { grid-template-columns: 1fr; min-height: auto; }
+  .page-hero-text { border-right: none; border-bottom: 1px solid var(--border); padding: 56px 24px; }
+  .page-hero-media { min-height: 300px; }
+  .hero-markers { grid-template-columns: 1fr; }
+  .focus-grid { grid-template-columns: 1fr; }
+  .focus-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .focus-card:last-child { border-bottom: none; }
+  .focus-card { padding: 36px 24px; }
+  .model-section { grid-template-columns: 1fr; }
+  .model-left { border-right: none; border-bottom: 1px solid var(--border); padding: 56px 24px; }
+  .model-right { padding: 56px 24px; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+  .metric-cell:nth-child(2) { border-right: none; }
+  .metric-cell { border-bottom: 1px solid var(--border); }
+  .metric-cell:nth-child(3), .metric-cell:nth-child(4) { border-bottom: none; }
+  .venture-nav { grid-template-columns: 1fr; }
+  .vn-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .vn-item:last-child { border-bottom: none; }
+  .section-header { padding: 48px 24px 36px; }
+  .page-cta { grid-template-columns: 1fr; padding: 56px 24px; }
+  .site-footer { padding: 0 24px; }
+  .footer-inner { flex-direction: column; height: auto; padding: 20px 0; gap: 12px; text-align: center; }
+}
+@media (max-width: 600px) {
+  .metrics-grid { grid-template-columns: 1fr; }
+  .metric-cell { border-right: none; border-bottom: 1px solid var(--border); }
+  .metric-cell:last-child { border-bottom: none; }
+  .page-h1 { font-size: clamp(44px,14vw,72px); }
 }
 </style>
 </head>
 <body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 <progress id="scrollProgress" max="100" value="0" aria-label="Page scroll progress"></progress>
+
 <nav>
-  <div class="wrapper nav-inner">
-    <a class="logo" href="index.html">Benjaire</a>
-    <div class="links">
-      <a href="index.html#home">Home</a>
-      <a href="services.html">Services</a>
-      <a href="commerce.html" class="active">Commerce</a>
-      <a href="technology.html">Technology</a>
-      <a href="systems.html">Systems</a>
-      <a href="index.html#contact">Contact</a>
-    </div>
-    <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+  <a href="index.html" class="nav-logo">Benjaire</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="commerce.html" class="active">Commerce</a></li>
+    <li><a href="technology.html">Technology</a></li>
+    <li><a href="systems.html">Systems</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Get in Touch</a>
+  <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#home">Home</a>
+<div class="mobile-menu" id="mobileMenu" role="navigation">
+  <a href="index.html">Home</a>
   <a href="services.html">Services</a>
   <a href="commerce.html" class="active">Commerce</a>
   <a href="technology.html">Technology</a>
   <a href="systems.html">Systems</a>
   <a href="index.html#contact">Contact</a>
+  <a href="index.html#contact" class="mobile-cta">Get in Touch →</a>
 </div>
 
-<main class="wrapper">
-  <section class="hero reveal">
-    <div class="eyebrow">Venture 01</div>
-    <h1>Ecommerce Operations</h1>
-    <p class="lead">Benjaire builds ecommerce operations that can scale across multiple channels, product categories, and market conditions. The objective is steady margin growth, predictable fulfillment, and resilient systems that hold under pressure.</p>
-    <div class="hero-media">
-      <img
-        src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1600&q=85"
-        alt="Ecommerce fulfillment and inventory management operations"
-        loading="eager"
-      >
-      <div class="hero-media-overlay"></div>
-      <div class="hero-media-cap">Commerce · Retail Operations</div>
+<main>
+
+<!-- HERO -->
+<header class="page-hero">
+  <div class="page-hero-text reveal">
+    <div class="page-eyebrow">Venture 01</div>
+    <h1 class="page-h1">Ecommerce Operations</h1>
+    <p class="page-lead">Benjaire builds ecommerce operations designed for long-term margin growth, channel discipline, and resilient fulfillment. The goal isn't just revenue — it's a business that holds up under pressure and compounds as volume grows.</p>
+    <div class="hero-markers">
+      <div class="hero-marker">
+        <div class="hero-marker-num">01</div>
+        <div class="hero-marker-label">Channel Strategy</div>
+      </div>
+      <div class="hero-marker">
+        <div class="hero-marker-num">02</div>
+        <div class="hero-marker-label">Sourcing & Inventory</div>
+      </div>
+      <div class="hero-marker">
+        <div class="hero-marker-num">03</div>
+        <div class="hero-marker-label">Performance Management</div>
+      </div>
     </div>
-  </section>
+  </div>
+  <div class="page-hero-media reveal" style="transition-delay:.08s;">
+    <img
+      src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1600&q=85"
+      alt="Ecommerce fulfillment and inventory — Benjaire Commerce"
+      loading="eager"
+    >
+    <div class="media-cap">Commerce · Retail Operations</div>
+  </div>
+</header>
 
-  <section class="grid">
-    <article class="card reveal">
-      <h3>Channel Strategy</h3>
-      <p>We design a channel mix that balances acquisition cost, margin, and operational complexity across marketplaces, direct storefronts, and partner channels.</p>
-      <details class="insight">
+<!-- FOCUS AREAS -->
+<section class="focus-section">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">Focus Areas</span>
+    </div>
+    <h2 class="section-h2">How We Build<br>the Operation</h2>
+    <p class="section-sub">Three disciplines that work together. Channel strategy determines where we compete. Sourcing and inventory determines how reliably we can fulfill. Performance management determines whether the business is actually getting better over time.</p>
+  </div>
+  <div class="focus-grid">
+    <article class="focus-card reveal">
+      <div class="focus-num">01</div>
+      <div class="focus-name">Channel Strategy</div>
+      <p class="focus-desc">We design a channel mix that balances acquisition cost, contribution margin, and operational complexity. Each channel earns its place — we cut what doesn't hold its weight and double down on what does.</p>
+      <details class="focus-detail">
         <summary>Execution Note</summary>
-        <p>Channel priorities are reviewed quarterly to match demand shifts and protect contribution margin.</p>
+        <p>Channel priorities are reviewed quarterly against demand shifts and margin targets, not just top-line performance.</p>
       </details>
     </article>
-    <article class="card reveal" style="transition-delay:.06s;">
-      <h3>Sourcing and Inventory</h3>
-      <p>Supplier qualification, lead-time planning, and reorder discipline are modeled to reduce stockouts and dead inventory.</p>
-      <details class="insight">
+    <article class="focus-card reveal" style="transition-delay:.07s;">
+      <div class="focus-num">02</div>
+      <div class="focus-name">Sourcing & Inventory</div>
+      <p class="focus-desc">Supplier qualification, lead-time planning, and reorder discipline are modeled to reduce stockouts and eliminate dead inventory. We build inventory policy around real demand data, not intuition.</p>
+      <details class="focus-detail">
         <summary>Execution Note</summary>
-        <p>Inventory policy is tied to lead time, demand volatility, and service-level targets by SKU tier.</p>
+        <p>Inventory policy is set by SKU tier based on lead time, demand volatility, and target service levels — not flat rules.</p>
       </details>
     </article>
-    <article class="card reveal" style="transition-delay:.12s;">
-      <h3>Performance Management</h3>
-      <p>We monitor contribution margin, return rates, and demand velocity to prioritize decisions that improve unit economics.</p>
-      <details class="insight">
+    <article class="focus-card reveal" style="transition-delay:.14s;">
+      <div class="focus-num">03</div>
+      <div class="focus-name">Performance Management</div>
+      <p class="focus-desc">We monitor contribution margin, return rates, and demand velocity to keep decisions grounded in unit economics. Weekly scorecards track what drives profitability — not what looks good in a dashboard.</p>
+      <details class="focus-detail">
         <summary>Execution Note</summary>
-        <p>Weekly scorecards track profitability drivers instead of vanity metrics to keep decisions grounded.</p>
+        <p>Reporting is built around decisions, not data volume. If a metric doesn't change what we do, it doesn't go in the scorecard.</p>
       </details>
     </article>
-  </section>
+  </div>
+</section>
 
-  <section class="section reveal">
-    <h2>Operating Model</h2>
-    <p>Our model is designed for repeatability. Each process is documented, measured, and improved over time. We avoid growth tactics that inflate top-line revenue but weaken the underlying business.</p>
-    <ul class="list">
-      <li>Standardized sourcing scorecards for quality, reliability, and landed cost.</li>
-      <li>Forecasting cadence with weekly demand reviews and inventory health checks.</li>
-      <li>Clear exception handling for listing quality, customer issues, and fulfillment delays.</li>
-    </ul>
-  </section>
+<!-- OPERATING MODEL -->
+<section class="model-section">
+  <div class="model-left reveal">
+    <div class="section-tag">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">Operating Model</span>
+    </div>
+    <h2 class="model-h2">"Built for <em>repeatability.</em><br>Not just reach."</h2>
+    <p class="model-body">We avoid growth tactics that inflate top-line numbers while weakening the business underneath. Every process is documented, measured, and improved on a defined cadence. The operations we build are designed to scale without requiring proportional increases in headcount or management overhead.</p>
+  </div>
+  <div class="model-right">
+    <div class="section-tag reveal">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">Operating Standards</span>
+    </div>
+    <div class="model-item reveal" style="transition-delay:.05s;">
+      <span class="model-num">01</span>
+      <div>
+        <div class="model-name">Standardized Sourcing</div>
+        <p class="model-desc">Scorecards for quality, reliability, and landed cost keep supplier decisions consistent and auditable across the portfolio.</p>
+      </div>
+    </div>
+    <div class="model-item reveal" style="transition-delay:.09s;">
+      <span class="model-num">02</span>
+      <div>
+        <div class="model-name">Forecasting Cadence</div>
+        <p class="model-desc">Weekly demand reviews and inventory health checks prevent reactive buying and keep working capital tied to real opportunity.</p>
+      </div>
+    </div>
+    <div class="model-item reveal" style="transition-delay:.13s;">
+      <span class="model-num">03</span>
+      <div>
+        <div class="model-name">Exception Handling</div>
+        <p class="model-desc">Clear playbooks for listing quality issues, customer escalations, and fulfillment delays reduce operational drag and protect brand reputation.</p>
+      </div>
+    </div>
+    <div class="model-item reveal" style="transition-delay:.17s;">
+      <span class="model-num">04</span>
+      <div>
+        <div class="model-name">Cash Conversion Focus</div>
+        <p class="model-desc">Inventory turns, payment terms, and fulfillment timing are managed together to keep cash cycling efficiently through the business.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="section reveal" style="transition-delay:.06s;">
-    <h2>What Good Looks Like</h2>
-    <p>A healthy ecommerce operation is measured by durability: stable cash conversion, defensible margins, and the ability to fulfill reliably as volume grows.</p>
-    <details class="insight">
-      <summary>Measurement Lens</summary>
-      <p>We evaluate operational health through margin quality, fulfillment reliability, and cash-cycle stability.</p>
-    </details>
-  </section>
+<!-- METRICS -->
+<section class="metrics-section">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">What Good Looks Like</span>
+    </div>
+    <h2 class="section-h2">Measuring What Matters</h2>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-cell reveal">
+      <div class="metric-label">Primary Target</div>
+      <div class="metric-value">Contribution Margin</div>
+      <p class="metric-desc">Revenue minus variable costs. The only number that tells you whether a channel or SKU is worth running.</p>
+    </div>
+    <div class="metric-cell reveal" style="transition-delay:.06s;">
+      <div class="metric-label">Fulfillment Health</div>
+      <div class="metric-value">On-Time Rate</div>
+      <p class="metric-desc">Consistent delivery performance is the baseline for customer trust and repeat purchase behavior.</p>
+    </div>
+    <div class="metric-cell reveal" style="transition-delay:.12s;">
+      <div class="metric-label">Inventory Quality</div>
+      <div class="metric-value">Sell-Through Rate</div>
+      <p class="metric-desc">Dead inventory is a capital problem. We track turns by SKU tier to catch slow movers before they become write-offs.</p>
+    </div>
+    <div class="metric-cell reveal" style="transition-delay:.18s;">
+      <div class="metric-label">Cash Efficiency</div>
+      <div class="metric-value">Cash Cycle Time</div>
+      <p class="metric-desc">Days from capital outlay to cash in — the metric that determines whether growth creates or destroys working capital.</p>
+    </div>
+  </div>
+</section>
 
-  <div class="footer">Benjaire Commerce — Built for long-term operating discipline.</div>
+<!-- VENTURE NAV -->
+<section class="venture-nav" aria-label="Venture navigation">
+  <a href="commerce.html" class="vn-item current">
+    <div class="vn-num">Venture 01</div>
+    <div class="vn-name">Commerce</div>
+    <span class="vn-arrow">Current</span>
+  </a>
+  <a href="technology.html" class="vn-item">
+    <div class="vn-num">Venture 02</div>
+    <div class="vn-name">Technology</div>
+    <span class="vn-arrow">→</span>
+  </a>
+  <a href="systems.html" class="vn-item">
+    <div class="vn-num">Venture 03</div>
+    <div class="vn-name">Systems</div>
+    <span class="vn-arrow">→</span>
+  </a>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div>
+    <div class="cta-overline reveal">Ready to work together</div>
+    <h2 class="cta-h2 reveal" style="transition-delay:.06s;">
+      <span class="solid">Build an Operation</span>
+      <span class="grad">That Lasts.</span>
+    </h2>
+  </div>
+  <div class="cta-actions reveal" style="transition-delay:.10s;">
+    <a href="index.html#contact" class="btn-primary" style="text-align:center;">Get in Touch</a>
+    <a href="services.html" class="btn-secondary" style="text-align:center;">All Services</a>
+  </div>
+</section>
+
 </main>
 
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Benjaire · New York</span>
+    <span class="footer-copy">Commerce — Built for long-term discipline.</span>
+    <div class="footer-links">
+      <a href="services.html">Services</a>
+      <a href="technology.html">Technology</a>
+      <a href="systems.html">Systems</a>
+    </div>
+  </div>
+</footer>
+
 <script>
-const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-const sp = document.getElementById('scrollProgress');
-function syncSP() { const st = window.scrollY, m = document.documentElement.scrollHeight - window.innerHeight; sp.value = m > 0 ? (st/m)*100 : 0; }
-window.addEventListener('scroll', syncSP, { passive: true }); window.addEventListener('resize', syncSP); syncSP();
-const nt = document.getElementById('navToggle'), mm = document.getElementById('mobileMenu');
-nt.addEventListener('click', () => { nt.classList.toggle('open'); mm.classList.toggle('open'); });
-mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nt.classList.remove('open'); mm.classList.remove('open'); }));
+(function(){
+  const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+  if(!dot||!ring)return;
+  let cx=0,cy=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px';});
+  (function loop(){rx+=(cx-rx)*.11;ry+=(cy-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button,.focus-card,.metric-cell,.model-item,.vn-item').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));});
+})();
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const sp=document.getElementById('scrollProgress');
+function syncSP(){const m=document.documentElement.scrollHeight-window.innerHeight;sp.value=m>0?(window.scrollY/m)*100:0;}
+window.addEventListener('scroll',syncSP,{passive:true});window.addEventListener('resize',syncSP);syncSP();
+const nt=document.getElementById('navToggle'),mm=document.getElementById('mobileMenu');
+nt.addEventListener('click',()=>{nt.classList.toggle('open');mm.classList.toggle('open');nt.setAttribute('aria-label',mm.classList.contains('open')?'Close menu':'Open menu');});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nt.classList.remove('open');mm.classList.remove('open');}));
 </script>
 </body>
 </html>
