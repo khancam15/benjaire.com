@@ -5,313 +5,409 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Benjaire Services — What We Offer</title>
-<meta name="description" content="Professional services from Benjaire: AI system builds, technical architecture, ecommerce operations consulting, and systems integration for businesses ready to scale.">
-
-<!-- Open Graph / Social -->
+<title>Benjaire Services — What We Build for Clients</title>
+<meta name="description" content="Benjaire delivers AI systems builds, technical architecture, and ecommerce operations consulting. Focused engagements with defined deliverables — no retainers built on vague scope.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://benjaire.com/services.html">
-<meta property="og:title" content="Benjaire Services — What We Offer">
-<meta property="og:description" content="AI systems, technical architecture, and ecommerce consulting from Benjaire. We build operational leverage for businesses that demand long-term results.">
+<meta property="og:title" content="Benjaire Services — What We Build for Clients">
+<meta property="og:description" content="AI systems, technical architecture, and ecommerce consulting. We build operational leverage for businesses that demand long-term results.">
 <meta property="og:image" content="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1200&q=80">
 <meta name="twitter:card" content="summary_large_image">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --bg: #f5f8fc; --surface: #ffffff; --border: rgba(15,23,42,0.12);
-  --blue: #1e5bb8; --blue-dim: rgba(30,91,184,0.08);
-  --text-hi: #0f172a; --text-mid: #475569; --text-lo: #64748b;
-  --mono: 'IBM Plex Mono', monospace; --sans: 'Public Sans', sans-serif; --head: 'Manrope', sans-serif;
+  --bg: #03070f; --bg2: #060d1b; --surface: #0a1120;
+  --border: rgba(56,189,248,0.09); --border-hi: rgba(56,189,248,0.20);
+  --blue: #2563eb; --cyan: #06b6d4;
+  --glow-b: rgba(37,99,235,0.40); --glow-c: rgba(6,182,212,0.30);
+  --text-hi: #f1f5f9; --text-mid: #94a3b8; --text-lo: #475569;
+  --mono: 'IBM Plex Mono', monospace; --sans: 'Public Sans', sans-serif; --cond: 'Manrope', sans-serif;
 }
-body { font-family: var(--sans); color: var(--text-hi); background: radial-gradient(circle at 60% top, rgba(30,91,184,0.07), transparent 44%), var(--bg); line-height: 1.65; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-hi); font-family: var(--sans); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; cursor: none; }
+input, textarea, select { cursor: text; }
 
-#scrollProgress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; border: 0; z-index: 200; appearance: none; }
-#scrollProgress::-webkit-progress-bar { background: rgba(15,23,42,0.08); }
-#scrollProgress::-webkit-progress-value { background: var(--blue); }
-#scrollProgress::-moz-progress-bar { background: var(--blue); }
+#cursor-dot { position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); transform: translate(-50%,-50%); mix-blend-mode: screen; }
+#cursor-ring { position: fixed; top: 0; left: 0; z-index: 9998; pointer-events: none; width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(6,182,212,0.45); transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.16,1,.3,1), height .35s cubic-bezier(.16,1,.3,1), border-color .35s; }
+body.cursor-hover #cursor-ring { width: 60px; height: 60px; border-color: rgba(6,182,212,.70); }
 
-.wrapper { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-nav { position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
-.nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-family: var(--head); font-weight: 800; font-size: 18px; letter-spacing: 0.04em; text-decoration: none; color: var(--text-hi); }
-.links { display: flex; gap: 20px; }
-.links a { font-family: var(--mono); font-size: 12px; text-decoration: none; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; }
-.links a:hover { color: var(--blue); }
-.links a.active { color: var(--blue); }
+#scrollProgress { position: fixed; top: 0; left: 0; width: 100%; height: 2px; border: 0; z-index: 300; appearance: none; }
+#scrollProgress::-webkit-progress-bar { background: transparent; }
+#scrollProgress::-webkit-progress-value { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+#scrollProgress::-moz-progress-bar { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+::-webkit-scrollbar { width: 3px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--cyan)); border-radius: 2px; }
 
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(3,7,15,.82); border-bottom: 1px solid var(--border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.nav-logo { font-family: var(--cond); font-size: 18px; font-weight: 800; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; background: linear-gradient(135deg,#fff 0%,var(--cyan) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color .2s; cursor: none; }
+.nav-links a:hover { color: var(--cyan); } .nav-links a.active { color: var(--text-hi); }
+.nav-cta { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--bg); background: var(--cyan); border: none; padding: 10px 22px; cursor: none; text-decoration: none; position: relative; overflow: hidden; transition: box-shadow .3s; }
+.nav-cta::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.18); transform: translateX(-100%); transition: transform .4s; }
+.nav-cta:hover::before { transform: translateX(0); } .nav-cta:hover { box-shadow: 0 0 24px var(--glow-c); }
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-hi); transition: transform 0.25s, opacity 0.25s; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-hi); transition: transform .25s, opacity .25s; }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-.mobile-menu { position: fixed; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 28px 24px; display: flex; flex-direction: column; gap: 20px; transform: translateY(-110%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; z-index: 99; pointer-events: none; }
+.mobile-menu { position: fixed; top: 64px; left: 0; right: 0; background: rgba(6,13,26,.97); border-bottom: 1px solid var(--border); backdrop-filter: blur(24px); padding: 28px 24px; display: flex; flex-direction: column; gap: 22px; transform: translateY(-110%); opacity: 0; transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .35s ease; z-index: 99; pointer-events: none; }
 .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
-.mobile-menu a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; }
-.mobile-menu a.active { color: var(--blue); }
+.mobile-menu a { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color .2s; }
+.mobile-menu a:hover { color: var(--cyan); } .mobile-menu a.active { color: var(--text-hi); } .mobile-menu .mobile-cta { color: var(--cyan); }
 
-/* HERO */
-.hero { padding: 72px 0 0; }
-.eyebrow { font-family: var(--mono); font-size: 11px; color: var(--blue); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
-h1 { font-family: var(--head); font-size: clamp(36px, 7vw, 64px); line-height: 1.05; margin-bottom: 18px; }
-.lead { max-width: 760px; color: var(--text-mid); font-size: 18px; line-height: 1.7; }
+.section-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.section-tag-line { width: 28px; height: 1px; background: linear-gradient(90deg, var(--blue), var(--cyan)); flex-shrink: 0; }
+.section-tag-text { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); }
 
-/* Hero image */
-.hero-media { position: relative; margin: 36px 0 0; height: 380px; overflow: hidden; border: 1px solid var(--border); }
-.hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(10%) contrast(1.03); transition: transform 1s ease; }
-.hero-media:hover img { transform: scale(1.02); }
-.hero-media-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.28) 0%, transparent 50%); pointer-events: none; }
-.hero-media-cap { position: absolute; bottom: 16px; left: 20px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; background: rgba(15,23,42,0.55); padding: 4px 10px; backdrop-filter: blur(4px); }
+.btn-primary { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--bg); background: linear-gradient(130deg, var(--blue) 0%, var(--cyan) 100%); border: none; padding: 15px 34px; cursor: none; text-decoration: none; display: inline-block; position: relative; overflow: hidden; transition: box-shadow .35s, transform .2s; }
+.btn-primary::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.16); transform: translateX(-110%) skewX(-12deg); transition: transform .55s; }
+.btn-primary:hover::before { transform: translateX(115%) skewX(-12deg); }
+.btn-primary:hover { box-shadow: 0 0 40px var(--glow-b); transform: translateY(-2px); }
+.btn-secondary { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-mid); background: transparent; border: 1px solid var(--border-hi); padding: 15px 34px; cursor: none; text-decoration: none; display: inline-block; transition: border-color .3s, color .3s, box-shadow .3s, transform .2s; }
+.btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 24px var(--glow-c); transform: translateY(-2px); }
 
-/* SERVICE TIERS */
-.tiers { margin: 56px 0; display: grid; gap: 0; border: 1px solid var(--border); }
-.tier { display: grid; grid-template-columns: 280px 1fr; border-bottom: 1px solid var(--border); }
-.tier:last-child { border-bottom: none; }
-.tier-left { padding: 32px 28px; border-right: 1px solid var(--border); background: var(--blue-dim); display: flex; flex-direction: column; gap: 12px; }
-.tier-tag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--blue); }
-.tier-name { font-family: var(--head); font-size: 22px; font-weight: 700; color: var(--text-hi); line-height: 1.2; }
-.tier-type { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-lo); border: 1px solid var(--border); padding: 3px 8px; align-self: flex-start; }
-.tier-right { padding: 32px 36px; display: flex; flex-direction: column; gap: 14px; }
-.tier-desc { color: var(--text-mid); font-size: 15px; line-height: 1.7; max-width: 580px; }
-.tier-items { display: flex; flex-direction: column; gap: 8px; }
-.tier-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text-hi); }
-.tier-item::before { content: '—'; font-family: var(--mono); color: var(--blue); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+/* ─── PAGE HERO ─── */
+.page-hero { padding-top: 64px; display: grid; grid-template-columns: 1fr 1fr; min-height: 72vh; border-bottom: 1px solid var(--border); }
+.page-hero-text { padding: 72px 56px 72px 48px; display: flex; flex-direction: column; justify-content: center; gap: 28px; border-right: 1px solid var(--border); }
+.page-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); }
+.page-h1 { font-family: var(--cond); font-size: clamp(52px,7.5vw,96px); font-weight: 800; line-height: .88; letter-spacing: -.02em; text-transform: uppercase; background: linear-gradient(135deg, var(--text-hi) 0%, var(--text-mid) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-lead { font-size: 17px; line-height: 1.78; color: var(--text-mid); max-width: 460px; }
+.page-hero-media { position: relative; overflow: hidden; background: var(--surface); }
+.page-hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(65%) brightness(.62) contrast(1.12); transition: transform .8s cubic-bezier(.16,1,.3,1); }
+.page-hero-media:hover img { transform: scale(1.04); }
+.page-hero-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(3,7,15,.25), rgba(3,7,15,.70) 100%); pointer-events: none; }
+.media-cap { position: absolute; bottom: 20px; left: 24px; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.65); background: rgba(3,7,15,.65); padding: 5px 12px; backdrop-filter: blur(6px); border: 1px solid var(--border); z-index: 1; }
 
-/* ENGAGEMENT MODEL */
-.engage { border-top: 1px solid var(--border); padding: 52px 0; }
-.engage h2 { font-family: var(--head); font-size: 28px; margin-bottom: 10px; }
-.engage-lead { color: var(--text-mid); font-size: 16px; max-width: 720px; margin-bottom: 32px; line-height: 1.7; }
-.steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); }
-.e-step { padding: 24px 20px; border-right: 1px solid var(--border); }
-.e-step:last-child { border-right: none; }
-.e-step-num { font-family: var(--mono); font-size: 11px; color: var(--blue); letter-spacing: 0.12em; margin-bottom: 8px; }
-.e-step-name { font-family: var(--head); font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text-hi); }
-.e-step-desc { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+/* ─── SERVICES ROWS ─── */
+.services-section { border-bottom: 1px solid var(--border); }
+.service-row { display: grid; grid-template-columns: 300px 1fr; border-bottom: 1px solid var(--border); background: var(--bg); transition: background .3s; }
+.service-row:last-child { border-bottom: none; }
+.service-row:hover { background: rgba(37,99,235,.025); }
+.service-left { padding: 44px 36px; border-right: 1px solid var(--border); background: var(--bg2); display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden; }
+.service-left::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--blue), var(--cyan), transparent); opacity: 0; transition: opacity .4s; }
+.service-row:hover .service-left::before { opacity: 1; }
+.svc-tag { font-family: var(--mono); font-size: 10px; color: var(--cyan); letter-spacing: .16em; text-transform: uppercase; }
+.svc-name { font-family: var(--cond); font-size: 26px; font-weight: 700; text-transform: uppercase; color: var(--text-hi); line-height: 1.1; }
+.svc-type { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-lo); padding: 4px 10px; border: 1px solid var(--border-hi); align-self: flex-start; background: rgba(6,182,212,.04); }
+.svc-link { font-family: var(--mono); font-size: 11px; color: var(--cyan); text-decoration: none; margin-top: auto; opacity: 0; transition: opacity .25s; letter-spacing: .08em; }
+.service-row:hover .svc-link { opacity: 1; }
+.service-right { padding: 44px 52px; display: flex; flex-direction: column; gap: 22px; }
+.svc-desc { font-size: 15px; line-height: 1.78; color: var(--text-mid); max-width: 640px; }
+.svc-items { display: flex; flex-direction: column; gap: 10px; }
+.svc-item { display: flex; align-items: flex-start; gap: 14px; font-size: 14px; color: var(--text-hi); line-height: 1.6; }
+.svc-item::before { content: '—'; font-family: var(--mono); color: var(--cyan); font-size: 11px; flex-shrink: 0; margin-top: 2px; }
 
-/* STANDARDS */
-.standards { border-top: 1px solid var(--border); padding: 44px 0; }
-.standards h2 { font-family: var(--head); font-size: 28px; margin-bottom: 20px; }
-.standard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.standard-item { background: var(--surface); border: 1px solid var(--border); padding: 20px 22px; }
-.standard-item h4 { font-family: var(--head); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-.standard-item p { color: var(--text-mid); font-size: 14px; line-height: 1.65; }
+/* ─── PROCESS ─── */
+.process-section { border-bottom: 1px solid var(--border); background: var(--bg2); }
+.section-header { padding: 60px 48px 44px; border-bottom: 1px solid var(--border); }
+.section-h2 { font-family: var(--cond); font-size: clamp(36px,5vw,56px); font-weight: 800; text-transform: uppercase; line-height: .92; color: var(--text-hi); }
+.section-sub { font-size: 15px; line-height: 1.78; color: var(--text-mid); max-width: 540px; margin-top: 18px; }
+.process-steps { display: grid; grid-template-columns: repeat(4,1fr); }
+.p-step { padding: 40px 32px; border-right: 1px solid var(--border); transition: background .3s; }
+.p-step:last-child { border-right: none; }
+.p-step:hover { background: rgba(37,99,235,.04); }
+.p-step-num { font-family: var(--mono); font-size: 10px; color: var(--blue); letter-spacing: .14em; margin-bottom: 18px; }
+.p-step-name { font-family: var(--cond); font-size: 22px; font-weight: 700; text-transform: uppercase; color: var(--text-hi); margin-bottom: 12px; letter-spacing: .04em; }
+.p-step-desc { font-size: 14px; color: var(--text-mid); line-height: 1.68; }
 
-/* CTA STRIPE */
-.cta-stripe { margin-top: 40px; background: var(--text-hi); padding: 40px 36px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-.cta-stripe-text h3 { font-family: var(--head); font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
-.cta-stripe-text p { font-size: 14px; color: rgba(255,255,255,0.65); }
-.btn-light { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-hi); background: #ffffff; border: none; padding: 14px 28px; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s; white-space: nowrap; }
-.btn-light:hover { opacity: 0.88; }
+/* ─── STANDARDS ─── */
+.standards-section { border-bottom: 1px solid var(--border); background: var(--bg); }
+.standards-grid { display: grid; grid-template-columns: repeat(2,1fr); }
+.std-card { padding: 44px 52px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background .3s; position: relative; overflow: hidden; }
+.std-card:nth-child(2n) { border-right: none; }
+.std-card:nth-child(3), .std-card:nth-child(4) { border-bottom: none; }
+.std-card:hover { background: rgba(6,182,212,.02); }
+.std-num { font-family: var(--mono); font-size: 10px; color: var(--cyan); letter-spacing: .14em; margin-bottom: 16px; }
+.std-name { font-family: var(--cond); font-size: 24px; font-weight: 700; text-transform: uppercase; color: var(--text-hi); margin-bottom: 14px; letter-spacing: .04em; }
+.std-desc { font-size: 15px; line-height: 1.75; color: var(--text-mid); }
 
-.footer { border-top: 1px solid var(--border); margin-top: 40px; padding: 20px 0 34px; color: var(--text-lo); font-family: var(--mono); font-size: 12px; }
+/* ─── PAGE CTA ─── */
+.page-cta { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 320px; align-items: center; padding: 88px 48px; gap: 48px; background: var(--bg2); }
+.page-cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 80% at 20% 50%, rgba(37,99,235,.07), transparent 65%); }
+.page-cta::after { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(56,189,248,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,.02) 1px, transparent 1px); background-size: 52px 52px; }
+.cta-overline { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 18px; position: relative; z-index: 1; }
+.cta-h2 { font-family: var(--cond); font-size: clamp(40px,5.5vw,68px); font-weight: 800; text-transform: uppercase; line-height: .90; position: relative; z-index: 1; }
+.cta-h2 .solid { color: var(--text-hi); display: block; }
+.cta-h2 .grad { display: block; background: linear-gradient(135deg, var(--blue), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cta-actions { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
 
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.65s ease, transform 0.65s ease; }
+/* ─── FOOTER ─── */
+.site-footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(--bg2); }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--text-lo); letter-spacing: .08em; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-lo); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--cyan); }
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
 .reveal.in { opacity: 1; transform: none; }
 
-@media (max-width: 900px) {
-  .links { display: none; }
-  .nav-hamburger { display: flex; }
-  .hero-media { height: 240px; }
-  .tiers { border: none; gap: 16px; }
-  .tier { grid-template-columns: 1fr; border: 1px solid var(--border); }
-  .tier-left { border-right: none; border-bottom: 1px solid var(--border); }
-  .tier-right { padding: 24px; }
-  .steps-row { grid-template-columns: 1fr 1fr; }
-  .e-step:nth-child(2) { border-right: none; }
-  .e-step { border-bottom: 1px solid var(--border); }
-  .e-step:nth-child(3), .e-step:nth-child(4) { border-bottom: none; }
-  .standard-grid { grid-template-columns: 1fr; }
-  .cta-stripe { flex-direction: column; align-items: flex-start; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: opacity .4s; transform: none; }
+  .btn-primary::before, .nav-cta::before { display: none; }
 }
 
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; } .nav-links { display: none; } .nav-cta { display: none; } .nav-hamburger { display: flex; }
+  body { cursor: auto; } #cursor-dot, #cursor-ring { display: none; }
+  .page-hero { grid-template-columns: 1fr; min-height: auto; }
+  .page-hero-text { border-right: none; border-bottom: 1px solid var(--border); padding: 56px 24px; }
+  .page-hero-media { min-height: 300px; }
+  .service-row { grid-template-columns: 1fr; }
+  .service-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .service-right { padding: 32px 24px; }
+  .section-header { padding: 48px 24px 36px; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .p-step:nth-child(2) { border-right: none; }
+  .p-step { border-bottom: 1px solid var(--border); }
+  .p-step:nth-child(3), .p-step:nth-child(4) { border-bottom: none; }
+  .p-step { padding: 32px 24px; }
+  .standards-grid { grid-template-columns: 1fr; }
+  .std-card { border-right: none; border-bottom: 1px solid var(--border); padding: 36px 24px; }
+  .std-card:last-child { border-bottom: none; }
+  .page-cta { grid-template-columns: 1fr; padding: 56px 24px; }
+  .site-footer { padding: 0 24px; }
+  .footer-inner { flex-direction: column; height: auto; padding: 20px 0; gap: 12px; text-align: center; }
+}
 @media (max-width: 600px) {
-  .steps-row { grid-template-columns: 1fr; }
-  .e-step { border-right: none; border-bottom: 1px solid var(--border); }
-  .e-step:last-child { border-bottom: none; }
+  .process-steps { grid-template-columns: 1fr; }
+  .p-step { border-right: none; border-bottom: 1px solid var(--border); }
+  .p-step:last-child { border-bottom: none; }
+  .page-h1 { font-size: clamp(44px, 14vw, 72px); }
 }
 </style>
 </head>
 <body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 <progress id="scrollProgress" max="100" value="0" aria-label="Page scroll progress"></progress>
+
 <nav>
-  <div class="wrapper nav-inner">
-    <a class="logo" href="index.html">Benjaire</a>
-    <div class="links">
-      <a href="index.html#home">Home</a>
-      <a href="services.html" class="active">Services</a>
-      <a href="commerce.html">Commerce</a>
-      <a href="technology.html">Technology</a>
-      <a href="systems.html">Systems</a>
-      <a href="index.html#contact">Contact</a>
-    </div>
-    <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+  <a href="index.html" class="nav-logo">Benjaire</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="commerce.html">Commerce</a></li>
+    <li><a href="technology.html">Technology</a></li>
+    <li><a href="systems.html">Systems</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Get in Touch</a>
+  <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#home">Home</a>
+<div class="mobile-menu" id="mobileMenu" role="navigation">
+  <a href="index.html">Home</a>
   <a href="services.html" class="active">Services</a>
   <a href="commerce.html">Commerce</a>
   <a href="technology.html">Technology</a>
   <a href="systems.html">Systems</a>
   <a href="index.html#contact">Contact</a>
+  <a href="index.html#contact" class="mobile-cta">Get in Touch →</a>
 </div>
 
-<main class="wrapper">
+<main>
 
-  <!-- HERO -->
-  <section class="hero reveal">
-    <div class="eyebrow">What We Offer</div>
-    <h1>Services</h1>
-    <p class="lead">Benjaire delivers external services through two primary lanes: AI systems builds for businesses looking to automate real workflows, and technical infrastructure engagements for organizations that need operational clarity and reliability at scale.</p>
-    <div class="hero-media">
-      <img
-        src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1600&q=85"
-        alt="Professional workspace and technology consulting — Benjaire Services"
-        loading="eager"
-      >
-      <div class="hero-media-overlay"></div>
-      <div class="hero-media-cap">Professional Services · New York</div>
+<!-- HERO -->
+<header class="page-hero">
+  <div class="page-hero-text reveal">
+    <div class="page-eyebrow">What We Build for Clients</div>
+    <h1 class="page-h1">Services</h1>
+    <p class="page-lead">Benjaire takes on focused client engagements across three disciplines: AI systems, technical architecture, and ecommerce operations. Every project has a defined output and ships with documentation your team can own and run without us.</p>
+  </div>
+  <div class="page-hero-media reveal" style="transition-delay:.08s;">
+    <img
+      src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1600&q=85"
+      alt="Professional services — Benjaire"
+      loading="eager"
+    >
+    <div class="media-cap">Professional Services · New York</div>
+  </div>
+</header>
+
+<!-- SERVICES -->
+<section class="services-section">
+
+  <div class="service-row reveal">
+    <div class="service-left">
+      <div class="svc-tag">Service 01</div>
+      <div class="svc-name">AI Systems Build</div>
+      <div class="svc-type">Technology</div>
+      <a href="technology.html" class="svc-link">View Venture ↗</a>
     </div>
-  </section>
-
-  <!-- SERVICE TIERS -->
-  <div class="tiers reveal" style="transition-delay:.08s;">
-
-    <div class="tier">
-      <div class="tier-left">
-        <div class="tier-tag">Service 01</div>
-        <div class="tier-name">AI Systems Build</div>
-        <div class="tier-type">Technology</div>
-      </div>
-      <div class="tier-right">
-        <p class="tier-desc">We design, build, and deploy agentic AI systems that handle repetitive, high-volume workflows. Every system ships with clear guardrails, monitoring, and human override controls — built for teams that need to trust what they run.</p>
-        <div class="tier-items">
-          <div class="tier-item">Workflow mapping and automation target selection</div>
-          <div class="tier-item">Agent design with prompt engineering and tooling</div>
-          <div class="tier-item">Integration with existing tools and data sources</div>
-          <div class="tier-item">Production deployment with observability and rollback support</div>
-          <div class="tier-item">Post-launch iteration and quality tracking</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tier">
-      <div class="tier-left">
-        <div class="tier-tag">Service 02</div>
-        <div class="tier-name">Systems Architecture</div>
-        <div class="tier-type">Infrastructure</div>
-      </div>
-      <div class="tier-right">
-        <p class="tier-desc">We assess technical environments, identify fragility points, and define architecture roadmaps that improve reliability and cut operational friction. The work is practical: scoped decisions, sequenced rollout, and clear ownership.</p>
-        <div class="tier-items">
-          <div class="tier-item">Current-state system audit and dependency mapping</div>
-          <div class="tier-item">Architecture roadmap with prioritized improvement path</div>
-          <div class="tier-item">Integration design for internal tools and external platforms</div>
-          <div class="tier-item">Incident response framework and observability standards</div>
-          <div class="tier-item">Runbooks and operational documentation</div>
-        </div>
+    <div class="service-right">
+      <p class="svc-desc">We design, build, and deploy agentic AI systems that handle repetitive, high-volume workflows. Every system ships with defined guardrails, monitoring, and human override controls — built for teams that need to trust what they run in production.</p>
+      <div class="svc-items">
+        <div class="svc-item">Workflow mapping and automation target selection</div>
+        <div class="svc-item">Agent design with prompt engineering and tooling</div>
+        <div class="svc-item">Integration with existing systems and data sources</div>
+        <div class="svc-item">Production deployment with observability and rollback support</div>
+        <div class="svc-item">Post-launch performance tracking and iteration</div>
       </div>
     </div>
-
-    <div class="tier">
-      <div class="tier-left">
-        <div class="tier-tag">Service 03</div>
-        <div class="tier-name">Ecommerce Operations</div>
-        <div class="tier-type">Commerce Consulting</div>
-      </div>
-      <div class="tier-right">
-        <p class="tier-desc">We help brands and operators build ecommerce businesses with real operating leverage — not just traffic tactics. The focus is on margin, inventory health, and channel infrastructure that holds as volume grows.</p>
-        <div class="tier-items">
-          <div class="tier-item">Channel strategy and contribution margin analysis</div>
-          <div class="tier-item">Inventory and supplier planning model build-out</div>
-          <div class="tier-item">Marketplace listing and operational standards review</div>
-          <div class="tier-item">Weekly performance scorecard design and implementation</div>
-          <div class="tier-item">Fulfillment reliability and exception handling frameworks</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- ENGAGEMENT MODEL -->
-  <section class="engage reveal">
-    <h2>How Engagements Work</h2>
-    <p class="engage-lead">We run focused, time-bounded projects with defined deliverables. No retainers built on vague scope. Every engagement starts with a clear output and ends with something your team can actually operate.</p>
-    <div class="steps-row">
-      <div class="e-step">
-        <div class="e-step-num">01</div>
-        <div class="e-step-name">Scope Call</div>
-        <p class="e-step-desc">30 minutes to understand the problem, define the right service, and confirm fit. We move fast here.</p>
-      </div>
-      <div class="e-step">
-        <div class="e-step-num">02</div>
-        <div class="e-step-name">Proposal</div>
-        <p class="e-step-desc">A single-page engagement document: deliverables, timeline, and investment. No ambiguity.</p>
-      </div>
-      <div class="e-step">
-        <div class="e-step-num">03</div>
-        <div class="e-step-name">Execution</div>
-        <p class="e-step-desc">We work directly with your team. Weekly updates, fast decisions, no middleman overhead.</p>
-      </div>
-      <div class="e-step">
-        <div class="e-step-num">04</div>
-        <div class="e-step-name">Handoff</div>
-        <p class="e-step-desc">Full documentation, working systems, and a team that knows how to run what we built.</p>
+  <div class="service-row reveal" style="transition-delay:.06s;">
+    <div class="service-left">
+      <div class="svc-tag">Service 02</div>
+      <div class="svc-name">Systems Architecture</div>
+      <div class="svc-type">Infrastructure</div>
+      <a href="systems.html" class="svc-link">View Venture ↗</a>
+    </div>
+    <div class="service-right">
+      <p class="svc-desc">We assess technical environments, identify fragility points, and define architecture roadmaps that improve reliability and reduce operational friction. The work is practical — scoped decisions, sequenced rollout, and clear ownership at every step.</p>
+      <div class="svc-items">
+        <div class="svc-item">Current-state system audit and dependency mapping</div>
+        <div class="svc-item">Architecture roadmap with prioritized improvement path</div>
+        <div class="svc-item">Integration design for internal tools and external platforms</div>
+        <div class="svc-item">Incident response framework and observability standards</div>
+        <div class="svc-item">Runbooks and operational documentation</div>
       </div>
     </div>
-  </section>
-
-  <!-- OPERATING STANDARDS -->
-  <section class="standards reveal">
-    <h2>What We Hold Ourselves To</h2>
-    <div class="standard-grid">
-      <div class="standard-item">
-        <h4>Outcomes, Not Effort</h4>
-        <p>Engagements are scoped to results. We do not bill for hours that do not move the project forward. If something is not working, we surface it early and adjust.</p>
-      </div>
-      <div class="standard-item">
-        <h4>Documentation That Lasts</h4>
-        <p>Every system we build ships with documentation your team can follow without us. No dependency on Benjaire for ongoing operation of what we deliver.</p>
-      </div>
-      <div class="standard-item">
-        <h4>Conservative Risk Profile</h4>
-        <p>We flag tradeoffs clearly. We do not recommend systems or changes we would not run ourselves. High-risk proposals get honest scoping, not optimistic projections.</p>
-      </div>
-      <div class="standard-item">
-        <h4>Direct Communication</h4>
-        <p>One point of contact. Status updates that say something real. If there is a problem, you hear about it from us before it surfaces elsewhere.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA STRIPE -->
-  <div class="cta-stripe reveal">
-    <div class="cta-stripe-text">
-      <h3>Ready to scope a project?</h3>
-      <p>Send a message and we will follow up within one business day.</p>
-    </div>
-    <a href="index.html#contact" class="btn-light">Get in Touch →</a>
   </div>
 
-  <div class="footer">Benjaire Services — Practical work. Durable results.</div>
+  <div class="service-row reveal" style="transition-delay:.12s;">
+    <div class="service-left">
+      <div class="svc-tag">Service 03</div>
+      <div class="svc-name">Ecommerce Operations</div>
+      <div class="svc-type">Commerce Consulting</div>
+      <a href="commerce.html" class="svc-link">View Venture ↗</a>
+    </div>
+    <div class="service-right">
+      <p class="svc-desc">We help brands and operators build ecommerce businesses with real operating leverage — not just traffic tactics. The focus is on margin discipline, inventory health, and channel infrastructure that holds as volume grows across any market condition.</p>
+      <div class="svc-items">
+        <div class="svc-item">Channel strategy and contribution margin analysis</div>
+        <div class="svc-item">Inventory and supplier planning model build-out</div>
+        <div class="svc-item">Marketplace listing and operational standards review</div>
+        <div class="svc-item">Weekly performance scorecard design and implementation</div>
+        <div class="svc-item">Fulfillment reliability and exception handling frameworks</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ENGAGEMENT PROCESS -->
+<section class="process-section">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">Engagement Model</span>
+    </div>
+    <h2 class="section-h2">How Engagements Work</h2>
+    <p class="section-sub">Focused, time-bounded projects with defined deliverables. No retainers built on vague scope. Every engagement starts with a clear output and ends with something your team can operate independently.</p>
+  </div>
+  <div class="process-steps">
+    <div class="p-step reveal">
+      <div class="p-step-num">01</div>
+      <div class="p-step-name">Scope Call</div>
+      <p class="p-step-desc">30 minutes to understand the problem, define the right service, and confirm fit. We move fast and give you a direct answer on whether we can help.</p>
+    </div>
+    <div class="p-step reveal" style="transition-delay:.06s;">
+      <div class="p-step-num">02</div>
+      <div class="p-step-name">Proposal</div>
+      <p class="p-step-desc">A single-page engagement document covering deliverables, timeline, and investment. No ambiguity — you know exactly what you're getting before we start.</p>
+    </div>
+    <div class="p-step reveal" style="transition-delay:.12s;">
+      <div class="p-step-num">03</div>
+      <div class="p-step-name">Execution</div>
+      <p class="p-step-desc">We work directly with your team. Weekly updates, fast decisions, no middleman overhead. You have one point of contact throughout.</p>
+    </div>
+    <div class="p-step reveal" style="transition-delay:.18s;">
+      <div class="p-step-num">04</div>
+      <div class="p-step-name">Handoff</div>
+      <p class="p-step-desc">Full documentation, working systems, and a team that understands how to run what we built. No dependency on Benjaire for ongoing operation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATING STANDARDS -->
+<section class="standards-section">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">Standards</span>
+    </div>
+    <h2 class="section-h2">What We Hold Ourselves To</h2>
+  </div>
+  <div class="standards-grid">
+    <div class="std-card reveal">
+      <div class="std-num">01</div>
+      <div class="std-name">Outcomes, Not Effort</div>
+      <p class="std-desc">Engagements are scoped to results. We do not bill for hours that do not move the project forward. If something is not working, we surface it early and adjust — not at billing time.</p>
+    </div>
+    <div class="std-card reveal" style="transition-delay:.06s;">
+      <div class="std-num">02</div>
+      <div class="std-name">Documentation That Lasts</div>
+      <p class="std-desc">Every system we build ships with documentation your team can follow without us in the room. No Benjaire dependency for day-to-day operation of what we deliver.</p>
+    </div>
+    <div class="std-card reveal" style="transition-delay:.10s;">
+      <div class="std-num">03</div>
+      <div class="std-name">Conservative Risk Profile</div>
+      <p class="std-desc">We flag tradeoffs clearly. We do not recommend systems we would not run ourselves. High-risk proposals get honest scoping, not optimistic projections built to win the deal.</p>
+    </div>
+    <div class="std-card reveal" style="transition-delay:.14s;">
+      <div class="std-num">04</div>
+      <div class="std-name">Direct Communication</div>
+      <p class="std-desc">One point of contact. Status updates that say something real. If there is a problem, you hear about it from us directly — before it surfaces through other channels.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div>
+    <div class="cta-overline reveal">Ready to scope a project</div>
+    <h2 class="cta-h2 reveal" style="transition-delay:.06s;">
+      <span class="solid">Start a Conversation.</span>
+      <span class="grad">We Move Fast.</span>
+    </h2>
+  </div>
+  <div class="cta-actions reveal" style="transition-delay:.10s;">
+    <a href="index.html#contact" class="btn-primary" style="text-align:center;">Get in Touch</a>
+    <a href="index.html#ventures" class="btn-secondary" style="text-align:center;">View Ventures</a>
+  </div>
+</section>
+
 </main>
 
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Benjaire · New York</span>
+    <span class="footer-copy">Services — Practical work. Durable results.</span>
+    <div class="footer-links">
+      <a href="commerce.html">Commerce</a>
+      <a href="technology.html">Technology</a>
+      <a href="systems.html">Systems</a>
+    </div>
+  </div>
+</footer>
+
 <script>
-const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-const sp = document.getElementById('scrollProgress');
-function syncSP() { const st = window.scrollY, m = document.documentElement.scrollHeight - window.innerHeight; sp.value = m > 0 ? (st/m)*100 : 0; }
-window.addEventListener('scroll', syncSP, { passive: true }); window.addEventListener('resize', syncSP); syncSP();
-const nt = document.getElementById('navToggle'), mm = document.getElementById('mobileMenu');
-nt.addEventListener('click', () => { nt.classList.toggle('open'); mm.classList.toggle('open'); });
-mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nt.classList.remove('open'); mm.classList.remove('open'); }));
+(function(){
+  const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+  if(!dot||!ring)return;
+  let cx=0,cy=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px';});
+  (function loop(){rx+=(cx-rx)*.11;ry+=(cy-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button,.service-row,.p-step,.std-card').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));});
+})();
+
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const sp=document.getElementById('scrollProgress');
+function syncSP(){const m=document.documentElement.scrollHeight-window.innerHeight;sp.value=m>0?(window.scrollY/m)*100:0;}
+window.addEventListener('scroll',syncSP,{passive:true});window.addEventListener('resize',syncSP);syncSP();
+
+const nt=document.getElementById('navToggle'),mm=document.getElementById('mobileMenu');
+nt.addEventListener('click',()=>{nt.classList.toggle('open');mm.classList.toggle('open');nt.setAttribute('aria-label',mm.classList.contains('open')?'Close menu':'Open menu');});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nt.classList.remove('open');mm.classList.remove('open');}));
 </script>
 </body>
 </html>
