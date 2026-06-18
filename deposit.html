@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Project Deposit — Benjaire</title>
+<meta name="description" content="Secure your project with Benjaire by submitting a $50 project deposit. Applied toward the total cost of your engagement.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:        #03070f;
+  --bg2:       #060d1b;
+  --surface:   #0a1120;
+  --border:    rgba(56,189,248,0.09);
+  --border-hi: rgba(56,189,248,0.22);
+  --blue:      #2563eb;
+  --cyan:      #06b6d4;
+  --green:     #4ade80;
+  --glow-b:    rgba(37,99,235,0.40);
+  --glow-c:    rgba(6,182,212,0.30);
+  --text-hi:   #f1f5f9;
+  --text-mid:  #94a3b8;
+  --text-lo:   #475569;
+  --mono:      'IBM Plex Mono', monospace;
+  --sans:      'Public Sans', sans-serif;
+  --cond:      'Manrope', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text-hi);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+/* ─── CURSOR ─── */
+#cursor-dot {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  pointer-events: none; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--cyan);
+  transform: translate(-50%, -50%);
+  will-change: left, top; mix-blend-mode: screen;
+}
+#cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 9998;
+  pointer-events: none; width: 38px; height: 38px;
+  border-radius: 50%; border: 1px solid rgba(6,182,212,0.45);
+  transform: translate(-50%, -50%);
+  will-change: left, top;
+  transition: width 0.35s cubic-bezier(0.16,1,0.3,1),
+              height 0.35s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.35s;
+}
+body.cursor-hover #cursor-ring { width: 60px; height: 60px; border-color: rgba(6,182,212,0.70); }
+
+/* ─── SCROLL PROGRESS ─── */
+#scrollProgress {
+  position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+  border: 0; z-index: 300; appearance: none;
+}
+#scrollProgress::-webkit-progress-bar  { background: transparent; }
+#scrollProgress::-webkit-progress-value { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+#scrollProgress::-moz-progress-bar      { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--cyan)); border-radius: 2px; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(3,7,15,0.88);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+}
+.nav-logo {
+  font-family: var(--cond); font-size: 18px; font-weight: 800;
+  letter-spacing: 0.14em; text-decoration: none; text-transform: uppercase;
+  background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  cursor: none;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-mid); text-decoration: none; transition: color 0.2s; cursor: none;
+}
+.nav-links a:hover { color: var(--cyan); }
+.nav-cta {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bg); background: var(--cyan);
+  border: none; padding: 10px 22px; cursor: none;
+  text-decoration: none; position: relative; overflow: hidden; transition: box-shadow 0.3s;
+}
+.nav-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0.18);
+  transform: translateX(-100%); transition: transform 0.4s;
+}
+.nav-cta:hover::before { transform: translateX(0); }
+.nav-cta:hover { box-shadow: 0 0 24px var(--glow-c); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--text-hi); transition: transform 0.25s, opacity 0.25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-menu {
+  position: fixed; top: 64px; left: 0; right: 0;
+  background: rgba(6,13,26,0.97); border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(24px); padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 22px;
+  transform: translateY(-110%); opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease;
+  z-index: 99; pointer-events: none;
+}
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+.mobile-menu a {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-mid); text-decoration: none; transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--cyan); }
+.mobile-menu .mobile-cta { color: var(--cyan); }
+
+/* ─── PAGE WRAPPER ─── */
+.page-wrap {
+  padding-top: 64px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── DEPOSIT HERO ─── */
+.deposit-hero {
+  position: relative;
+  padding: 96px 48px 80px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.deposit-hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 80% at 20% 50%, rgba(37,99,235,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 50% at 75% 40%, rgba(6,182,212,0.07) 0%, transparent 60%);
+}
+.deposit-hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(56,189,248,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.deposit-hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 340px; gap: 80px; align-items: center;
+}
+.deposit-tag { display: flex; align-items: center; gap: 14px; margin-bottom: 32px; }
+.deposit-tag-line { width: 42px; height: 1px; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+.deposit-tag-text { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan); }
+.deposit-h1 {
+  font-family: var(--cond); font-size: clamp(48px, 7vw, 96px);
+  font-weight: 800; line-height: 0.88; letter-spacing: -0.025em;
+  text-transform: uppercase; margin-bottom: 32px;
+}
+.deposit-h1 .ln-solid { display: block; color: var(--text-hi); }
+.deposit-h1 .ln-grad {
+  display: block;
+  background: linear-gradient(130deg, var(--blue) 0%, var(--cyan) 55%, #a5f3fc 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.deposit-desc {
+  font-size: 17px; line-height: 1.78; color: var(--text-mid); max-width: 500px;
+}
+
+/* ─── DEPOSIT CARD ─── */
+.deposit-card {
+  background: var(--surface);
+  border: 1px solid var(--border-hi);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.deposit-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+}
+.deposit-amount-row {
+  display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;
+}
+.deposit-amount {
+  font-family: var(--cond); font-size: 64px; font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(130deg, var(--cyan), #a5f3fc);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.deposit-currency {
+  font-family: var(--mono); font-size: 18px; color: var(--text-mid);
+}
+.deposit-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--text-lo); margin-bottom: 28px;
+}
+.deposit-divider {
+  height: 1px; background: var(--border); margin-bottom: 28px;
+}
+.deposit-items { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+.deposit-item {
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.deposit-item-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--cyan); flex-shrink: 0; margin-top: 8px;
+}
+.deposit-item-text {
+  font-size: 14px; line-height: 1.6; color: var(--text-mid);
+}
+.deposit-item-text strong { color: var(--text-hi); font-weight: 600; }
+
+.deposit-pay-btn {
+  display: block; width: 100%;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bg); background: var(--cyan);
+  border: none; padding: 18px 24px;
+  text-decoration: none; text-align: center;
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.3s; cursor: none;
+}
+.deposit-pay-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%); transition: transform 0.4s;
+}
+.deposit-pay-btn:hover::before { transform: translateX(0); }
+.deposit-pay-btn:hover { box-shadow: 0 0 32px var(--glow-c); }
+.deposit-secure {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 14px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-lo);
+}
+.deposit-secure-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--green); }
+
+/* ─── HOW IT WORKS ─── */
+.how-section {
+  padding: 96px 48px;
+  border-bottom: 1px solid var(--border);
+}
+.how-inner { max-width: 1100px; margin: 0 auto; }
+.section-tag { display: flex; align-items: center; gap: 14px; margin-bottom: 56px; }
+.section-tag-line { width: 42px; height: 1px; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+.section-tag-text { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan); }
+.how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.how-step {
+  background: var(--surface); padding: 40px 36px;
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s;
+}
+.how-step:hover { border-color: var(--border-hi); }
+.how-step-num {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--text-lo); margin-bottom: 20px;
+}
+.how-step-title {
+  font-family: var(--cond); font-size: 22px; font-weight: 700;
+  color: var(--text-hi); margin-bottom: 12px; letter-spacing: -0.01em;
+}
+.how-step-desc { font-size: 14px; line-height: 1.72; color: var(--text-mid); }
+
+/* ─── FAQ ─── */
+.faq-section {
+  padding: 96px 48px;
+  border-bottom: 1px solid var(--border);
+}
+.faq-inner { max-width: 720px; margin: 0 auto; }
+.faq-list { display: flex; flex-direction: column; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0;
+}
+.faq-q {
+  font-family: var(--cond); font-size: 18px; font-weight: 700;
+  color: var(--text-hi); margin-bottom: 12px; letter-spacing: -0.01em;
+}
+.faq-a { font-size: 15px; line-height: 1.72; color: var(--text-mid); }
+
+/* ─── CTA FOOTER ─── */
+.deposit-footer {
+  padding: 80px 48px;
+  text-align: center;
+}
+.deposit-footer-inner { max-width: 560px; margin: 0 auto; }
+.deposit-footer h2 {
+  font-family: var(--cond); font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.deposit-footer p { font-size: 16px; color: var(--text-mid); margin-bottom: 36px; }
+.deposit-footer-links {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+.btn-primary {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bg); background: var(--cyan);
+  border: none; padding: 14px 28px;
+  text-decoration: none; position: relative; overflow: hidden;
+  transition: box-shadow 0.3s; cursor: none;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0.18);
+  transform: translateX(-100%); transition: transform 0.4s;
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover { box-shadow: 0 0 24px var(--glow-c); }
+.btn-ghost {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-mid); text-decoration: none; padding: 14px 28px;
+  border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; cursor: none;
+}
+.btn-ghost:hover { border-color: var(--border-hi); color: var(--text-hi); }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .deposit-hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .deposit-card { max-width: 480px; }
+  .how-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .deposit-hero, .how-section, .faq-section, .deposit-footer { padding-left: 20px; padding-right: 20px; }
+  .deposit-hero { padding-top: 64px; }
+  .deposit-card { padding: 28px 20px; }
+  .deposit-amount { font-size: 48px; }
+  .deposit-footer-links { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<progress id="scrollProgress" value="0" max="100"></progress>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Benjaire</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#booking" class="nav-cta">Book a Call →</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="index.html#booking" class="mobile-cta">Book a Call →</a>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ─── HERO ─── -->
+  <section class="deposit-hero">
+    <div class="deposit-hero-glow"></div>
+    <div class="deposit-hero-grid"></div>
+    <div class="deposit-hero-inner">
+      <div>
+        <div class="deposit-tag reveal">
+          <div class="deposit-tag-line"></div>
+          <span class="deposit-tag-text">Secure Your Project</span>
+        </div>
+        <h1 class="deposit-h1 reveal" style="transition-delay:.06s;">
+          <span class="ln-solid">Project</span>
+          <span class="ln-grad">Deposit</span>
+        </h1>
+        <p class="deposit-desc reveal" style="transition-delay:.12s;">
+          Reserve your spot and lock in your start date with a $50 deposit.
+          It's applied directly toward the total cost of your project — this is how we begin.
+        </p>
+      </div>
+      <div class="deposit-card reveal" style="transition-delay:.18s;">
+        <div class="deposit-amount-row">
+          <span class="deposit-currency">$</span>
+          <span class="deposit-amount">50</span>
+        </div>
+        <div class="deposit-label">Project Deposit · USD</div>
+        <div class="deposit-divider"></div>
+        <div class="deposit-items">
+          <div class="deposit-item">
+            <div class="deposit-item-dot"></div>
+            <p class="deposit-item-text"><strong>Applied to your total</strong> — the $50 is credited toward your final invoice, not an added fee.</p>
+          </div>
+          <div class="deposit-item">
+            <div class="deposit-item-dot"></div>
+            <p class="deposit-item-text"><strong>Locks in your start date</strong> — your project slot is reserved once payment is confirmed.</p>
+          </div>
+          <div class="deposit-item">
+            <div class="deposit-item-dot"></div>
+            <p class="deposit-item-text"><strong>You work directly with Khaneil</strong> — no handoffs, no junior staff.</p>
+          </div>
+        </div>
+        <!-- STRIPE PAYMENT LINK GOES HERE -->
+        <a href="#" class="deposit-pay-btn" id="payBtn">
+          Pay $50 Deposit →
+        </a>
+        <div class="deposit-secure">
+          <span class="deposit-secure-dot"></span>
+          Secured by Stripe · SSL Encrypted
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HOW IT WORKS ─── -->
+  <section class="how-section">
+    <div class="how-inner">
+      <div class="section-tag reveal">
+        <div class="section-tag-line"></div>
+        <span class="section-tag-text">How It Works</span>
+      </div>
+      <div class="how-grid">
+        <div class="how-step reveal" style="transition-delay:.06s;">
+          <div class="how-step-num">Step 01</div>
+          <div class="how-step-title">Submit Your Deposit</div>
+          <p class="how-step-desc">Click the button above and complete your secure $50 payment through Stripe. You'll receive an instant email confirmation.</p>
+        </div>
+        <div class="how-step reveal" style="transition-delay:.12s;">
+          <div class="how-step-num">Step 02</div>
+          <div class="how-step-title">Khaneil Reaches Out</div>
+          <p class="how-step-desc">Within 24 hours, Khaneil will contact you directly to confirm your project scope, timeline, and next steps.</p>
+        </div>
+        <div class="how-step reveal" style="transition-delay:.18s;">
+          <div class="how-step-num">Step 03</div>
+          <div class="how-step-title">Work Begins</div>
+          <p class="how-step-desc">Your deposit is applied to the final invoice. You pay the remaining balance only when you're satisfied with the deliverables.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="section-tag reveal">
+        <div class="section-tag-line"></div>
+        <span class="section-tag-text">Common Questions</span>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal" style="transition-delay:.04s;">
+          <div class="faq-q">Is the $50 refundable?</div>
+          <p class="faq-a">The deposit is non-refundable once the project has been scoped and work has begun. If you reach out before work starts, we'll work something out on a case-by-case basis.</p>
+        </div>
+        <div class="faq-item reveal" style="transition-delay:.08s;">
+          <div class="faq-q">What services require a deposit?</div>
+          <p class="faq-a">Deposits are required for all web development, personal branding, and custom project engagements. Resume and career coaching sessions are booked through the scheduling page.</p>
+        </div>
+        <div class="faq-item reveal" style="transition-delay:.12s;">
+          <div class="faq-q">What happens after I pay?</div>
+          <p class="faq-a">You'll receive a Stripe payment receipt immediately. Khaneil will follow up within 24 hours via email to align on project scope, timeline, and the remaining balance.</p>
+        </div>
+        <div class="faq-item reveal" style="transition-delay:.16s;">
+          <div class="faq-q">Is my payment information secure?</div>
+          <p class="faq-a">Payments are processed by Stripe — one of the most trusted payment platforms in the world. Benjaire never stores your card details.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER CTA ─── -->
+  <section class="deposit-footer">
+    <div class="deposit-footer-inner">
+      <h2 class="reveal">Not sure yet?<br><span style="background: linear-gradient(130deg, var(--blue), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Book a free call.</span></h2>
+      <p class="reveal" style="transition-delay:.06s;">Have questions before committing? Schedule a free 30-minute Zoom call with Khaneil to talk through your project first.</p>
+      <div class="deposit-footer-links reveal" style="transition-delay:.12s;">
+        <a href="index.html#booking" class="btn-primary">Book a Free Call →</a>
+        <a href="services.html" class="btn-ghost">View Services</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ─── CURSOR ─── */
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = -100, my = -100, rx = -100, ry = -100;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function lerp() {
+  rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(lerp);
+})();
+document.querySelectorAll('a, button, .deposit-pay-btn, .how-step').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+
+/* ─── SCROLL PROGRESS ─── */
+const prog = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const s = document.documentElement;
+  prog.value = (s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100;
+}, { passive: true });
+
+/* ─── MOBILE NAV ─── */
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobileMenu');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+});
+
+/* ─── SCROLL REVEAL ─── */
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
