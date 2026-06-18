@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Contact — Benjaire</title>
+<meta name="description" content="Get in touch with Khaneil Campbell at Benjaire. Send a message directly — no automated replies, no waiting rooms.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:        #03070f;
+  --bg2:       #060d1b;
+  --surface:   #0a1120;
+  --border:    rgba(56,189,248,0.09);
+  --border-hi: rgba(56,189,248,0.22);
+  --blue:      #2563eb;
+  --cyan:      #06b6d4;
+  --green:     #4ade80;
+  --glow-b:    rgba(37,99,235,0.40);
+  --glow-c:    rgba(6,182,212,0.30);
+  --text-hi:   #f1f5f9;
+  --text-mid:  #94a3b8;
+  --text-lo:   #475569;
+  --mono:      'IBM Plex Mono', monospace;
+  --sans:      'Public Sans', sans-serif;
+  --cond:      'Manrope', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--text-hi);
+  font-family: var(--sans); font-size: 16px; line-height: 1.6;
+  overflow-x: hidden; -webkit-font-smoothing: antialiased; cursor: none;
+}
+input, textarea { cursor: text; }
+
+/* ─── CURSOR ─── */
+#cursor-dot {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  pointer-events: none; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--cyan);
+  transform: translate(-50%, -50%); will-change: left, top; mix-blend-mode: screen;
+}
+#cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 9998;
+  pointer-events: none; width: 38px; height: 38px;
+  border-radius: 50%; border: 1px solid rgba(6,182,212,0.45);
+  transform: translate(-50%, -50%); will-change: left, top;
+  transition: width 0.35s cubic-bezier(0.16,1,0.3,1), height 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s;
+}
+body.cursor-hover #cursor-ring { width: 60px; height: 60px; border-color: rgba(6,182,212,0.70); }
+
+/* ─── SCROLL PROGRESS ─── */
+#scrollProgress {
+  position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+  border: 0; z-index: 300; appearance: none;
+}
+#scrollProgress::-webkit-progress-bar  { background: transparent; }
+#scrollProgress::-webkit-progress-value { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+#scrollProgress::-moz-progress-bar      { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--cyan)); border-radius: 2px; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(3,7,15,0.88); border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+}
+.nav-logo {
+  font-family: var(--cond); font-size: 18px; font-weight: 800;
+  letter-spacing: 0.14em; text-decoration: none; text-transform: uppercase;
+  background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; cursor: none;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-mid); text-decoration: none; transition: color 0.2s; cursor: none;
+}
+.nav-links a:hover { color: var(--cyan); }
+.nav-links a.active { color: var(--text-hi); }
+.nav-cta {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bg); background: var(--cyan);
+  border: none; padding: 10px 22px; cursor: none;
+  text-decoration: none; position: relative; overflow: hidden; transition: box-shadow 0.3s;
+}
+.nav-cta::before {
+  content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.18);
+  transform: translateX(-100%); transition: transform 0.4s;
+}
+.nav-cta:hover::before { transform: translateX(0); }
+.nav-cta:hover { box-shadow: 0 0 24px var(--glow-c); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-hi); transition: transform 0.25s, opacity 0.25s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-menu {
+  position: fixed; top: 64px; left: 0; right: 0;
+  background: rgba(6,13,26,0.97); border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(24px); padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 22px;
+  transform: translateY(-110%); opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease;
+  z-index: 99; pointer-events: none;
+}
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+.mobile-menu a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+.mobile-menu a:hover { color: var(--cyan); }
+.mobile-menu .mobile-cta { color: var(--cyan); }
+
+/* ─── PAGE ─── */
+.page-wrap { padding-top: 64px; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ─── HERO ─── */
+.contact-hero {
+  position: relative; padding: 96px 48px 80px;
+  border-bottom: 1px solid var(--border); overflow: hidden;
+}
+.contact-hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 80% at 15% 50%, rgba(37,99,235,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 50% at 80% 40%, rgba(6,182,212,0.07) 0%, transparent 60%);
+}
+.contact-hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(56,189,248,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.contact-hero-inner {
+  position: relative; z-index: 2; max-width: 1100px; margin: 0 auto;
+}
+.section-tag { display: flex; align-items: center; gap: 14px; margin-bottom: 32px; }
+.section-tag-line { width: 42px; height: 1px; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+.section-tag-text { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan); }
+.contact-h1 {
+  font-family: var(--cond); font-size: clamp(56px, 8vw, 112px);
+  font-weight: 800; line-height: 0.88; letter-spacing: -0.025em;
+  text-transform: uppercase; margin-bottom: 32px;
+}
+.contact-h1 .ln-solid { display: block; color: var(--text-hi); }
+.contact-h1 .ln-grad {
+  display: block;
+  background: linear-gradient(130deg, var(--blue) 0%, var(--cyan) 55%, #a5f3fc 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.contact-hero-desc { font-size: 17px; line-height: 1.78; color: var(--text-mid); max-width: 520px; }
+
+/* ─── MAIN CONTACT GRID ─── */
+.contact-main {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border); background: var(--bg2);
+}
+.contact-info {
+  padding: 80px 56px 80px 48px; border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 48px;
+}
+.contact-info-heading {
+  font-family: var(--cond); font-size: 28px; font-weight: 700;
+  color: var(--text-hi); letter-spacing: -0.01em; margin-bottom: 12px;
+}
+.contact-info-body { font-size: 15px; line-height: 1.82; color: var(--text-mid); }
+.contact-email-link {
+  font-family: var(--mono); font-size: 14px; color: var(--cyan);
+  letter-spacing: 0.06em; text-decoration: none; transition: text-shadow 0.3s; cursor: none;
+  display: inline-block; margin-top: 12px;
+}
+.contact-email-link:hover { text-shadow: 0 0 24px var(--glow-c); }
+
+.contact-channels { display: flex; flex-direction: column; gap: 0; }
+.contact-channel {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0; border-bottom: 1px solid var(--border);
+}
+.contact-channel:last-child { border-bottom: none; }
+.contact-channel-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-lo); }
+.contact-channel-val { font-size: 14px; color: var(--text-mid); }
+.contact-channel-val a { color: var(--cyan); text-decoration: none; font-family: var(--mono); font-size: 13px; cursor: none; transition: text-shadow 0.3s; }
+.contact-channel-val a:hover { text-shadow: 0 0 16px var(--glow-c); }
+
+.contact-form-wrap { padding: 80px 48px; display: flex; flex-direction: column; gap: 20px; }
+.form-field { display: flex; flex-direction: column; gap: 8px; }
+.form-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-lo); }
+.form-input, .form-textarea {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text-hi); font-family: var(--sans); font-size: 15px;
+  padding: 13px 16px; outline: none; resize: none;
+  transition: border-color 0.25s, box-shadow 0.25s; caret-color: var(--cyan);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--text-lo); }
+.form-input:focus, .form-textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(6,182,212,0.10), 0 0 24px rgba(6,182,212,0.06); }
+.form-textarea { min-height: 140px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.btn-primary {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bg); background: var(--cyan); border: none; padding: 16px 28px;
+  text-decoration: none; position: relative; overflow: hidden;
+  transition: box-shadow 0.3s; cursor: none; align-self: flex-start;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.18);
+  transform: translateX(-100%); transition: transform 0.4s;
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover { box-shadow: 0 0 24px var(--glow-c); }
+
+/* ─── FOOTER ─── */
+footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(--bg2); }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--text-lo); letter-spacing: 0.08em; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-lo); text-decoration: none; transition: color 0.2s; cursor: none; }
+.footer-links a:hover { color: var(--cyan); }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1), transform 0.85s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .contact-main { grid-template-columns: 1fr; }
+  .contact-info { border-right: none; border-bottom: 1px solid var(--border); padding: 56px 24px; }
+  .contact-form-wrap { padding: 56px 24px; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .contact-hero { padding: 64px 20px 56px; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { padding: 0 20px; }
+  .footer-inner { flex-direction: column; height: auto; gap: 12px; padding: 20px 0; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<progress id="scrollProgress" value="0" max="100"></progress>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">Benjaire</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="deposit.html">Start a Project</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="index.html#booking" class="nav-cta">Book a Call →</a>
+  <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="deposit.html">Start a Project</a>
+  <a href="contact.html" class="active">Contact</a>
+  <a href="index.html#booking" class="mobile-cta">Book a Free Call →</a>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ─── HERO ─── -->
+  <section class="contact-hero">
+    <div class="contact-hero-glow"></div>
+    <div class="contact-hero-grid"></div>
+    <div class="contact-hero-inner">
+      <div class="section-tag reveal">
+        <div class="section-tag-line"></div>
+        <span class="section-tag-text">Get in Touch</span>
+      </div>
+      <h1 class="contact-h1 reveal" style="transition-delay:.06s;">
+        <span class="ln-solid">Let's</span>
+        <span class="ln-grad">Talk.</span>
+      </h1>
+      <p class="contact-hero-desc reveal" style="transition-delay:.12s;">
+        Have a project in mind or a question? Send a message and Khaneil will respond personally.
+        No automated replies, no waiting rooms.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT GRID ─── -->
+  <div class="contact-main">
+    <div class="contact-info">
+      <div class="reveal">
+        <div class="contact-info-heading">Direct Line</div>
+        <p class="contact-info-body">Every message goes straight to Khaneil — not a support queue, not a VA. Expect a reply within 24 hours.</p>
+        <a href="mailto:contact@benjaire.com" class="contact-email-link">contact@benjaire.com</a>
+      </div>
+      <div class="contact-channels reveal" style="transition-delay:.08s;">
+        <div class="contact-channel">
+          <span class="contact-channel-label">Email</span>
+          <span class="contact-channel-val"><a href="mailto:contact@benjaire.com">contact@benjaire.com</a></span>
+        </div>
+        <div class="contact-channel">
+          <span class="contact-channel-label">Response Time</span>
+          <span class="contact-channel-val">Within 24 hours</span>
+        </div>
+        <div class="contact-channel">
+          <span class="contact-channel-label">Location</span>
+          <span class="contact-channel-val">New York, NY</span>
+        </div>
+        <div class="contact-channel">
+          <span class="contact-channel-label">Availability</span>
+          <span class="contact-channel-val" style="color: var(--green);">Open for Work</span>
+        </div>
+        <div class="contact-channel">
+          <span class="contact-channel-label">Prefer a call?</span>
+          <span class="contact-channel-val"><a href="index.html#booking">Book a free 30-min Zoom →</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <div class="form-row">
+        <div class="form-field reveal">
+          <label class="form-label" for="c-name">Name</label>
+          <input id="c-name" class="form-input" type="text" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-field reveal" style="transition-delay:.04s;">
+          <label class="form-label" for="c-email">Email</label>
+          <input id="c-email" class="form-input" type="email" placeholder="your@email.com" autocomplete="email">
+        </div>
+      </div>
+      <div class="form-field reveal" style="transition-delay:.06s;">
+        <label class="form-label" for="c-subject">Subject</label>
+        <input id="c-subject" class="form-input" type="text" placeholder="What's this about?">
+      </div>
+      <div class="form-field reveal" style="transition-delay:.08s;">
+        <label class="form-label" for="c-msg">Message</label>
+        <textarea id="c-msg" class="form-textarea" placeholder="Tell me what you're working on..."></textarea>
+      </div>
+      <button id="contactSendBtn" class="btn-primary reveal" style="transition-delay:.12s;">Send Message →</button>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Benjaire · New York</span>
+      <span class="footer-copy">Helping Professionals Build Careers, Brands &amp; Digital Solutions</span>
+      <div class="footer-links">
+        <a href="services.html">Services</a>
+        <a href="deposit.html">Start a Project</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* ─── CURSOR ─── */
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = -100, my = -100, rx = -100, ry = -100;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function lerp() {
+  rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(lerp);
+})();
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+
+/* ─── SCROLL PROGRESS ─── */
+const prog = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const s = document.documentElement;
+  prog.value = (s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100;
+}, { passive: true });
+
+/* ─── MOBILE NAV ─── */
+const navToggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  navToggle.setAttribute('aria-label', mobileMenu.classList.contains('open') ? 'Close menu' : 'Open menu');
+});
+
+/* ─── SCROLL REVEAL ─── */
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+
+/* ─── CONTACT FORM ─── */
+document.getElementById('contactSendBtn').addEventListener('click', function() {
+  const name = document.getElementById('c-name').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!name || !email || !ok) {
+    this.textContent = 'Please fill in required fields.';
+    this.style.background = '#1e293b';
+    setTimeout(() => { this.textContent = 'Send Message →'; this.style.background = ''; }, 2400);
+    return;
+  }
+  this.textContent = 'Message Sent ✓';
+  this.style.background = 'linear-gradient(135deg,#059669,#10b981)';
+  this.style.color = '#fff';
+  setTimeout(() => {
+    this.textContent = 'Send Message →'; this.style.background = ''; this.style.color = '';
+    ['c-name','c-email','c-subject','c-msg'].forEach(id => { document.getElementById(id).value = ''; });
+  }, 3200);
+});
+</script>
+</body>
+</html>
