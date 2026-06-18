@@ -3,19 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src https://fonts.gstatic.com https://assets.calendly.com; img-src 'self' https://images.unsplash.com https://*.calendly.com data:; connect-src https://*.calendly.com; frame-src https://calendly.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Benjaire — Computer &amp; Technology Services</title>
-<meta name="description" content="Benjaire is a computer and technology services company operating across commerce, AI systems, and technical infrastructure. Based in New York.">
+<title>Benjaire — Helping Professionals Build Careers, Brands &amp; Digital Solutions</title>
+<meta name="description" content="Benjaire helps professionals and small businesses build careers, personal brands, and digital solutions. Web development, resume writing, career coaching, and cybersecurity. Based in New York.">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://benjaire.com/">
-<meta property="og:title" content="Benjaire — Built to Scale. Built to Last.">
-<meta property="og:description" content="A multi-venture holding company operating at the intersection of commerce, technology, and systems. New York.">
+<meta property="og:title" content="Benjaire — Careers, Brands &amp; Digital Solutions">
+<meta property="og:description" content="Helping professionals and small businesses build careers, personal brands, and digital solutions. Technology · Careers · Personal Branding · New York.">
 <meta property="og:image" content="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Benjaire — Built to Scale. Built to Last.">
-<meta name="twitter:description" content="A multi-venture holding company operating at the intersection of commerce, technology, and systems. New York.">
+<meta name="twitter:title" content="Benjaire — Careers, Brands &amp; Digital Solutions">
+<meta name="twitter:description" content="Helping professionals and small businesses build careers, personal brands, and digital solutions. New York.">>
+
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -445,6 +446,309 @@ nav {
 }
 .venture-details p { margin-top: 8px; font-size: 13px; color: var(--text-lo); line-height: 1.6; }
 
+/* ─── ABOUT ─── */
+.about-section {
+  border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 420px 1fr;
+  background: var(--bg);
+}
+.about-left {
+  padding: 72px 48px; border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 28px;
+  position: relative; overflow: hidden;
+}
+.about-left::before {
+  content: ''; position: absolute; bottom: -80px; left: -80px;
+  width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.about-photo-wrap {
+  width: 100%; aspect-ratio: 4/5; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--border);
+  position: relative;
+}
+.about-photo-wrap img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: grayscale(55%) brightness(.75) contrast(1.1);
+  transition: filter .5s;
+}
+.about-photo-wrap:hover img { filter: grayscale(10%) brightness(.85) contrast(1.05); }
+.about-photo-placeholder {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-lo);
+  background: var(--bg2);
+}
+.about-quick-facts { display: flex; flex-direction: column; gap: 10px; }
+.about-fact {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--text-mid);
+}
+.about-fact-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+
+.about-right {
+  padding: 72px 56px 72px 52px;
+  display: flex; flex-direction: column; justify-content: center; gap: 28px;
+}
+.about-h2 {
+  font-family: var(--cond); font-size: clamp(38px, 5vw, 60px);
+  font-weight: 800; text-transform: uppercase; line-height: .92;
+  background: linear-gradient(135deg, var(--text-hi) 0%, var(--text-mid) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.about-body { font-size: 16px; line-height: 1.82; color: var(--text-mid); max-width: 560px; }
+.about-body strong { color: var(--text-hi); font-weight: 500; }
+.about-body p + p { margin-top: 18px; }
+.about-highlights {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px;
+}
+.about-highlight {
+  padding: 20px 22px; border: 1px solid var(--border);
+  background: var(--bg2); transition: border-color .3s, background .3s;
+}
+.about-highlight:hover { border-color: var(--border-hi); background: rgba(6,182,212,.02); }
+.about-highlight-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--cyan); margin-bottom: 6px;
+}
+.about-highlight-val {
+  font-family: var(--cond); font-size: 18px; font-weight: 700;
+  text-transform: uppercase; color: var(--text-hi); letter-spacing: .04em;
+}
+
+@media (max-width: 1024px) {
+  .about-section { grid-template-columns: 1fr; }
+  .about-left { border-right: none; border-bottom: 1px solid var(--border); padding: 48px 24px; }
+  .about-photo-wrap { aspect-ratio: 16/9; }
+  .about-right { padding: 48px 24px; }
+  .about-highlights { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .about-highlights { grid-template-columns: 1fr; }
+}
+
+/* ─── BOOKING ─── */
+.booking-section {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg); position: relative; overflow: hidden;
+}
+.booking-section::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 80% at 15% 50%, rgba(37,99,235,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 60% at 85% 40%, rgba(6,182,212,0.06) 0%, transparent 55%);
+}
+.booking-section::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(56,189,248,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.022) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.booking-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; z-index: 1;
+}
+.booking-left {
+  padding: 88px 64px 88px 48px; border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: center; gap: 36px;
+}
+.booking-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--cyan);
+  border: 1px solid rgba(6,182,212,.25); padding: 9px 16px;
+  background: rgba(6,182,212,.05); align-self: flex-start;
+}
+.booking-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan); animation: pulse-dot 1.8s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .35; transform: scale(.65); }
+}
+.booking-h2 {
+  font-family: var(--cond); font-size: clamp(44px, 5.8vw, 74px);
+  font-weight: 800; text-transform: uppercase; line-height: .88; letter-spacing: -.01em;
+}
+.booking-h2 .solid { color: var(--text-hi); display: block; }
+.booking-h2 .grad {
+  display: block;
+  background: linear-gradient(130deg, var(--blue) 0%, var(--cyan) 60%, #a5f3fc 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.booking-desc {
+  font-size: 16px; line-height: 1.80; color: var(--text-mid); max-width: 400px;
+}
+.booking-perks { display: flex; flex-direction: column; gap: 0; }
+.booking-perk {
+  display: grid; grid-template-columns: 72px 1fr; gap: 20px;
+  align-items: start; padding: 18px 0; border-bottom: 1px solid var(--border);
+}
+.booking-perk:first-child { border-top: 1px solid var(--border); }
+.booking-perk-tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--cyan); padding-top: 2px;
+}
+.booking-perk-text { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+.booking-perk-text strong { color: var(--text-hi); font-weight: 500; }
+
+.booking-right {
+  padding: 88px 48px; display: flex; align-items: center; justify-content: center;
+}
+
+/* ── MOCK CALENDAR CARD ── */
+.cal-card {
+  width: 100%; max-width: 440px;
+  background: var(--bg2); border: 1px solid var(--border-hi);
+  box-shadow: 0 0 60px rgba(6,182,212,.07), 0 0 120px rgba(37,99,235,.05);
+  display: flex; flex-direction: column; overflow: hidden;
+  position: relative;
+}
+.cal-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan), var(--blue));
+  background-size: 200% 100%; animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+.cal-header {
+  padding: 28px 28px 22px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cal-header-left { display: flex; flex-direction: column; gap: 4px; }
+.cal-title {
+  font-family: var(--cond); font-size: 18px; font-weight: 700;
+  text-transform: uppercase; color: var(--text-hi); letter-spacing: .04em;
+}
+.cal-subtitle {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--text-lo);
+}
+.cal-duration {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+  color: var(--cyan); border: 1px solid rgba(6,182,212,.22);
+  padding: 5px 12px; background: rgba(6,182,212,.04);
+}
+.cal-month-nav {
+  padding: 20px 28px 12px; display: flex; align-items: center;
+  justify-content: space-between; border-bottom: 1px solid var(--border);
+}
+.cal-month-label {
+  font-family: var(--cond); font-size: 16px; font-weight: 700;
+  text-transform: uppercase; color: var(--text-hi); letter-spacing: .06em;
+}
+.cal-nav-arrows { display: flex; gap: 8px; }
+.cal-arrow {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); color: var(--text-lo);
+  font-size: 11px; cursor: pointer; transition: border-color .2s, color .2s;
+  background: none;
+}
+.cal-arrow:hover { border-color: var(--cyan); color: var(--cyan); }
+.cal-grid { padding: 16px 28px 20px; }
+.cal-days-header {
+  display: grid; grid-template-columns: repeat(7,1fr);
+  margin-bottom: 8px;
+}
+.cal-day-name {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--text-lo); text-align: center; padding: 4px 0;
+}
+.cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
+.cal-day {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; color: var(--text-lo);
+  border: 1px solid transparent; cursor: default; border-radius: 0;
+  transition: all .2s; position: relative;
+}
+.cal-day.available {
+  color: var(--text-hi); cursor: pointer;
+  border-color: rgba(56,189,248,.08);
+  background: rgba(56,189,248,.03);
+}
+.cal-day.available:hover {
+  border-color: var(--cyan); color: var(--cyan);
+  background: rgba(6,182,212,.07);
+}
+.cal-day.selected {
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  color: #000; font-weight: 700; border-color: transparent;
+}
+.cal-day.today { color: var(--cyan); }
+.cal-day.empty { border-color: transparent; background: none; cursor: default; }
+.cal-times {
+  padding: 0 28px 24px; display: flex; flex-direction: column; gap: 8px;
+}
+.cal-times-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-lo); margin-bottom: 4px;
+}
+.cal-time-slots { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cal-slot {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+  color: var(--text-mid); border: 1px solid var(--border);
+  padding: 10px; text-align: center; cursor: pointer;
+  transition: all .25s; background: var(--surface);
+}
+.cal-slot:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(6,182,212,.06); }
+.cal-slot.selected-slot {
+  background: rgba(6,182,212,.12); border-color: var(--cyan);
+  color: var(--cyan);
+}
+.cal-footer {
+  padding: 20px 28px; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg);
+}
+.cal-tz {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+  color: var(--text-lo);
+}
+.cal-book-btn {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--bg); background: linear-gradient(130deg, var(--blue), var(--cyan));
+  border: none; padding: 11px 24px; cursor: pointer; position: relative; overflow: hidden;
+  transition: box-shadow .3s, opacity .2s;
+}
+.cal-book-btn:hover { box-shadow: 0 0 28px var(--glow-c); }
+.cal-coming-soon-overlay {
+  position: absolute; inset: 0; background: rgba(3,7,15,.72);
+  backdrop-filter: blur(6px); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px; z-index: 10;
+}
+.cal-coming-soon-overlay .cs-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--cyan);
+  border: 1px solid rgba(6,182,212,.3); padding: 8px 18px;
+  background: rgba(6,182,212,.06);
+}
+.cal-coming-soon-overlay .cs-note {
+  font-size: 12px; color: var(--text-lo); text-align: center;
+  max-width: 220px; line-height: 1.65;
+}
+.cal-coming-soon-overlay .cs-link {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--text-mid);
+  text-decoration: none; border-bottom: 1px solid var(--border);
+  padding-bottom: 2px; transition: color .2s, border-color .2s;
+}
+.cal-coming-soon-overlay .cs-link:hover { color: var(--cyan); border-color: var(--cyan); }
+
+@media (max-width: 1024px) {
+  .booking-inner { grid-template-columns: 1fr; }
+  .booking-left { border-right: none; border-bottom: 1px solid var(--border); padding: 64px 24px; }
+  .booking-right { padding: 48px 24px; }
+  .cal-card { max-width: 100%; }
+}
+
 /* ─── PRINCIPLES ─── */
 .principles-section {
   border-bottom: 1px solid var(--border);
@@ -652,9 +956,6 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
   <ul class="nav-links">
     <li><a href="index.html#home" class="active">Home</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="commerce.html">Commerce</a></li>
-    <li><a href="technology.html">Technology</a></li>
-    <li><a href="systems.html">Systems</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <a href="index.html#contact" class="nav-cta">Get in Touch</a>
@@ -666,9 +967,6 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
 <div class="mobile-menu" id="mobileMenu" role="navigation">
   <a href="index.html#home" class="active">Home</a>
   <a href="services.html">Services</a>
-  <a href="commerce.html">Commerce</a>
-  <a href="technology.html">Technology</a>
-  <a href="systems.html">Systems</a>
   <a href="index.html#contact">Contact</a>
   <a href="index.html#contact" class="mobile-cta">Get in Touch →</a>
 </div>
@@ -684,24 +982,24 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
   <div class="hero-content">
     <div class="hero-tag reveal">
       <div class="hero-tag-line"></div>
-      <span class="hero-tag-text">Computer &amp; Technology Services · New York</span>
+      <span class="hero-tag-text">Professional Services · New York</span>
     </div>
 
     <h1 class="hero-h1">
-      <span class="ln-solid reveal" style="transition-delay:.04s;">Built</span>
-      <span class="ln-solid reveal" style="transition-delay:.10s;">to Scale.</span>
-      <span class="ln-outline reveal" style="transition-delay:.16s;">Built</span>
-      <span class="ln-grad reveal" style="transition-delay:.22s;">to Last.</span>
+      <span class="ln-solid reveal" style="transition-delay:.04s;">Careers.</span>
+      <span class="ln-solid reveal" style="transition-delay:.10s;">Brands.</span>
+      <span class="ln-outline reveal" style="transition-delay:.16s;">Digital</span>
+      <span class="ln-grad reveal" style="transition-delay:.22s;">Solutions.</span>
     </h1>
 
     <p class="hero-desc reveal" style="transition-delay:.32s;">
-      Benjaire operates at the intersection of <strong>commerce, technology,</strong>
-      and <strong>systems.</strong> We build ventures designed for long-term,
-      compounding value — not short cycles.
+      Benjaire helps <strong>professionals, creators, and small businesses</strong>
+      build careers, personal brands, and the digital presence they need
+      to grow — backed by technology and strategy.
     </p>
 
     <div class="hero-actions reveal" style="transition-delay:.42s;">
-      <a href="#ventures" class="btn-primary">View Ventures</a>
+      <a href="#services" class="btn-primary">View Services</a>
       <a href="#contact" class="btn-secondary">Get in Touch</a>
     </div>
   </div>
@@ -710,84 +1008,134 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
 <!-- ─── MARQUEE ─── -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-track">
-    <span class="marquee-item">Commerce</span>
-    <span class="marquee-item">Technology</span>
-    <span class="marquee-item">Systems</span>
+    <span class="marquee-item">Web Development</span>
+    <span class="marquee-item">Resume Writing</span>
+    <span class="marquee-item">Personal Branding</span>
+    <span class="marquee-item">Career Strategy</span>
+    <span class="marquee-item">Cybersecurity</span>
+    <span class="marquee-item">AI Solutions</span>
     <span class="marquee-item">New York</span>
-    <span class="marquee-item">Built to Last</span>
-    <span class="marquee-item">Compounding Value</span>
-    <span class="marquee-item">Long-Term Horizon</span>
-    <span class="marquee-item">Commerce</span>
-    <span class="marquee-item">Technology</span>
-    <span class="marquee-item">Systems</span>
+    <span class="marquee-item">Tech Consulting</span>
+    <span class="marquee-item">Web Development</span>
+    <span class="marquee-item">Resume Writing</span>
+    <span class="marquee-item">Personal Branding</span>
+    <span class="marquee-item">Career Strategy</span>
+    <span class="marquee-item">Cybersecurity</span>
+    <span class="marquee-item">AI Solutions</span>
     <span class="marquee-item">New York</span>
-    <span class="marquee-item">Built to Last</span>
-    <span class="marquee-item">Compounding Value</span>
-    <span class="marquee-item">Long-Term Horizon</span>
+    <span class="marquee-item">Tech Consulting</span>
   </div>
 </div>
 
 <!-- ─── STATS BAR ─── -->
 <div class="stats-bar">
   <div class="stat-cell reveal">
-    <div class="stat-num">3<span style="font-size:0.6em;vertical-align:super;">+</span></div>
-    <div class="stat-label">Active Ventures</div>
+    <div class="stat-num">5<span style="font-size:0.6em;vertical-align:super;">+</span></div>
+    <div class="stat-label">Service Areas</div>
   </div>
   <div class="stat-cell reveal" style="transition-delay:.06s;">
     <div class="stat-num">NYC</div>
-    <div class="stat-label">Headquartered</div>
+    <div class="stat-label">Based In</div>
   </div>
   <div class="stat-cell reveal" style="transition-delay:.12s;">
     <div class="stat-num">2022</div>
     <div class="stat-label">Founded</div>
   </div>
   <div class="stat-cell reveal" style="transition-delay:.18s;">
-    <div class="stat-num">∞</div>
-    <div class="stat-label">Long-Term Horizon</div>
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Client-Focused</div>
   </div>
 </div>
 
-<!-- ─── VENTURES ─── -->
-<section class="ventures-section" id="ventures">
+<!-- ─── SERVICES ─── -->
+<section class="ventures-section" id="services">
   <div class="ventures-header">
     <div>
       <div class="section-tag reveal">
         <div class="section-tag-line"></div>
-        <span class="section-tag-text">Our Ventures</span>
+        <span class="section-tag-text">What We Do</span>
       </div>
       <h2 class="ventures-h2 reveal" style="transition-delay:.06s;">
-        What<br>We Build
+        Our<br>Services
       </h2>
     </div>
     <p class="ventures-intro reveal" style="transition-delay:.1s;">
-      Each operating unit under Benjaire runs independently. We select markets with
-      high ceilings, build the infrastructure to run them properly, and compound from there.
+      Professional services for individuals, creators, and small businesses.
+      From building your digital presence to advancing your career — we bring
+      the strategy and the execution.
     </p>
   </div>
 
-  <div class="ventures-grid">
+  <div class="ventures-grid" style="grid-template-columns: repeat(3,1fr);">
     <article class="venture-card reveal">
       <div class="venture-img-wrap">
         <img
           class="venture-img"
-          src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=900&q=80"
-          alt="Ecommerce fulfillment and inventory operations"
+          src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=900&q=80"
+          alt="Web development and digital solutions"
           loading="lazy"
         >
       </div>
       <div class="venture-body">
-        <div class="venture-name">Ecommerce</div>
-        <span class="venture-type">Retail Operations</span>
+        <div class="venture-name">Web Development</div>
+        <span class="venture-type">Digital Solutions</span>
         <p class="venture-desc">
-          Product sourcing, inventory planning, and marketplace operations across
-          digital retail channels. Built around margin discipline and repeatable
-          operating systems rather than one-off channel tactics.
+          Professional websites for individuals, creators, and small businesses.
+          Personal sites, portfolios, business redesigns, and full domain and hosting setup.
         </p>
         <details class="venture-details">
-          <summary>Focus Areas</summary>
-          <p>Channel mix strategy, inventory resilience, and margin-forward operating standards.</p>
+          <summary>What's Included</summary>
+          <p>Personal &amp; business websites, portfolio sites, redesigns, domain &amp; hosting setup.</p>
         </details>
-        <a class="venture-arrow" href="commerce.html" aria-label="View ecommerce details">↗</a>
+        <a class="venture-arrow" href="services.html" aria-label="View web development services">↗</a>
+      </div>
+    </article>
+
+    <article class="venture-card reveal" style="transition-delay:.07s;">
+      <div class="venture-img-wrap">
+        <img
+          class="venture-img"
+          src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=900&q=80"
+          alt="Resume writing and career strategy"
+          loading="lazy"
+        >
+      </div>
+      <div class="venture-body">
+        <div class="venture-name">Resume &amp; Career</div>
+        <span class="venture-type">Career Strategy</span>
+        <p class="venture-desc">
+          Helping professionals position themselves for their next move.
+          Resume writing, LinkedIn optimization, cover letters, interview prep, and coaching.
+        </p>
+        <details class="venture-details">
+          <summary>What's Included</summary>
+          <p>Resume writing, LinkedIn optimization, cover letters, interview prep &amp; career coaching.</p>
+        </details>
+        <a class="venture-arrow" href="services.html" aria-label="View career services">↗</a>
+      </div>
+    </article>
+
+    <article class="venture-card reveal" style="transition-delay:.14s;">
+      <div class="venture-img-wrap">
+        <img
+          class="venture-img"
+          src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=900&q=80"
+          alt="Personal branding and professional presence"
+          loading="lazy"
+        >
+      </div>
+      <div class="venture-body">
+        <div class="venture-name">Personal Branding</div>
+        <span class="venture-type">Brand Strategy</span>
+        <p class="venture-desc">
+          Build a strong, authentic professional presence. Personal websites,
+          professional bios, portfolio development, and brand strategy.
+        </p>
+        <details class="venture-details">
+          <summary>What's Included</summary>
+          <p>Personal websites, professional bios, portfolio development &amp; brand strategy.</p>
+        </details>
+        <a class="venture-arrow" href="services.html" aria-label="View branding services">↗</a>
       </div>
     </article>
 
@@ -796,23 +1144,22 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
         <img
           class="venture-img"
           src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80"
-          alt="AI and technology systems development"
+          alt="Technology consulting and computer support"
           loading="lazy"
         >
       </div>
       <div class="venture-body">
-        <div class="venture-name">Technology</div>
-        <span class="venture-type">AI Systems</span>
+        <div class="venture-name">Tech Consulting</div>
+        <span class="venture-type">Technology</span>
         <p class="venture-desc">
-          Agentic AI systems designed for real business operations. We build workflows
-          that replace manual, repeatable processes — sold directly to companies that
-          need the efficiency now.
+          Reliable technology solutions for individuals and businesses. Computer setup,
+          Microsoft 365, remote troubleshooting, and home office optimization.
         </p>
         <details class="venture-details">
-          <summary>Focus Areas</summary>
-          <p>Workflow automation, decision support pipelines, and production-safe agent design.</p>
+          <summary>What's Included</summary>
+          <p>Computer setup &amp; support, Microsoft 365, remote troubleshooting, home office optimization.</p>
         </details>
-        <a class="venture-arrow" href="technology.html" aria-label="View technology details">↗</a>
+        <a class="venture-arrow" href="services.html" aria-label="View tech consulting services">↗</a>
       </div>
     </article>
 
@@ -821,25 +1168,85 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
         <img
           class="venture-img"
           src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80"
-          alt="Technical infrastructure and systems architecture"
+          alt="Cybersecurity and AI workflow solutions"
           loading="lazy"
         >
       </div>
       <div class="venture-body">
-        <div class="venture-name">Systems</div>
-        <span class="venture-type">Technical Services</span>
+        <div class="venture-name">Cybersecurity &amp; AI</div>
+        <span class="venture-type">Security · AI</span>
         <p class="venture-desc">
-          The next lane expands our technical infrastructure services: integrations,
-          automation architecture, and operational systems that make teams faster,
-          more reliable, and easier to scale.
+          Helping clients stay secure and work smarter. Security best practices,
+          identity protection, AI workflow consulting, and process automation.
         </p>
         <details class="venture-details">
-          <summary>Focus Areas</summary>
-          <p>Architecture, integrations, and reliability practices for smoother operations at scale.</p>
+          <summary>What's Included</summary>
+          <p>Security best practices, identity protection, AI workflow consulting &amp; process automation.</p>
         </details>
-        <a class="venture-arrow" href="systems.html" aria-label="View systems details">↗</a>
+        <a class="venture-arrow" href="services.html" aria-label="View cybersecurity services">↗</a>
       </div>
     </article>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section class="about-section" id="about">
+  <div class="about-left reveal">
+    <div class="about-photo-wrap">
+      <!-- Replace with your photo: <img src="assets/your-photo.jpg" alt="Your Name — Benjaire"> -->
+      <div class="about-photo-placeholder">Your Photo Here</div>
+    </div>
+    <div class="about-quick-facts">
+      <div class="about-fact"><span class="about-fact-dot"></span>New York City Metropolitan Area</div>
+      <div class="about-fact"><span class="about-fact-dot"></span>IT Professional · Columbia University</div>
+      <div class="about-fact"><span class="about-fact-dot"></span>Cybersecurity &amp; SOC Operations</div>
+      <div class="about-fact"><span class="about-fact-dot"></span>ITIL 4 Foundation Certified</div>
+      <div class="about-fact"><span class="about-fact-dot"></span>Microsoft 365 &amp; AI Workflow Specialist</div>
+      <div class="about-fact"><span class="about-fact-dot"></span>Available for New Clients</div>
+    </div>
+    <a href="https://www.linkedin.com/in/khaneil-c-44179a14a" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="text-align:center; margin-top:8px;">View LinkedIn ↗</a>
+  </div>
+
+  <div class="about-right">
+    <div class="section-tag reveal">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">Who You're Working With</span>
+    </div>
+    <h2 class="about-h2 reveal" style="transition-delay:.06s;">
+      The Professional<br>Behind<br>Benjaire.
+    </h2>
+    <div class="about-body reveal" style="transition-delay:.12s;">
+      <p>
+        Benjaire is led by <strong>Khaneil Campbell</strong>, a New York based technology
+        and career strategy professional with institutional experience at
+        <strong>Columbia University Information Technology</strong>.
+      </p>
+      <p>
+        Khaneil brings hands-on proficiency in <strong>cybersecurity, SOC automation,
+        incident response, detection engineering, Microsoft 365 administration,
+        and AI workflow design</strong>, supported by ITIL 4 Foundation, KCS, and HDI
+        certifications. Every client works directly with Khaneil.
+        <strong>No intermediaries. No compromised quality. Measurable outcomes, every time.</strong>
+      </p>
+    </div>
+    <div class="about-highlights reveal" style="transition-delay:.18s;">
+      <div class="about-highlight">
+        <div class="about-highlight-label">Certifications</div>
+        <div class="about-highlight-val">ITIL 4 · KCS · HDI</div>
+      </div>
+      <div class="about-highlight">
+        <div class="about-highlight-label">Security</div>
+        <div class="about-highlight-val">SOC · Detection · IR</div>
+      </div>
+      <div class="about-highlight">
+        <div class="about-highlight-label">Technology</div>
+        <div class="about-highlight-val">M365 · Splunk · Python</div>
+      </div>
+      <div class="about-highlight">
+        <div class="about-highlight-label">Innovation</div>
+        <div class="about-highlight-val">AI · Automation · Dev</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -851,67 +1258,132 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
       <span class="section-tag-text">Philosophy</span>
     </div>
     <p class="principle-quote reveal" style="transition-delay:.06s;">
-      "We are not trying to move fast.<br>
-      We are trying to build something that <em>holds.</em>"
+      "Your career and brand are<br>
+      assets. We help you <em>build them right.</em>"
     </p>
     <p class="principles-sub reveal" style="transition-delay:.12s;">
-      Every decision at Benjaire traces back to the same question: does this still
-      make sense in ten years? If the answer requires too many assumptions, we pass.
+      Every professional deserves a strong digital presence and a clear career strategy.
+      We bring both the technical skills and the professional insight to make that happen.
     </p>
   </div>
 
   <div class="principles-right">
     <div class="section-tag reveal">
       <div class="section-tag-line"></div>
-      <span class="section-tag-text">Core Principles</span>
+      <span class="section-tag-text">How We Work</span>
     </div>
 
     <div class="principle-item reveal" style="transition-delay:.06s;">
       <span class="p-num">01</span>
       <div>
-        <div class="p-name">Compounding Over Optimization</div>
-        <p class="p-desc">Build for the tenth year, not the next quarter. The decisions that feel slow now are the ones that create separation later.</p>
+        <div class="p-name">Client-First, Always</div>
+        <p class="p-desc">Every engagement starts with understanding your goals. We build solutions that serve you — not generic templates dressed up as strategy.</p>
       </div>
     </div>
 
     <div class="principle-item reveal" style="transition-delay:.10s;">
       <span class="p-num">02</span>
       <div>
-        <div class="p-name">Systems Before Scale</div>
-        <p class="p-desc">Growth without infrastructure just amplifies problems. We build the operational backbone first, then accelerate.</p>
+        <div class="p-name">Real Deliverables</div>
+        <p class="p-desc">No vague advice. Every project ends with something you can use — a live website, a polished resume, a working AI workflow, a clear plan.</p>
       </div>
     </div>
 
     <div class="principle-item reveal" style="transition-delay:.14s;">
       <span class="p-num">03</span>
       <div>
-        <div class="p-name">Ownership Without Dependencies</div>
-        <p class="p-desc">Independent, self-funded, and in full control of every decision. No outside pressure means no compromised direction.</p>
+        <div class="p-name">Technology That Empowers</div>
+        <p class="p-desc">We make technology accessible and useful. Whether it's your first website or AI automation, we explain and equip — not just execute.</p>
       </div>
     </div>
 
     <div class="principle-item reveal" style="transition-delay:.18s;">
       <span class="p-num">04</span>
       <div>
-        <div class="p-name">Clarity of Capital</div>
-        <p class="p-desc">Every dollar has a purpose. Profit is not a vanity metric here — it is the only honest measurement of whether something is working.</p>
+        <div class="p-name">Long-Term Thinking</div>
+        <p class="p-desc">We build for durability. Your website, brand, and career assets should still be working for you years from now — that's how we scope every project.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ─── BOOKING ─── -->
+<section class="booking-section" id="booking">
+  <div class="booking-inner">
+
+    <div class="booking-left">
+      <div class="section-tag reveal">
+        <div class="section-tag-line"></div>
+        <span class="section-tag-text">Free Consultation</span>
+      </div>
+      <div class="booking-badge reveal" style="transition-delay:.04s;">
+        Now Accepting New Clients
+      </div>
+      <h2 class="booking-h2 reveal" style="transition-delay:.08s;">
+        <span class="solid">Book a Free</span>
+        <span class="grad">Zoom Call.</span>
+      </h2>
+      <p class="booking-desc reveal" style="transition-delay:.12s;">
+        Not sure which service fits your situation? Schedule a free 30 minute
+        Zoom call with Khaneil directly. No sales pitch — just an honest
+        conversation about your goals and what it would take to get there.
+      </p>
+      <div class="booking-perks reveal" style="transition-delay:.16s;">
+        <div class="booking-perk">
+          <span class="booking-perk-icon">30 MIN</span>
+          One on one session with Khaneil, no junior staff or assistants.
+        </div>
+        <div class="booking-perk">
+          <span class="booking-perk-icon">FREE</span>
+          Zero cost, zero obligation. Walk away with clarity regardless.
+        </div>
+        <div class="booking-perk">
+          <span class="booking-perk-icon">ZOOM</span>
+          Virtual meeting from anywhere — link sent immediately on booking.
+        </div>
+        <div class="booking-perk">
+          <span class="booking-perk-icon">PREP</span>
+          Come with your questions. Leave with a clear next step.
+        </div>
+      </div>
+    </div>
+
+    <div class="booking-right reveal" style="transition-delay:.10s;">
+      <!--
+        INTEGRATION: When ready, replace the entire .cal-card block below with:
+        <iframe src="https://calendly.com/YOUR_USERNAME/30min"
+                style="width:100%;min-height:660px;border:none;"></iframe>
+        Recommended: Calendly · Cal.com · TidyCal
+      -->
+      <div class="cal-card" style="min-height:660px; overflow:hidden;">
+        <!-- Calendly inline widget -->
+        <div
+          class="calendly-inline-widget"
+          data-url="https://calendly.com/benjaireco/free-consultation-benjaire?embed_type=Inline&hide_gdpr_banner=1&background_color=060d1b&text_color=f1f5f9&primary_color=06b6d4"
+          style="min-width:100%;height:660px;"
+        ></div>
+        <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <div class="booking-embed-label" style="border-top:1px solid var(--border);">
+          Powered by Calendly · Zoom link sent automatically on confirmation
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- ─── CTA ─── -->
 <section class="cta-section">
   <div>
-    <div class="cta-overline reveal">Ready to connect</div>
+    <div class="cta-overline reveal">Ready to get started</div>
     <h2 class="cta-h2 reveal" style="transition-delay:.06s;">
-      <span class="solid">Build With Us.</span>
-      <span class="grad">Or Follow Along.</span>
+      <span class="solid">Let's Build Your</span>
+      <span class="grad">Next Chapter.</span>
     </h2>
   </div>
   <div class="cta-buttons reveal" style="transition-delay:.10s;">
     <a href="#contact" class="btn-primary" style="text-align:center;">Get in Touch</a>
-    <a href="#ventures" class="btn-secondary" style="text-align:center;">View Ventures</a>
+    <a href="#services" class="btn-secondary" style="text-align:center;">View Services</a>
   </div>
 </section>
 
@@ -954,11 +1426,10 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
 <footer>
   <div class="footer-inner">
     <span class="footer-copy">© 2026 Benjaire · New York</span>
-    <span class="footer-copy">2248 Broadway #1548, New York, NY 10024</span>
+    <span class="footer-copy">Helping Professionals Build Careers, Brands &amp; Digital Solutions</span>
     <div class="footer-links">
-      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-      <a href="#">Privacy</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#contact">Contact</a>
     </div>
   </div>
 </footer>
@@ -1171,6 +1642,49 @@ function handleSend(e) {
 }
 const sendBtn = document.getElementById('contactSendBtn');
 if (sendBtn) sendBtn.addEventListener('click', handleSend);
+</script>
+
+<!-- ─── BOOKING CALENDAR ─── -->
+<script>
+(function () {
+  const grid = document.getElementById('calDays');
+  if (!grid) return;
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay();
+  const available = new Set([3,5,9,10,12,16,17,19,23,24,26,30]);
+
+  for (let i = 0; i < firstDay; i++) {
+    const el = document.createElement('div');
+    el.className = 'cal-day empty';
+    grid.appendChild(el);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const el = document.createElement('div');
+    const isAvail = available.has(d);
+    const isToday = d === today.getDate();
+    el.className = 'cal-day' + (isAvail ? ' available' : '') + (isToday ? ' today' : '');
+    el.textContent = d;
+    if (isAvail) {
+      el.addEventListener('click', () => {
+        grid.querySelectorAll('.cal-day.selected').forEach(x => x.classList.remove('selected'));
+        el.classList.add('selected');
+      });
+    }
+    grid.appendChild(el);
+  }
+
+  document.querySelectorAll('.cal-slot').forEach(slot => {
+    slot.addEventListener('click', () => {
+      document.querySelectorAll('.cal-slot').forEach(s => s.classList.remove('selected-slot'));
+      slot.classList.add('selected-slot');
+    });
+  });
+})();
 </script>
 
 <!-- ─── HAMBURGER ─── -->
