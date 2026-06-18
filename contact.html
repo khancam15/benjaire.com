@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.emailjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Contact — Benjaire</title>
 <meta name="description" content="Get in touch with Khaneil Campbell at Benjaire. Send a message directly — no automated replies, no waiting rooms.">
@@ -416,24 +416,51 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 reveals.forEach(el => io.observe(el));
 
-/* ─── CONTACT FORM ─── */
+/* ─── EMAILJS ─── */
+</script>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+emailjs.init('iNYB1aapTMY7yl3Z2');
+
 document.getElementById('contactSendBtn').addEventListener('click', function() {
-  const name = document.getElementById('c-name').value.trim();
-  const email = document.getElementById('c-email').value.trim();
-  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if (!name || !email || !ok) {
-    this.textContent = 'Please fill in required fields.';
-    this.style.background = '#1e293b';
-    setTimeout(() => { this.textContent = 'Send Message →'; this.style.background = ''; }, 2400);
+  const btn = this;
+  const name    = document.getElementById('c-name').value.trim();
+  const email   = document.getElementById('c-email').value.trim();
+  const subject = document.getElementById('c-subject').value.trim();
+  const msg     = document.getElementById('c-msg').value.trim();
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!name || !email || !validEmail || !msg) {
+    btn.textContent = 'Please fill in required fields.';
+    btn.style.background = '#1e293b';
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 2400);
     return;
   }
-  this.textContent = 'Message Sent ✓';
-  this.style.background = 'linear-gradient(135deg,#059669,#10b981)';
-  this.style.color = '#fff';
-  setTimeout(() => {
-    this.textContent = 'Send Message →'; this.style.background = ''; this.style.color = '';
-    ['c-name','c-email','c-subject','c-msg'].forEach(id => { document.getElementById(id).value = ''; });
-  }, 3200);
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  emailjs.send('service_zv89q7i', 'template_xzyyi55', {
+    from_name: name,
+    from_email: email,
+    subject: subject || 'New Contact Message',
+    message: msg,
+    reply_to: email
+  }).then(() => {
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = 'linear-gradient(135deg,#059669,#10b981)';
+    btn.style.color = '#fff';
+    btn.disabled = false;
+    setTimeout(() => {
+      btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = '';
+      ['c-name','c-email','c-subject','c-msg'].forEach(id => { document.getElementById(id).value = ''; });
+    }, 3200);
+  }).catch(() => {
+    btn.textContent = 'Failed — try again';
+    btn.style.background = '#7f1d1d';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);
+  });
 });
 </script>
 </body>
