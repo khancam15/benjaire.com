@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.emailjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.emailjs.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Contact — Benjaire</title>
 <meta name="description" content="Get in touch with Khaneil Campbell at Benjaire. Send a message directly — no automated replies, no waiting rooms.">
@@ -268,7 +268,7 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="deposit.html">Start a Project</a></li>
+    <li><a href="deposit.html">Project</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
   <a href="index.html#booking" class="nav-cta">Book a Call →</a>
@@ -279,7 +279,7 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="services.html">Services</a>
-  <a href="deposit.html">Start a Project</a>
+  <a href="deposit.html">Project</a>
   <a href="contact.html" class="active">Contact</a>
   <a href="index.html#booking" class="mobile-cta">Book a Free Call →</a>
 </div>
@@ -368,7 +368,7 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
       <span class="footer-copy">Helping Professionals Build Careers, Brands &amp; Digital Solutions</span>
       <div class="footer-links">
         <a href="services.html">Services</a>
-        <a href="deposit.html">Start a Project</a>
+        <a href="deposit.html">Project</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
@@ -418,9 +418,9 @@ reveals.forEach(el => io.observe(el));
 
 /* ─── EMAILJS ─── */
 </script>
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-emailjs.init('iNYB1aapTMY7yl3Z2');
+emailjs.init({ publicKey: 'iNYB1aapTMY7yl3Z2' });
 
 document.getElementById('contactSendBtn').addEventListener('click', function() {
   const btn = this;
