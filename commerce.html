@@ -157,52 +157,29 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .cta-h2 .grad { display: block; background: linear-gradient(135deg, var(--blue), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .cta-actions { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
 
-/* ─── FOOTER ─── */
-.site-footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(--bg2); }
-.footer-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--text-lo); letter-spacing: .08em; }
-.footer-links { display: flex; gap: 32px; }
-.footer-links a { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-lo); text-decoration: none; transition: color .2s; }
-.footer-links a:hover { color: var(--cyan); }
 
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
-.reveal.in { opacity: 1; transform: none; }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal { transition: opacity .4s; transform: none; }
-  .btn-primary::before, .nav-cta::before { display: none; }
+/* ─── SITE FOOTER ─── */
+.site-footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 64px 48px 32px; margin-top: auto; }
+.footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand { display: flex; flex-direction: column; gap: 12px; }
+.footer-logo { font-family: var(--cond); font-size: 20px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; background: linear-gradient(135deg,#fff 0%,var(--cyan) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.footer-tagline { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+.footer-location { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-lo); }
+.footer-col { display: flex; flex-direction: column; gap: 12px; }
+.footer-col-label { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 4px; }
+.footer-col a { font-size: 13px; color: var(--text-mid); text-decoration: none; transition: color .2s; cursor: none; }
+.footer-col a:hover { color: var(--text-hi); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid var(--border); }
+.footer-copy { font-family: var(--mono); font-size: 10px; letter-spacing: .10em; color: var(--text-lo); }
+@media (max-width: 900px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .footer-brand { grid-column: 1 / -1; }
+  .site-footer { padding: 48px 24px 28px; }
 }
-@media (max-width: 1024px) {
-  nav { padding: 0 24px; } .nav-links { display: none; } .nav-cta { display: none; } .nav-hamburger { display: flex; }
-  body { cursor: auto; } #cursor-dot, #cursor-ring { display: none; }
-  .page-hero { grid-template-columns: 1fr; min-height: auto; }
-  .page-hero-text { border-right: none; border-bottom: 1px solid var(--border); padding: 56px 24px; }
-  .page-hero-media { min-height: 300px; }
-  .hero-markers { grid-template-columns: 1fr; }
-  .focus-grid { grid-template-columns: 1fr; }
-  .focus-card { border-right: none; border-bottom: 1px solid var(--border); }
-  .focus-card:last-child { border-bottom: none; }
-  .focus-card { padding: 36px 24px; }
-  .model-section { grid-template-columns: 1fr; }
-  .model-left { border-right: none; border-bottom: 1px solid var(--border); padding: 56px 24px; }
-  .model-right { padding: 56px 24px; }
-  .metrics-grid { grid-template-columns: 1fr 1fr; }
-  .metric-cell:nth-child(2) { border-right: none; }
-  .metric-cell { border-bottom: 1px solid var(--border); }
-  .metric-cell:nth-child(3), .metric-cell:nth-child(4) { border-bottom: none; }
-  .venture-nav { grid-template-columns: 1fr; }
-  .vn-item { border-right: none; border-bottom: 1px solid var(--border); }
-  .vn-item:last-child { border-bottom: none; }
-  .section-header { padding: 48px 24px 36px; }
-  .page-cta { grid-template-columns: 1fr; padding: 56px 24px; }
-  .site-footer { padding: 0 24px; }
-  .footer-inner { flex-direction: column; height: auto; padding: 20px 0; gap: 12px; text-align: center; }
-}
-@media (max-width: 600px) {
-  .metrics-grid { grid-template-columns: 1fr; }
-  .metric-cell { border-right: none; border-bottom: 1px solid var(--border); }
-  .metric-cell:last-child { border-bottom: none; }
-  .page-h1 { font-size: clamp(44px,14vw,72px); }
+@media (max-width: 580px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 }
 </style>
 </head>
@@ -213,10 +190,10 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 
 <nav>
   <a href="index.html" class="nav-logo">Benjaire</a>
-  <ul class="nav-links">
+    <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="deposit.html">Project</a></li>
+    <li><a href="index.html#about">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <a href="index.html#booking" class="nav-cta">Book a Call →</a>
@@ -228,7 +205,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 <div class="mobile-menu" id="mobileMenu" role="navigation">
   <a href="index.html">Home</a>
   <a href="services.html">Services</a>
-  <a href="deposit.html">Project</a>
+  <a href="index.html#about">About</a>
   <a href="contact.html">Contact</a>
   <a href="index.html#booking" class="mobile-cta">Book a Call →</a>
 </div>
@@ -424,13 +401,34 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <span class="footer-copy">© 2026 Benjaire · New York</span>
-    <span class="footer-copy">Commerce — Built for long-term discipline.</span>
-    <div class="footer-links">
+    <div class="footer-brand">
+      <span class="footer-logo">Benjaire</span>
+      <p class="footer-tagline">Helping Professionals Build Careers,<br>Brands &amp; Digital Solutions</p>
+      <span class="footer-location">New York, NY</span>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Navigate</div>
+      <a href="index.html">Home</a>
       <a href="services.html">Services</a>
+      <a href="index.html#about">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Explore</div>
+      <a href="commerce.html">Commerce</a>
       <a href="technology.html">Technology</a>
       <a href="systems.html">Systems</a>
     </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Work Together</div>
+      <a href="deposit.html">Start a Project →</a>
+      <a href="index.html#booking">Book a Free Call →</a>
+      <a href="contact.html">Send a Message →</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Benjaire · New York</span>
+    <span class="footer-copy">All rights reserved</span>
   </div>
 </footer>
 
