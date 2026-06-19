@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Portfolio &mdash; Benjaire &middot; Web, AI &amp; Cybersecurity Projects</title>
+<meta name="description" content="Web development, AI workflows, cybersecurity labs, and digital solutions built by Benjaire.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://benjaire.com/portfolio.html">
+<meta property="og:title" content="Portfolio &mdash; Benjaire">
+<meta property="og:description" content="Websites, AI workflows, cybersecurity labs, and career transformations built by Khaneil Campbell.">
+<meta property="og:image" content="https://benjaire.com/assets/khaneil-campbell.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://benjaire.com/assets/khaneil-campbell.jpg">
+<link rel="canonical" href="https://benjaire.com/portfolio.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg:#03070f;--bg2:#060d1b;--surface:#0a1120;--border:rgba(56,189,248,0.09);--border-hi:rgba(56,189,248,0.22);--blue:#2563eb;--cyan:#06b6d4;--green:#4ade80;--glow-b:rgba(37,99,235,0.40);--glow-c:rgba(6,182,212,0.30);--text-hi:#f1f5f9;--text-mid:#94a3b8;--text-lo:#475569;--mono:'IBM Plex Mono',monospace;--sans:'Public Sans',sans-serif;--cond:'Manrope',sans-serif; }
+html{scroll-behavior:smooth;}body{background:var(--bg);color:var(--text-hi);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;}input,textarea{cursor:text;}
+#cursor-dot{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;width:6px;height:6px;border-radius:50%;background:var(--cyan);transform:translate(-50%,-50%);mix-blend-mode:screen;}
+#cursor-ring{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;width:38px;height:38px;border-radius:50%;border:1px solid rgba(6,182,212,0.45);transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.16,1,.3,1),height .35s,border-color .35s;}
+body.cursor-hover #cursor-ring{width:60px;height:60px;border-color:rgba(6,182,212,.70);}
+#scrollProgress{position:fixed;top:0;left:0;width:100%;height:2px;border:0;z-index:300;appearance:none;}
+#scrollProgress::-webkit-progress-bar{background:transparent;}#scrollProgress::-webkit-progress-value{background:linear-gradient(90deg,var(--blue),var(--cyan));}#scrollProgress::-moz-progress-bar{background:linear-gradient(90deg,var(--blue),var(--cyan));}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:linear-gradient(var(--blue),var(--cyan));border-radius:2px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(3,7,15,.88);border-bottom:1px solid var(--border);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);}
+.nav-logo{font-family:var(--cond);font-size:18px;font-weight:800;letter-spacing:.14em;text-decoration:none;text-transform:uppercase;background:linear-gradient(135deg,#fff 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:none;}
+.nav-links{display:flex;gap:28px;list-style:none;}.nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;transition:color .2s;cursor:none;}
+.nav-links a:hover{color:var(--cyan);}.nav-links a.active{color:var(--text-hi);}
+.nav-cta{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--cyan);border:none;padding:10px 22px;cursor:none;text-decoration:none;position:relative;overflow:hidden;transition:box-shadow .3s;}
+.nav-cta::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.18);transform:translateX(-100%);transition:transform .4s;}.nav-cta:hover::before{transform:translateX(0);}.nav-cta:hover{box-shadow:0 0 24px var(--glow-c);}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--text-hi);transition:transform .25s,opacity .25s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}.nav-hamburger.open span:nth-child(2){opacity:0;}.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mobile-menu{position:fixed;top:64px;left:0;right:0;background:rgba(6,13,26,.97);border-bottom:1px solid var(--border);backdrop-filter:blur(24px);padding:28px 24px;display:flex;flex-direction:column;gap:22px;transform:translateY(-110%);opacity:0;transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .35s ease;z-index:99;pointer-events:none;}
+.mobile-menu.open{transform:translateY(0);opacity:1;pointer-events:all;}
+.mobile-menu a{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.mobile-menu a:hover{color:var(--cyan);}.mobile-menu a.active{color:var(--text-hi);}.mobile-menu .mobile-cta{color:var(--cyan);}
+.page-wrap{padding-top:64px;min-height:100vh;display:flex;flex-direction:column;}
+.section-tag{display:flex;align-items:center;gap:10px;margin-bottom:24px;}.section-tag-line{width:28px;height:1px;background:linear-gradient(90deg,var(--blue),var(--cyan));flex-shrink:0;}.section-tag-text{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);}
+.btn-primary{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:linear-gradient(130deg,var(--blue) 0%,var(--cyan) 100%);border:none;padding:15px 34px;cursor:none;text-decoration:none;display:inline-block;position:relative;overflow:hidden;transition:box-shadow .35s,transform .2s;}
+.btn-primary::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.16);transform:translateX(-110%) skewX(-12deg);transition:transform .55s;}.btn-primary:hover::before{transform:translateX(115%) skewX(-12deg);}.btn-primary:hover{box-shadow:0 0 40px var(--glow-b);transform:translateY(-2px);}
+.btn-secondary{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mid);background:transparent;border:1px solid var(--border-hi);padding:15px 34px;cursor:none;text-decoration:none;display:inline-block;transition:border-color .3s,color .3s,box-shadow .3s,transform .2s;}
+.btn-secondary:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 24px var(--glow-c);transform:translateY(-2px);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}.reveal.in{opacity:1;transform:none;}
+.page-hero{position:relative;padding:96px 48px 80px;border-bottom:1px solid var(--border);overflow:hidden;}
+.page-hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 80% at 15% 50%,rgba(37,99,235,.12) 0%,transparent 65%),radial-gradient(ellipse 35% 50% at 80% 40%,rgba(6,182,212,.07) 0%,transparent 60%);}
+.page-hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(56,189,248,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.018) 1px,transparent 1px);background-size:80px 80px;}
+.page-hero-content{position:relative;z-index:2;max-width:720px;}
+.page-h1{font-family:var(--cond);font-size:clamp(48px,7vw,96px);font-weight:800;text-transform:uppercase;line-height:.88;letter-spacing:-.02em;margin:24px 0 32px;}
+.page-h1 .solid{display:block;color:var(--text-hi);}.page-h1 .grad{display:block;background:linear-gradient(130deg,var(--blue) 0%,var(--cyan) 55%,#a5f3fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-lead{font-size:17px;line-height:1.78;color:var(--text-mid);max-width:560px;}.page-lead strong{color:var(--text-hi);font-weight:500;}
+.site-footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 48px 32px;margin-top:auto;}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand{display:flex;flex-direction:column;gap:12px;}
+.footer-logo{font-family:var(--cond);font-size:20px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(135deg,#fff 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.footer-tagline{font-size:13px;color:var(--text-mid);line-height:1.6;}.footer-location{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-lo);}
+.footer-col{display:flex;flex-direction:column;gap:12px;}.footer-col-label{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;}
+.footer-col a{font-size:13px;color:var(--text-mid);text-decoration:none;transition:color .2s;cursor:none;}.footer-col a:hover{color:var(--text-hi);}.footer-cred{font-size:13px;color:var(--text-mid);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);}
+.footer-copy{font-family:var(--mono);font-size:10px;letter-spacing:.10em;color:var(--text-lo);}
+@media(max-width:1024px){nav{padding:0 24px;}.nav-links{display:none;}.nav-cta{display:none;}.nav-hamburger{display:flex;}body{cursor:auto;}#cursor-dot,#cursor-ring{display:none;}.page-hero{padding:72px 24px 56px;}.footer-inner{grid-template-columns:1fr 1fr;gap:32px;}.footer-brand{grid-column:1/-1;}.site-footer{padding:48px 24px 28px;}}
+@media(max-width:600px){.page-h1{font-size:clamp(40px,13vw,64px);}.footer-inner{grid-template-columns:1fr;gap:24px;}.footer-bottom{flex-direction:column;gap:8px;text-align:center;}.mobile-menu a{min-height:48px;display:flex;align-items:center;}.btn-primary,.btn-secondary{min-height:48px;display:inline-flex;align-items:center;justify-content:center;}.nav-hamburger{min-width:44px;min-height:44px;justify-content:center;}}
+
+.portfolio-cats{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--bg2);overflow-x:auto;}
+.cat-tab{padding:28px 32px;border-right:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+.cat-tab.active{color:var(--cyan);}.cat-tab:not(.active){color:var(--text-lo);}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);background:var(--bg);}
+.work-card{padding:52px 44px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:16px;}
+.work-card:nth-child(3n){border-right:none;}.work-card:nth-last-child(-n+3){border-bottom:none;}
+.wc-cat{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);}
+.wc-name{font-family:var(--cond);font-size:24px;font-weight:700;text-transform:uppercase;color:var(--text-hi);line-height:1.1;}
+.wc-desc{font-size:14px;color:var(--text-lo);line-height:1.70;flex:1;}
+.wc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;}
+.wc-tag{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-lo);border:1px solid var(--border);padding:4px 10px;}
+.portfolio-cta{display:grid;grid-template-columns:1fr 280px;align-items:center;padding:80px 48px;border-bottom:1px solid var(--border);gap:48px;background:var(--bg2);position:relative;overflow:hidden;}
+.portfolio-cta::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 20% 50%,rgba(37,99,235,.08) 0%,transparent 65%);}
+@media(max-width:1024px){.work-grid{grid-template-columns:1fr;}.work-card{border-right:none;}.work-card:nth-child(3n){border-right:none;}.work-card:nth-last-child(-n+3){border-bottom:1px solid var(--border);}.work-card:last-child{border-bottom:none;}.portfolio-cta{grid-template-columns:1fr;padding:64px 24px;}}
+
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<progress id="scrollProgress" max="100" value="0" aria-label="Page scroll progress"></progress>
+<nav>
+  <a href="index.html" class="nav-logo">Benjaire</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="index.html#booking" class="nav-cta">Book Consultation &rarr;</a>
+  <button class="nav-hamburger" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu" role="navigation">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="portfolio.html" class="active">Portfolio</a>
+  <a href="insights.html">Insights</a>
+  <a href="contact.html">Contact</a>
+  <a href="index.html#booking" class="mobile-cta">Book Consultation &rarr;</a>
+</div>
+<main class="page-wrap">
+<div class="page-hero">
+  <div class="page-hero-glow"></div><div class="page-hero-grid"></div>
+  <div class="page-hero-content">
+    <div class="section-tag reveal"><div class="section-tag-line"></div><span class="section-tag-text">Work &amp; Projects</span></div>
+    <h1 class="page-h1"><span class="solid reveal" style="transition-delay:.06s;">Portfolio.</span></h1>
+    <p class="page-lead reveal" style="transition-delay:.20s;">A selection of <strong>websites, AI workflows, cybersecurity labs, and digital solutions</strong> built for professionals and businesses.</p>
+  </div>
+</div>
+<div class="portfolio-cats">
+  <div class="cat-tab active">All</div>
+  <div class="cat-tab">Websites</div>
+  <div class="cat-tab">AI Projects</div>
+  <div class="cat-tab">Cybersecurity</div>
+  <div class="cat-tab">Career &amp; Brand</div>
+</div>
+<div class="work-grid">
+  <div class="work-card reveal">
+    <div class="wc-cat">Web</div><div class="wc-name">Benjaire.com</div>
+    <p class="wc-desc">Personal brand and services website — dark cyberpunk aesthetic, custom animations, Stripe payment integration, Calendly booking, and EmailJS contact form.</p>
+    <div class="wc-tags"><span class="wc-tag">HTML</span><span class="wc-tag">CSS</span><span class="wc-tag">Stripe</span><span class="wc-tag">Calendly</span></div>
+  </div>
+  <div class="work-card reveal" style="transition-delay:.08s;">
+    <div class="wc-cat">AI</div><div class="wc-name">AI Workflow Automation</div>
+    <p class="wc-desc">Custom automation pipelines built with Claude, ChatGPT, and Make.com — reducing manual work by connecting tools, summarizing data, and generating structured outputs.</p>
+    <div class="wc-tags"><span class="wc-tag">Claude</span><span class="wc-tag">ChatGPT</span><span class="wc-tag">Make.com</span></div>
+  </div>
+  <div class="work-card reveal" style="transition-delay:.16s;">
+    <div class="wc-cat">Security</div><div class="wc-name">Cybersecurity Home Lab</div>
+    <p class="wc-desc">Enterprise-grade home lab: VirtualBox network segmentation, Splunk SIEM deployment, Kali Linux attack simulation, and documented detection engineering rules.</p>
+    <div class="wc-tags"><span class="wc-tag">Splunk</span><span class="wc-tag">Kali Linux</span><span class="wc-tag">VirtualBox</span></div>
+  </div>
+  <div class="work-card reveal">
+    <div class="wc-cat">Career</div><div class="wc-name">Resume Transformations</div>
+    <p class="wc-desc">Complete career document overhauls — ATS-optimized resumes, LinkedIn profiles, and cover letters resulting in interview callbacks across tech, finance, and healthcare.</p>
+    <div class="wc-tags"><span class="wc-tag">Career Strategy</span><span class="wc-tag">ATS</span><span class="wc-tag">LinkedIn</span></div>
+  </div>
+  <div class="work-card reveal" style="transition-delay:.08s;">
+    <div class="wc-cat">Brand</div><div class="wc-name">Personal Brand Strategy</div>
+    <p class="wc-desc">End-to-end personal branding — bio writing, portfolio development, social profile optimization, and consistent visual presence across platforms.</p>
+    <div class="wc-tags"><span class="wc-tag">Branding</span><span class="wc-tag">LinkedIn</span><span class="wc-tag">Strategy</span></div>
+  </div>
+  <div class="work-card reveal" style="transition-delay:.16s;align-items:center;justify-content:center;text-align:center;background:var(--bg2);border:1px dashed var(--border);">
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-lo);">More Coming</div>
+    <div class="wc-name" style="color:var(--text-lo);">Projects Added Regularly</div>
+    <a href="contact.html" class="btn-secondary" style="margin-top:8px;">Discuss a Project</a>
+  </div>
+</div>
+<section class="portfolio-cta">
+  <div style="position:relative;z-index:1;">
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;" class="reveal">Start a Project</div>
+    <h2 class="reveal" style="transition-delay:.06s;font-family:var(--cond);font-size:clamp(40px,5.5vw,68px);font-weight:800;text-transform:uppercase;line-height:.90;">
+      <span style="color:var(--text-hi);display:block;">Ready to Build</span><span style="display:block;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Something?</span>
+    </h2>
+  </div>
+  <div class="reveal" style="transition-delay:.10s;display:flex;flex-direction:column;gap:12px;position:relative;z-index:1;">
+    <a href="deposit.html" class="btn-primary" style="text-align:center;">Start a Project &rarr;</a>
+    <a href="index.html#booking" class="btn-secondary" style="text-align:center;">Book Consultation</a>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">Benjaire</span>
+      <p class="footer-tagline">IT Service Management,<br>Cybersecurity &amp; AI Engineering</p>
+      <span class="footer-location">New York, NY</span>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Navigate</div>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Credentials</div>
+      <span class="footer-cred">Security+</span>
+      <span class="footer-cred">ITIL 4</span>
+      <span class="footer-cred">HDI</span>
+      <span class="footer-cred">KCS</span>
+      <span class="footer-cred">Columbia University IT</span>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Connect</div>
+      <a href="https://www.linkedin.com/in/khaneil-c-44179a14a" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+      <a href="https://github.com/khancam15" target="_blank" rel="noopener">GitHub &#8599;</a>
+      <a href="index.html#booking">Book a Consultation &rarr;</a>
+      <a href="deposit.html">Start a Project &rarr;</a>
+      <a href="contact.html">Send a Message &rarr;</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 Benjaire &middot; New York</span>
+    <span class="footer-copy">IT Service Management &middot; Cybersecurity &middot; AI Engineering</span>
+  </div>
+</footer>
+<script>
+const navToggle=document.getElementById('navToggle');
+const mobileMenu=document.getElementById('mobileMenu');
+navToggle.addEventListener('click',()=>{navToggle.classList.toggle('open');mobileMenu.classList.toggle('open');navToggle.setAttribute('aria-label',mobileMenu.classList.contains('open')?'Close menu':'Open menu');});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navToggle.classList.remove('open');mobileMenu.classList.remove('open');navToggle.setAttribute('aria-label','Open menu');}));
+const mq=window.matchMedia('(min-width: 1025px)');
+mq.addEventListener('change',e=>{if(e.matches){navToggle.classList.remove('open');mobileMenu.classList.remove('open');}});
+const dot=document.getElementById('cursor-dot');const ring=document.getElementById('cursor-ring');
+if(dot&&ring){let rx=0,ry=0;document.addEventListener('mousemove',e=>{dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';rx+=(e.clientX-rx)*.12;ry+=(e.clientY-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';});document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));});}
+const prog=document.getElementById('scrollProgress');if(prog){window.addEventListener('scroll',()=>{const h=document.documentElement;prog.value=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;},{passive:true});}
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
