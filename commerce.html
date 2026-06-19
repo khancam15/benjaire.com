@@ -181,6 +181,13 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
   .footer-inner { grid-template-columns: 1fr; gap: 28px; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 }
+
+/* ─── TOUCH TARGETS ─── */
+@media (max-width: 1024px) {
+  .nav-hamburger { min-width: 44px; min-height: 44px; justify-content: center; }
+  .mobile-menu a { min-height: 48px; display: flex; align-items: center; }
+  .btn-primary, .btn-secondary, .nav-cta { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
+}
 </style>
 </head>
 <body>
