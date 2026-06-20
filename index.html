@@ -508,6 +508,96 @@ nav {
 }
 .booking-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse-dot 1.8s ease-in-out infinite; }
 @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.65); } }
+
+/* ─── SCANLINE OVERLAY ─── */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.04) 2px,
+    rgba(0,0,0,0.04) 4px
+  );
+  animation: scanline-drift 8s linear infinite;
+}
+@keyframes scanline-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 80px; }
+}
+
+/* ─── GLITCH H1 ─── */
+@keyframes glitch-h {
+  0%,90%,100% { clip-path: inset(0 0 100% 0); transform: translate(0,0); }
+  91% { clip-path: inset(8% 0 78% 0); transform: translate(-3px, 0); }
+  93% { clip-path: inset(58% 0 22% 0); transform: translate(3px, 0); }
+  95% { clip-path: inset(30% 0 55% 0); transform: translate(-2px, 0); }
+  97% { clip-path: inset(72% 0 5% 0); transform: translate(2px, 0); }
+}
+@keyframes glitch-h2 {
+  0%,90%,100% { clip-path: inset(0 0 100% 0); transform: translate(0,0); }
+  92% { clip-path: inset(40% 0 45% 0); transform: translate(4px, 0); }
+  94% { clip-path: inset(15% 0 72% 0); transform: translate(-4px, 0); }
+  96% { clip-path: inset(80% 0 8% 0); transform: translate(3px, 0); }
+  98% { clip-path: inset(60% 0 28% 0); transform: translate(-2px, 0); }
+}
+.hero-h1 { position: relative; }
+.hero-h1::before,
+.hero-h1::after {
+  content: attr(data-text);
+  position: absolute; inset: 0;
+  pointer-events: none; white-space: pre-wrap; overflow: hidden;
+  font-family: var(--cond); font-size: inherit; font-weight: 800;
+  line-height: 0.87; letter-spacing: -0.025em; text-transform: uppercase;
+}
+.hero-h1::before {
+  color: var(--cyan); opacity: 0;
+  animation: glitch-h 7s steps(1) infinite;
+}
+.hero-h1::after {
+  color: var(--blue); opacity: 0;
+  animation: glitch-h2 7s steps(1) infinite 0.5s;
+}
+.hero-h1:hover::before,
+.hero-h1:hover::after { opacity: 0.6; }
+
+/* ─── SECTION AMBIENT DIVIDERS ─── */
+.section-glow-line {
+  height: 1px; width: 100%; position: relative; overflow: hidden;
+}
+.section-glow-line::after {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--blue), transparent);
+  animation: glow-sweep 4s ease-in-out infinite;
+}
+@keyframes glow-sweep {
+  0%   { left: -60%; opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* ─── CARD HOVER GLOW ─── */
+.project-card::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(6,182,212,0.06) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.5s;
+}
+.project-card:hover::after { opacity: 1; }
+
+/* ─── SERVICE ROW SIDE GLOW ─── */
+.service-row { position: relative; }
+.service-row::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, var(--blue), var(--cyan));
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 0.4s ease;
+}
+.service-row:hover::before { transform: scaleY(1); }
 .booking-h2 { font-family: var(--cond); font-size: clamp(44px, 5.8vw, 74px); font-weight: 800; text-transform: uppercase; line-height: .88; letter-spacing: -.01em; }
 .booking-h2 .solid { color: var(--text-hi); display: block; }
 .booking-h2 .grad {
@@ -782,7 +872,7 @@ nav {
         <span class="hero-tag-text">IT Service Management · Cybersecurity · AI Engineering</span>
       </div>
 
-      <h1 class="hero-h1">
+      <h1 class="hero-h1" data-text="Cybersecurity.&#10;AI&#10;Engineering&#10;&amp; IT.">
         <span class="ln-solid reveal" style="transition-delay:.04s;">Cybersecurity.</span>
         <span class="ln-solid reveal" style="transition-delay:.10s;">AI</span>
         <span class="ln-outline reveal" style="transition-delay:.16s;">Engineering</span>
@@ -822,6 +912,7 @@ nav {
   </div>
 </header>
 
+<div class="section-glow-line" aria-hidden="true"></div>
 <!-- ─── MARQUEE ─── -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-track">
@@ -1101,6 +1192,7 @@ nav {
   </div>
 </section>
 
+<div class="section-glow-line" aria-hidden="true"></div>
 <!-- ─── FEATURED PROJECTS ─── -->
 <section class="projects-section" id="projects">
   <div class="projects-header">
@@ -1156,6 +1248,7 @@ nav {
   </div>
 </section>
 
+<div class="section-glow-line" aria-hidden="true"></div>
 <!-- ─── BOOKING ─── -->
 <section class="booking-section" id="booking">
   <div class="booking-inner">
@@ -1274,48 +1367,176 @@ nav {
 (function () {
   const canvas = document.getElementById('bgCanvas');
   const ctx = canvas.getContext('2d');
-  let W, H, nodes;
+  const hero = canvas.closest('.hero');
+  const glow = hero.querySelector('.hero-glow');
+  let W, H, nodes, streams, tick_id;
   let mouseX = -2000, mouseY = -2000;
-  const NODE_COUNT = 88, MAX_DIST = 145, BASE_SPEED = 0.20, MOUSE_R = 200;
+  let glowX = 0.16, glowY = 0.44; // current aurora position (normalised)
+  let glowTX = 0.16, glowTY = 0.44; // target
+
+  const NODE_COUNT = 110, HUB_COUNT = 6;
+  const MAX_DIST = 155, BASE_SPEED = 0.18, MOUSE_R = 220;
+  const CYAN = [6,182,212], BLUE = [37,99,235];
+
   function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
-  function makeNode() {
-    const angle = Math.random() * Math.PI * 2, speed = BASE_SPEED * (0.3 + Math.random() * 0.7);
-    return { x: Math.random() * W, y: Math.random() * H, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed };
+
+  function makeNode(isHub) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = BASE_SPEED * (isHub ? 0.15 : 0.3 + Math.random() * 0.7);
+    const z = isHub ? 0.9 + Math.random() * 0.1 : 0.3 + Math.random() * 0.7;
+    return {
+      x: Math.random() * W, y: Math.random() * H,
+      vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+      z, isHub,
+      phase: Math.random() * Math.PI * 2, // breathing offset
+      pulseSpeed: 0.018 + Math.random() * 0.012
+    };
   }
-  function init() { resize(); nodes = Array.from({ length: NODE_COUNT }, makeNode); }
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
-    nodes.forEach(n => {
-      const dx = n.x - mouseX, dy = n.y - mouseY, dist = Math.sqrt(dx*dx+dy*dy);
-      if (dist < MOUSE_R && dist > 1) { const f = ((MOUSE_R-dist)/MOUSE_R)*0.14; n.vx += (dx/dist)*f; n.vy += (dy/dist)*f; }
-      n.vx *= 0.994; n.vy *= 0.994;
-      const sp = Math.sqrt(n.vx*n.vx+n.vy*n.vy), cap = BASE_SPEED*2.8;
-      if (sp > cap) { n.vx = (n.vx/sp)*cap; n.vy = (n.vy/sp)*cap; }
-      n.x += n.vx; n.y += n.vy;
-      if (n.x<0){n.x=0;n.vx*=-1;} if(n.x>W){n.x=W;n.vx*=-1;}
-      if (n.y<0){n.y=0;n.vy*=-1;} if(n.y>H){n.y=H;n.vy*=-1;}
-    });
-    for (let i=0;i<nodes.length;i++) for (let j=i+1;j<nodes.length;j++) {
-      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, d=Math.sqrt(dx*dx+dy*dy);
-      if (d>MAX_DIST) continue;
-      const dm = Math.min(Math.hypot(nodes[i].x-mouseX,nodes[i].y-mouseY), Math.hypot(nodes[j].x-mouseX,nodes[j].y-mouseY));
-      const glow = dm < MOUSE_R ? 1+(1-dm/MOUSE_R)*1.8 : 1, alpha = 0.20*(1-d/MAX_DIST)*glow;
-      ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y);
-      ctx.strokeStyle = (i+j)%5===0 ? `rgba(6,182,212,${Math.min(alpha,0.55)})` : `rgba(37,99,235,${Math.min(alpha,0.55)})`;
-      ctx.lineWidth = 0.65*Math.min(glow,1.6); ctx.stroke();
+
+  function makeStream(a, b) {
+    return { a, b, t: Math.random(), speed: 0.003 + Math.random() * 0.004, alpha: 0.7 + Math.random() * 0.3 };
+  }
+
+  function init() {
+    resize();
+    nodes = [];
+    for (let i = 0; i < HUB_COUNT; i++) nodes.push(makeNode(true));
+    for (let i = HUB_COUNT; i < NODE_COUNT; i++) nodes.push(makeNode(false));
+    streams = [];
+    for (let i = 0; i < 18; i++) {
+      const a = Math.floor(Math.random() * NODE_COUNT);
+      const b = Math.floor(Math.random() * NODE_COUNT);
+      if (a !== b) streams.push(makeStream(a, b));
     }
-    nodes.forEach((n,i) => {
-      const dm=Math.hypot(n.x-mouseX,n.y-mouseY), glow=dm<MOUSE_R?1+(1-dm/MOUSE_R)*2.2:1;
-      const alpha=Math.min(0.55*glow,0.95), r=1.4*Math.min(glow,2.2);
-      ctx.beginPath(); ctx.arc(n.x,n.y,r,0,Math.PI*2);
-      ctx.fillStyle = i%4===0 ? `rgba(6,182,212,${alpha})` : `rgba(37,99,235,${alpha})`; ctx.fill();
-    });
-    requestAnimationFrame(tick);
   }
-  window.addEventListener('resize', resize);
-  document.addEventListener('mousemove', e => { const r=canvas.getBoundingClientRect(); mouseX=e.clientX-r.left; mouseY=e.clientY-r.top; });
-  document.addEventListener('mouseleave', () => { mouseX=-2000; mouseY=-2000; });
-  init(); tick();
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
+  function updateAurora() {
+    glowX = lerp(glowX, glowTX, 0.02);
+    glowY = lerp(glowY, glowTY, 0.02);
+    const xp = (glowX * 100).toFixed(1) + '%';
+    const yp = (glowY * 100).toFixed(1) + '%';
+    glow.style.background = `
+      radial-gradient(ellipse 62% 58% at ${xp} ${yp}, rgba(37,99,235,0.18) 0%, transparent 65%),
+      radial-gradient(ellipse 38% 42% at ${(100 - glowX * 100).toFixed(1)}% ${(100 - glowY * 100).toFixed(1)}%, rgba(6,182,212,0.10) 0%, transparent 60%)
+    `;
+  }
+
+  function drawFrame(t) {
+    ctx.clearRect(0, 0, W, H);
+
+    // Move nodes
+    nodes.forEach(n => {
+      const dx = n.x - mouseX, dy = n.y - mouseY, dist = Math.hypot(dx, dy);
+      if (dist < MOUSE_R && dist > 1) {
+        const f = ((MOUSE_R - dist) / MOUSE_R) * (n.isHub ? 0.06 : 0.16);
+        n.vx += (dx / dist) * f; n.vy += (dy / dist) * f;
+      }
+      n.vx *= 0.993; n.vy *= 0.993;
+      const sp = Math.hypot(n.vx, n.vy), cap = BASE_SPEED * (n.isHub ? 1.2 : 2.8);
+      if (sp > cap) { n.vx = (n.vx / sp) * cap; n.vy = (n.vy / sp) * cap; }
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0) { n.x = 0; n.vx *= -1; } if (n.x > W) { n.x = W; n.vx *= -1; }
+      if (n.y < 0) { n.y = 0; n.vy *= -1; } if (n.y > H) { n.y = H; n.vy *= -1; }
+      n.phase += n.pulseSpeed;
+    });
+
+    // Draw edges + triangles
+    const connected = []; // store pairs for stream use
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        const d = Math.hypot(dx, dy);
+        if (d > MAX_DIST) continue;
+        connected.push([i, j]);
+        const dm = Math.min(Math.hypot(nodes[i].x - mouseX, nodes[i].y - mouseY),
+                            Math.hypot(nodes[j].x - mouseX, nodes[j].y - mouseY));
+        const gw = dm < MOUSE_R ? 1 + (1 - dm / MOUSE_R) * 2.2 : 1;
+        const zAvg = (nodes[i].z + nodes[j].z) / 2;
+        const alpha = clamp(0.18 * (1 - d / MAX_DIST) * gw * zAvg, 0, 0.65);
+        const isCyan = (i + j) % 4 === 0 || nodes[i].isHub || nodes[j].isHub;
+        const [r, g, b] = isCyan ? CYAN : BLUE;
+        ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`;
+        ctx.lineWidth = (nodes[i].isHub || nodes[j].isHub ? 0.9 : 0.55) * Math.min(gw, 1.8);
+        ctx.stroke();
+
+        // Triangle fill: find a 3rd node close to both
+        if ((i + j) % 3 === 0) {
+          for (let k = j + 1; k < nodes.length; k++) {
+            const d2 = Math.hypot(nodes[i].x - nodes[k].x, nodes[i].y - nodes[k].y);
+            const d3 = Math.hypot(nodes[j].x - nodes[k].x, nodes[j].y - nodes[k].y);
+            if (d2 < MAX_DIST && d3 < MAX_DIST) {
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.lineTo(nodes[k].x, nodes[k].y);
+              ctx.closePath();
+              ctx.fillStyle = `rgba(${r},${g},${b},${clamp(alpha * 0.12, 0, 0.08)})`;
+              ctx.fill();
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    // Draw nodes
+    nodes.forEach((n, i) => {
+      const dm = Math.hypot(n.x - mouseX, n.y - mouseY);
+      const gw = dm < MOUSE_R ? 1 + (1 - dm / MOUSE_R) * 2.5 : 1;
+      const breathe = 1 + Math.sin(n.phase) * 0.25;
+      const r = (n.isHub ? 2.8 : 1.3) * Math.min(gw, 2.5) * breathe * n.z;
+      const alpha = clamp((n.isHub ? 0.75 : 0.55) * gw * n.z, 0, 1);
+      const [cr, cg, cb] = i % 3 === 0 ? CYAN : BLUE;
+
+      if (n.isHub) {
+        // Hub: outer glow ring
+        const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3.5);
+        grad.addColorStop(0, `rgba(${cr},${cg},${cb},${alpha * 0.5})`);
+        grad.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
+        ctx.beginPath(); ctx.arc(n.x, n.y, r * 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = grad; ctx.fill();
+      }
+
+      ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha})`; ctx.fill();
+    });
+
+    // Draw data streams (bright particles travelling along edges)
+    streams.forEach(s => {
+      const a = nodes[s.a], b = nodes[s.b];
+      const d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (d > MAX_DIST) { s.t = 0; return; }
+      s.t += s.speed;
+      if (s.t > 1) s.t = 0;
+      const px = lerp(a.x, b.x, s.t), py = lerp(a.y, b.y, s.t);
+      const trail = Math.max(0, s.t - 0.12);
+      const tx = lerp(a.x, b.x, trail), ty = lerp(a.y, b.y, trail);
+      const grad = ctx.createLinearGradient(tx, ty, px, py);
+      grad.addColorStop(0, 'rgba(6,182,212,0)');
+      grad.addColorStop(1, `rgba(6,182,212,${s.alpha * 0.9})`);
+      ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(px, py);
+      ctx.strokeStyle = grad; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.beginPath(); ctx.arc(px, py, 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(165,243,252,${s.alpha})`; ctx.fill();
+    });
+
+    updateAurora();
+    requestAnimationFrame(drawFrame);
+  }
+
+  window.addEventListener('resize', () => { resize(); });
+  document.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left; mouseY = e.clientY - rect.top;
+    glowTX = clamp(e.clientX / window.innerWidth, 0.05, 0.95);
+    glowTY = clamp(e.clientY / window.innerHeight, 0.05, 0.95);
+  });
+  document.addEventListener('mouseleave', () => { mouseX = -2000; mouseY = -2000; });
+  init(); drawFrame(0);
 })();
 </script>
 
