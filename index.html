@@ -223,9 +223,17 @@ nav {
   display: flex; flex-direction: column; justify-content: flex-end;
   position: relative; overflow: hidden; border-bottom: 1px solid var(--border);
 }
+.hero-ai-bg {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: url('assets/hero-bg.webp') center center / cover no-repeat;
+  opacity: 0.28;
+  transition: opacity 1.2s ease;
+}
+.hero-ai-bg.loaded { opacity: 0.28; }
 .hero-glow {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
   background:
+    linear-gradient(180deg, rgba(3,7,15,0.55) 0%, rgba(3,7,15,0.15) 40%, rgba(3,7,15,0.72) 100%),
     radial-gradient(ellipse 58% 58% at 16% 44%, rgba(37,99,235,0.15) 0%, transparent 65%),
     radial-gradient(ellipse 40% 40% at 80% 62%, rgba(6,182,212,0.08) 0%, transparent 60%);
 }
@@ -861,6 +869,7 @@ nav {
 
 <!-- ─── HERO ─── -->
 <header class="hero" id="home">
+  <div class="hero-ai-bg"></div>
   <div class="hero-glow"></div>
   <div class="hero-grid"></div>
   <canvas id="bgCanvas"></canvas>
