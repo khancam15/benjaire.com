@@ -7,4 +7,9 @@
   <url><loc>https://benjaire.com/insights.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://benjaire.com/contact.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://benjaire.com/deposit.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://benjaire.com/it-service-management.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://benjaire.com/cybersecurity.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://benjaire.com/ai-automation.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://benjaire.com/web-development.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://benjaire.com/professional-development.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
