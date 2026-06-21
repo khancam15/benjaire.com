@@ -734,6 +734,136 @@ nav {
   .nav-hamburger { min-width: 44px; min-height: 44px; justify-content: center; }
 }
 
+/* ─── POLY.APP: GRAIN TEXTURE ─── */
+.hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ─── POLY.APP: BENTO SERVICE CARDS ─── */
+.services-bento {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  background: var(--border); gap: 1px;
+}
+.svc-card {
+  background: var(--bg); padding: 48px 44px;
+  display: flex; flex-direction: column; gap: 20px;
+  text-decoration: none; cursor: none;
+  position: relative; overflow: hidden;
+  transition: background 0.35s;
+}
+.svc-card:hover { background: rgba(6,182,212,0.025); }
+.svc-card::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,0.10) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.svc-card:hover::after { opacity: 1; }
+.svc-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan), transparent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.svc-card:hover::before { transform: scaleX(1); }
+.svc-card.wide { grid-column: span 2; }
+.svc-icon {
+  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); background: rgba(37,99,235,0.08);
+  font-size: 15px; color: var(--cyan); font-family: var(--mono); flex-shrink: 0;
+}
+.svc-num {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em;
+  color: var(--cyan); text-transform: uppercase; opacity: 0.45;
+}
+.svc-name {
+  font-family: var(--cond); font-size: clamp(17px, 1.6vw, 22px); font-weight: 700;
+  text-transform: uppercase; color: var(--text-hi); letter-spacing: 0.03em; line-height: 1.1;
+  transition: color 0.2s;
+}
+.svc-card:hover .svc-name { color: #fff; }
+.svc-desc { font-size: 13px; line-height: 1.74; color: var(--text-lo); transition: color 0.2s; flex: 1; }
+.svc-card:hover .svc-desc { color: var(--text-mid); }
+.svc-tag {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--cyan); padding: 5px 12px; border: 1px solid rgba(6,182,212,0.18);
+  background: rgba(6,182,212,0.03); align-self: flex-start; margin-top: auto;
+  transition: border-color 0.3s, background 0.3s;
+}
+.svc-card:hover .svc-tag { border-color: rgba(6,182,212,0.4); background: rgba(6,182,212,0.08); }
+
+/* ─── POLY.APP: TOOLS BENTO ─── */
+.tools-bento {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--border); gap: 1px;
+}
+.tool-glass {
+  background: var(--bg2); padding: 44px 36px;
+  display: flex; flex-direction: column; gap: 18px;
+  position: relative; overflow: hidden; transition: background 0.3s;
+}
+.tool-glass:hover { background: rgba(6,182,212,0.025); }
+.tool-glass::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+.tool-glass:hover::before { transform: scaleX(1); }
+.tg-icon {
+  font-size: 14px; font-family: var(--mono); color: var(--cyan);
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  background: rgba(37,99,235,0.08); border: 1px solid var(--border);
+}
+.tg-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--cyan);
+}
+.tg-items { font-size: 13px; color: var(--text-lo); line-height: 1.85; transition: color 0.2s; }
+.tool-glass:hover .tg-items { color: var(--text-mid); }
+
+/* ─── POLY.APP: PRINCIPLES BENTO ─── */
+.principles-bento {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--border);
+}
+.pb-card {
+  background: var(--bg); padding: 44px 40px;
+  display: flex; flex-direction: column; gap: 14px;
+  position: relative; overflow: hidden; transition: background 0.35s;
+}
+.pb-card:hover { background: rgba(37,99,235,0.03); }
+.pb-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0; transition: opacity 0.4s;
+}
+.pb-card:hover::before { opacity: 1; }
+.pb-num {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em;
+  color: var(--cyan); opacity: 0.45; text-transform: uppercase;
+}
+.pb-name {
+  font-family: var(--cond); font-size: 17px; font-weight: 700;
+  color: var(--text-hi); text-transform: uppercase; letter-spacing: 0.03em;
+}
+.pb-desc { font-size: 13px; color: var(--text-lo); line-height: 1.72; transition: color 0.2s; }
+.pb-card:hover .pb-desc { color: var(--text-mid); }
+
+/* ─── MOBILE: POLY BENTO ─── */
+@media (max-width: 768px) {
+  .services-bento { grid-template-columns: 1fr; }
+  .svc-card.wide { grid-column: span 1; }
+  .tools-bento { grid-template-columns: repeat(2, 1fr); }
+  .principles-bento { grid-template-columns: 1fr; }
+}
+@media (max-width: 1024px) {
+  .services-bento { grid-template-columns: repeat(2, 1fr); }
+  .svc-card.wide { grid-column: span 1; }
+}
+
 /* ─── SITE FOOTER ─── */
 .site-footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 64px 48px 32px; margin-top: auto; }
 .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
@@ -981,60 +1111,48 @@ nav {
     </p>
   </div>
 
-  <div class="services-list">
-    <a class="service-row reveal" href="services.html">
-      <span class="sr-num">01</span>
-      <div class="sr-main">
-        <div class="sr-name">AI Engineering &amp; Automation</div>
-        <div class="sr-desc">Custom AI workflows, automation pipelines, and intelligent tool integration. Leverage ChatGPT, Claude, and modern AI platforms to save time and work smarter.</div>
-      </div>
-      <span class="sr-tag">AI · Automation</span>
-      <span class="sr-arrow">↗</span>
+  <div class="services-bento">
+    <a class="svc-card wide reveal" href="services.html">
+      <div class="svc-icon">◆</div>
+      <span class="svc-num">01</span>
+      <div class="svc-name">AI Engineering &amp; Automation</div>
+      <div class="svc-desc">Custom AI workflows, automation pipelines, and intelligent tool integration. Leverage ChatGPT, Claude, and modern AI platforms to save time and work smarter.</div>
+      <span class="svc-tag">AI · Automation</span>
     </a>
-    <a class="service-row reveal" href="services.html" style="transition-delay:.04s;">
-      <span class="sr-num">02</span>
-      <div class="sr-main">
-        <div class="sr-name">Cybersecurity</div>
-        <div class="sr-desc">Protect what matters. Security assessments, SOC best practices, incident response guidance, identity protection, and digital hygiene for individuals and small businesses.</div>
-      </div>
-      <span class="sr-tag">Security · SOC</span>
-      <span class="sr-arrow">↗</span>
+    <a class="svc-card reveal" href="services.html" style="transition-delay:.04s;">
+      <div class="svc-icon">◉</div>
+      <span class="svc-num">02</span>
+      <div class="svc-name">Cybersecurity</div>
+      <div class="svc-desc">Security assessments, SOC best practices, incident response guidance, and identity protection for individuals and small businesses.</div>
+      <span class="svc-tag">Security · SOC</span>
     </a>
-    <a class="service-row reveal" href="services.html" style="transition-delay:.08s;">
-      <span class="sr-num">03</span>
-      <div class="sr-main">
-        <div class="sr-name">Website Development</div>
-        <div class="sr-desc">Professional websites for individuals, creators, and small businesses — personal sites, portfolios, business redesigns, and full domain and hosting setup.</div>
-      </div>
-      <span class="sr-tag">Web · Digital</span>
-      <span class="sr-arrow">↗</span>
+    <a class="svc-card reveal" href="services.html" style="transition-delay:.08s;">
+      <div class="svc-icon">◻</div>
+      <span class="svc-num">03</span>
+      <div class="svc-name">Website Development</div>
+      <div class="svc-desc">Professional websites for individuals, creators, and small businesses — portfolios, business sites, and full domain and hosting setup.</div>
+      <span class="svc-tag">Web · Digital</span>
     </a>
-    <a class="service-row reveal" href="services.html" style="transition-delay:.12s;">
-      <span class="sr-num">04</span>
-      <div class="sr-main">
-        <div class="sr-name">Technical Services</div>
-        <div class="sr-desc">End-to-end IT support — computer setup, Microsoft 365 administration, network troubleshooting, remote support, and home office optimization.</div>
-      </div>
-      <span class="sr-tag">IT · Support</span>
-      <span class="sr-arrow">↗</span>
+    <a class="svc-card reveal" href="services.html" style="transition-delay:.12s;">
+      <div class="svc-icon">⬡</div>
+      <span class="svc-num">04</span>
+      <div class="svc-name">Technical Services</div>
+      <div class="svc-desc">End-to-end IT support — computer setup, Microsoft 365 administration, network troubleshooting, and home office optimization.</div>
+      <span class="svc-tag">IT · Support</span>
     </a>
-    <a class="service-row reveal" href="services.html" style="transition-delay:.16s;">
-      <span class="sr-num">05</span>
-      <div class="sr-main">
-        <div class="sr-name">Career Strategy</div>
-        <div class="sr-desc">Positioning professionals for their next move. Resume writing, LinkedIn optimization, cover letters, interview prep, and one-on-one career coaching.</div>
-      </div>
-      <span class="sr-tag">Career Strategy</span>
-      <span class="sr-arrow">↗</span>
+    <a class="svc-card reveal" href="services.html" style="transition-delay:.16s;">
+      <div class="svc-icon">◈</div>
+      <span class="svc-num">05</span>
+      <div class="svc-name">Career Strategy</div>
+      <div class="svc-desc">Resume writing, LinkedIn optimization, cover letters, interview prep, and one-on-one career coaching for your next move.</div>
+      <span class="svc-tag">Career</span>
     </a>
-    <a class="service-row reveal" href="services.html" style="transition-delay:.20s;">
-      <span class="sr-num">06</span>
-      <div class="sr-main">
-        <div class="sr-name">Personal Branding</div>
-        <div class="sr-desc">Build a strong, authentic professional presence — personal bios, portfolio development, online reputation management, and end-to-end brand strategy.</div>
-      </div>
-      <span class="sr-tag">Brand Strategy</span>
-      <span class="sr-arrow">↗</span>
+    <a class="svc-card reveal" href="services.html" style="transition-delay:.20s;">
+      <div class="svc-icon">✦</div>
+      <span class="svc-num">06</span>
+      <div class="svc-name">Personal Branding</div>
+      <div class="svc-desc">Build a strong, authentic professional presence — bios, portfolio development, online reputation, and end-to-end brand strategy.</div>
+      <span class="svc-tag">Brand Strategy</span>
     </a>
   </div>
 </section>
@@ -1141,32 +1259,26 @@ nav {
       <div class="section-tag-line"></div>
       <span class="section-tag-text">What Sets Us Apart</span>
     </div>
-    <div class="principle-item reveal" style="transition-delay:.06s;">
-      <span class="p-num">01</span>
-      <div>
-        <div class="p-name">Certified &amp; Credentialed</div>
-        <p class="p-desc">CompTIA Security+, ITIL 4 Foundation, HDI, and KCS certifications — real credentials that underpin every engagement, not just a name on a website.</p>
+    <div class="principles-bento">
+      <div class="pb-card reveal">
+        <span class="pb-num">01</span>
+        <div class="pb-name">Certified &amp; Credentialed</div>
+        <p class="pb-desc">CompTIA Security+, ITIL 4 Foundation, HDI, and KCS certifications — real credentials that underpin every engagement.</p>
       </div>
-    </div>
-    <div class="principle-item reveal" style="transition-delay:.10s;">
-      <span class="p-num">02</span>
-      <div>
-        <div class="p-name">Columbia University IT Experience</div>
-        <p class="p-desc">Institutional-grade experience from one of the world's top research universities — SOC operations, incident response, and enterprise IT at scale.</p>
+      <div class="pb-card reveal" style="transition-delay:.06s;">
+        <span class="pb-num">02</span>
+        <div class="pb-name">Columbia University IT</div>
+        <p class="pb-desc">Institutional-grade experience — SOC operations, incident response, and enterprise IT at one of the world's top research universities.</p>
       </div>
-    </div>
-    <div class="principle-item reveal" style="transition-delay:.14s;">
-      <span class="p-num">03</span>
-      <div>
-        <div class="p-name">Modern Technology Stack</div>
-        <p class="p-desc">Splunk, Kali Linux, Microsoft 365, Google Workspace, ChatGPT, Claude — not legacy tooling. You get modern solutions built with the tools professionals actually use.</p>
+      <div class="pb-card reveal" style="transition-delay:.10s;">
+        <span class="pb-num">03</span>
+        <div class="pb-name">Modern Stack</div>
+        <p class="pb-desc">Splunk, Kali Linux, M365, ChatGPT, Claude — not legacy tooling. Modern solutions built with the tools professionals actually use.</p>
       </div>
-    </div>
-    <div class="principle-item reveal" style="transition-delay:.18s;">
-      <span class="p-num">04</span>
-      <div>
-        <div class="p-name">Direct. No Intermediaries.</div>
-        <p class="p-desc">Every project is handled personally. No handoffs, no junior staff, no diluted quality. You work with Khaneil directly from first call to final delivery.</p>
+      <div class="pb-card reveal" style="transition-delay:.14s;">
+        <span class="pb-num">04</span>
+        <div class="pb-name">Direct. No Intermediaries.</div>
+        <p class="pb-desc">Every project handled personally. No handoffs, no junior staff. You work with Khaneil directly from first call to final delivery.</p>
       </div>
     </div>
   </div>
@@ -1181,22 +1293,26 @@ nav {
     </div>
     <h2 class="tools-h2 reveal" style="transition-delay:.06s;">The Stack.</h2>
   </div>
-  <div class="tools-grid">
-    <div class="tool-category reveal">
-      <div class="tc-label">Security</div>
-      <div class="tc-items">Splunk · Microsoft Defender · Kali Linux · Cloudflare · Wireshark</div>
+  <div class="tools-bento">
+    <div class="tool-glass reveal">
+      <div class="tg-icon">◉</div>
+      <div class="tg-label">Security</div>
+      <div class="tg-items">Splunk<br>Microsoft Defender<br>Kali Linux<br>Cloudflare<br>Wireshark</div>
     </div>
-    <div class="tool-category reveal" style="transition-delay:.06s;">
-      <div class="tc-label">Cloud &amp; Workspace</div>
-      <div class="tc-items">Microsoft 365 · Google Workspace · GitHub · Azure AD · Zoom</div>
+    <div class="tool-glass reveal" style="transition-delay:.06s;">
+      <div class="tg-icon">◈</div>
+      <div class="tg-label">Cloud &amp; Workspace</div>
+      <div class="tg-items">Microsoft 365<br>Google Workspace<br>GitHub<br>Azure AD<br>Zoom</div>
     </div>
-    <div class="tool-category reveal" style="transition-delay:.12s;">
-      <div class="tc-label">AI &amp; Automation</div>
-      <div class="tc-items">ChatGPT · Claude · Gemini · NotebookLM · Make.com</div>
+    <div class="tool-glass reveal" style="transition-delay:.12s;">
+      <div class="tg-icon">◆</div>
+      <div class="tg-label">AI &amp; Automation</div>
+      <div class="tg-items">ChatGPT<br>Claude<br>Gemini<br>NotebookLM<br>Make.com</div>
     </div>
-    <div class="tool-category reveal" style="transition-delay:.18s;">
-      <div class="tc-label">Infrastructure</div>
-      <div class="tc-items">Linux · VirtualBox · Windows Server · Active Directory · Wireshark</div>
+    <div class="tool-glass reveal" style="transition-delay:.18s;">
+      <div class="tg-icon">⬡</div>
+      <div class="tg-label">Infrastructure</div>
+      <div class="tg-items">Linux<br>VirtualBox<br>Windows Server<br>Active Directory<br>Wireshark</div>
     </div>
   </div>
 </section>
