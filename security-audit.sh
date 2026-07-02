@@ -42,7 +42,7 @@ for FILE in "${HTML_FILES[@]}"; do
     pass "Content-Security-Policy present"
     # Warn if unsafe-inline is in script-src
     CSP_LINE=$(grep -i 'Content-Security-Policy' "$FILE" | head -1)
-    SCRIPT_SRC=$(echo "$CSP_LINE" | grep -oiE "script-src[^;'\"]*" | head -1)
+    SCRIPT_SRC=$(echo "$CSP_LINE" | grep -oiE "script-src[^;'\"]*" | head -1 || true)
     if echo "$SCRIPT_SRC" | grep -qi 'unsafe-inline'; then
       warn "script-src contains 'unsafe-inline' — consider nonces or hashes"
     fi
