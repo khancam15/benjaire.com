@@ -90,3 +90,7 @@ node_modules/
 *.bak
 *.tmp
 *.orig
+
+# Personal photos / raw camera files (not web assets)
+*.heic
+*.HEIC
