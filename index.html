@@ -20,6 +20,49 @@
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80">
 <link rel="canonical" href="https://benjaire.com/">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://benjaire.com/#business",
+      "name": "Benjaire",
+      "url": "https://benjaire.com",
+      "image": "https://benjaire.com/assets/khaneil-campbell.jpg",
+      "description": "Benjaire is a New York-based consultancy helping professionals and small businesses build careers, personal brands, and digital solutions — web development, AI automation, cybersecurity, IT service management, and career strategy.",
+      "address": { "@type": "PostalAddress", "addressLocality": "New York", "addressRegion": "NY", "addressCountry": "US" },
+      "areaServed": { "@type": "City", "name": "New York" },
+      "email": "contact@benjaire.com",
+      "founder": { "@id": "https://benjaire.com/#person" },
+      "sameAs": ["https://www.linkedin.com/in/khaneil-c-44179a14a", "https://github.com/khancam15"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development", "url": "https://benjaire.com/web-development.html" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI & Automation", "url": "https://benjaire.com/ai-automation.html" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cybersecurity", "url": "https://benjaire.com/cybersecurity.html" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "IT Service Management", "url": "https://benjaire.com/it-service-management.html" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Career & Personal Branding", "url": "https://benjaire.com/professional-development.html" } }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://benjaire.com/#person",
+      "name": "Khaneil Campbell",
+      "jobTitle": "Founder",
+      "worksFor": { "@id": "https://benjaire.com/#business" },
+      "url": "https://benjaire.com/about.html",
+      "image": "https://benjaire.com/assets/khaneil-campbell.jpg",
+      "sameAs": ["https://www.linkedin.com/in/khaneil-c-44179a14a", "https://github.com/khancam15"],
+      "knowsAbout": ["Cybersecurity", "IT Service Management", "AI Automation", "Web Development", "Career Strategy", "Personal Branding"]
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -371,6 +414,9 @@ nav {
 }
 
 .ventures-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+.venture-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.venture-links a { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--cyan); text-decoration: none; padding: 6px 11px; border: 1px solid rgba(56,189,248,0.18); border-radius: 999px; transition: background .15s, border-color .15s, color .15s; }
+.venture-links a:hover { background: rgba(56,189,248,0.10); border-color: rgba(56,189,248,0.4); color: #f1f5f9; }
 
 .venture-card {
   border-right: 1px solid var(--border);
@@ -900,6 +946,29 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
   .hero-h1 { font-size: clamp(52px, 14vw, 80px); }
   .hero-actions { flex-direction: column; align-items: flex-start; }
 }
+
+/* ─── UNIFIED SHELL: nav dropdown + footer ─── */
+.nav-dd { position: relative; }
+.nav-dd-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(6px); min-width: 236px; background: rgba(6,13,27,0.97); border: 1px solid rgba(56,189,248,0.16); border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 2px; opacity: 0; visibility: hidden; transition: opacity .18s ease, transform .18s ease, visibility .18s; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 18px 44px rgba(0,0,0,0.5); z-index: 300; }
+.nav-dd:hover .nav-dd-menu, .nav-dd:focus-within .nav-dd-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.nav-dd-menu a { display: block; padding: 9px 12px; font-size: 13px; font-weight: 500; color: #94a3b8; border-radius: 8px; text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
+.nav-dd-menu a:hover { background: rgba(56,189,248,0.09); color: #f1f5f9; }
+.nav-dd-menu a.nav-dd-all { border-top: 1px solid rgba(56,189,248,0.13); margin-top: 4px; padding-top: 11px; color: #06b6d4; }
+.nav-cta { white-space: nowrap; }
+@media (max-width: 960px) { .nav-dd-menu { display: none; } }
+@media (max-width: 1024px) { .nav-links { display: none; } .nav-cta { display: none; } .nav-hamburger { display: flex; } }
+.bj-footer { background: #03070f; border-top: 1px solid rgba(56,189,248,0.09); }
+.bj-footer a { text-decoration: none; }
+.bjf-inner { max-width: 1200px; margin: 0 auto; padding: 64px 32px 48px; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
+.bjf-logo { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; color: #f1f5f9; }
+.bjf-tagline { margin: 12px 0; font-size: 13.5px; line-height: 1.55; color: #94a3b8; }
+.bjf-loc { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #64748b; }
+.bjf-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #06b6d4; margin-bottom: 14px; }
+.bjf-col { display: flex; flex-direction: column; gap: 9px; }
+.bjf-col a { font-size: 13.5px; color: #94a3b8; transition: color .15s; }
+.bjf-col a:hover { color: #f1f5f9; }
+.bjf-bottom { max-width: 1200px; margin: 0 auto; padding: 20px 32px 28px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(56,189,248,0.07); font-size: 12px; color: #64748b; }
+@media (max-width: 760px) { .bjf-inner { grid-template-columns: 1fr 1fr; padding: 48px 24px 36px; } .bjf-bottom { padding: 18px 24px 24px; } }
 </style>
 </head>
 <body>
@@ -911,23 +980,37 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
 
 <!-- ─── NAV ─── -->
 <nav>
-  <a href="index.html#home" class="nav-logo">Benjaire</a>
+  <a href="#home" class="nav-logo">Benjaire</a>
   <ul class="nav-links">
-    <li><a href="index.html#home" class="active">Home</a></li>
-    <li><a href="services.html">Services</a></li>
+    <li><a href="#home" class="active">Home</a></li>
+    <li class="nav-dd">
+      <a href="services.html">Services</a>
+      <div class="nav-dd-menu" role="menu">
+      <a href="web-development.html">Web Development</a>
+      <a href="ai-automation.html">AI &amp; Automation</a>
+      <a href="cybersecurity.html">Cybersecurity</a>
+      <a href="it-service-management.html">IT Service Management</a>
+      <a href="professional-development.html">Career &amp; Personal Branding</a>
+        <a href="services.html" class="nav-dd-all">All Services &rarr;</a>
+      </div>
+    </li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="insights.html">Insights</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="contact.html" class="nav-cta">Get in Touch</a>
-  <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
+  <a href="#booking" class="nav-cta">Book Consultation &rarr;</a>
+  <button class="nav-hamburger" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu" role="navigation">
-  <a href="index.html#home" class="active">Home</a>
+  <a href="#home" class="active">Home</a>
   <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="insights.html">Insights</a>
   <a href="contact.html">Contact</a>
-  <a href="contact.html" class="mobile-cta">Get in Touch →</a>
+  <a href="#booking" class="mobile-cta">Book Consultation &rarr;</a>
 </div>
 
 <main>
@@ -1019,72 +1102,84 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
       </h2>
     </div>
     <p class="ventures-intro reveal" style="transition-delay:.1s;">
-      Three core services to help you look sharp, show up online, and get hired.
+      Five focused services across three pillars — build your digital presence,
+      protect it, and advance your career.
     </p>
   </div>
 
   <div class="ventures-grid" style="grid-template-columns: repeat(3,1fr);">
 
-    <!-- 1 — Resume Services -->
+    <!-- 1 — Build -->
     <article class="venture-card reveal">
       <div class="venture-img-wrap">
         <img
           class="venture-img"
-          src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=900&q=80"
-          alt="Resume writing and career strategy"
+          src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=900&q=80"
+          alt="Web development and AI automation"
           loading="lazy"
         >
       </div>
       <div class="venture-body">
-        <div class="venture-name">Resume Services</div>
-        <span class="venture-type">Career · ATS-Ready</span>
+        <div class="venture-name">Build</div>
+        <span class="venture-type">Web · AI &amp; Automation</span>
         <p class="venture-desc">
-          Professional resume writing, cover letters, and LinkedIn optimization —
-          crafted to get past ATS filters and land interviews.
+          Clean, fast websites and AI workflows that save hours — built for
+          individuals and small businesses, live from day one.
         </p>
-        <a class="venture-arrow" href="services.html" aria-label="View resume services">↗</a>
+        <div class="venture-links">
+          <a href="web-development.html">Web Development</a>
+          <a href="ai-automation.html">AI &amp; Automation</a>
+        </div>
+        <a class="venture-arrow" href="web-development.html" aria-label="View web development services">↗</a>
       </div>
     </article>
 
-    <!-- 2 — Website Design -->
+    <!-- 2 — Protect -->
     <article class="venture-card reveal" style="transition-delay:.07s;">
       <div class="venture-img-wrap">
         <img
           class="venture-img"
-          src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=900&q=80"
-          alt="Web development and digital solutions"
+          src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80"
+          alt="Cybersecurity and IT service management"
           loading="lazy"
         >
       </div>
       <div class="venture-body">
-        <div class="venture-name">Website Design</div>
-        <span class="venture-type">Web · Digital</span>
+        <div class="venture-name">Protect</div>
+        <span class="venture-type">Security · IT Management</span>
         <p class="venture-desc">
-          Clean, professional websites for individuals and small businesses —
-          from portfolio sites to full business builds with hosting setup.
+          Enterprise-grade security discipline, right-sized — protect your
+          accounts, devices, and operations without the enterprise overhead.
         </p>
-        <a class="venture-arrow" href="services.html" aria-label="View website design services">↗</a>
+        <div class="venture-links">
+          <a href="cybersecurity.html">Cybersecurity</a>
+          <a href="it-service-management.html">IT Service Management</a>
+        </div>
+        <a class="venture-arrow" href="cybersecurity.html" aria-label="View cybersecurity services">↗</a>
       </div>
     </article>
 
-    <!-- 3 — Online Presence -->
+    <!-- 3 — Advance -->
     <article class="venture-card reveal" style="transition-delay:.14s;">
       <div class="venture-img-wrap">
         <img
           class="venture-img"
-          src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=900&q=80"
-          alt="Professional online presence and personal branding"
+          src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=900&q=80"
+          alt="Career strategy and personal branding"
           loading="lazy"
         >
       </div>
       <div class="venture-body">
-        <div class="venture-name">Online Presence</div>
-        <span class="venture-type">Brand · Strategy</span>
+        <div class="venture-name">Advance</div>
+        <span class="venture-type">Career · Personal Brand</span>
         <p class="venture-desc">
-          Build a presence that works for you — professional bio, cohesive brand,
-          and a digital footprint that makes the right first impression.
+          ATS-ready resumes, LinkedIn optimization, and a personal brand that
+          makes the right first impression — and opens doors.
         </p>
-        <a class="venture-arrow" href="services.html" aria-label="View online presence services">↗</a>
+        <div class="venture-links">
+          <a href="professional-development.html">Career &amp; Personal Branding</a>
+        </div>
+        <a class="venture-arrow" href="professional-development.html" aria-label="View career and branding services">↗</a>
       </div>
     </article>
 
@@ -1288,14 +1383,41 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
 </main>
 
 <!-- ─── FOOTER ─── -->
-<footer>
-  <div class="footer-inner">
-    <span class="footer-copy">© 2026 Benjaire · New York</span>
-    <span class="footer-copy">Helping Professionals Build Careers, Brands &amp; Digital Solutions</span>
-    <div class="footer-links">
+<footer class="bj-footer">
+  <div class="bjf-inner">
+    <div class="bjf-brand">
+      <span class="bjf-logo">Benjaire</span>
+      <p class="bjf-tagline">Careers, Brands &amp;<br>Digital Solutions</p>
+      <span class="bjf-loc">New York, NY</span>
+    </div>
+    <div class="bjf-col">
+      <div class="bjf-label">Navigate</div>
+      <a href="index.html">Home</a>
       <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
     </div>
+    <div class="bjf-col">
+      <div class="bjf-label">Services</div>
+      <a href="web-development.html">Web Development</a>
+      <a href="ai-automation.html">AI &amp; Automation</a>
+      <a href="cybersecurity.html">Cybersecurity</a>
+      <a href="it-service-management.html">IT Service Management</a>
+      <a href="professional-development.html">Career &amp; Personal Branding</a>
+    </div>
+    <div class="bjf-col">
+      <div class="bjf-label">Connect</div>
+      <a href="https://www.linkedin.com/in/khaneil-c-44179a14a" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a>
+      <a href="https://github.com/khancam15" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
+      <a href="index.html#booking">Book a Consultation &rarr;</a>
+      <a href="deposit.html">Start a Project &rarr;</a>
+    </div>
+  </div>
+  <div class="bjf-bottom">
+    <span>&copy; 2026 Benjaire &middot; New York</span>
+    <span>Build &middot; Protect &middot; Advance</span>
   </div>
 </footer>
 

@@ -83,6 +83,29 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .insights-cta::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 20% 50%,rgba(37,99,235,.08) 0%,transparent 65%);}
 @media(max-width:1024px){.articles-grid{grid-template-columns:1fr;}.article-card{border-right:none;}.article-card:nth-child(3n){border-right:none;}.article-card:nth-last-child(-n+3){border-bottom:1px solid var(--border);}.article-card:last-child{border-bottom:none;}.insights-cta{grid-template-columns:1fr;padding:64px 24px;}}
 
+
+/* ─── UNIFIED SHELL: nav dropdown + footer ─── */
+.nav-dd { position: relative; }
+.nav-dd-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(6px); min-width: 236px; background: rgba(6,13,27,0.97); border: 1px solid rgba(56,189,248,0.16); border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 2px; opacity: 0; visibility: hidden; transition: opacity .18s ease, transform .18s ease, visibility .18s; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 18px 44px rgba(0,0,0,0.5); z-index: 300; }
+.nav-dd:hover .nav-dd-menu, .nav-dd:focus-within .nav-dd-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.nav-dd-menu a { display: block; padding: 9px 12px; font-size: 13px; font-weight: 500; color: #94a3b8; border-radius: 8px; text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
+.nav-dd-menu a:hover { background: rgba(56,189,248,0.09); color: #f1f5f9; }
+.nav-dd-menu a.nav-dd-all { border-top: 1px solid rgba(56,189,248,0.13); margin-top: 4px; padding-top: 11px; color: #06b6d4; }
+.nav-cta { white-space: nowrap; }
+@media (max-width: 960px) { .nav-dd-menu { display: none; } }
+@media (max-width: 1024px) { .nav-links { display: none; } .nav-cta { display: none; } .nav-hamburger { display: flex; } }
+.bj-footer { background: #03070f; border-top: 1px solid rgba(56,189,248,0.09); }
+.bj-footer a { text-decoration: none; }
+.bjf-inner { max-width: 1200px; margin: 0 auto; padding: 64px 32px 48px; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
+.bjf-logo { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; color: #f1f5f9; }
+.bjf-tagline { margin: 12px 0; font-size: 13.5px; line-height: 1.55; color: #94a3b8; }
+.bjf-loc { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #64748b; }
+.bjf-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #06b6d4; margin-bottom: 14px; }
+.bjf-col { display: flex; flex-direction: column; gap: 9px; }
+.bjf-col a { font-size: 13.5px; color: #94a3b8; transition: color .15s; }
+.bjf-col a:hover { color: #f1f5f9; }
+.bjf-bottom { max-width: 1200px; margin: 0 auto; padding: 20px 32px 28px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(56,189,248,0.07); font-size: 12px; color: #64748b; }
+@media (max-width: 760px) { .bjf-inner { grid-template-columns: 1fr 1fr; padding: 48px 24px 36px; } .bjf-bottom { padding: 18px 24px 24px; } }
 </style>
 </head>
 <body>
@@ -93,7 +116,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   <a href="index.html" class="nav-logo">Benjaire</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="services.html">Services</a></li>
+    <li class="nav-dd">
+      <a href="services.html">Services</a>
+      <div class="nav-dd-menu" role="menu">
+      <a href="web-development.html">Web Development</a>
+      <a href="ai-automation.html">AI &amp; Automation</a>
+      <a href="cybersecurity.html">Cybersecurity</a>
+      <a href="it-service-management.html">IT Service Management</a>
+      <a href="professional-development.html">Career &amp; Personal Branding</a>
+        <a href="services.html" class="nav-dd-all">All Services &rarr;</a>
+      </div>
+    </li>
     <li><a href="about.html">About</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="insights.html" class="active">Insights</a></li>
@@ -178,15 +211,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 </section>
 </main>
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <span class="footer-logo">Benjaire</span>
-      <p class="footer-tagline">IT Service Management,<br>Cybersecurity &amp; AI Engineering</p>
-      <span class="footer-location">New York, NY</span>
+<footer class="bj-footer">
+  <div class="bjf-inner">
+    <div class="bjf-brand">
+      <span class="bjf-logo">Benjaire</span>
+      <p class="bjf-tagline">Careers, Brands &amp;<br>Digital Solutions</p>
+      <span class="bjf-loc">New York, NY</span>
     </div>
-    <div class="footer-col">
-      <div class="footer-col-label">Navigate</div>
+    <div class="bjf-col">
+      <div class="bjf-label">Navigate</div>
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
       <a href="about.html">About</a>
@@ -194,26 +227,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
     </div>
-    <div class="footer-col">
-      <div class="footer-col-label">Credentials</div>
-      <span class="footer-cred">Security+</span>
-      <span class="footer-cred">ITIL 4</span>
-      <span class="footer-cred">HDI</span>
-      <span class="footer-cred">KCS</span>
-      <span class="footer-cred">Columbia University IT</span>
+    <div class="bjf-col">
+      <div class="bjf-label">Services</div>
+      <a href="web-development.html">Web Development</a>
+      <a href="ai-automation.html">AI &amp; Automation</a>
+      <a href="cybersecurity.html">Cybersecurity</a>
+      <a href="it-service-management.html">IT Service Management</a>
+      <a href="professional-development.html">Career &amp; Personal Branding</a>
     </div>
-    <div class="footer-col">
-      <div class="footer-col-label">Connect</div>
+    <div class="bjf-col">
+      <div class="bjf-label">Connect</div>
       <a href="https://www.linkedin.com/in/khaneil-c-44179a14a" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a>
       <a href="https://github.com/khancam15" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
       <a href="index.html#booking">Book a Consultation &rarr;</a>
       <a href="deposit.html">Start a Project &rarr;</a>
-      <a href="contact.html">Send a Message &rarr;</a>
     </div>
   </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">&copy; 2026 Benjaire &middot; New York</span>
-    <span class="footer-copy">IT Service Management &middot; Cybersecurity &middot; AI Engineering</span>
+  <div class="bjf-bottom">
+    <span>&copy; 2026 Benjaire &middot; New York</span>
+    <span>Build &middot; Protect &middot; Advance</span>
   </div>
 </footer>
 <script>
