@@ -3,61 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src https://fonts.gstatic.com https://assets.calendly.com; img-src 'self' https://images.unsplash.com https://*.calendly.com data:; connect-src https://*.calendly.com; frame-src https://calendly.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="google-site-verification" content="I7KBbwaeJi7SFBZQpyouvX1Tm59-wJ6u3t0U8gdEn6Y">
-<title>Benjaire — Helping Professionals Build Careers, Brands &amp; Digital Solutions</title>
-<meta name="description" content="Benjaire helps professionals and small businesses build careers, personal brands, and digital solutions. Web development, resume writing, career coaching, and cybersecurity. Based in New York.">
+<title>Benjaire | Technology and Digital Brands</title>
+<meta name="description" content="Benjaire is a New York-based parent company building technology, digital-service, and consumer brands founded by Khaneil Campbell.">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://benjaire.com/">
-<meta property="og:title" content="Benjaire — Careers, Brands &amp; Digital Solutions">
-<meta property="og:description" content="Helping professionals and small businesses build careers, personal brands, and digital solutions. Technology · Careers · Personal Branding · New York.">
+<meta property="og:title" content="Benjaire | Technology and Digital Brands">
+<meta property="og:description" content="A New York parent company that starts and operates independent brands across technology, digital services, and consumer products.">
 <meta property="og:image" content="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Benjaire — Careers, Brands &amp; Digital Solutions">
-<meta name="twitter:description" content="Helping professionals and small businesses build careers, personal brands, and digital solutions. New York.">
+<meta name="twitter:title" content="Benjaire | Technology and Digital Brands">
+<meta name="twitter:description" content="A New York parent company building independent technology, digital-service, and consumer brands.">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80">
 <link rel="canonical" href="https://benjaire.com/">
 
+<!-- Organization schema for Benjaire LLC (parent). "Jaire Systems" name is provisional —
+     update the name/@id and add its URL to sameAs once the domain is final. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "ProfessionalService",
-      "@id": "https://benjaire.com/#business",
-      "name": "Benjaire",
-      "url": "https://benjaire.com",
+      "@type": "Organization",
+      "@id": "https://benjaire.com/#organization",
+      "name": "Benjaire LLC",
+      "alternateName": "Benjaire",
+      "url": "https://benjaire.com/",
       "image": "https://benjaire.com/assets/khaneil-campbell.jpg",
-      "description": "Benjaire is a New York-based consultancy helping professionals and small businesses build careers, personal brands, and digital solutions — web development, AI automation, cybersecurity, IT service management, and career strategy.",
+      "description": "Benjaire is a New York-based parent company building technology, digital-service, and consumer brands founded by Khaneil Campbell.",
+      "foundingDate": "2022",
       "address": { "@type": "PostalAddress", "addressLocality": "New York", "addressRegion": "NY", "addressCountry": "US" },
-      "areaServed": { "@type": "City", "name": "New York" },
       "email": "contact@benjaire.com",
-      "founder": { "@id": "https://benjaire.com/#person" },
-      "sameAs": ["https://www.linkedin.com/in/khaneil-c-44179a14a", "https://github.com/khancam15"],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Services",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development", "url": "https://benjaire.com/web-development.html" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI & Automation", "url": "https://benjaire.com/ai-automation.html" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cybersecurity", "url": "https://benjaire.com/cybersecurity.html" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "IT Service Management", "url": "https://benjaire.com/it-service-management.html" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Career & Personal Branding", "url": "https://benjaire.com/professional-development.html" } }
-        ]
-      }
+      "founder": { "@id": "https://benjaire.com/#khaneil-campbell" },
+      "sameAs": [
+        "https://khaneilcampbell.com",
+        "https://www.linkedin.com/in/khaneil-c-44179a14a",
+        "https://github.com/khancam15"
+      ],
+      "subOrganization": [
+        {
+          "@type": "Organization",
+          "@id": "https://benjaire.com/companies.html#jaire-systems",
+          "name": "Jaire Systems",
+          "description": "The group's client-facing technology consultancy, covering engineering, automation, security, and IT service management engagements.",
+          "parentOrganization": { "@id": "https://benjaire.com/#organization" }
+        }
+      ]
     },
     {
       "@type": "Person",
-      "@id": "https://benjaire.com/#person",
+      "@id": "https://benjaire.com/#khaneil-campbell",
       "name": "Khaneil Campbell",
       "jobTitle": "Founder",
-      "worksFor": { "@id": "https://benjaire.com/#business" },
-      "url": "https://benjaire.com/about.html",
+      "url": "https://khaneilcampbell.com",
       "image": "https://benjaire.com/assets/khaneil-campbell.jpg",
-      "sameAs": ["https://www.linkedin.com/in/khaneil-c-44179a14a", "https://github.com/khancam15"],
-      "knowsAbout": ["Cybersecurity", "IT Service Management", "AI Automation", "Web Development", "Career Strategy", "Personal Branding"]
+      "worksFor": { "@id": "https://benjaire.com/#organization" },
+      "sameAs": [
+        "https://khaneilcampbell.com",
+        "https://www.linkedin.com/in/khaneil-c-44179a14a",
+        "https://github.com/khancam15"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://benjaire.com/#website",
+      "url": "https://benjaire.com/",
+      "name": "Benjaire",
+      "publisher": { "@id": "https://benjaire.com/#organization" }
     }
   ]
 }
@@ -65,916 +80,14 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 
-<style>
-/* ─── RESET & TOKENS ─── */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-:root {
-  --bg:        #03070f;
-  --bg2:       #060d1b;
-  --surface:   #0a1120;
-  --border:    rgba(56,189,248,0.09);
-  --border-hi: rgba(56,189,248,0.20);
-  --blue:      #2563eb;
-  --cyan:      #06b6d4;
-  --glow-b:    rgba(37,99,235,0.40);
-  --glow-c:    rgba(6,182,212,0.30);
-  --text-hi:   #f1f5f9;
-  --text-mid:  #94a3b8;
-  --text-lo:   #475569;
-  --mono:      'IBM Plex Mono', monospace;
-  --sans:      'Public Sans', sans-serif;
-  --cond:      'Manrope', sans-serif;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--text-hi);
-  font-family: var(--sans);
-  font-size: 16px;
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  cursor: none;
-}
-
-input, textarea, select { cursor: text; }
-
-/* ─── CUSTOM CURSOR ─── */
-#cursor-dot {
-  position: fixed; top: 0; left: 0; z-index: 9999;
-  pointer-events: none; width: 6px; height: 6px;
-  border-radius: 50%; background: var(--cyan);
-  transform: translate(-50%, -50%);
-  will-change: left, top; mix-blend-mode: screen;
-}
-#cursor-ring {
-  position: fixed; top: 0; left: 0; z-index: 9998;
-  pointer-events: none; width: 38px; height: 38px;
-  border-radius: 50%; border: 1px solid rgba(6,182,212,0.45);
-  transform: translate(-50%, -50%);
-  will-change: left, top;
-  transition: width 0.35s cubic-bezier(0.16,1,0.3,1),
-              height 0.35s cubic-bezier(0.16,1,0.3,1),
-              border-color 0.35s;
-}
-body.cursor-hover #cursor-ring {
-  width: 60px; height: 60px;
-  border-color: rgba(6,182,212,0.70);
-}
-
-/* ─── SCROLL PROGRESS ─── */
-#scrollProgress {
-  position: fixed; top: 0; left: 0; width: 100%; height: 2px;
-  border: 0; z-index: 300; appearance: none;
-}
-#scrollProgress::-webkit-progress-bar  { background: transparent; }
-#scrollProgress::-webkit-progress-value { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
-#scrollProgress::-moz-progress-bar      { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
-
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--cyan)); border-radius: 2px; }
-
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 48px; height: 64px;
-  background: rgba(3,7,15,0.80);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-}
-
-.nav-logo {
-  font-family: var(--cond); font-size: 18px; font-weight: 800;
-  letter-spacing: 0.14em; text-decoration: none; text-transform: uppercase;
-  background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.nav-links { display: flex; gap: 36px; list-style: none; }
-.nav-links a {
-  font-family: var(--mono); font-size: 11px;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--text-mid); text-decoration: none;
-  transition: color 0.2s; cursor: none;
-}
-.nav-links a:hover { color: var(--cyan); }
-.nav-links a.active { color: var(--text-hi); }
-
-.nav-cta {
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--bg); background: var(--cyan);
-  border: none; padding: 10px 22px; cursor: none;
-  text-decoration: none; position: relative; overflow: hidden;
-  transition: box-shadow 0.3s;
-}
-.nav-cta::before {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(255,255,255,0.18);
-  transform: translateX(-100%); transition: transform 0.4s;
-}
-.nav-cta:hover::before { transform: translateX(0); }
-.nav-cta:hover { box-shadow: 0 0 24px var(--glow-c); }
-
-/* Hamburger */
-.nav-hamburger {
-  display: none; flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer; padding: 4px;
-}
-.nav-hamburger span {
-  display: block; width: 22px; height: 1.5px;
-  background: var(--text-hi); transition: transform 0.25s, opacity 0.25s;
-}
-.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity: 0; }
-.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-/* Mobile menu */
-.mobile-menu {
-  position: fixed; top: 64px; left: 0; right: 0;
-  background: rgba(6,13,26,0.97);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(24px);
-  padding: 28px 24px; display: flex; flex-direction: column; gap: 22px;
-  transform: translateY(-110%); opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease;
-  z-index: 99; pointer-events: none;
-}
-.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
-.mobile-menu a {
-  font-family: var(--mono); font-size: 12px;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--text-mid); text-decoration: none; transition: color 0.2s;
-}
-.mobile-menu a:hover { color: var(--cyan); }
-.mobile-menu a.active { color: var(--text-hi); }
-.mobile-menu .mobile-cta { color: var(--cyan); }
-
-/* ─── HERO ─── */
-.hero {
-  padding-top: 64px; min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  position: relative; overflow: hidden;
-  border-bottom: 1px solid var(--border);
-}
-
-.hero-glow {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 55% at 18% 42%, rgba(37,99,235,0.14) 0%, transparent 65%),
-    radial-gradient(ellipse 38% 38% at 78% 65%, rgba(6,182,212,0.09) 0%, transparent 60%);
-}
-
-.hero-grid {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background-image:
-    linear-gradient(rgba(56,189,248,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,0.025) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-
-#bgCanvas {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  z-index: 1; pointer-events: none;
-}
-
-.hero-content {
-  padding: 80px 48px 88px;
-  position: relative; z-index: 2;
-}
-
-.hero-tag {
-  display: flex; align-items: center; gap: 14px; margin-bottom: 40px;
-}
-.hero-tag-line {
-  width: 42px; height: 1px;
-  background: linear-gradient(90deg, var(--blue), var(--cyan));
-  flex-shrink: 0;
-}
-.hero-tag-text {
-  font-family: var(--mono); font-size: 11px;
-  letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan);
-}
-
-.hero-h1 {
-  font-family: var(--cond); font-size: clamp(64px, 9.5vw, 132px);
-  font-weight: 800; line-height: 0.87; letter-spacing: -0.025em;
-  text-transform: uppercase; margin-bottom: 48px;
-}
-.hero-h1 .ln-solid {
-  display: block; color: var(--text-hi);
-}
-.hero-h1 .ln-outline {
-  display: block;
-  -webkit-text-stroke: 1.5px rgba(241,245,249,0.18);
-  color: transparent;
-}
-.hero-h1 .ln-grad {
-  display: block;
-  background: linear-gradient(130deg, var(--blue) 0%, var(--cyan) 55%, #a5f3fc 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-desc {
-  font-size: 18px; line-height: 1.72; color: var(--text-mid);
-  max-width: 500px; margin-bottom: 52px;
-}
-.hero-desc strong { color: var(--text-hi); font-weight: 500; }
-
-.hero-actions { display: flex; gap: 16px; align-items: center; }
-
-/* ─── BUTTONS ─── */
-.btn-primary {
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--bg); background: linear-gradient(130deg, var(--blue) 0%, var(--cyan) 100%);
-  border: none; padding: 15px 34px; cursor: none;
-  text-decoration: none; display: inline-block;
-  position: relative; overflow: hidden;
-  transition: box-shadow 0.35s, transform 0.2s;
-}
-.btn-primary::before {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(255,255,255,0.16);
-  transform: translateX(-110%) skewX(-12deg); transition: transform 0.55s;
-}
-.btn-primary:hover::before { transform: translateX(115%) skewX(-12deg); }
-.btn-primary:hover {
-  box-shadow: 0 0 40px var(--glow-b), 0 0 80px rgba(37,99,235,0.12);
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--text-mid); background: transparent;
-  border: 1px solid var(--border-hi); padding: 15px 34px;
-  cursor: none; text-decoration: none; display: inline-block;
-  transition: border-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
-}
-.btn-secondary:hover {
-  border-color: var(--cyan); color: var(--cyan);
-  box-shadow: 0 0 24px var(--glow-c);
-  transform: translateY(-2px);
-}
-
-/* ─── MARQUEE ─── */
-.marquee-strip {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  overflow: hidden; padding: 16px 0;
-  background: var(--bg2);
-}
-.marquee-track {
-  display: flex; gap: 0; width: max-content;
-  animation: marquee 32s linear infinite;
-}
-.marquee-strip:hover .marquee-track { animation-play-state: paused; }
-.marquee-item {
-  font-family: var(--mono); font-size: 10px;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--text-lo); padding: 0 52px;
-  white-space: nowrap; display: flex; align-items: center; gap: 52px;
-}
-.marquee-item::after { content: '◆'; color: var(--blue); font-size: 5px; }
-@keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* ─── STATS BAR ─── */
-.stats-bar {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg2);
-}
-.stat-cell {
-  padding: 40px 36px; border-right: 1px solid var(--border);
-  position: relative; overflow: hidden;
-  transition: background 0.3s;
-}
-.stat-cell::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--blue), var(--cyan));
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
-}
-.stat-cell:hover::before { transform: scaleX(1); }
-.stat-cell:hover { background: rgba(37,99,235,0.04); }
-.stat-cell:last-child { border-right: none; }
-.stat-num {
-  font-family: var(--cond); font-size: 50px; font-weight: 800;
-  line-height: 1; margin-bottom: 8px;
-  background: linear-gradient(135deg, var(--text-hi) 20%, var(--cyan) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.stat-label {
-  font-family: var(--mono); font-size: 10px;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-lo);
-}
-
-/* ─── SECTION TAGS ─── */
-.section-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
-.section-tag-line {
-  width: 28px; height: 1px;
-  background: linear-gradient(90deg, var(--blue), var(--cyan));
-  flex-shrink: 0;
-}
-.section-tag-text {
-  font-family: var(--mono); font-size: 10px;
-  letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan);
-}
-
-/* ─── VENTURES ─── */
-.ventures-section { border-bottom: 1px solid var(--border); background: var(--bg); }
-.ventures-header {
-  padding: 72px 48px 52px; border-bottom: 1px solid var(--border);
-  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end;
-}
-.ventures-h2 {
-  font-family: var(--cond); font-size: clamp(44px, 6vw, 72px);
-  font-weight: 800; text-transform: uppercase; line-height: 0.90;
-  background: linear-gradient(135deg, var(--text-hi) 0%, var(--text-mid) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.ventures-intro {
-  font-size: 16px; line-height: 1.78; color: var(--text-mid);
-  max-width: 420px; align-self: end;
-}
-
-.ventures-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-.venture-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.venture-links a { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--cyan); text-decoration: none; padding: 6px 11px; border: 1px solid rgba(56,189,248,0.18); border-radius: 999px; transition: background .15s, border-color .15s, color .15s; }
-.venture-links a:hover { background: rgba(56,189,248,0.10); border-color: rgba(56,189,248,0.4); color: #f1f5f9; }
-
-.venture-card {
-  border-right: 1px solid var(--border);
-  display: flex; flex-direction: column;
-  background: var(--bg); overflow: hidden;
-  position: relative; transform-style: preserve-3d;
-  transition: background 0.35s;
-}
-.venture-card:last-child { border-right: none; }
-
-.venture-card::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(135deg, transparent 50%, rgba(6,182,212,0.05) 100%);
-  opacity: 0; transition: opacity 0.4s;
-}
-.venture-card:hover { background: rgba(37,99,235,0.03); }
-.venture-card:hover::after { opacity: 1; }
-
-/* Glowing top border on hover */
-.venture-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-  opacity: 0; transition: opacity 0.4s;
-}
-.venture-card:hover::before { opacity: 1; }
-
-.venture-img-wrap {
-  height: 200px; overflow: hidden; flex-shrink: 0;
-  background: var(--surface); border-bottom: 1px solid var(--border);
-  position: relative;
-}
-.venture-img-wrap::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgba(3,7,15,0.85) 100%);
-  pointer-events: none;
-}
-.venture-img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  filter: grayscale(70%) brightness(0.65) contrast(1.1);
-  transition: transform 0.75s cubic-bezier(0.16,1,0.3,1), filter 0.55s;
-}
-.venture-card:hover .venture-img {
-  transform: scale(1.07);
-  filter: grayscale(20%) brightness(0.80) contrast(1.05);
-}
-
-.venture-body {
-  padding: 32px 36px 40px;
-  display: flex; flex-direction: column; gap: 16px; flex: 1;
-}
-.venture-num { font-family: var(--mono); font-size: 11px; color: var(--cyan); letter-spacing: 0.12em; }
-.venture-name {
-  font-family: var(--cond); font-size: 28px; font-weight: 700;
-  text-transform: uppercase; color: var(--text-hi); letter-spacing: 0.04em;
-}
-.venture-type {
-  font-family: var(--mono); font-size: 10px;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-lo);
-  padding: 4px 10px; border: 1px solid var(--border-hi); align-self: flex-start;
-  background: rgba(6,182,212,0.04);
-}
-.venture-desc { font-size: 15px; line-height: 1.68; color: var(--text-mid); flex: 1; }
-.venture-arrow {
-  font-size: 18px; color: var(--cyan); align-self: flex-end;
-  opacity: 0; transform: translateX(-6px);
-  transition: opacity 0.25s, transform 0.25s; text-decoration: none;
-}
-.venture-card:hover .venture-arrow { opacity: 1; transform: translateX(0); }
-
-.venture-details { border-top: 1px solid var(--border); padding-top: 12px; }
-.venture-details summary {
-  font-family: var(--mono); font-size: 10px;
-  letter-spacing: 0.14em; color: var(--text-lo);
-  text-transform: uppercase; cursor: pointer;
-}
-.venture-details p { margin-top: 8px; font-size: 13px; color: var(--text-lo); line-height: 1.6; }
-
-/* ─── ABOUT ─── */
-.about-section {
-  border-bottom: 1px solid var(--border);
-  display: grid; grid-template-columns: 420px 1fr;
-  background: var(--bg);
-}
-.about-left {
-  padding: 72px 48px; border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; gap: 28px;
-  position: relative; overflow: hidden;
-}
-.about-left::before {
-  content: ''; position: absolute; bottom: -80px; left: -80px;
-  width: 420px; height: 420px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-.about-photo-wrap {
-  width: 100%; aspect-ratio: 4/5; overflow: hidden;
-  background: var(--surface); border: 1px solid var(--border);
-  position: relative;
-}
-.about-photo-wrap img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  filter: grayscale(55%) brightness(.75) contrast(1.1);
-  transition: filter .5s;
-}
-.about-photo-wrap:hover img { filter: grayscale(10%) brightness(.85) contrast(1.05); }
-.about-photo-placeholder {
-  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--text-lo);
-  background: var(--bg2);
-}
-.about-quick-facts { display: flex; flex-direction: column; gap: 10px; }
-.about-fact {
-  display: flex; align-items: center; gap: 14px;
-  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--text-mid);
-}
-.about-fact-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
-
-.about-right {
-  padding: 72px 56px 72px 52px;
-  display: flex; flex-direction: column; justify-content: center; gap: 28px;
-}
-.about-h2 {
-  font-family: var(--cond); font-size: clamp(38px, 5vw, 60px);
-  font-weight: 800; text-transform: uppercase; line-height: .92;
-  background: linear-gradient(135deg, var(--text-hi) 0%, var(--text-mid) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.about-body { font-size: 16px; line-height: 1.82; color: var(--text-mid); max-width: 560px; }
-.about-body strong { color: var(--text-hi); font-weight: 500; }
-.about-body p + p { margin-top: 18px; }
-.about-highlights {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px;
-}
-.about-highlight {
-  padding: 20px 22px; border: 1px solid var(--border);
-  background: var(--bg2); transition: border-color .3s, background .3s;
-}
-.about-highlight:hover { border-color: var(--border-hi); background: rgba(6,182,212,.02); }
-.about-highlight-label {
-  font-family: var(--mono); font-size: 9px; letter-spacing: .2em;
-  text-transform: uppercase; color: var(--cyan); margin-bottom: 6px;
-}
-.about-highlight-val {
-  font-family: var(--cond); font-size: 18px; font-weight: 700;
-  text-transform: uppercase; color: var(--text-hi); letter-spacing: .04em;
-}
-
-@media (max-width: 1024px) {
-  .about-section { grid-template-columns: 1fr; }
-  .about-left { border-right: none; border-bottom: 1px solid var(--border); padding: 48px 24px; }
-  .about-photo-wrap { aspect-ratio: 16/9; }
-  .about-right { padding: 48px 24px; }
-  .about-highlights { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 600px) {
-  .about-highlights { grid-template-columns: 1fr; }
-}
-
-/* ─── BOOKING ─── */
-.booking-section {
-  border-bottom: 1px solid var(--border);
-  background: var(--bg); position: relative; overflow: hidden;
-}
-.booking-section::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 55% 80% at 15% 50%, rgba(37,99,235,0.09) 0%, transparent 60%),
-    radial-gradient(ellipse 45% 60% at 85% 40%, rgba(6,182,212,0.06) 0%, transparent 55%);
-}
-.booking-section::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(56,189,248,0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,0.022) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-.booking-inner {
-  display: grid; grid-template-columns: 1fr 1fr;
-  position: relative; z-index: 1;
-}
-.booking-left {
-  padding: 88px 64px 88px 48px; border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; justify-content: center; gap: 36px;
-}
-.booking-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--cyan);
-  border: 1px solid rgba(6,182,212,.25); padding: 9px 16px;
-  background: rgba(6,182,212,.05); align-self: flex-start;
-}
-.booking-badge::before {
-  content: ''; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--cyan); animation: pulse-dot 1.8s ease-in-out infinite;
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: .35; transform: scale(.65); }
-}
-.booking-h2 {
-  font-family: var(--cond); font-size: clamp(44px, 5.8vw, 74px);
-  font-weight: 800; text-transform: uppercase; line-height: .88; letter-spacing: -.01em;
-}
-.booking-h2 .solid { color: var(--text-hi); display: block; }
-.booking-h2 .grad {
-  display: block;
-  background: linear-gradient(130deg, var(--blue) 0%, var(--cyan) 60%, #a5f3fc 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.booking-desc {
-  font-size: 16px; line-height: 1.80; color: var(--text-mid); max-width: 400px;
-}
-.booking-perks { display: flex; flex-direction: column; gap: 0; }
-.booking-perk {
-  display: grid; grid-template-columns: 72px 1fr; gap: 20px;
-  align-items: start; padding: 18px 0; border-bottom: 1px solid var(--border);
-}
-.booking-perk:first-child { border-top: 1px solid var(--border); }
-.booking-perk-tag {
-  font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--cyan); padding-top: 2px;
-}
-.booking-perk-text { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
-.booking-perk-text strong { color: var(--text-hi); font-weight: 500; }
-
-.booking-right {
-  padding: 88px 48px; display: flex; align-items: center; justify-content: center;
-}
-
-/* ── MOCK CALENDAR CARD ── */
-.cal-card {
-  width: 100%; max-width: 440px;
-  background: var(--bg2); border: 1px solid var(--border-hi);
-  box-shadow: 0 0 60px rgba(6,182,212,.07), 0 0 120px rgba(37,99,235,.05);
-  display: flex; flex-direction: column; overflow: hidden;
-  position: relative;
-}
-.cal-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--blue), var(--cyan), var(--blue));
-  background-size: 200% 100%; animation: shimmer 3s linear infinite;
-}
-@keyframes shimmer {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-.cal-header {
-  padding: 28px 28px 22px; border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.cal-header-left { display: flex; flex-direction: column; gap: 4px; }
-.cal-title {
-  font-family: var(--cond); font-size: 18px; font-weight: 700;
-  text-transform: uppercase; color: var(--text-hi); letter-spacing: .04em;
-}
-.cal-subtitle {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--text-lo);
-}
-.cal-duration {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
-  color: var(--cyan); border: 1px solid rgba(6,182,212,.22);
-  padding: 5px 12px; background: rgba(6,182,212,.04);
-}
-.cal-month-nav {
-  padding: 20px 28px 12px; display: flex; align-items: center;
-  justify-content: space-between; border-bottom: 1px solid var(--border);
-}
-.cal-month-label {
-  font-family: var(--cond); font-size: 16px; font-weight: 700;
-  text-transform: uppercase; color: var(--text-hi); letter-spacing: .06em;
-}
-.cal-nav-arrows { display: flex; gap: 8px; }
-.cal-arrow {
-  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--border); color: var(--text-lo);
-  font-size: 11px; cursor: pointer; transition: border-color .2s, color .2s;
-  background: none;
-}
-.cal-arrow:hover { border-color: var(--cyan); color: var(--cyan); }
-.cal-grid { padding: 16px 28px 20px; }
-.cal-days-header {
-  display: grid; grid-template-columns: repeat(7,1fr);
-  margin-bottom: 8px;
-}
-.cal-day-name {
-  font-family: var(--mono); font-size: 9px; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--text-lo); text-align: center; padding: 4px 0;
-}
-.cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
-.cal-day {
-  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 11px; color: var(--text-lo);
-  border: 1px solid transparent; cursor: default; border-radius: 0;
-  transition: all .2s; position: relative;
-}
-.cal-day.available {
-  color: var(--text-hi); cursor: pointer;
-  border-color: rgba(56,189,248,.08);
-  background: rgba(56,189,248,.03);
-}
-.cal-day.available:hover {
-  border-color: var(--cyan); color: var(--cyan);
-  background: rgba(6,182,212,.07);
-}
-.cal-day.selected {
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  color: #000; font-weight: 700; border-color: transparent;
-}
-.cal-day.today { color: var(--cyan); }
-.cal-day.empty { border-color: transparent; background: none; cursor: default; }
-.cal-times {
-  padding: 0 28px 24px; display: flex; flex-direction: column; gap: 8px;
-}
-.cal-times-label {
-  font-family: var(--mono); font-size: 9px; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--text-lo); margin-bottom: 4px;
-}
-.cal-time-slots { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.cal-slot {
-  font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
-  color: var(--text-mid); border: 1px solid var(--border);
-  padding: 10px; text-align: center; cursor: pointer;
-  transition: all .25s; background: var(--surface);
-}
-.cal-slot:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(6,182,212,.06); }
-.cal-slot.selected-slot {
-  background: rgba(6,182,212,.12); border-color: var(--cyan);
-  color: var(--cyan);
-}
-.cal-footer {
-  padding: 20px 28px; border-top: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  background: var(--bg);
-}
-.cal-tz {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
-  color: var(--text-lo);
-}
-.cal-book-btn {
-  font-family: var(--mono); font-size: 10px; font-weight: 500;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--bg); background: linear-gradient(130deg, var(--blue), var(--cyan));
-  border: none; padding: 11px 24px; cursor: pointer; position: relative; overflow: hidden;
-  transition: box-shadow .3s, opacity .2s;
-}
-.cal-book-btn:hover { box-shadow: 0 0 28px var(--glow-c); }
-.cal-coming-soon-overlay {
-  position: absolute; inset: 0; background: rgba(3,7,15,.72);
-  backdrop-filter: blur(6px); display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 12px; z-index: 10;
-}
-.cal-coming-soon-overlay .cs-label {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
-  text-transform: uppercase; color: var(--cyan);
-  border: 1px solid rgba(6,182,212,.3); padding: 8px 18px;
-  background: rgba(6,182,212,.06);
-}
-.cal-coming-soon-overlay .cs-note {
-  font-size: 12px; color: var(--text-lo); text-align: center;
-  max-width: 220px; line-height: 1.65;
-}
-.cal-coming-soon-overlay .cs-link {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--text-mid);
-  text-decoration: none; border-bottom: 1px solid var(--border);
-  padding-bottom: 2px; transition: color .2s, border-color .2s;
-}
-.cal-coming-soon-overlay .cs-link:hover { color: var(--cyan); border-color: var(--cyan); }
-
-@media (max-width: 1024px) {
-  .booking-inner { grid-template-columns: 1fr; }
-  .booking-left { border-right: none; border-bottom: 1px solid var(--border); padding: 64px 24px; }
-  .booking-right { padding: 48px 24px; }
-  .cal-card { max-width: 100%; }
-}
-
-/* ─── PRINCIPLES ─── */
-.principles-section {
-  border-bottom: 1px solid var(--border);
-  display: grid; grid-template-columns: 1fr 1fr;
-  background: var(--bg2);
-}
-.principles-left {
-  padding: 80px 56px 80px 48px; border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; justify-content: center; gap: 34px;
-  position: relative; overflow: hidden;
-}
-.principles-left::before {
-  content: ''; position: absolute; bottom: -100px; left: -100px;
-  width: 500px; height: 500px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(37,99,235,0.07) 0%, transparent 70%);
-  pointer-events: none;
-}
-.principle-quote {
-  font-family: var(--cond); font-size: clamp(28px, 3.5vw, 44px);
-  font-weight: 700; line-height: 1.2; color: var(--text-hi); letter-spacing: 0.01em;
-  position: relative; z-index: 1;
-}
-.principle-quote em {
-  font-style: normal;
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.principles-sub { font-size: 15px; line-height: 1.78; color: var(--text-mid); max-width: 380px; position: relative; z-index: 1; }
-
-.principles-right { padding: 80px 48px; display: flex; flex-direction: column; gap: 0; }
-.principle-item {
-  display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start;
-  padding: 28px 0; border-bottom: 1px solid var(--border);
-  transition: padding-left 0.35s cubic-bezier(0.16,1,0.3,1);
-}
-.principle-item:hover { padding-left: 10px; }
-.principle-item:first-child { padding-top: 0; }
-.principle-item:last-child { border-bottom: none; padding-bottom: 0; }
-.p-num {
-  font-family: var(--mono); font-size: 12px; color: var(--blue);
-  letter-spacing: 0.1em; padding-top: 3px; opacity: 0.6; transition: opacity 0.2s;
-}
-.principle-item:hover .p-num { opacity: 1; }
-.p-name {
-  font-family: var(--cond); font-size: 18px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-hi); margin-bottom: 8px;
-}
-.p-desc { font-size: 14px; line-height: 1.68; color: var(--text-mid); }
-
-/* ─── CTA ─── */
-.cta-section {
-  position: relative; overflow: hidden;
-  display: grid; grid-template-columns: 1fr 320px; align-items: center;
-  padding: 88px 48px; border-bottom: 1px solid var(--border); gap: 48px;
-  background: var(--bg);
-}
-.cta-section::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse 70% 80% at 25% 50%, rgba(37,99,235,0.07) 0%, transparent 65%);
-}
-.cta-section::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(56,189,248,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,0.018) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-.cta-overline {
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
-  text-transform: uppercase; color: var(--cyan); margin-bottom: 18px;
-  position: relative; z-index: 1;
-}
-.cta-h2 {
-  font-family: var(--cond); font-size: clamp(44px, 6vw, 76px);
-  font-weight: 800; text-transform: uppercase; line-height: 0.90;
-  position: relative; z-index: 1;
-}
-.cta-h2 .solid { color: var(--text-hi); display: block; }
-.cta-h2 .grad {
-  display: block;
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.cta-buttons { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
-
-/* ─── FOOTER ─── */
-footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(--bg2); }
-.footer-inner {
-  display: flex; align-items: center; justify-content: space-between; height: 64px;
-}
-.footer-copy { font-family: var(--mono); font-size: 11px; color: var(--text-lo); letter-spacing: 0.08em; }
-.footer-links { display: flex; gap: 32px; }
-.footer-links a {
-  font-family: var(--mono); font-size: 11px;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--text-lo); text-decoration: none; transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--cyan); }
-
-/* ─── REVEAL ─── */
-.reveal {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1),
-              transform 0.85s cubic-bezier(0.16,1,0.3,1);
-}
-.reveal.in { opacity: 1; transform: none; }
-
-/* ─── REDUCED MOTION ─── */
-@media (prefers-reduced-motion: reduce) {
-  .reveal { transition: opacity 0.4s; transform: none; }
-  .marquee-track { animation: none; }
-  .btn-primary::before, .nav-cta::before { display: none; }
-}
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 1024px) {
-  .hero-content { padding: 64px 24px 64px; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); }
-  .stat-cell:nth-child(2) { border-right: none; }
-  .ventures-header { grid-template-columns: 1fr; padding: 48px 24px; }
-  .ventures-grid { grid-template-columns: 1fr; }
-  .venture-card { border-right: none; border-bottom: 1px solid var(--border); }
-  .venture-card:last-child { border-bottom: none; }
-  .venture-body { padding: 24px; }
-  .venture-img-wrap { height: 220px; }
-  .principles-section { grid-template-columns: 1fr; }
-  .principles-left { border-right: none; border-bottom: 1px solid var(--border); padding: 56px 24px; }
-  .principles-right { padding: 56px 24px; }
-  .cta-section { grid-template-columns: 1fr; padding: 56px 24px; }
-  nav { padding: 0 24px; }
-  .nav-links { display: none; }
-  .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
-  body { cursor: auto; }
-  #cursor-dot, #cursor-ring { display: none; }
-  .ventures-grid .venture-card .venture-arrow { opacity: 1; transform: none; }
-  footer { padding: 0 24px; }
-  .footer-inner { flex-direction: column; height: auto; padding: 20px 0; gap: 12px; text-align: center; }
-}
-
-@media (max-width: 600px) {
-  .stats-bar { grid-template-columns: 1fr 1fr; }
-  .stat-cell:nth-child(3) { border-right: 1px solid var(--border); }
-  .footer-links { gap: 20px; }
-  .hero-h1 { font-size: clamp(52px, 14vw, 80px); }
-  .hero-actions { flex-direction: column; align-items: flex-start; }
-}
-
-/* ─── UNIFIED SHELL: nav dropdown + footer ─── */
-.nav-dd { position: relative; }
-.nav-dd-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(6px); min-width: 236px; background: rgba(6,13,27,0.97); border: 1px solid rgba(56,189,248,0.16); border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 2px; opacity: 0; visibility: hidden; transition: opacity .18s ease, transform .18s ease, visibility .18s; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 18px 44px rgba(0,0,0,0.5); z-index: 300; }
-.nav-dd:hover .nav-dd-menu, .nav-dd:focus-within .nav-dd-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-.nav-dd-menu a { display: block; padding: 9px 12px; font-size: 13px; font-weight: 500; color: #94a3b8; border-radius: 8px; text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
-.nav-dd-menu a:hover { background: rgba(56,189,248,0.09); color: #f1f5f9; }
-.nav-dd-menu a.nav-dd-all { border-top: 1px solid rgba(56,189,248,0.13); margin-top: 4px; padding-top: 11px; color: #06b6d4; }
-.nav-cta { white-space: nowrap; }
-@media (max-width: 960px) { .nav-dd-menu { display: none; } }
-@media (max-width: 1024px) { .nav-links { display: none; } .nav-cta { display: none; } .nav-hamburger { display: flex; } }
-.bj-footer { background: #03070f; border-top: 1px solid rgba(56,189,248,0.09); }
-.bj-footer a { text-decoration: none; }
-.bjf-inner { max-width: 1200px; margin: 0 auto; padding: 64px 32px 48px; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
-.bjf-logo { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; color: #f1f5f9; }
-.bjf-tagline { margin: 12px 0; font-size: 13.5px; line-height: 1.55; color: #94a3b8; }
-.bjf-loc { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #64748b; }
-.bjf-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #06b6d4; margin-bottom: 14px; }
-.bjf-col { display: flex; flex-direction: column; gap: 9px; }
-.bjf-col a { font-size: 13.5px; color: #94a3b8; transition: color .15s; }
-.bjf-col a:hover { color: #f1f5f9; }
-.bjf-bottom { max-width: 1200px; margin: 0 auto; padding: 20px 32px 28px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(56,189,248,0.07); font-size: 12px; color: #64748b; }
-@media (max-width: 760px) { .bjf-inner { grid-template-columns: 1fr 1fr; padding: 48px 24px 36px; } .bjf-bottom { padding: 18px 24px 24px; } }
-</style>
 </head>
 <body>
 
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
 
 <progress id="scrollProgress" max="100" value="0" aria-label="Page scroll progress"></progress>
 
@@ -983,34 +96,22 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
   <a href="#home" class="nav-logo">Benjaire</a>
   <ul class="nav-links">
     <li><a href="#home" class="active">Home</a></li>
-    <li class="nav-dd">
-      <a href="services.html">Services</a>
-      <div class="nav-dd-menu" role="menu">
-      <a href="web-development.html">Web Development</a>
-      <a href="ai-automation.html">AI &amp; Automation</a>
-      <a href="cybersecurity.html">Cybersecurity</a>
-      <a href="it-service-management.html">IT Service Management</a>
-      <a href="professional-development.html">Career &amp; Personal Branding</a>
-        <a href="services.html" class="nav-dd-all">All Services &rarr;</a>
-      </div>
-    </li>
+    <li><a href="companies.html">Our Companies</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="insights.html">Insights</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="#booking" class="nav-cta">Book Consultation &rarr;</a>
+  <a href="companies.html" class="nav-cta">Our Companies &rarr;</a>
   <button class="nav-hamburger" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu" role="navigation">
   <a href="#home" class="active">Home</a>
-  <a href="services.html">Services</a>
+  <a href="companies.html">Our Companies</a>
   <a href="about.html">About</a>
-  <a href="portfolio.html">Portfolio</a>
   <a href="insights.html">Insights</a>
   <a href="contact.html">Contact</a>
-  <a href="#booking" class="mobile-cta">Book Consultation &rarr;</a>
+  <a href="companies.html" class="mobile-cta">Our Companies &rarr;</a>
 </div>
 
 <main>
@@ -1019,30 +120,30 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
 <header class="hero" id="home">
   <div class="hero-glow"></div>
   <div class="hero-grid"></div>
-  <canvas id="bgCanvas"></canvas>
 
   <div class="hero-content">
     <div class="hero-tag reveal">
       <div class="hero-tag-line"></div>
-      <span class="hero-tag-text">Professional Services · New York</span>
+      <span class="hero-tag-text">Parent Company · New York</span>
     </div>
 
     <h1 class="hero-h1">
-      <span class="ln-solid reveal" style="transition-delay:.04s;">Careers.</span>
-      <span class="ln-solid reveal" style="transition-delay:.10s;">Brands.</span>
-      <span class="ln-outline reveal" style="transition-delay:.16s;">Digital</span>
-      <span class="ln-grad reveal" style="transition-delay:.22s;">Solutions.</span>
+      <span class="ln-solid reveal" style="transition-delay:.04s;">We Build</span>
+      <span class="ln-solid reveal" style="transition-delay:.10s;">Technology</span>
+      <span class="ln-outline reveal" style="transition-delay:.16s;">and Digital</span>
+      <span class="ln-grad reveal" style="transition-delay:.22s;">Brands.</span>
     </h1>
 
     <p class="hero-desc reveal" style="transition-delay:.32s;">
-      Benjaire helps <strong>professionals, creators, and small businesses</strong>
-      build careers, personal brands, and the digital presence they need
-      to grow — backed by technology and strategy.
+      Benjaire LLC is a <strong>New York parent company</strong>. We start and operate
+      independent brands across technology, digital services, and consumer
+      products — each with its own name, its own customers, and its own
+      reason to exist.
     </p>
 
     <div class="hero-actions reveal" style="transition-delay:.42s;">
-      <a href="#services" class="btn-primary">View Services</a>
-      <a href="contact.html" class="btn-secondary">Get in Touch</a>
+      <a href="companies.html" class="btn-primary">Our Companies</a>
+      <a href="about.html" class="btn-secondary">About Benjaire</a>
     </div>
   </div>
 </header>
@@ -1050,197 +151,198 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
 <!-- ─── MARQUEE ─── -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-track">
-    <span class="marquee-item">Web Development</span>
-    <span class="marquee-item">Resume Writing</span>
-    <span class="marquee-item">Personal Branding</span>
-    <span class="marquee-item">Career Strategy</span>
-    <span class="marquee-item">Cybersecurity</span>
-    <span class="marquee-item">AI Solutions</span>
+    <span class="marquee-item">Parent Company</span>
     <span class="marquee-item">New York</span>
-    <span class="marquee-item">Tech Consulting</span>
-    <span class="marquee-item">Web Development</span>
-    <span class="marquee-item">Resume Writing</span>
-    <span class="marquee-item">Personal Branding</span>
-    <span class="marquee-item">Career Strategy</span>
-    <span class="marquee-item">Cybersecurity</span>
-    <span class="marquee-item">AI Solutions</span>
+    <span class="marquee-item">Technology</span>
+    <span class="marquee-item">Digital Services</span>
+    <span class="marquee-item">Consumer Brands</span>
+    <span class="marquee-item">Independent Brands</span>
+    <span class="marquee-item">Founded 2022</span>
+    <span class="marquee-item">Operator-Led</span>
+    <span class="marquee-item">Parent Company</span>
     <span class="marquee-item">New York</span>
-    <span class="marquee-item">Tech Consulting</span>
+    <span class="marquee-item">Technology</span>
+    <span class="marquee-item">Digital Services</span>
+    <span class="marquee-item">Consumer Brands</span>
+    <span class="marquee-item">Independent Brands</span>
+    <span class="marquee-item">Founded 2022</span>
+    <span class="marquee-item">Operator-Led</span>
   </div>
 </div>
 
 <!-- ─── STATS BAR ─── -->
 <div class="stats-bar">
   <div class="stat-cell reveal">
-    <div class="stat-num">6<span style="font-size:0.6em;vertical-align:super;">+</span></div>
-    <div class="stat-label">Service Areas</div>
+    <div class="stat-num">1</div>
+    <div class="stat-label">Brand Live</div>
   </div>
   <div class="stat-cell reveal" style="transition-delay:.06s;">
-    <div class="stat-num">NYC</div>
-    <div class="stat-label">Based In</div>
+    <div class="stat-num">2</div>
+    <div class="stat-label">In Development</div>
   </div>
   <div class="stat-cell reveal" style="transition-delay:.12s;">
+    <div class="stat-num">NYC</div>
+    <div class="stat-label">Headquarters</div>
+  </div>
+  <div class="stat-cell reveal" style="transition-delay:.18s;">
     <div class="stat-num">2022</div>
     <div class="stat-label">Founded</div>
   </div>
-  <div class="stat-cell reveal" style="transition-delay:.18s;">
-    <div class="stat-num">100%</div>
-    <div class="stat-label">Client-Focused</div>
-  </div>
 </div>
 
-<!-- ─── SERVICES ─── -->
-<section class="ventures-section" id="services">
+<!-- ─── OUR COMPANIES ─── -->
+<section class="ventures-section" id="companies">
   <div class="ventures-header">
     <div>
       <div class="section-tag reveal">
         <div class="section-tag-line"></div>
-        <span class="section-tag-text">What We Do</span>
+        <span class="section-tag-text">The Group</span>
       </div>
       <h2 class="ventures-h2 reveal" style="transition-delay:.06s;">
-        Our<br>Services
+        Our<br>Companies
       </h2>
     </div>
     <p class="ventures-intro reveal" style="transition-delay:.1s;">
-      Five focused services across three pillars — build your digital presence,
-      protect it, and advance your career.
+      Three properties, three distinct jobs. Each one carries its own name and
+      speaks to its own audience — Benjaire holds them, it does not front for them.
     </p>
   </div>
 
   <div class="ventures-grid" style="grid-template-columns: repeat(3,1fr);">
 
-    <!-- 1 — Build -->
-    <article class="venture-card reveal">
-      <div class="venture-img-wrap">
-        <img
-          class="venture-img"
-          src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=900&q=80"
-          alt="Web development and AI automation"
-          loading="lazy"
-        >
-      </div>
-      <div class="venture-body">
-        <div class="venture-name">Build</div>
-        <span class="venture-type">Web · AI &amp; Automation</span>
-        <p class="venture-desc">
-          Clean, fast websites and AI workflows that save hours — built for
-          individuals and small businesses, live from day one.
-        </p>
-        <div class="venture-links">
-          <a href="web-development.html">Web Development</a>
-          <a href="ai-automation.html">AI &amp; Automation</a>
-        </div>
-        <a class="venture-arrow" href="web-development.html" aria-label="View web development services">↗</a>
-      </div>
-    </article>
-
-    <!-- 2 — Protect -->
-    <article class="venture-card reveal" style="transition-delay:.07s;">
-      <div class="venture-img-wrap">
-        <img
-          class="venture-img"
-          src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80"
-          alt="Cybersecurity and IT service management"
-          loading="lazy"
-        >
-      </div>
-      <div class="venture-body">
-        <div class="venture-name">Protect</div>
-        <span class="venture-type">Security · IT Management</span>
-        <p class="venture-desc">
-          Enterprise-grade security discipline, right-sized — protect your
-          accounts, devices, and operations without the enterprise overhead.
-        </p>
-        <div class="venture-links">
-          <a href="cybersecurity.html">Cybersecurity</a>
-          <a href="it-service-management.html">IT Service Management</a>
-        </div>
-        <a class="venture-arrow" href="cybersecurity.html" aria-label="View cybersecurity services">↗</a>
-      </div>
-    </article>
-
-    <!-- 3 — Advance -->
-    <article class="venture-card reveal" style="transition-delay:.14s;">
+    <!-- 1 — Khaneil Campbell -->
+    <article class="venture-card reveal" id="khaneil-campbell">
       <div class="venture-img-wrap">
         <img
           class="venture-img"
           src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=900&q=80"
-          alt="Career strategy and personal branding"
+          alt="Khaneil Campbell — professional practice and writing"
           loading="lazy"
+          width="900" height="600"
         >
       </div>
       <div class="venture-body">
-        <div class="venture-name">Advance</div>
-        <span class="venture-type">Career · Personal Brand</span>
+        <div class="venture-name">Khaneil Campbell</div>
+        <span class="venture-type">Professional Authority · Live</span>
         <p class="venture-desc">
-          ATS-ready resumes, LinkedIn optimization, and a personal brand that
-          makes the right first impression — and opens doors.
+          The founder's own practice and publishing base. His credentials,
+          technical writing, and professional record live there rather than here.
         </p>
         <div class="venture-links">
-          <a href="professional-development.html">Career &amp; Personal Branding</a>
+          <a href="https://khaneilcampbell.com" target="_blank" rel="noopener noreferrer">Visit khaneilcampbell.com &#8599;</a>
         </div>
-        <a class="venture-arrow" href="professional-development.html" aria-label="View career and branding services">↗</a>
+        <a class="venture-arrow" href="https://khaneilcampbell.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Khaneil Campbell website">&#8599;</a>
+      </div>
+    </article>
+
+    <!-- 2 — Jaire Systems (name provisional) -->
+    <article class="venture-card reveal" id="jaire-systems" style="transition-delay:.07s;">
+      <div class="venture-img-wrap">
+        <img
+          class="venture-img"
+          src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=900&q=80"
+          alt="Jaire Systems — technology consultancy"
+          loading="lazy"
+          width="900" height="600"
+        >
+      </div>
+      <div class="venture-body">
+        <div class="venture-name">Jaire Systems</div>
+        <span class="venture-type">Technology Consultancy · In Development</span>
+        <p class="venture-desc">
+          The group's client-facing technology arm. Engineering, automation,
+          security, and IT service management engagements will run through it,
+          along with all consultation booking.
+        </p>
+        <div class="venture-links">
+          <span class="venture-flag">Name and domain being finalized</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3 — Consumer brand (not yet started) -->
+    <article class="venture-card reveal" id="consumer-brand" style="transition-delay:.14s;">
+      <div class="venture-img-wrap">
+        <div class="venture-img-placeholder" aria-hidden="true">
+          <span>Benjaire</span>
+          <span class="vip-sub">Brand Three</span>
+        </div>
+      </div>
+      <div class="venture-body">
+        <div class="venture-name">Consumer Brand</div>
+        <span class="venture-type">Products &amp; Accessories · Planned</span>
+        <p class="venture-desc">
+          A direct-to-consumer line in early planning. We announce brands when
+          there is something real to show, so details will follow through
+          <a href="insights.html">Insights</a>.
+        </p>
+        <div class="venture-links">
+          <span class="venture-flag">Not yet started</span>
+        </div>
       </div>
     </article>
 
   </div>
 </section>
 
-<!-- ─── ABOUT ─── -->
+<!-- ─── FOUNDER ─── -->
 <section class="about-section" id="about">
   <div class="about-left reveal">
     <div class="about-photo-wrap">
-      <img src="assets/khaneil-campbell.jpg" alt="Khaneil Campbell — Benjaire">
+      <img src="assets/khaneil-campbell.jpg" alt="Khaneil Campbell, founder of Benjaire LLC" width="800" height="1066">
     </div>
     <div class="about-quick-facts">
       <div class="about-fact"><span class="about-fact-dot"></span>New York City</div>
-      <div class="about-fact"><span class="about-fact-dot"></span>IT Professional · Columbia University</div>
-      <div class="about-fact"><span class="about-fact-dot"></span>IT Service Management & Cybersecurity Background</div> 
-      <div class="about-fact"><span class="about-fact-dot"></span>ITIL 4 & &amp; Security+ Certified</div>
-      <div class="about-fact"><span class="about-fact-dot"></span>Available for New Clients</div>
+      <div class="about-fact"><span class="about-fact-dot"></span>Founder &amp; Operator</div>
+      <div class="about-fact"><span class="about-fact-dot"></span>Benjaire LLC · Established 2022</div>
+      <div class="about-fact"><span class="about-fact-dot"></span>Sole owner of the group</div>
     </div>
-    <a href="https://www.linkedin.com/in/khaneil-c-44179a14a" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="text-align:center; margin-top:8px;">View LinkedIn ↗</a>
-    <a href="https://github.com/khancam15" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="text-align:center; margin-top:8px;">View GitHub ↗</a>
+    <a href="https://khaneilcampbell.com" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="text-align:center; margin-top:8px;">Khaneil Campbell's professional site &#8599;</a>
+    <a href="https://www.linkedin.com/in/khaneil-c-44179a14a" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="text-align:center; margin-top:8px;">LinkedIn &#8599;</a>
   </div>
 
   <div class="about-right">
     <div class="section-tag reveal">
       <div class="section-tag-line"></div>
-      <span class="section-tag-text">Who You're Working With</span>
+      <span class="section-tag-text">Founder</span>
     </div>
     <h2 class="about-h2 reveal" style="transition-delay:.06s;">
-      The Professional<br>Behind<br>Benjaire.
+      Founded by<br>Khaneil<br>Campbell.
     </h2>
     <div class="about-body reveal" style="transition-delay:.12s;">
       <p>
-        Benjaire is led by <strong>Khaneil Campbell</strong>, a New York based technology
-        and career strategy professional with institutional experience at
-        <strong>Columbia University Information Technology</strong>.
+        Benjaire was started in 2022 by <strong>Khaneil Campbell</strong>, a New York
+        technologist who wanted a structure that could hold more than one idea at a time.
       </p>
       <p>
-        Khaneil brings hands-on proficiency in <strong>cybersecurity, SOC automation,
-        incident response, detection engineering, Microsoft 365 administration,
-        and AI workflow design</strong>, supported by Security+, ITIL 4 Foundation, KCS, and HDI
-        certifications. Every client works directly with Khaneil.
-        <strong>No intermediaries. No compromised quality. Measurable outcomes, every time.</strong>
+        The decision behind this company was deliberate: rather than stretch a single
+        personal brand across every kind of work, build a parent that can stand up
+        <strong>separate brands, each properly named and properly scoped</strong>. A consultancy
+        should sell like a consultancy. A product line should sell like a product line.
+        Neither should borrow the other's voice.
+      </p>
+      <p>
+        His technical background, certifications, and published work are documented on
+        <a href="https://khaneilcampbell.com" target="_blank" rel="noopener noreferrer">Khaneil Campbell's professional site</a>
+        — this page is about the company he built, not the resume behind it.
       </p>
     </div>
     <div class="about-highlights reveal" style="transition-delay:.18s;">
       <div class="about-highlight">
-        <div class="about-highlight-label">Certifications</div>
-        <div class="about-highlight-val">Security+ · ITIL 4 · KCS · HDI</div>
+        <div class="about-highlight-label">Structure</div>
+        <div class="about-highlight-val">New York LLC</div>
       </div>
       <div class="about-highlight">
-        <div class="about-highlight-label">Security</div>
-        <div class="about-highlight-val">SOC · Detection · IR</div>
+        <div class="about-highlight-label">Established</div>
+        <div class="about-highlight-val">2022</div>
       </div>
       <div class="about-highlight">
-        <div class="about-highlight-label">Technology</div>
-        <div class="about-highlight-val">M365 · Splunk · Python</div>
+        <div class="about-highlight-label">Model</div>
+        <div class="about-highlight-val">Operator-Led</div>
       </div>
       <div class="about-highlight">
-        <div class="about-highlight-label">Innovation</div>
-        <div class="about-highlight-val">AI · Automation · Dev</div>
+        <div class="about-highlight-label">Focus</div>
+        <div class="about-highlight-val">Technology · Consumer</div>
       </div>
     </div>
   </div>
@@ -1251,132 +353,71 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
   <div class="principles-left">
     <div class="section-tag reveal">
       <div class="section-tag-line"></div>
-      <span class="section-tag-text">Philosophy</span>
+      <span class="section-tag-text">Mission</span>
     </div>
     <p class="principle-quote reveal" style="transition-delay:.06s;">
-      "Your career and brand are<br>
-      assets. We help you <em>build them right.</em>"
+      "A holding company doesn't<br>
+      serve customers. <em>Its brands do.</em>"
     </p>
     <p class="principles-sub reveal" style="transition-delay:.12s;">
-      Every professional deserves a strong digital presence and a clear career strategy.
-      We bring both the technical skills and the professional insight to make that happen.
+      Benjaire exists to give each brand room to be itself — its own name, its own
+      audience, its own standards — backed by shared capital, shared discipline,
+      and one founder accountable for all of it.
     </p>
   </div>
 
   <div class="principles-right">
     <div class="section-tag reveal">
       <div class="section-tag-line"></div>
-      <span class="section-tag-text">How We Work</span>
+      <span class="section-tag-text">How We Operate</span>
     </div>
 
     <div class="principle-item reveal" style="transition-delay:.06s;">
       <span class="p-num">01</span>
       <div>
-        <div class="p-name">Client-First, Always</div>
-        <p class="p-desc">Every engagement starts with understanding your goals. We build solutions that serve you — not generic templates dressed up as strategy.</p>
+        <div class="p-name">One Brand, One Job</div>
+        <p class="p-desc">Every property in the group has a single clear purpose and a single audience. We don't let them blur together, and we never reuse one brand's story to sell another.</p>
       </div>
     </div>
 
     <div class="principle-item reveal" style="transition-delay:.10s;">
       <span class="p-num">02</span>
       <div>
-        <div class="p-name">Real Deliverables</div>
-        <p class="p-desc">No vague advice. Every project ends with something you can use — a live website, a polished resume, a working AI workflow, a clear plan.</p>
+        <div class="p-name">Built to Stand Alone</div>
+        <p class="p-desc">A brand launches when it can carry its own name, its own site, and its own customers. Until then it stays listed as in development rather than announced early.</p>
       </div>
     </div>
 
     <div class="principle-item reveal" style="transition-delay:.14s;">
       <span class="p-num">03</span>
       <div>
-        <div class="p-name">Technology That Empowers</div>
-        <p class="p-desc">We make technology accessible and useful. Whether it's your first website or AI automation, we explain and equip — not just execute.</p>
+        <div class="p-name">Operator-Led</div>
+        <p class="p-desc">Benjaire is run by the person doing the work, not a layer sitting above it. Decisions are made close to the product, and one founder answers for every brand in the group.</p>
       </div>
     </div>
 
     <div class="principle-item reveal" style="transition-delay:.18s;">
       <span class="p-num">04</span>
       <div>
-        <div class="p-name">Long-Term Thinking</div>
-        <p class="p-desc">We build for durability. Your website, brand, and career assets should still be working for you years from now — that's how we scope every project.</p>
+        <div class="p-name">Patient by Design</div>
+        <p class="p-desc">We hold what we build. Brands are measured over years rather than quarters, and we would rather launch late than ship something we'd have to walk back.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ─── BOOKING ─── -->
-<section class="booking-section" id="booking">
-  <div class="booking-inner">
-
-    <div class="booking-left">
-      <div class="section-tag reveal">
-        <div class="section-tag-line"></div>
-        <span class="section-tag-text">Free Consultation</span>
-      </div>
-      <div class="booking-badge reveal" style="transition-delay:.04s;">
-        Now Accepting New Clients
-      </div>
-      <h2 class="booking-h2 reveal" style="transition-delay:.08s;">
-        <span class="solid">Book a Free</span>
-        <span class="grad">Zoom Call.</span>
-      </h2>
-      <p class="booking-desc reveal" style="transition-delay:.12s;">
-        Not sure which service fits your situation? Schedule a free 30 minute
-        Zoom call with Khaneil directly. Let's have a meaningful conversation 
-        about your goals and what it would take to get there.
-      </p>
-      <div class="booking-perks reveal" style="transition-delay:.16s;">
-        <div class="booking-perk">
-          <span class="booking-perk-icon">30 MIN</span>
-          One on one session with Khaneil, no junior staff or assistants.
-        </div>
-        <div class="booking-perk">
-          <span class="booking-perk-icon">FREE</span>
-          Zero cost, zero obligation. Walk away with clarity regardless.
-        </div>
-        <div class="booking-perk">
-          <span class="booking-perk-icon">ZOOM</span>
-          Virtual meeting from anywhere — link sent immediately on booking.
-        </div>
-        <div class="booking-perk">
-          <span class="booking-perk-icon">PREP</span>
-          Come with your questions. Leave with a clear next step.
-        </div>
-      </div>
-    </div>
-
-    <div class="booking-right reveal" style="transition-delay:.10s;">
-      <!--
-        INTEGRATION: When ready, replace the entire .cal-card block below with:
-        <iframe src="https://calendly.com/YOUR_USERNAME/30min"
-                style="width:100%;min-height:660px;border:none;"></iframe>
-        Recommended: Calendly · Cal.com · TidyCal
-      -->
-      <div class="cal-card" style="min-height:660px; overflow:hidden;">
-        <!-- Calendly inline widget -->
-        <div
-          class="calendly-inline-widget"
-          data-url="https://calendly.com/benjaireco/free-consultation-benjaire?embed_type=Inline&hide_gdpr_banner=1&background_color=060d1b&text_color=f1f5f9&primary_color=06b6d4"
-          style="min-width:100%;height:660px;"
-        ></div>
-        <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-      </div>
-    </div>
-
   </div>
 </section>
 
 <!-- ─── CTA ─── -->
 <section class="cta-section">
   <div>
-    <div class="cta-overline reveal">Ready to get started</div>
+    <div class="cta-overline reveal">Where to next</div>
     <h2 class="cta-h2 reveal" style="transition-delay:.06s;">
-      <span class="solid">Let's Build Your</span>
-      <span class="grad">Next Chapter.</span>
+      <span class="solid">Start With the</span>
+      <span class="grad">Right Brand.</span>
     </h2>
   </div>
   <div class="cta-buttons reveal" style="transition-delay:.10s;">
-    <a href="contact.html" class="btn-primary" style="text-align:center;">Get in Touch</a>
-    <a href="#services" class="btn-secondary" style="text-align:center;">View Services</a>
+    <a href="companies.html" class="btn-primary" style="text-align:center;">Our Companies</a>
+    <a href="contact.html" class="btn-secondary" style="text-align:center;">Contact Benjaire</a>
   </div>
 </section>
 
@@ -1387,279 +428,47 @@ footer { padding: 0 48px; border-top: 1px solid var(--border); background: var(-
   <div class="bjf-inner">
     <div class="bjf-brand">
       <span class="bjf-logo">Benjaire</span>
-      <p class="bjf-tagline">Careers, Brands &amp;<br>Digital Solutions</p>
+      <p class="bjf-tagline">Technology and<br>Digital Brands</p>
       <span class="bjf-loc">New York, NY</span>
     </div>
     <div class="bjf-col">
       <div class="bjf-label">Navigate</div>
       <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
+      <a href="companies.html">Our Companies</a>
       <a href="about.html">About</a>
-      <a href="portfolio.html">Portfolio</a>
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
     </div>
     <div class="bjf-col">
-      <div class="bjf-label">Services</div>
-      <a href="web-development.html">Web Development</a>
-      <a href="ai-automation.html">AI &amp; Automation</a>
-      <a href="cybersecurity.html">Cybersecurity</a>
-      <a href="it-service-management.html">IT Service Management</a>
-      <a href="professional-development.html">Career &amp; Personal Branding</a>
+      <div class="bjf-label">Companies</div>
+      <a href="https://khaneilcampbell.com" target="_blank" rel="noopener noreferrer">Khaneil Campbell &#8599;</a>
+      <a href="companies.html#jaire-systems">Jaire Systems</a>
+      <a href="companies.html#consumer-brand">Consumer Brand</a>
     </div>
     <div class="bjf-col">
       <div class="bjf-label">Connect</div>
       <a href="https://www.linkedin.com/in/khaneil-c-44179a14a" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a>
       <a href="https://github.com/khancam15" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
-      <a href="index.html#booking">Book a Consultation &rarr;</a>
-      <a href="deposit.html">Start a Project &rarr;</a>
+      <a href="contact.html">Contact Benjaire &rarr;</a>
     </div>
   </div>
   <div class="bjf-bottom">
-    <span>&copy; 2026 Benjaire &middot; New York</span>
-    <span>Build &middot; Protect &middot; Advance</span>
+    <span>&copy; 2026 Benjaire LLC &middot; New York</span>
+    <span>One Group &middot; Independent Brands</span>
   </div>
 </footer>
 
-<!-- ─── MOUSE-REACTIVE CANVAS ─── -->
-<script>
-(function () {
-  const canvas = document.getElementById('bgCanvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, nodes;
-  let mouseX = -2000, mouseY = -2000;
 
-  const NODE_COUNT = 88;
-  const MAX_DIST   = 145;
-  const BASE_SPEED = 0.20;
-  const MOUSE_R    = 200;
 
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
 
-  function makeNode() {
-    const angle = Math.random() * Math.PI * 2;
-    const speed = BASE_SPEED * (0.3 + Math.random() * 0.7);
-    return {
-      x:  Math.random() * W,
-      y:  Math.random() * H,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-    };
-  }
 
-  function init() { resize(); nodes = Array.from({ length: NODE_COUNT }, makeNode); }
 
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
 
-    nodes.forEach(n => {
-      const dx   = n.x - mouseX;
-      const dy   = n.y - mouseY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist < MOUSE_R && dist > 1) {
-        const force = ((MOUSE_R - dist) / MOUSE_R) * 0.14;
-        n.vx += (dx / dist) * force;
-        n.vy += (dy / dist) * force;
-      }
 
-      n.vx *= 0.994;
-      n.vy *= 0.994;
 
-      const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
-      const cap   = BASE_SPEED * 2.8;
-      if (speed > cap) { n.vx = (n.vx / speed) * cap; n.vy = (n.vy / speed) * cap; }
 
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0) { n.x = 0; n.vx *= -1; }
-      if (n.x > W) { n.x = W; n.vx *= -1; }
-      if (n.y < 0) { n.y = 0; n.vy *= -1; }
-      if (n.y > H) { n.y = H; n.vy *= -1; }
-    });
 
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].x - nodes[j].x;
-        const dy = nodes[i].y - nodes[j].y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d > MAX_DIST) continue;
-
-        const distMouse = Math.min(
-          Math.hypot(nodes[i].x - mouseX, nodes[i].y - mouseY),
-          Math.hypot(nodes[j].x - mouseX, nodes[j].y - mouseY)
-        );
-        const glow  = distMouse < MOUSE_R ? 1 + (1 - distMouse / MOUSE_R) * 1.8 : 1;
-        const alpha = 0.20 * (1 - d / MAX_DIST) * glow;
-
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[j].x, nodes[j].y);
-        ctx.strokeStyle = (i + j) % 5 === 0
-          ? `rgba(6,182,212,${Math.min(alpha, 0.55)})`
-          : `rgba(37,99,235,${Math.min(alpha, 0.55)})`;
-        ctx.lineWidth = 0.65 * Math.min(glow, 1.6);
-        ctx.stroke();
-      }
-    }
-
-    nodes.forEach((n, i) => {
-      const distMouse = Math.hypot(n.x - mouseX, n.y - mouseY);
-      const glow  = distMouse < MOUSE_R ? 1 + (1 - distMouse / MOUSE_R) * 2.2 : 1;
-      const alpha = Math.min(0.55 * glow, 0.95);
-      const r     = 1.4 * Math.min(glow, 2.2);
-
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-      ctx.fillStyle = i % 4 === 0
-        ? `rgba(6,182,212,${alpha})`
-        : `rgba(37,99,235,${alpha})`;
-      ctx.fill();
-    });
-
-    requestAnimationFrame(tick);
-  }
-
-  window.addEventListener('resize', resize);
-
-  document.addEventListener('mousemove', e => {
-    const rect = canvas.getBoundingClientRect();
-    mouseX = e.clientX - rect.left;
-    mouseY = e.clientY - rect.top;
-  });
-  document.addEventListener('mouseleave', () => { mouseX = -2000; mouseY = -2000; });
-
-  init(); tick();
-})();
-</script>
-
-<!-- ─── CUSTOM CURSOR ─── -->
-<script>
-(function () {
-  const dot  = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  if (!dot || !ring) return;
-
-  let cx = 0, cy = 0, rx = 0, ry = 0;
-
-  document.addEventListener('mousemove', e => {
-    cx = e.clientX; cy = e.clientY;
-    dot.style.left = cx + 'px';
-    dot.style.top  = cy + 'px';
-  });
-
-  function animateRing() {
-    rx += (cx - rx) * 0.11;
-    ry += (cy - ry) * 0.11;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  document.querySelectorAll('a, button, .venture-card, .stat-cell, summary').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-  });
-})();
-</script>
-
-<!-- ─── 3D CARD TILT ─── -->
-<script>
-(function () {
-  document.querySelectorAll('.venture-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const r  = card.getBoundingClientRect();
-      const x  = e.clientX - r.left;
-      const y  = e.clientY - r.top;
-      const rx = ((y - r.height / 2) / r.height) * -5;
-      const ry = ((x - r.width  / 2) / r.width)  *  5;
-      card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
-})();
-</script>
-
-<!-- ─── SCROLL REVEAL + PROGRESS ─── -->
-<script>
-const io = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
-  { threshold: 0.07 }
-);
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-const scrollProgress = document.getElementById('scrollProgress');
-function syncProgress() {
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  scrollProgress.value = max > 0 ? (window.scrollY / max) * 100 : 0;
-}
-window.addEventListener('scroll', syncProgress, { passive: true });
-window.addEventListener('resize', syncProgress);
-syncProgress();
-</script>
-
-<!-- ─── BOOKING CALENDAR ─── -->
-<script>
-(function () {
-  const grid = document.getElementById('calDays');
-  if (!grid) return;
-
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstDay = new Date(year, month, 1).getDay();
-  const available = new Set([3,5,9,10,12,16,17,19,23,24,26,30]);
-
-  for (let i = 0; i < firstDay; i++) {
-    const el = document.createElement('div');
-    el.className = 'cal-day empty';
-    grid.appendChild(el);
-  }
-
-  for (let d = 1; d <= daysInMonth; d++) {
-    const el = document.createElement('div');
-    const isAvail = available.has(d);
-    const isToday = d === today.getDate();
-    el.className = 'cal-day' + (isAvail ? ' available' : '') + (isToday ? ' today' : '');
-    el.textContent = d;
-    if (isAvail) {
-      el.addEventListener('click', () => {
-        grid.querySelectorAll('.cal-day.selected').forEach(x => x.classList.remove('selected'));
-        el.classList.add('selected');
-      });
-    }
-    grid.appendChild(el);
-  }
-
-  document.querySelectorAll('.cal-slot').forEach(slot => {
-    slot.addEventListener('click', () => {
-      document.querySelectorAll('.cal-slot').forEach(s => s.classList.remove('selected-slot'));
-      slot.classList.add('selected-slot');
-    });
-  });
-})();
-</script>
-
-<!-- ─── HAMBURGER ─── -->
-<script>
-const navToggle  = document.getElementById('navToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-navToggle.addEventListener('click', () => {
-  navToggle.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-  navToggle.setAttribute('aria-label', mobileMenu.classList.contains('open') ? 'Close menu' : 'Open menu');
-});
-mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  navToggle.classList.remove('open');
-  mobileMenu.classList.remove('open');
-}));
-</script>
-
+<script src="assets/site.js"></script>
 </body>
 </html>

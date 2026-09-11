@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Parent-company structure only. The service pages (services.html and the five
+  service sub-pages), portfolio.html, and deposit.html are intentionally parked:
+  the files remain live so existing inbound links keep resolving, but they are
+  no longer linked from the site navigation or listed here. They move to the
+  Jaire Systems domain once it launches.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://benjaire.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://benjaire.com/services.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://benjaire.com/companies.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://benjaire.com/about.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://benjaire.com/portfolio.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://benjaire.com/insights.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://benjaire.com/contact.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://benjaire.com/deposit.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://benjaire.com/it-service-management.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://benjaire.com/cybersecurity.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://benjaire.com/ai-automation.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://benjaire.com/web-development.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://benjaire.com/professional-development.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
