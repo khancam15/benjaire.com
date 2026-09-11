@@ -46,9 +46,36 @@ def add(findings: list[Finding], level: str, file: Path, message: str, line: Opt
     findings.append(Finding(level, file, message, line))
 
 
+LINKED_ASSET_RE = re.compile(
+    r'(?:href|src)=["\']([^"\':?#]+\.(?:css|js))(?:[?#][^"\']*)?["\']',
+    flags=re.IGNORECASE,
+)
+
+
+def with_linked_assets(path: Path, text: str) -> str:
+    """Page text plus any local stylesheets/scripts it links.
+
+    Styling and behaviour live in assets/site.css and assets/site.js rather
+    than in each page, so the CSS/JS checks below have to follow those links
+    or they report every page as missing things the site actually has.
+    """
+    parts = [text]
+    for rel in LINKED_ASSET_RE.findall(text):
+        if "//" in rel:  # remote asset, not ours to read
+            continue
+        asset = (path.parent / rel).resolve()
+        try:
+            parts.append(asset.read_text(encoding="utf-8"))
+        except OSError:
+            continue
+    return "\n".join(parts)
+
+
 def audit_file(path: Path) -> list[Finding]:
     text = path.read_text(encoding="utf-8")
     lower = text.lower()
+    source = with_linked_assets(path, text)
+    source_lower = source.lower()
     findings: list[Finding] = []
 
     if '<meta name="viewport"' not in lower and "<meta name='viewport'" not in lower:
@@ -63,16 +90,16 @@ def audit_file(path: Path) -> list[Finding]:
     if "<h1" not in lower:
         add(findings, "FAIL", path, "Missing h1")
 
-    if ":focus-visible" not in text:
+    if ":focus-visible" not in source:
         add(findings, "WARN", path, "Add visible keyboard focus styles")
 
-    if "prefers-reduced-motion" not in text:
+    if "prefers-reduced-motion" not in source:
         add(findings, "WARN", path, "Add reduced-motion handling for animated UI")
 
-    if "clamp(" not in text:
+    if "clamp(" not in source:
         add(findings, "WARN", path, "Consider responsive type sizing with CSS clamp()")
 
-    if "aria-expanded" not in lower and "mobile-menu" in lower:
+    if "aria-expanded" not in source_lower and "mobile-menu" in lower:
         add(findings, "WARN", path, "Mobile menu toggle should maintain aria-expanded")
 
     for tag_match in TAG_RE.finditer(text):
