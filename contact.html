@@ -6,15 +6,15 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.emailjs.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.emailjs.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Contact | Benjaire LLC</title>
-<meta name="description" content="Contact Benjaire LLC in New York — company inquiries, partnerships, and press. Consulting enquiries route to the group's technology brand.">
+<meta name="description" content="Contact Benjaire LLC in New York for company inquiries, partnerships, and press. Consulting inquiries route to the group's technology brand.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://benjaire.com/contact.html">
-<meta property="og:title" content="Contact — Benjaire">
-<meta property="og:description" content="Send a message to Khaneil Campbell directly. No automated replies, no waiting rooms. Based in New York.">
+<meta property="og:title" content="Contact Benjaire">
+<meta property="og:description" content="Company inquiries, partnerships, and press for Benjaire LLC. Messages reach the founder directly, with no automated replies.">
 <meta property="og:image" content="https://benjaire.com/assets/khaneil-campbell.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Contact — Benjaire">
-<meta name="twitter:description" content="Send a message to Khaneil Campbell directly. No automated replies, no waiting rooms.">
+<meta name="twitter:title" content="Contact Benjaire">
+<meta name="twitter:description" content="Company inquiries, partnerships, and press for Benjaire LLC in New York.">
 <meta name="twitter:image" content="https://benjaire.com/assets/khaneil-campbell.jpg">
 <link rel="canonical" href="https://benjaire.com/contact.html">
 
@@ -41,7 +41,7 @@
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
   <a href="companies.html" class="nav-cta">Our Companies &rarr;</a>
-  <button class="nav-hamburger" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <button class="nav-hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobileMenu" role="navigation">
   <a href="index.html">Home</a>
@@ -55,6 +55,8 @@
 <div class="page-wrap">
 
   <!-- ─── HERO ─── -->
+<main class="page-wrap">
+
   <section class="contact-hero">
     <div class="contact-hero-glow"></div>
     <div class="contact-hero-grid"></div>
@@ -69,7 +71,7 @@
       </h1>
       <p class="contact-hero-desc reveal" style="transition-delay:.12s;">
         Questions about the company, the brands, or something you want to build with us.
-        Messages reach the founder directly — no automated replies, no waiting rooms.
+        Messages reach the founder directly, with no automated replies and no waiting rooms.
       </p>
     </div>
   </section>
@@ -79,7 +81,7 @@
     <div class="contact-info">
       <div class="reveal">
         <div class="contact-info-heading">Direct Line</div>
-        <p class="contact-info-body">This is the parent company's inbox: company inquiries, partnerships, and press. Every message goes straight to Khaneil — not a support queue, not a VA. Expect a reply within 24 hours.</p>
+        <p class="contact-info-body">This is Benjaire's inbox for company inquiries, partnerships, and press. Every message goes straight to Khaneil, not a support queue and not an assistant. Expect a reply within 24 hours.</p>
         <a href="mailto:contact@benjaire.com" class="contact-email-link">contact@benjaire.com</a>
       </div>
       <div class="contact-channels reveal" style="transition-delay:.08s;">
@@ -130,6 +132,8 @@
   </div>
 
   <!-- ─── FOOTER ─── -->
+</main>
+
   <footer class="bj-footer">
   <div class="bjf-inner">
     <div class="bjf-brand">
@@ -205,7 +209,7 @@ document.getElementById('contactSendBtn').addEventListener('click', function() {
       ['c-name','c-email','c-subject','c-msg'].forEach(id => { document.getElementById(id).value = ''; });
     }, 3200);
   }).catch(() => {
-    btn.textContent = 'Failed — try again';
+    btn.textContent = 'Failed, try again';
     btn.style.background = '#7f1d1d';
     btn.disabled = false;
     setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Parent-company structure only. The service pages (services.html and the five
+  Group structure only. The service pages (services.html and the five
   service sub-pages), portfolio.html, and deposit.html are intentionally parked:
   the files remain live so existing inbound links keep resolving, but they are
   no longer linked from the site navigation or listed here. They move to the
