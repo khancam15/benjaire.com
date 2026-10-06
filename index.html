@@ -3,23 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="google-site-verification" content="I7KBbwaeJi7SFBZQpyouvX1Tm59-wJ6u3t0U8gdEn6Y">
-<title>Benjaire | Technology and Digital Brands</title>
-<meta name="description" content="Benjaire is a New York company founded by Khaneil Campbell. It builds and owns independent brands across technology, digital services, and consumer products.">
+<title>Benjaire | We Build Brands for Modern Life</title>
+<meta name="description" content="Benjaire is a New York-based company developing products and digital experiences at the intersection of technology, design and culture.">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://benjaire.com/">
-<meta property="og:title" content="Benjaire | Technology and Digital Brands">
-<meta property="og:description" content="A New York company that starts and operates independent brands across technology, digital services, and consumer products.">
+<meta property="og:title" content="Benjaire | We Build Brands for Modern Life">
+<meta property="og:description" content="Benjaire is a New York-based company developing products and digital experiences at the intersection of technology, design and culture.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Benjaire | Technology and Digital Brands">
-<meta name="twitter:description" content="A New York company building independent technology, digital service, and consumer brands.">
+<meta name="twitter:title" content="Benjaire | We Build Brands for Modern Life">
+<meta name="twitter:description" content="Benjaire is a New York-based company developing products and digital experiences at the intersection of technology, design and culture.">
 <link rel="canonical" href="https://benjaire.com/">
 
-<!-- Organization schema for Benjaire LLC. "Jaire Systems" name is provisional.
-     update the name/@id and add its URL to sameAs once the domain is final. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -28,46 +26,17 @@
       "@type": "Organization",
       "@id": "https://benjaire.com/#organization",
       "name": "Benjaire LLC",
-      "alternateName": "Benjaire",
       "url": "https://benjaire.com/",
-      "description": "Benjaire is a New York company founded by Khaneil Campbell. It builds and owns independent brands across technology, digital services, and consumer products.",
+      "description": "Benjaire is a New York-based company developing products and digital experiences at the intersection of technology, design and culture.",
       "foundingDate": "2022",
       "address": { "@type": "PostalAddress", "addressLocality": "New York", "addressRegion": "NY", "addressCountry": "US" },
-      "email": "contact@benjaire.com",
-      "founder": { "@id": "https://benjaire.com/#khaneil-campbell" },
-      "sameAs": [
-        "https://khaneilcampbell.com",
-        "https://www.linkedin.com/in/khaneil-c-44179a14a",
-        "https://github.com/khancam15"
-      ],
-      "subOrganization": [
-        {
-          "@type": "Organization",
-          "@id": "https://benjaire.com/companies.html#jaire-systems",
-          "name": "Jaire Systems",
-          "description": "The group's client-facing technology consultancy, covering engineering, automation, security, and IT service management engagements.",
-          "parentOrganization": { "@id": "https://benjaire.com/#organization" }
-        }
-      ]
-    },
-    {
-      "@type": "Person",
-      "@id": "https://benjaire.com/#khaneil-campbell",
-      "name": "Khaneil Campbell",
-      "jobTitle": "Founder",
-      "url": "https://khaneilcampbell.com",
-      "worksFor": { "@id": "https://benjaire.com/#organization" },
-      "sameAs": [
-        "https://khaneilcampbell.com",
-        "https://www.linkedin.com/in/khaneil-c-44179a14a",
-        "https://github.com/khancam15"
-      ]
+      "email": "contact@benjaire.com"
     },
     {
       "@type": "WebSite",
       "@id": "https://benjaire.com/#website",
       "url": "https://benjaire.com/",
-      "name": "Benjaire",
+      "name": "Benjaire LLC",
       "publisher": { "@id": "https://benjaire.com/#organization" }
     }
   ]
@@ -76,7 +45,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 
@@ -91,330 +60,50 @@
 <nav>
   <a href="#home" class="nav-logo">Benjaire</a>
   <ul class="nav-links">
-    <li><a href="#home" class="active">Home</a></li>
-    <li><a href="companies.html">Our Companies</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="insights.html">Insights</a></li>
+    <li><a href="#brands">Brands</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="companies.html" class="nav-cta">Our Companies &rarr;</a>
   <button class="nav-hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu" role="navigation">
-  <a href="#home" class="active">Home</a>
-  <a href="companies.html">Our Companies</a>
   <a href="about.html">About</a>
-  <a href="insights.html">Insights</a>
+  <a href="#brands">Brands</a>
   <a href="contact.html">Contact</a>
-  <a href="companies.html" class="mobile-cta">Our Companies &rarr;</a>
 </div>
 
 <main>
 
 <!-- ─── HERO ─── -->
 <header class="hero" id="home">
-  <div class="hero-glow"></div>
-  <div class="hero-grid"></div>
-
   <div class="hero-content">
     <div class="hero-tag reveal">
       <div class="hero-tag-line"></div>
-      <span class="hero-tag-text">Independent Brands · New York</span>
+      <span class="hero-tag-text">Benjaire</span>
     </div>
 
     <h1 class="hero-h1">
-      <span class="ln-solid reveal" style="transition-delay:.04s;">We Build</span>
-      <span class="ln-solid reveal" style="transition-delay:.10s;">Technology</span>
-      <span class="ln-outline reveal" style="transition-delay:.16s;">and Digital</span>
-      <span class="ln-grad reveal" style="transition-delay:.22s;">Brands.</span>
+      <span class="ln-solid reveal" style="transition-delay:.04s;">We build brands for modern life.</span>
     </h1>
 
-    <p class="hero-desc reveal" style="transition-delay:.32s;">
-      Benjaire LLC is a <strong>New York company</strong>. We start and operate
-      independent brands across technology, digital services, and consumer
-      products. Each one carries its own name, its own customers, and its own
-      reason to exist.
+    <p class="hero-desc reveal" style="transition-delay:.12s;">
+      Benjaire is a New York-based company developing products and
+      digital experiences at the intersection of technology, design
+      and culture.
     </p>
 
-    <div class="hero-actions reveal" style="transition-delay:.42s;">
-      <a href="companies.html" class="btn-primary">Our Companies</a>
-      <a href="about.html" class="btn-secondary">About Benjaire</a>
+    <div class="hero-actions reveal" style="transition-delay:.20s;">
+      <a href="#brands" class="hero-more">Our Brands <span aria-hidden="true">&darr;</span></a>
     </div>
   </div>
 </header>
 
-<!-- ─── MARQUEE ─── -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="marquee-item">Brand Builders</span>
-    <span class="marquee-item">New York</span>
-    <span class="marquee-item">Technology</span>
-    <span class="marquee-item">Digital Services</span>
-    <span class="marquee-item">Consumer Brands</span>
-    <span class="marquee-item">Independent Brands</span>
-    <span class="marquee-item">Founded 2022</span>
-    <span class="marquee-item">Operator Led</span>
-    <span class="marquee-item">Brand Builders</span>
-    <span class="marquee-item">New York</span>
-    <span class="marquee-item">Technology</span>
-    <span class="marquee-item">Digital Services</span>
-    <span class="marquee-item">Consumer Brands</span>
-    <span class="marquee-item">Independent Brands</span>
-    <span class="marquee-item">Founded 2022</span>
-    <span class="marquee-item">Operator Led</span>
-  </div>
-</div>
-
-<!-- ─── STATS BAR ─── -->
-<div class="stats-bar">
-  <div class="stat-cell reveal">
-    <div class="stat-num">1</div>
-    <div class="stat-label">Brand Live</div>
-  </div>
-  <div class="stat-cell reveal" style="transition-delay:.06s;">
-    <div class="stat-num">2</div>
-    <div class="stat-label">In Development</div>
-  </div>
-  <div class="stat-cell reveal" style="transition-delay:.12s;">
-    <div class="stat-num">NYC</div>
-    <div class="stat-label">Headquarters</div>
-  </div>
-  <div class="stat-cell reveal" style="transition-delay:.18s;">
-    <div class="stat-num">2022</div>
-    <div class="stat-label">Founded</div>
-  </div>
-</div>
-
-<!-- ─── OUR COMPANIES ─── -->
-<section class="ventures-section" id="companies">
-  <div class="ventures-header">
-    <div>
-      <div class="section-tag reveal">
-        <div class="section-tag-line"></div>
-        <span class="section-tag-text">The Group</span>
-      </div>
-      <h2 class="ventures-h2 reveal" style="transition-delay:.06s;">
-        Our<br>Companies
-      </h2>
-    </div>
-    <p class="ventures-intro reveal" style="transition-delay:.1s;">
-      Three properties, three distinct jobs. Each one carries its own name and
-      speaks to its own audience. Benjaire holds them, it does not front for them.
-    </p>
-  </div>
-
-  <div class="ventures-grid" style="grid-template-columns: repeat(3,1fr);">
-
-    <!-- 1 — Khaneil Campbell -->
-    <article class="venture-card reveal" id="khaneil-campbell">
-      <div class="venture-img-wrap">
-        <img
-          class="venture-img"
-          src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=900&q=80"
-          alt="Khaneil Campbell, professional practice and writing"
-          loading="lazy"
-          width="900" height="600"
-        >
-      </div>
-      <div class="venture-body">
-        <div class="venture-name">Khaneil Campbell</div>
-        <span class="venture-type">Professional Authority · Live</span>
-        <p class="venture-desc">
-          The founder's own practice and publishing base. His credentials,
-          technical writing, and professional record live there rather than here.
-        </p>
-        <div class="venture-links">
-          <a href="https://khaneilcampbell.com" target="_blank" rel="noopener noreferrer">Visit khaneilcampbell.com &#8599;</a>
-        </div>
-        <a class="venture-arrow" href="https://khaneilcampbell.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Khaneil Campbell website">&#8599;</a>
-      </div>
-    </article>
-
-    <!-- 2 — Jaire Systems (name provisional) -->
-    <article class="venture-card reveal" id="jaire-systems" style="transition-delay:.07s;">
-      <div class="venture-img-wrap">
-        <img
-          class="venture-img"
-          src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=900&q=80"
-          alt="Jaire Systems, technology consultancy"
-          loading="lazy"
-          width="900" height="600"
-        >
-      </div>
-      <div class="venture-body">
-        <div class="venture-name">Jaire Systems</div>
-        <span class="venture-type">Technology Consultancy · In Development</span>
-        <p class="venture-desc">
-          The technology arm that works with clients. Engineering, automation,
-          security, and IT service management engagements will run through it,
-          along with all consultation booking.
-        </p>
-        <div class="venture-links">
-          <span class="venture-flag">Name and domain being finalized</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- 3 — Consumer brand (not yet started) -->
-    <article class="venture-card reveal" id="consumer-brand" style="transition-delay:.14s;">
-      <div class="venture-img-wrap">
-        <div class="venture-img-placeholder" aria-hidden="true">
-          <span>Benjaire</span>
-          <span class="vip-sub">Brand Three</span>
-        </div>
-      </div>
-      <div class="venture-body">
-        <div class="venture-name">Consumer Brand</div>
-        <span class="venture-type">Products &amp; Accessories · Planned</span>
-        <p class="venture-desc">
-          A consumer line in early planning. We announce brands when
-          there is something real to show, so details will follow through
-          <a href="insights.html">Insights</a>.
-        </p>
-        <div class="venture-links">
-          <span class="venture-flag">Not yet started</span>
-        </div>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<!-- ─── FOUNDER ─── -->
-<!-- ─── THE BRAND ─── -->
-<section class="about-section" id="brand">
-  <div class="about-left reveal">
-    <div class="co-ident">
-      <div class="co-ident-mark">Benjaire</div>
-      <div class="co-ident-sub">LLC &middot; New York</div>
-      <div class="co-ident-rule"></div>
-      <p class="co-ident-note">One mark behind several brands, each free to sound like itself.</p>
-    </div>
-    <div class="about-quick-facts">
-      <div class="about-fact"><span class="about-fact-dot"></span>Established 2022</div>
-      <div class="about-fact"><span class="about-fact-dot"></span>New York City</div>
-      <div class="about-fact"><span class="about-fact-dot"></span>Owner and operator, never the storefront</div>
-      <div class="about-fact"><span class="about-fact-dot"></span>Three brands, three audiences</div>
-    </div>
-    <a href="companies.html" class="btn-secondary" style="text-align:center; margin-top:8px;">Our Companies &rarr;</a>
-  </div>
-
-  <div class="about-right">
-    <div class="section-tag reveal">
-      <div class="section-tag-line"></div>
-      <span class="section-tag-text">The Brand</span>
-    </div>
-    <h2 class="about-h2 reveal" style="transition-delay:.06s;">
-      What the<br>Benjaire Name<br>Carries.
-    </h2>
-    <div class="about-body reveal" style="transition-delay:.12s;">
-      <p>
-        Benjaire is the owner, not the storefront. You will rarely buy anything with
-        this name on it, because <strong>the mark sits behind the brands rather than
-        in front of them</strong>.
-      </p>
-      <p>
-        What it does carry is a standard. Every brand in the group launches with its
-        own name, its own site, and its own audience, and it launches only once it can
-        hold all three on its own. Nothing ships early to fill a gap on this page.
-      </p>
-      <p>
-        That is the promise of the mark. If a brand carries it, someone is accountable
-        for it, and it was built to still be working in ten years.
-      </p>
-    </div>
-    <div class="about-highlights reveal" style="transition-delay:.18s;">
-      <div class="about-highlight">
-        <div class="about-highlight-label">Structure</div>
-        <div class="about-highlight-val">New York LLC</div>
-      </div>
-      <div class="about-highlight">
-        <div class="about-highlight-label">Established</div>
-        <div class="about-highlight-val">2022</div>
-      </div>
-      <div class="about-highlight">
-        <div class="about-highlight-label">Model</div>
-        <div class="about-highlight-val">Operator Led</div>
-      </div>
-      <div class="about-highlight">
-        <div class="about-highlight-label">Focus</div>
-        <div class="about-highlight-val">Technology &middot; Consumer</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── PRINCIPLES ─── -->
-<section class="principles-section" id="principles">
-  <div class="principles-left">
-    <div class="section-tag reveal">
-      <div class="section-tag-line"></div>
-      <span class="section-tag-text">Mission</span>
-    </div>
-    <p class="principle-quote reveal" style="transition-delay:.06s;">
-      "A holding company doesn't<br>
-      serve customers. <em>Its brands do.</em>"
-    </p>
-    <p class="principles-sub reveal" style="transition-delay:.12s;">
-      Benjaire exists to give each brand room to be itself, with its own name, its own
-      audience, and its own standards, backed by shared capital, shared discipline,
-      and one founder accountable for all of it.
-    </p>
-  </div>
-
-  <div class="principles-right">
-    <div class="section-tag reveal">
-      <div class="section-tag-line"></div>
-      <span class="section-tag-text">How We Operate</span>
-    </div>
-
-    <div class="principle-item reveal" style="transition-delay:.06s;">
-      <span class="p-num">01</span>
-      <div>
-        <div class="p-name">One Brand, One Job</div>
-        <p class="p-desc">Every property in the group has a single clear purpose and a single audience. We don't let them blur together, and we never reuse one brand's story to sell another.</p>
-      </div>
-    </div>
-
-    <div class="principle-item reveal" style="transition-delay:.10s;">
-      <span class="p-num">02</span>
-      <div>
-        <div class="p-name">Built to Stand Alone</div>
-        <p class="p-desc">A brand launches when it can carry its own name, its own site, and its own customers. Until then it stays listed as in development rather than announced early.</p>
-      </div>
-    </div>
-
-    <div class="principle-item reveal" style="transition-delay:.14s;">
-      <span class="p-num">03</span>
-      <div>
-        <div class="p-name">Operator Led</div>
-        <p class="p-desc">Benjaire is run by the person doing the work, not a layer sitting above it. Decisions are made close to the product, and one founder answers for every brand in the group.</p>
-      </div>
-    </div>
-
-    <div class="principle-item reveal" style="transition-delay:.18s;">
-      <span class="p-num">04</span>
-      <div>
-        <div class="p-name">Patient by Design</div>
-        <p class="p-desc">We hold what we build. Brands are measured over years rather than quarters, and we would rather launch late than ship something we'd have to walk back.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── CTA ─── -->
-<section class="cta-section">
-  <div>
-    <div class="cta-overline reveal">Where to next</div>
-    <h2 class="cta-h2 reveal" style="transition-delay:.06s;">
-      <span class="solid">Start With the</span>
-      <span class="grad">Right Brand.</span>
-    </h2>
-  </div>
-  <div class="cta-buttons reveal" style="transition-delay:.10s;">
-    <a href="companies.html" class="btn-primary" style="text-align:center;">Our Companies</a>
-    <a href="contact.html" class="btn-secondary" style="text-align:center;">Contact Benjaire</a>
+<!-- ─── OUR BRANDS ─── -->
+<section class="brands" id="brands">
+  <div class="section-tag reveal">
+    <div class="section-tag-line"></div>
+    <span class="section-tag-text">Our Brands</span>
   </div>
 </section>
 
@@ -425,46 +114,25 @@
   <div class="bjf-inner">
     <div class="bjf-brand">
       <span class="bjf-logo">Benjaire</span>
-      <p class="bjf-tagline">Technology and<br>Digital Brands</p>
       <span class="bjf-loc">New York, NY</span>
     </div>
     <div class="bjf-col">
       <div class="bjf-label">Navigate</div>
-      <a href="index.html">Home</a>
-      <a href="companies.html">Our Companies</a>
       <a href="about.html">About</a>
-      <a href="insights.html">Insights</a>
+      <a href="#brands">Brands</a>
       <a href="contact.html">Contact</a>
     </div>
     <div class="bjf-col">
-      <div class="bjf-label">Companies</div>
-      <a href="https://khaneilcampbell.com" target="_blank" rel="noopener noreferrer">Khaneil Campbell &#8599;</a>
-      <a href="companies.html#jaire-systems">Jaire Systems</a>
-      <a href="companies.html#consumer-brand">Consumer Brand</a>
-    </div>
-    <div class="bjf-col">
-      <div class="bjf-label">Connect</div>
-      <a href="https://www.linkedin.com/in/khaneil-c-44179a14a" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a>
-      <a href="https://github.com/khancam15" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
+      <div class="bjf-label">Contact</div>
+      <a href="mailto:contact@benjaire.com">contact@benjaire.com</a>
+      <span class="bjf-loc">Benjaire LLC &middot; New York</span>
       <a href="contact.html">Contact Benjaire &rarr;</a>
     </div>
   </div>
   <div class="bjf-bottom">
     <span>&copy; 2026 Benjaire LLC &middot; New York</span>
-    <span>One Group &middot; Independent Brands</span>
   </div>
 </footer>
-
-
-
-
-
-
-
-
-
-
-
 
 <script src="assets/site.js"></script>
 </body>
