@@ -1,6 +1,6 @@
 # Benjaire.com
 
-Website for Benjaire LLC, a New York holding company. Two pages: home and contact. Benjaire LLC owns and builds independent consumer product brands; each brand launches under its own name/trademark on its own domain rather than on benjaire.com.
+Website for Benjaire LLC, a New York holding company. Three pages: home, about, and contact (plus a "Brands" nav item that anchors to a section on the home page). Benjaire LLC owns and builds independent consumer product brands; each brand launches under its own name/trademark on its own domain rather than on benjaire.com.
 
 ## Description
 
@@ -30,7 +30,7 @@ python3 -m http.server 5501
 Use this repository as a lightweight static site. Keep changes simple, reviewable, and easy to deploy through GitHub Pages.
 
 - Benjaire stays anonymous by design: do not add a founder name, personal bio, photo, or personal social links to any page.
-- This site is intentionally just two pages (home, contact). Consumer product brands Benjaire owns live on their own domains, not here — don't add product/shop content to this repo unless explicitly asked.
+- This site is intentionally just three pages (home, about, contact). Consumer product brands Benjaire owns live on their own domains, not here — don't add product/shop content to this repo unless explicitly asked.
 - Preserve the current page content unless a change is explicitly about copy, positioning, or messaging.
 - Keep UI changes consistent across pages: navigation, typography, spacing, colors, responsive breakpoints, and footer treatment should feel like one system.
 - Prefer semantic HTML elements such as `main`, `section`, `article`, `nav`, `button`, `details`, and `summary`.
