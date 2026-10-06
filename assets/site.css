@@ -222,6 +222,29 @@ nav {
 }
 .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
+.hero-more {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; letter-spacing: var(--track-nav); text-transform: uppercase;
+  color: var(--fg-mid); text-decoration: none;
+  padding-bottom: 4px; border-bottom: 1px solid var(--line-mid);
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.hero-more:hover { color: var(--accent); border-color: var(--accent); }
+.hero-more span { display: inline-block; transition: transform .25s var(--ease); }
+.hero-more:hover span { transform: translateY(2px); }
+
+/* ─── OUR BRANDS ─── */
+.brands {
+  padding: 80px var(--gutter) 120px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+.brands .section-tag { justify-content: center; }
+.brands-desc {
+  font-size: 15px; line-height: 1.85; color: var(--fg-mid);
+  max-width: 480px; margin: 0 auto;
+}
+
 /* ─── CONTACT ─── */
 .page-wrap { padding-top: 72px; min-height: 100vh; display: flex; flex-direction: column; }
 
