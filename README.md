@@ -1,6 +1,6 @@
 # Benjaire.com
 
-Personal website for Benjaire, a multi-venture holding company operating at the intersection of technology, commerce, and innovation.
+Website for Benjaire LLC, a New York holding company. Three pages: home, about, and contact (plus a "Brands" nav item that anchors to a section on the home page). Benjaire LLC owns and builds independent consumer product brands; each brand launches under its own name/trademark on its own domain rather than on benjaire.com.
 
 ## Description
 
@@ -9,7 +9,7 @@ This repository contains the source code for benjaire.com, a static website host
 ## Technologies Used
 
 - HTML5
-- CSS3 (inline styles)
+- CSS3 (shared stylesheet in `assets/site.css`)
 - Google Fonts
 
 ## Getting Started
@@ -29,6 +29,8 @@ python3 -m http.server 5501
 
 Use this repository as a lightweight static site. Keep changes simple, reviewable, and easy to deploy through GitHub Pages.
 
+- Benjaire stays anonymous by design: do not add a founder name, personal bio, photo, or personal social links to any page.
+- This site is intentionally just three pages (home, about, contact). Consumer product brands Benjaire owns live on their own domains, not here — don't add product/shop content to this repo unless explicitly asked.
 - Preserve the current page content unless a change is explicitly about copy, positioning, or messaging.
 - Keep UI changes consistent across pages: navigation, typography, spacing, colors, responsive breakpoints, and footer treatment should feel like one system.
 - Prefer semantic HTML elements such as `main`, `section`, `article`, `nav`, `button`, `details`, and `summary`.
@@ -82,7 +84,7 @@ This is a static website, so security work is mostly about reducing browser atta
 - Do not use `eval()`, `document.write()`, unsafe `innerHTML` assignments, or `javascript:` URLs.
 - Use `rel="noopener noreferrer"` for every `target="_blank"` link.
 - Keep external resources on HTTPS only.
-- Keep `frame-ancestors 'none'`, `base-uri 'self'`, and `connect-src 'none'` in the CSP unless the site truly needs a broader policy.
+- Keep `frame-ancestors 'none'`, `base-uri 'self'`, and `connect-src 'none'` in the CSP unless the page truly needs a broader policy (the form on `contact.html` needs `connect-src https://api.emailjs.com`).
 - Treat forms as high-risk. If forms are added, validate server-side, protect against spam, and review CSRF behavior for the destination service.
 - Review image and font sources before adding them to the CSP.
 - Run the security audits before pushing to `main`.
