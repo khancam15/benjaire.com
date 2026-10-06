@@ -235,15 +235,11 @@ nav {
 
 /* ─── OUR BRANDS ─── */
 .brands {
-  padding: 80px var(--gutter) 120px;
+  padding: 64px var(--gutter);
   border-bottom: 1px solid var(--line);
   text-align: center;
 }
-.brands .section-tag { justify-content: center; }
-.brands-desc {
-  font-size: 15px; line-height: 1.85; color: var(--fg-mid);
-  max-width: 480px; margin: 0 auto;
-}
+.brands .section-tag { justify-content: center; margin-bottom: 0; }
 
 /* ─── CONTACT ─── */
 .page-wrap { padding-top: 72px; min-height: 100vh; display: flex; flex-direction: column; }
