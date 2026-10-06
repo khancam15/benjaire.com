@@ -8,6 +8,7 @@
 <title>About | Benjaire LLC</title>
 <meta name="description" content="Benjaire LLC is a privately held New York company focused on building and operating modern consumer and technology brands.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Benjaire">
 <meta property="og:url" content="https://benjaire.com/about.html">
 <meta property="og:title" content="About | Benjaire LLC">
 <meta property="og:description" content="Benjaire LLC is a privately held New York company focused on building and operating modern consumer and technology brands.">
@@ -15,6 +16,36 @@
 <meta name="twitter:title" content="About | Benjaire LLC">
 <meta name="twitter:description" content="Benjaire LLC is a privately held New York company focused on building and operating modern consumer and technology brands.">
 <link rel="canonical" href="https://benjaire.com/about.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://benjaire.com/#organization",
+      "name": "Benjaire LLC",
+      "alternateName": "Benjaire",
+      "url": "https://benjaire.com/"
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://benjaire.com/about.html#webpage",
+      "url": "https://benjaire.com/about.html",
+      "name": "About | Benjaire LLC",
+      "isPartOf": { "@id": "https://benjaire.com/#website" },
+      "about": { "@id": "https://benjaire.com/#organization" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://benjaire.com/" },
+        { "@type": "ListItem", "position": 2, "name": "About", "item": "https://benjaire.com/about.html" }
+      ]
+    }
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
