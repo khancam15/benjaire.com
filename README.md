@@ -1,6 +1,6 @@
 # Benjaire.com
 
-Website for Benjaire LLC, a New York holding company. Three pages: home, about, and contact (plus a "Brands" nav item that anchors to a section on the home page). Benjaire LLC owns and builds independent consumer product brands; each brand launches under its own name/trademark on its own domain rather than on benjaire.com.
+Website for Benjaire, a New York holding company. Three pages: home, about, and contact (plus a "Brands" nav item that anchors to a section on the home page). Benjaire owns and builds independent consumer product brands; each brand launches under its own name/trademark on its own domain rather than on benjaire.com.
 
 ## Description
 
