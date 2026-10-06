@@ -10,6 +10,7 @@
 <meta name="description" content="Benjaire is a New York-based company developing products and digital experiences at the intersection of technology, design and culture.">
 
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Benjaire">
 <meta property="og:url" content="https://benjaire.com/">
 <meta property="og:title" content="Benjaire | We Build Brands for Modern Life">
 <meta property="og:description" content="Benjaire is a New York-based company developing products and digital experiences at the intersection of technology, design and culture.">
@@ -26,6 +27,7 @@
       "@type": "Organization",
       "@id": "https://benjaire.com/#organization",
       "name": "Benjaire LLC",
+      "alternateName": "Benjaire",
       "url": "https://benjaire.com/",
       "description": "Benjaire is a New York-based company developing products and digital experiences at the intersection of technology, design and culture.",
       "foundingDate": "2022",
@@ -36,8 +38,16 @@
       "@type": "WebSite",
       "@id": "https://benjaire.com/#website",
       "url": "https://benjaire.com/",
-      "name": "Benjaire LLC",
+      "name": "Benjaire",
       "publisher": { "@id": "https://benjaire.com/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://benjaire.com/#webpage",
+      "url": "https://benjaire.com/",
+      "name": "Benjaire | We Build Brands for Modern Life",
+      "isPartOf": { "@id": "https://benjaire.com/#website" },
+      "about": { "@id": "https://benjaire.com/#organization" }
     }
   ]
 }
@@ -58,7 +68,7 @@
 
 <!-- ─── NAV ─── -->
 <nav>
-  <a href="#home" class="nav-logo">Benjaire</a>
+  <a href="index.html" class="nav-logo">Benjaire</a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="#brands">Brands</a></li>
