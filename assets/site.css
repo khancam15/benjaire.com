@@ -1,8 +1,10 @@
 /* ============================================================
    BENJAIRE LLC — shared stylesheet
-   Warm minimal theme: off-white ground, near-black ink, one clay
-   highlight. Every hue comes from the --accent* tokens below and
-   nowhere else, so re-tinting means editing those values alone.
+   Sand, beige, black, and white. No hue — every tone is a neutral,
+   from near-white ground through sand and beige surfaces to a deep
+   umber accent and black ink. Every colour comes from the tokens
+   below and nowhere else, so re-tinting means editing those values
+   alone.
 
    Type:   Archivo (display, bold sentence case) · Inter (body + labels)
    Layout: full-bleed hairline rules, wide-tracked uppercase labels
@@ -21,30 +23,31 @@
 
 /* ─── TOKENS ─── */
 :root {
-  /* ── surfaces ── */
-  --bg:           #faf8f5;
-  --bg-raised:    #f3eee6;   /* alternating rows, side panels */
-  --surface:      #ece4d8;
+  /* ── surfaces: white -> sand -> beige ── */
+  --bg:           #faf7f1;
+  --bg-raised:    #f0e7d5;   /* sand — alternating rows, side panels */
+  --surface:      #e6d8bf;   /* beige — tiles, deeper panels */
 
-  /* ── hairlines ── */
+  /* ── hairlines (black, low opacity) ── */
   --line:         rgba(23,18,12,0.11);
   --line-mid:     rgba(23,18,12,0.20);
   --line-strong:  rgba(23,18,12,0.34);
 
-  /* ── ink (contrast vs #faf8f5) ── */
-  --fg:           #16120d;   /* headings, strong   18.7:1 */
-  --fg-mid:       #4c463c;   /* body                8.1:1 */
+  /* ── ink (contrast vs #faf7f1) ── */
+  --fg:           #16120d;   /* headings, strong   18.5:1 */
+  --fg-mid:       #4c463c;   /* body                8.0:1 */
   --fg-low:       #6e6758;   /* labels              5.0:1 */
   --fg-faint:     #8d8574;   /* de-emphasised only  3.3:1 */
 
-  /* ── clay highlight ──
-     Roles are the inverse of a dark ground: on the warm ground the true
-     clay is the readable weight (5.9:1) and --accent-hi is its hover
-     step (4.5:1). --on-accent is text sitting on a clay fill (5.9:1). */
-  --accent:       #9a3412;
-  --accent-hi:    #c2410c;
-  --accent-line:  rgba(154,52,18,0.32);
-  --accent-wash:  rgba(154,52,18,0.08);
+  /* ── umber accent ──
+     The one non-black, non-sand tone, and still a neutral: a deep
+     umber that reads as "black mixed with sand." On the warm ground
+     it sits at 7.5:1 and --accent-hi is its hover step (4.9:1).
+     --on-accent is text sitting on an accent fill (7.5:1). */
+  --accent:       #4a3c28;
+  --accent-hi:    #6b5940;
+  --accent-line:  rgba(74,60,40,0.35);
+  --accent-wash:  rgba(74,60,40,0.08);
   --on-accent:    #ffffff;
 
   --display: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
