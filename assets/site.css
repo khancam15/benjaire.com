@@ -277,8 +277,8 @@ nav {
   display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px;
   padding: clamp(56px, 8vw, 88px) var(--gutter) 48px;
 }
+.bjf-brand { display: flex; flex-direction: column; gap: 14px; }
 .bjf-logo { font-family: var(--display); font-weight: 800; font-size: 22px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg); }
-.bjf-tagline { margin: 16px 0; font-size: 13px; line-height: 1.7; color: var(--fg-mid); }
 .bjf-loc { font-size: 9px; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--fg-faint); }
 .bjf-label { font-size: 9px; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
 .bjf-col { display: flex; flex-direction: column; gap: 12px; }
