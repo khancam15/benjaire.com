@@ -93,4 +93,4 @@ Current note: pages use inline CSS and JavaScript, so the CSP currently includes
 
 ## Deployment
 
-The website is automatically deployed via GitHub Pages from the `main` branch.
+The website is automatically deployed via GitHub Pages from the `main` branch. Changes reach `main` through squash merged pull requests; see [CONTRIBUTING.md](CONTRIBUTING.md).
