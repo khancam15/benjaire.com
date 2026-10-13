@@ -1,4 +1,4 @@
-# Benjaire Design System (v0.1, proposal)
+# Benjaire Design System (v0.2, proposal)
 
 - **Status:** Proposed for owner approval (milestone M2). Nothing here is implemented until approved.
 - **Approach:** refine and modernize the existing identity. Don't replace it.
@@ -13,7 +13,7 @@
 ## 2. What's kept (recognizable identity)
 | Element | Kept as is |
 |---|---|
-| Palette | Sand, beige, black, and white with a deep umber accent. All values unchanged. |
+| Palette family | Warm neutrals with a single brown accent (now shifted warmer; see §4) |
 | Type | Archivo (display, 500/700/800) and Inter (body, 400/500/600) |
 | Wordmark | "BENJAIRE" in Archivo 800, uppercase, 0.1em tracking |
 | Structure | Full-width hairline rules, flat surfaces, no shadows, no rounded corners |
@@ -28,7 +28,8 @@
 | Nav background uses the sand ground (was white) | One continuous surface; feels more premium |
 | A **"Partner with us"** outlined button in the nav | Gives business visitors one clear primary action |
 | Home gains "What we do", "Focus areas", the Brands section, and a "Work with Benjaire" band | Today the home page is only a hero and an empty heading |
-| Raised sand bands (`--bg-raised`) alternate sections | Hierarchy without adding new colors |
+| Beige bands (`--bg-raised`) alternate sections, and a **deep cocoa band** closes key pages | Hierarchy and a premium finish |
+| **Warmer palette** (§4): cream, beige, latte, cocoa text, saddle-brown accent, caramel rules | Owner direction 2026-10-13 |
 | A faint hairline grid behind the hero | A technology-forward hint that stays within the palette |
 | Footer gains Legal links and a tagline | Trust and compliance |
 | Form redesign: category chips, inline errors, consent, spam-protection slot | Meets PRD US-3 |
@@ -37,19 +38,23 @@
 
 ## 4. Tokens
 
-### Color (unchanged; contrast against `--bg #faf7f1`)
-| Token | Value | Use | Contrast |
+### Color (v0.2: cream, beige and cocoa palette, per owner direction 2026-10-13)
+The palette shifts warmer and browner than the original near-black/umber. It's inspired by contemporary wellness and DTC brands, but every value is Benjaire's own.
+
+| Token | Value | Use | Contrast on `--bg` |
 |---|---|---|---|
-| `--bg` | `#faf7f1` | Page ground | — |
-| `--bg-raised` | `#f0e7d5` | Alternating bands | — |
-| `--surface` | `#e6d8bf` | Tiles, logo wells | — |
-| `--fg` | `#16120d` | Headings | 18.5:1 |
-| `--fg-mid` | `#4c463c` | Body | 8.0:1 |
-| `--fg-low` | `#6e6758` | Labels | 5.0:1 |
-| `--fg-faint` | `#8d8574` | Decorative only, **never** body text | 3.3:1 |
-| `--accent` | `#4a3c28` | Buttons, links, rules | 7.5:1 |
-| `--accent-hi` | `#6b5940` | Hover | 4.9:1 |
-| New: `--danger` | `#8f2716` | Form errors | ≥ 7:1 (to be verified) |
+| `--bg` | `#fdfaf5` | Cream page ground | — |
+| `--bg-raised` | `#f4ebe0` | Beige bands, footer | — |
+| `--surface` | `#e9dccb` | Latte tiles, logo wells | — |
+| `--fg` | `#2a1d14` | Cocoa headings (replaces black) | 15.7:1 |
+| `--fg-mid` | `#5a4637` | Body text | 8.5:1 |
+| `--fg-low` | `#705b49` | Labels (≥ 4.7:1 on every surface) | 5.9:1 |
+| `--fg-faint` | `#a08b77` | Decorative only, **never** text | 3.1:1 |
+| `--accent` | `#6b4226` | Saddle brown: buttons, links, numbers | 8.3:1 (white on it: 8.6:1) |
+| `--accent-hi` | `#8a5a36` | Hover | 5.6:1 |
+| `--caramel` | `#b58357` | Decorative rules only, **never** text | 3.2:1 |
+| `--cocoa` | `#2a1d14` | Dark closing band | Cream text on it: 15.7:1 |
+| `--danger` | `#8f2716` | Form errors | 8.2:1 |
 
 ### Type scale (new)
 | Token | Size | Use |
