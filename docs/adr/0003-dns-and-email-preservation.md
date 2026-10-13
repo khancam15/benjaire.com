@@ -4,18 +4,18 @@
 - **Date:** 2026-10-13
 
 ## Context
-`contact@benjaire.com` is the company's only published inbox and must keep working. The DNS provider and email provider are **not yet known** (PRD V-1, V-2). Any hosting choice that changes nameservers (ADR-0002 options B and C) moves every DNS record, including MX, SPF, DKIM, DMARC, and the verification records. Mistakes there silently break email.
+`contact@benjaire.com` is the company's only published inbox and must keep working. **Confirmed:** DNS is on Cloudflare and the address is a Cloudflare Email Routing forwarder to a private inbox. The recommended hosting move (ADR-0002) changes **only the website records** (`benjaire.com`, `www`). The MX, SPF, and Email Routing records stay untouched, and no nameserver change is involved. The procedure below still applies so nothing changes silently.
 
 ## Decision (proposed)
 No DNS, email-routing, or production-hosting change happens without explicit owner approval. Any approved change follows this procedure:
 
-1. **Inventory.** Export the full zone from the current DNS provider (not just a scan; DKIM selectors are not discoverable from public DNS). Record the MX, SPF, DKIM, DMARC, verification, `www`, and any other records.
-2. **Stage.** Recreate the zone at the new provider without switching nameservers yet. Compare it record by record against the export.
-3. **Prepare.** Lower TTLs to 300s at least 24–48 hours before the cutover. Confirm that the new host serves the site at its preview URL.
+1. **Inventory.** Export the zone file from Cloudflare (DNS → Records → Export) and store it privately, **never in this public repository**. Note the current website records and their proxy status.
+2. **Stage.** Deploy to Cloudflare Pages and verify the site at its `*.pages.dev` preview URL. Make no DNS changes yet.
+3. **Prepare.** If the website records are DNS-only, lower their TTL ahead of time. Proxied records switch almost instantly.
 4. **Test email before.** Send and receive test messages to and from `contact@benjaire.com` and record the results.
-5. **Cut over** during a low-traffic window, after owner approval.
+5. **Cut over** after owner approval: attach `benjaire.com` and `www` as custom domains on the Pages project, which replaces only those records. Leave MX/TXT records alone.
 6. **Verify.** Check site, HTTPS, redirects, MX resolution, and send/receive tests, plus SPF/DKIM/DMARC pass results in the headers of a received message.
-7. **Rollback.** Revert the nameservers (or the A/CNAME records) to the original values from the export. GitHub Pages stays deployable until verification is complete. Keep the export permanently.
+7. **Rollback.** Restore the original website records from the export (GitHub Pages IPs/CNAME). GitHub Pages stays deployed until verification is complete. Keep the export privately.
 
 ## Consequences
 - Migration takes longer, but email risk is controlled and reversible.

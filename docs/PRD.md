@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Status** | Revised draft. Awaiting owner approval. **No development until approved.** |
-| **Revised** | 2026-10-13. v0.2 incorporates the owner's discovery responses. |
+| **Revised** | 2026-10-13. v0.2 incorporates the owner's discovery responses. v0.2.1 records the confirmed infrastructure facts (§2, §9). |
 | **Product** | benjaire.com, Benjaire's corporate website and parent-brand home |
 | **Tagline** | Brands for the Modern Era |
 | **Related** | Architecture Decision Records in [`docs/adr/`](adr/) |
@@ -38,15 +38,16 @@ Benjaire needs a credible, company-first home for the parent brand. It should ex
 | Pages | `index.html` (its "Our Brands" section is empty), `about.html`, `contact.html` | Repo |
 | Stack | Hand-written HTML, shared `assets/site.css` and `assets/site.js`, Google Fonts (Archivo and Inter) | Repo |
 | Design | A neutral sand/beige/black/white palette with one umber accent, contrast ratios recorded in comments, hairline rules, no shadows | `assets/site.css` |
-| Hosting | **GitHub Pages** from `main`, with a `CNAME` file for `benjaire.com` | Repo and README. **[VERIFY]** that live traffic actually reaches GitHub Pages and isn't behind a proxy. |
-| DNS provider | **Unknown** | **[VERIFY]** |
-| Email provider for `contact@benjaire.com` | **Unknown** | **[VERIFY]** |
+| Hosting | **GitHub Pages** from `main`, with a `CNAME` file for `benjaire.com` **[CONFIRMED]** | Repo, README, GitHub repo settings (Pages enabled) |
+| DNS provider | **Cloudflare [CONFIRMED]**. Email Routing only works on domains whose DNS is on Cloudflare. | Owner; repo description ("GitHub Pages and Cloudflare") |
+| Email for `contact@benjaire.com` | **Cloudflare Email Routing**, forwarding to the owner's private inbox **[CONFIRMED]**. It's a forwarder, not a mailbox. | Owner |
+| Repository visibility | **Public [CONFIRMED]** | GitHub API |
 | Contact form | Client-side **EmailJS**. No server-side validation and no bot protection. | `contact.html` |
 | Security | CSP in a `<meta>` tag. Browsers **ignore** `frame-ancestors` in a meta CSP, so the anti-clickjacking rule isn't enforced. No HSTS control. | Repo |
 | SEO | Titles, meta, Open Graph, `Organization` JSON-LD, sitemap, robots, Search Console verification file | Repo |
 | Assets | `hero-bg.png` is 6.3 MB and `hero-bg.webp` is 137 KB | Repo |
 
-> I couldn't audit the live DNS and mail records from my sandbox because outbound DNS lookups are blocked. Section 9.1 lists the exact checks for you to run, or for me to run if you allow network access.
+> **What this means:** DNS is already on Cloudflare, so moving hosting to Cloudflare Pages does **not** need a nameserver change. MX and Email Routing records stay untouched, and the cutover only replaces the website records for `benjaire.com` (and `www`). That greatly lowers the email risk. The one item still to check is whether those website records are proxied (orange cloud) or DNS-only (V-3).
 
 ## 3. Confirmed Requirements
 
@@ -71,6 +72,7 @@ The previous three-page limit is retired. New pages are added **only when they s
 - **No invented brand names, launches, or portfolio entries.**
 - If no brand is approved for publication, the page ships with an honest, well-designed empty state.
 - Unreleased projects stay private.
+- **There are no public brands at launch [CONFIRMED].** The Brands page ships with the empty state.
 
 ### 3.4 Inquiries [CONFIRMED]
 - All inquiries go to **contact@benjaire.com** (one central inbox).
@@ -147,7 +149,7 @@ One file per **publicly approved** brand:
 | `order` | no | Display order |
 | `featured` | no | Shows on the Home teaser |
 
-**Privacy rule:** unreleased or unapproved brands are **never committed to this repository**, not even as drafts or hidden entries. Anything in Git can be found in the commit history, and anything in the built site can be discovered. Private pipeline tracking stays outside this codebase. **[VERIFY]** whether this GitHub repository is public or private. Either way, the rule stands.
+**Privacy rule:** unreleased or unapproved brands are **never committed to this repository**, not even as drafts or hidden entries. Anything in Git can be found in the commit history, and anything in the built site can be discovered. Private pipeline tracking stays outside this codebase. **[VERIFY]** whether this GitHub repository is public or private. The repository is **public [CONFIRMED]**, so this rule is mandatory.
 
 **Empty state [PROPOSED]:** a short, factual statement that Benjaire's portfolio is in development and brands will be announced here, plus a call to action for partnership inquiries. No placeholder logos, no "coming soon" cards for unnamed brands, and no fabricated entries.
 
@@ -265,19 +267,21 @@ Astro still builds for GitHub Pages. Trade-offs: no HTTP security headers (meta 
 
 | # | Item | Why it matters | Owner | Blocks |
 |---|---|---|---|---|
-| V-1 | **DNS provider** (nameservers for benjaire.com) | Decides the migration path and email risk | Owner | M3 |
-| V-2 | **Email provider** for contact@benjaire.com (MX records), and whether it's a mailbox or a forwarder | Must be preserved through any DNS change; also decides how form mail is delivered | Owner | M3 |
-| V-3 | **Current hosting** confirmed as GitHub Pages (not proxied) | Baseline for rollback | Owner / Claude | M3 |
-| V-4 | Existing SPF, DKIM, DMARC, and verification TXT records | Must be copied exactly in any DNS move; affects form-mail deliverability | Owner | M3 |
-| V-5 | **Brands approved for public disclosure** (possibly none) | Decides Brands page content at launch | Owner | M4 (not blocking; the empty state works) |
-| V-6 | Repository visibility (public or private) | Confirms that nothing sensitive is ever committed | Owner | — |
+| V-1 | ~~DNS provider~~: **Cloudflare [CONFIRMED]** | — | — | — |
+| V-2 | ~~Email provider~~: **Cloudflare Email Routing → private inbox [CONFIRMED]** | — | — | — |
+| V-3 | Whether the `benjaire.com` / `www` website records in Cloudflare are **proxied (orange cloud)** or DNS-only, and their current targets | Rollback baseline; whether Cloudflare rules already add headers | Owner (Cloudflare dashboard → DNS) | M1 |
+| V-4 | Existing SPF/DMARC TXT records (Email Routing adds SPF automatically) | Form-mail deliverability; these records are **not** touched by the hosting cutover | Owner (export the zone file from Cloudflare) | M1 |
+| V-5 | ~~Public brands~~: **none at launch [CONFIRMED]** | — | — | — |
+| V-6 | ~~Repository visibility~~: **public [CONFIRMED]** | — | — | — |
+| V-12 | Replies to inquiries currently come from the private inbox, which **exposes a personal address** to whoever writes in | Corporate anonymity | Owner | Not blocking; see §12 |
 | V-7 | Founding year (2022) and "New York, NY" are OK to keep publishing | Company facts on About and in structured data | Owner | M4 |
 | V-8 | Analytics: approve Cloudflare Web Analytics (cookieless) or none | Privacy policy content | Owner | M4 |
 | V-9 | Terms of Use at launch: yes or no | Page scope | Owner | M4 |
 | V-10 | Legal review of the Privacy and Terms text | Compliance | Owner (counsel) | Launch |
 | V-11 | Dark theme wanted? | Design scope | Owner | M2 |
 
-### 9.1 How to verify V-1 to V-4 (read-only; changes nothing)
+### 9.1 How to verify V-3 and V-4 (read-only; changes nothing)
+In the Cloudflare dashboard, go to benjaire.com → **DNS → Records**, note the proxy status of the `benjaire.com` and `www` records, and use **Export** to save a zone file (keep it private; don't commit it). Or, from any terminal:
 Run these from any terminal, or let me run them by allowing outbound DNS in this environment:
 ```bash
 dig +short NS benjaire.com            # DNS provider
@@ -288,7 +292,7 @@ dig +short A benjaire.com             # GitHub Pages IPs are 185.199.108–111.1
 dig +short CNAME www.benjaire.com
 curl -sI https://benjaire.com | grep -i server   # "GitHub.com" means GitHub Pages
 ```
-Also check your registrar and email admin console for DKIM selectors, which can't be listed through public DNS.
+GitHub Pages records point to `185.199.108–111.153`. If they're proxied, `dig` returns Cloudflare IPs instead.
 
 ## 10. Milestones & Implementation Plan
 
@@ -297,7 +301,7 @@ Each milestone ends in an approval gate. Nothing past a gate starts without your
 | Milestone | Scope | Deliverables | Exit criteria / gate |
 |---|---|---|---|
 | **M0. Plan approval** | This PRD and the ADRs | Approved PRD v0.2 or later; ADR statuses updated | **Owner approves the plan** |
-| **M1. Infrastructure audit** | Resolve V-1 to V-4, V-6 | An audit note in `docs/` covering the record inventory, a hosting recommendation confirmed or revised, and a migration/rollback runbook | **Owner approves the hosting decision.** No DNS, email, or hosting changes happen in M1. |
+| **M1. Infrastructure audit** | Resolve V-3, V-4 (V-1, V-2, V-5, V-6 already confirmed) | An audit note in `docs/` covering the record inventory, a hosting recommendation confirmed or revised, and a migration/rollback runbook | **Owner approves the hosting decision.** No DNS, email, or hosting changes happen in M1. |
 | **M2. Design system & visual proposal** | Design tokens, components, before/after mockups | `docs/design-system.md` plus screenshots | **Owner approves the visuals** |
 | **M3. Foundation build** | Astro scaffold; migrate the current pages with matching visuals; shared layout; CI (build, lint, link check, axe, Lighthouse, existing security audit); preview deploys on the approved host (no production change) | Preview URL | Preview matches the approved design; Lighthouse ≥ 95; CI green |
 | **M4. MVP features** | Brands model and page (empty state), About, Contact with categories and the supplier section, Privacy, Terms, 404, SEO, structured data | Feature-complete preview | Every acceptance criterion in §5 passes on preview |
@@ -311,8 +315,8 @@ Each milestone ends in an approval gate. Nothing past a gate starts without your
 
 | Risk | Impact | Likelihood | Mitigation |
 |---|---|---|---|
-| **Email disruption during a DNS move** | Lost inquiries | Medium | Full zone export, record-by-record comparison before switching nameservers, low TTLs, test mail before and after, keep the old provider live until verified (ADR-0003) |
-| Moving the apex domain to Cloudflare Pages needs Cloudflare as DNS provider | Increases migration scope | High (if Cloudflare Pages is chosen) | Treat it as a DNS migration and audit it first; an alternative host avoids nameserver changes (ADR-0002) |
+| **Email disruption during the hosting cutover** | Lost inquiries | **Low** (DNS already on Cloudflare; MX untouched) | Full zone export, record-by-record comparison before switching nameservers, low TTLs, test mail before and after, keep the old provider live until verified (ADR-0003) |
+| Public repository exposes sensitive data (private inbox address, unreleased brands, zone export, secrets) | Privacy or confidentiality breach | Medium | The destination inbox lives only in host environment variables; never commit zone exports or unreleased brands; keep the existing secret audit in CI |
 | Unreleased brand names leaked through the repo or the build | Confidentiality breach | Medium | Never commit unapproved brands; review pull requests for content |
 | Credibility with an empty Brands page | Weaker first impression | Medium | Strong company narrative, a deliberate empty state, fast replies to inquiries |
 | Unsupported claims creep into copy (suppliers, capabilities) | Reputational/legal exposure | Medium | Copy checklist in pull request review; supplier language limited to "exploring" and "interested in" |
@@ -326,6 +330,8 @@ Each milestone ends in an approval gate. Nothing past a gate starts without your
 ## 12. Future Enhancements [FUTURE]
 Brand profile pages · individual brand websites (separate apps) · e-commerce (on brand domains) · customer accounts · partner collaboration tools · supplier management · CMS editing UI (a Git-based CMS such as Decap or TinaCMS fits this architecture) · per-category inboxes (config change only) · newsroom/press kit · careers · newsletter · multi-language.
 Each one needs a business requirement and an ADR before work starts.
+
+**Anonymity follow-up (outside the website build) [PROPOSED]:** set up replying *as* `contact@benjaire.com` so inquirers never see the private address. Options: Gmail "Send mail as" through an SMTP relay, or a low-cost business mailbox. Decide before launch traffic grows.
 
 ## 13. Approval
 
