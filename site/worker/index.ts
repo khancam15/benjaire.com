@@ -1,6 +1,7 @@
 // benjaire.com Worker. Static pages are served from ./dist by the assets
 // layer; only /api/* reaches this script (see wrangler.jsonc).
-import { composeEmail, originAllowed, recipientFor, validate } from './lib';
+import { EmailMessage } from 'cloudflare:email';
+import { buildMime, composeEmail, originAllowed, recipientFor, validate } from './lib';
 
 const JSON_HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
@@ -74,14 +75,20 @@ async function handleContact(req: Request, env: Env): Promise<Response> {
   }
 
   const { subject, text } = composeEmail(inquiry, { receivedAt: new Date().toISOString(), host: new URL(req.url).hostname });
+  const to = recipientFor(inquiry.category, env.CONTACT_TO, env.CATEGORY_RECIPIENTS);
+  const domain = env.MAIL_FROM.split('@')[1];
+  const raw = buildMime({
+    from: { name: 'Benjaire website', email: env.MAIL_FROM },
+    to,
+    replyTo: { name: inquiry.name, email: inquiry.email },
+    subject,
+    text,
+    messageId: `<${crypto.randomUUID()}@${domain}>`,
+    date: new Date(),
+  });
   try {
-    await env.SEND_EMAIL.send({
-      from: { name: 'Benjaire website', email: env.MAIL_FROM },
-      to: recipientFor(inquiry.category, env.CONTACT_TO, env.CATEGORY_RECIPIENTS),
-      replyTo: { name: inquiry.name, email: inquiry.email },
-      subject,
-      text,
-    });
+    // Classic send_email: works with Email Routing verified destinations.
+    await env.SEND_EMAIL.send(new EmailMessage(env.MAIL_FROM, to, raw));
   } catch (err) {
     console.error('send_email failed', err instanceof Error ? err.message : err);
     return respond(req, 502, { ok: false, error: "Your message couldn't be sent." });
