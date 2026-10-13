@@ -32,3 +32,11 @@ There is **no database**: submissions aren't stored, the inbox is the system of 
 - Option (a) needs no new vendor. Option (b) needs an email-API account and sending-domain DNS records, which need owner approval (ADR-0003).
 - **The repository is public**, so the private destination inbox address is stored **only** in host environment variables and never in code, config files, or commit messages.
 - Adding per-category inboxes later is a config-only change.
+
+## Implementation (2026-10-13)
+- Delivery uses option **(a)**, Cloudflare's `send_email` binding with its structured `send({ from, to, replyTo, subject, text })` API. No third-party email provider and no new DNS records.
+- From `website@benjaire.com` to the verified destination in the `CONTACT_TO` secret. Reply-To is the sender, so replying answers them directly.
+- The Worker runs only for `/api/*` (`run_worker_first`); every page stays a static asset.
+- Defenses: Origin allow-list, 20 KB body cap, Workers rate limiting (5 per minute per IP), honeypot, server-side Turnstile verification with action `contact`, field validation, and control-character stripping (header-injection safe).
+- Without JavaScript the form posts normally and the Worker redirects to `/contact?status=sent|error`.
+- `worker/lib.ts` holds the pure logic and is covered by `node --test` in CI.
