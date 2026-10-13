@@ -53,7 +53,6 @@ The palette shifts warmer and browner than the original near-black/umber. It's i
 | `--accent` | `#6b4226` | Saddle brown: buttons, links, numbers | 8.3:1 (white on it: 8.6:1) |
 | `--accent-hi` | `#8a5a36` | Hover | 5.6:1 |
 | `--caramel` | `#b58357` | Decorative rules only, **never** text | 3.2:1 |
-| `--copper` (proposed) | `#9a5420` | **Logo color**, sampled from the logo mockup (≈ `#a35e23`) and darkened slightly for contrast. Logo, eyebrow rules, and large accents. Text use OK on cream (5.5:1); pending the exact value from the logo files. | 5.5:1 |
 | `--cocoa` | `#2a1d14` | Dark closing band | Cream text on it: 15.7:1 |
 | `--danger` | `#8f2716` | Form errors | 8.2:1 |
 
@@ -106,17 +105,20 @@ Easing `cubic-bezier(.16, 1, .3, 1)`. Reveal: opacity plus a 20px rise over 0.9s
 | Contact | `before-contact-*` | `after-contact-*` |
 
 ## 8. Logo usage
-**Source:** the original vector files are lost, so the logo was **redrawn as SVG** from the owner's photo mockup (2026-10-13) and checked against an outline traced from the photo. It's pending owner approval; see `docs/design/logo/logo-proposal.png`.
+**Source:** the original vector files are lost, so the logo was **redrawn as SVG** from the owner's photo mockup (2026-10-13) and checked against an outline traced from the photo. **Approved 2026-10-13.**
+
+**Approved color treatment (owner, 2026-10-13):** **C, brushed bronze** everywhere, and **D, bronze plus grain texture**, only where the logo appears large. The bronze gradient uses only site palette colors: `#5a3a22 → #8a5a36 → #b58357 → #8a5a36 → #5a3a22` (diagonal). The cream (`#fdfaf5`) versions go on the cocoa band.
 
 | File (`docs/design/logo/`) | Use |
 |---|---|
-| `benjaire-lockup-vertical.svg` / `-cream.svg` | Stacked logo: hero, about, social images; cream version on the cocoa band |
-| `benjaire-lockup-horizontal.svg` / `-cream.svg` | Nav and footer |
-| `benjaire-monogram.svg` | The "B" alone |
-| `benjaire-wordmark.svg` | Wordmark alone (monoline, stroke-based) |
-| `favicon.svg` | Browser tab icon (copper B on a cream rounded square) |
+| `benjaire-lockup-horizontal.svg` (C) | Nav (about 28px tall) and footer |
+| `benjaire-lockup-vertical.svg` (C) | Medium uses, social share images |
+| `benjaire-lockup-vertical-textured.svg` / `benjaire-monogram-textured.svg` (D) | Large uses only: the home hero monogram (≥ 72px) and large About or print uses |
+| `benjaire-monogram.svg` (C), `benjaire-wordmark.svg` (C) | Standalone marks |
+| `*-cream.svg` | On the cocoa band |
+| `favicon.svg` | Bronze monogram on a cream rounded square |
 
-Logo color: `--copper #9a5420`.
+The earlier flat-copper `--copper` token was retired in favor of the bronze gradient.
 - Nav: monogram plus wordmark, about 28px tall. Footer: the full lockup. Favicon: the monogram alone, on cream and in copper.
 - Logo color: copper on cream or white. Cream version on the cocoa band.
 - Minimum clear space: the height of the monogram's top notch on all sides.

@@ -286,7 +286,7 @@ Astro still builds for GitHub Pages. Trade-offs: no HTTP security headers (meta 
 | V-9 | Terms of Use at launch: yes or no | Page scope | Owner | M4 |
 | V-10 | Legal review of the Privacy and Terms text | Compliance | Owner (counsel) | Launch |
 | V-11 | ~~Dark theme~~: **no dark mode [CONFIRMED 2026-10-13]** | — | — | — |
-| V-16 | ~~Logo source files~~: originals lost; **redrawn as SVG** from the photo mockup (2026-10-13); awaiting owner approval of the redraw | Nav, footer, favicon, social images | Owner | M3 |
+| V-16 | ~~Logo source files~~: originals lost; **redrawn as SVG** and **approved** (brushed bronze, plus a textured version for large uses), 2026-10-13 [CONFIRMED] | Nav, footer, favicon, social images | Owner | M3 |
 
 ### 9.1 How to verify V-3 and V-4 (read-only; changes nothing)
 In the Cloudflare dashboard, go to benjaire.com → **DNS → Records**, note the proxy status of the `benjaire.com` and `www` records, and use **Export** to save a zone file (keep it private; don't commit it). Or, from any terminal:
