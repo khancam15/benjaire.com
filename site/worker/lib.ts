@@ -106,3 +106,46 @@ export function originAllowed(origin: string | null, allowedHosts: string): bool
     return false;
   }
 }
+
+/** RFC 2047 encode a header value when it contains non-ASCII characters. */
+function encodeHeader(value: string): string {
+  return /^[\x20-\x7e]*$/.test(value) ? value : `=?UTF-8?B?${toBase64(value)}?=`;
+}
+
+function toBase64(text: string): string {
+  const bytes = new TextEncoder().encode(text);
+  let binary = '';
+  for (const b of bytes) binary += String.fromCharCode(b);
+  return btoa(binary);
+}
+
+/**
+ * Build a plain-text MIME message for Cloudflare's classic `send_email`
+ * (EmailMessage), which works with Email Routing verified destinations.
+ * Inputs are already stripped of CR/LF by validate(), so headers are safe.
+ */
+export function buildMime(opts: {
+  from: { name: string; email: string };
+  to: string;
+  replyTo: { name: string; email: string };
+  subject: string;
+  text: string;
+  messageId: string;
+  date: Date;
+}): string {
+  const addr = (a: { name: string; email: string }) => `${encodeHeader(a.name.replace(/["\\]/g, ''))} <${a.email}>`;
+  const body = toBase64(opts.text).replace(/.{1,76}/g, '$&\r\n');
+  return [
+    `From: ${addr(opts.from)}`,
+    `To: <${opts.to}>`,
+    `Reply-To: ${addr(opts.replyTo)}`,
+    `Subject: ${encodeHeader(opts.subject)}`,
+    `Date: ${opts.date.toUTCString()}`,
+    `Message-ID: ${opts.messageId}`,
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: base64',
+    '',
+    body,
+  ].join('\r\n');
+}
