@@ -1,6 +1,6 @@
 # Benjaire Design System (v0.2, proposal)
 
-- **Status:** Proposed for owner approval (milestone M2). Nothing here is implemented until approved.
+- **Status:** Approved by owner 2026-10-13 as the current direction (M2). Open to later refinement.
 - **Approach:** refine and modernize the existing identity. Don't replace it.
 - **Visual proposal:** [`docs/design/proposal/`](design/proposal/), with before/after screenshots at 1440px and 390px widths.
 

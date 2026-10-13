@@ -346,5 +346,5 @@ Each one needs a business requirement and an ADR before work starts.
 |---|---|---|
 | M0 Plan (this PRD and the ADRs) | ☑ Approved | 2026-10-13 |
 | M1 Hosting decision | ☐ Approved ☐ Changes requested | |
-| M2 Visual design | ☐ Approved ☐ Changes requested | |
+| M2 Visual design | ☑ Approved as current direction (warm cream/beige/cocoa palette, design system v0.2); owner may revisit | 2026-10-13 |
 | M6 Production cutover | ☐ Approved ☐ Changes requested | |
