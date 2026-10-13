@@ -50,6 +50,9 @@ jobs:
       - name: Check internal links
         run: npm run test:links
 
+      - name: Check SEO basics
+        run: npm run test:seo
+
       - name: Install Chromium for accessibility tests
         run: npx playwright install --with-deps chromium
 

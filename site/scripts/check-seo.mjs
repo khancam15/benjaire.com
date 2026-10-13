@@ -1,0 +1,40 @@
+// SEO guardrails for the built site (PRD US-7). Usage: node scripts/check-seo.mjs dist
+import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+const root = process.argv[2] ?? 'dist';
+const pages = readdirSync(root).filter((f) => f.endsWith('.html') && !f.startsWith('google'));
+const errors = [];
+const titles = new Map();
+const meta = (html, re) => html.match(re)?.[1];
+
+for (const f of pages) {
+  const html = readFileSync(join(root, f), 'utf8');
+  const title = meta(html, /<title>([^<]*)<\/title>/);
+  const desc = meta(html, /<meta name="description" content="([^"]*)"/);
+  const canonical = meta(html, /<link rel="canonical" href="([^"]*)"/);
+  const og = meta(html, /<meta property="og:image" content="([^"]*)"/);
+  if (!title) errors.push(`${f}: missing <title>`);
+  else if (titles.has(title)) errors.push(`${f}: duplicate title (also ${titles.get(title)})`);
+  else titles.set(title, f);
+  if (!desc || desc.length < 50) errors.push(`${f}: meta description missing or under 50 characters`);
+  if (!canonical || canonical.endsWith('.html') || !canonical.startsWith('https://benjaire.com/')) errors.push(`${f}: canonical must be a clean https://benjaire.com URL (got ${canonical})`);
+  if (!og?.endsWith('.png')) errors.push(`${f}: og:image must be a PNG (got ${og})`);
+  else if (!existsSync(join(root, new URL(og).pathname))) errors.push(`${f}: og:image file not found`);
+  if ((html.match(/<h1[\s>]/g) ?? []).length !== 1) errors.push(`${f}: must have exactly one <h1>`);
+}
+
+const sitemapPath = join(root, 'sitemap.xml');
+if (!existsSync(sitemapPath)) errors.push('sitemap.xml missing');
+else {
+  for (const [, loc] of readFileSync(sitemapPath, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)) {
+    const path = new URL(loc).pathname;
+    const file = path === '/' ? 'index.html' : `${path.slice(1)}.html`;
+    if (!existsSync(join(root, file))) errors.push(`sitemap lists ${loc} but ${file} doesn't exist`);
+    else if (/<meta name="robots" content="noindex"/.test(readFileSync(join(root, file), 'utf8'))) errors.push(`sitemap lists noindex page ${loc}`);
+  }
+}
+
+for (const e of errors) console.error(`✗ ${e}`);
+console.log(`${pages.length} pages checked, ${errors.length} SEO problem(s).`);
+process.exit(errors.length ? 1 : 0);

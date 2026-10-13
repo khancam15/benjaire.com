@@ -355,3 +355,8 @@ textarea.input { min-height: 150px; resize: vertical; }
 .mb-5 { margin-bottom: var(--s-5); }
 .mt-4 { margin-top: var(--s-4); }
 .no-rule { border-bottom: 0; }
+
+/* long-form legal text */
+.prose ul { padding-left: 1.2em; display: grid; gap: 6px; }
+.prose a { color: var(--accent); }
+.prose .updated { font-size: var(--t-sm); color: var(--fg-low); }

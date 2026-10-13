@@ -284,7 +284,7 @@ Astro still builds for GitHub Pages. Trade-offs: no HTTP security headers (meta 
 | V-7 | Founding year (2022) and "New York, NY" are OK to keep publishing | Company facts on About and in structured data | Owner | M4 |
 | V-8 | Analytics: approve Cloudflare Web Analytics (cookieless) or none | Privacy policy content | Owner | M4 |
 | V-9 | Terms of Use at launch: yes or no | Page scope | Owner | M4 |
-| V-10 | Legal review of the Privacy and Terms text | Compliance | Owner (counsel) | Launch |
+| V-10 | Legal review of the Privacy and Terms **drafts** (written 2026-10-13; `noindex` and out of the sitemap until approved) | Compliance | Owner (counsel) | Launch |
 | V-11 | ~~Dark theme~~: **no dark mode [CONFIRMED 2026-10-13]** | — | — | — |
 | V-16 | ~~Logo source files~~: originals lost; **redrawn as SVG** and **approved** (brushed bronze, plus a textured version for large uses), 2026-10-13 [CONFIRMED] | Nav, footer, favicon, social images | Owner | M3 |
 
@@ -312,7 +312,7 @@ Each milestone ends in an approval gate. Nothing past a gate starts without your
 | **M1. Infrastructure audit** (facts gathered) | V-1 to V-6 confirmed; hosting decision awaits approval | An audit note in `docs/` covering the record inventory, a hosting recommendation confirmed or revised, and a migration/rollback runbook | **Owner approves the hosting decision.** No DNS, email, or hosting changes happen in M1. |
 | **M2. Design system & visual proposal** | Design tokens, components, before/after mockups | `docs/design-system.md` plus screenshots | **Owner approves the visuals** |
 | **M3. Foundation build** ✅ done 2026-10-13: Astro site in `site/` merged (khancam15/benjaire.com#16); deployed to Cloudflare Workers (`benjaire-com`, workers.dev only) | Astro scaffold; migrate the current pages with matching visuals; shared layout; CI (build, lint, link check, axe, Lighthouse, existing security audit); preview deploys on the approved host (no production change) | Preview URL | Preview matches the approved design; Lighthouse ≥ 95; CI green |
-| **M4. MVP features** | Brands model and page (empty state), About, Contact with categories and the supplier section, Privacy, Terms, 404, SEO, structured data | Feature-complete preview | Every acceptance criterion in §5 passes on preview |
+| **M4. MVP features** (in progress 2026-10-13: legal drafts, sitemap, share image, structured data and SEO checks added) | Brands model and page (empty state), About, Contact with categories and the supplier section, Privacy, Terms, 404, SEO, structured data | Feature-complete preview | Every acceptance criterion in §5 passes on preview |
 | **M5. Contact backend & security** | Serverless handler, Turnstile, email API, recipient config, HTTP security headers | Working form on preview delivering to contact@benjaire.com | Spam, validation, and failure tests pass; securityheaders.com grade A (if on a host that supports headers) |
 | **M6. Launch** | Pre-launch QA, redirects, approved cutover per the runbook, Search Console resubmission | Live site | **Owner approves cutover.** Email verified working before and after. Rollback tested. |
 | **M7. Post-launch** | 2 weeks of monitoring for form delivery, Search Console errors, and performance | A short launch report | Stable; FUTURE backlog prioritized |
