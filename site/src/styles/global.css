@@ -135,7 +135,7 @@ h3 { font-weight: 700; font-size: var(--t-h3); line-height: 1.2; }
 }
 .site-nav .wrap { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); }
 .nav-logo { display: block; }
-.nav-logo img { height: 28px; width: auto; }
+.nav-logo img { height: 32px; width: auto; }
 .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
 .nav-links a {
   font-size: var(--t-xs); letter-spacing: var(--track-nav); text-transform: uppercase;
@@ -301,7 +301,7 @@ textarea.input { min-height: 150px; resize: vertical; }
 .f-col { display: flex; flex-direction: column; gap: 10px; font-size: 13px; min-width: 0; }
 .f-col a { text-decoration: none; color: var(--fg-mid); }
 .f-col a:hover { color: var(--accent); }
-.f-logo img { height: 30px; width: auto; margin-bottom: 6px; }
+.f-logo img { height: 32px; width: auto; margin-bottom: 6px; }
 .f-label { font-size: 9px; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
 .f-bottom {
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
