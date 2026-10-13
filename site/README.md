@@ -42,14 +42,21 @@ npm run test:a11y      # axe, WCAG 2.2 AA, desktop and mobile widths
 See `src/content/brands/README.md`. This repository is public: never commit
 unreleased brands.
 
-## Cloudflare Pages settings (set by the owner)
+## Cloudflare settings (Workers & Pages → Create → Import a repository)
+
+Cloudflare's current flow deploys static sites as a Worker with static assets,
+configured by `wrangler.jsonc` in this folder.
 
 | Setting | Value |
 |---|---|
-| Root directory | `site` |
+| Project name | `benjaire-com` (must match `name` in `wrangler.jsonc`) |
 | Build command | `npm run build` |
-| Output directory | `dist` |
-| Environment variable | `NODE_VERSION` = `22` |
+| Deploy command | `npx wrangler deploy` |
+| Non-production branch deploy command | default (`npx wrangler versions upload`) |
+| Advanced settings → Path (root directory) | `site` |
+| Advanced settings → Build variables | `NODE_VERSION` = `22` |
+| Preview builds | On |
 
-Connecting the project creates preview deployments only. benjaire.com keeps
-pointing at GitHub Pages until the M6 cutover is approved.
+The deployment gets a `*.workers.dev` address only. No routes or custom
+domains are configured, so benjaire.com keeps pointing at GitHub Pages until
+the M6 cutover is approved.

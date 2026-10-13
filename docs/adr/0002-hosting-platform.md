@@ -24,3 +24,10 @@ The site is currently on GitHub Pages (per the repo `CNAME` and README). The own
 - The concentration risk (a Cloudflare account compromise affects site, DNS, and email at once) is mitigated by hardware-key or app-based 2FA on the Cloudflare account and a stored zone export.
 - GitHub Pages stays deployable until the cutover is verified, as the rollback target.
 - Because the build output is static (ADR-0001), switching between C and D later is cheap.
+
+## Update 2026-10-13: Workers static assets
+Cloudflare's dashboard now creates Git-connected projects as **Workers with static assets** rather than classic Pages. The decision stands (Cloudflare, no nameserver change); the mechanism changes:
+- `site/wrangler.jsonc` points at `./dist`, with clean URLs (`html_handling: auto-trailing-slash`) and the built 404 page.
+- Security headers will still use a `_headers` file in the static output (supported for Workers assets).
+- The contact-form handler (ADR-0004) becomes a small Worker script instead of a Pages Function.
+- Preview builds give each branch its own preview URL.
