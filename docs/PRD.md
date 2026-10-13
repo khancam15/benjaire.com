@@ -153,7 +153,7 @@ News/press room, careers, brand detail pages hosted on benjaire.com, e-commerce,
 ### 8.1 Performance
 - Core Web Vitals at the 75th percentile on mobile: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1.
 - Page weight ≤ 500 KB on first load, excluding brand logos. JS ≤ 50 KB gzipped, used only for progressive enhancement.
-- AVIF/WebP images with explicit width and height, responsive `srcset`, lazy loading below the fold. Fonts self-hosted and subset, with `font-display: swap`. The current 28K-line `hero-bg.png` fallback should be replaced.
+- AVIF/WebP images with explicit width and height, responsive `srcset`, lazy loading below the fold. Fonts self-hosted and subset, with `font-display: swap`. The current 6.3 MB `hero-bg.png` should be retired in favor of the 137 KB WebP plus an AVIF variant.
 - Static pages served from a CDN with immutable caching for hashed assets.
 
 ### 8.2 Security
