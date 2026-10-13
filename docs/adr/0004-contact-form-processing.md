@@ -1,6 +1,6 @@
 # ADR-0004: Contact-form processing
 
-- **Status:** Proposed
+- **Status:** Accepted (owner approval 2026-10-13)
 - **Date:** 2026-10-13
 
 ## Context

@@ -8,7 +8,7 @@ Short records of significant technical decisions: the context, the options consi
 
 | ADR | Title | Status |
 |---|---|---|
-| [0001](0001-frontend-framework.md) | Frontend framework | Proposed |
-| [0002](0002-hosting-platform.md) | Hosting platform | Proposed (pending infrastructure audit) |
-| [0003](0003-dns-and-email-preservation.md) | DNS and email preservation | Proposed |
-| [0004](0004-contact-form-processing.md) | Contact-form processing | Proposed |
+| [0001](0001-frontend-framework.md) | Frontend framework | Accepted |
+| [0002](0002-hosting-platform.md) | Hosting platform | Accepted |
+| [0003](0003-dns-and-email-preservation.md) | DNS and email preservation | Accepted |
+| [0004](0004-contact-form-processing.md) | Contact-form processing | Accepted |

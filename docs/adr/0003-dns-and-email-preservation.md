@@ -1,6 +1,6 @@
 # ADR-0003: DNS and email preservation
 
-- **Status:** Proposed
+- **Status:** Accepted (owner approval 2026-10-13)
 - **Date:** 2026-10-13
 
 ## Context

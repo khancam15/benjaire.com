@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Revised draft. Awaiting owner approval. **No development until approved.** |
+| **Status** | **Approved by owner 2026-10-13** (M0). Each later milestone has its own approval gate. |
 | **Revised** | 2026-10-13. v0.2 incorporates the owner's discovery responses. v0.2.1 records the confirmed infrastructure facts (§2, §9). |
 | **Product** | benjaire.com, Benjaire's corporate website and parent-brand home |
 | **Tagline** | Brands for the Modern Era |
@@ -260,8 +260,8 @@ Contact form ──POST──► One serverless function ─┴─► Email API 
 | Decision | Recommendation | Status | ADR |
 |---|---|---|---|
 | Frontend framework | **Astro** (static output) with content collections | PROPOSED | [ADR-0001](adr/0001-frontend-framework.md) |
-| Hosting | **Cloudflare Pages** preferred, pending the infrastructure audit; alternatives evaluated | PROPOSED + VERIFY | [ADR-0002](adr/0002-hosting-platform.md) |
-| DNS & email preservation | Zone audit and a migration/rollback plan before any change | PROPOSED + VERIFY | [ADR-0003](adr/0003-dns-and-email-preservation.md) |
+| Hosting | **Cloudflare Pages** preferred, pending the infrastructure audit; alternatives evaluated | ACCEPTED | [ADR-0002](adr/0002-hosting-platform.md) |
+| DNS & email preservation | Zone audit and a migration/rollback plan before any change | ACCEPTED | [ADR-0003](adr/0003-dns-and-email-preservation.md) |
 | Contact-form processing | Serverless function + Turnstile + transactional email API; replaces EmailJS | PROPOSED | [ADR-0004](adr/0004-contact-form-processing.md) |
 
 ### 8.3 Fallback if the hosting migration is **not** approved
@@ -276,7 +276,7 @@ Astro still builds for GitHub Pages. Trade-offs: no HTTP security headers (meta 
 | V-3 | ~~Proxy status~~: website records are **DNS only [CONFIRMED]** | — | — | — |
 | V-4 | ~~Email authentication~~: SPF and DKIM present, **DMARC missing [CONFIRMED]** | — | — | — |
 | V-13 | ~~Zone export~~: **exported 2026-10-13 and stored privately by the owner [CONFIRMED]** | — | — | — |
-| V-14 | Approve adding a DMARC record (`p=none` to start) | Spoofing protection | Owner | Any time |
+| V-14 | ~~DMARC~~: **approved 2026-10-13** (`p=none` to start); owner applies it in Cloudflare | — | — | — |
 | V-5 | ~~Public brands~~: **none at launch [CONFIRMED]** | — | — | — |
 | V-6 | ~~Repository visibility~~: **public [CONFIRMED]** | — | — | — |
 | V-12 | Replies to inquiries currently come from the private inbox, which **exposes a personal address** to whoever writes in | Corporate anonymity | Owner | Not blocking; see §12 |
@@ -343,7 +343,7 @@ Each one needs a business requirement and an ADR before work starts.
 
 | Gate | Decision | Date |
 |---|---|---|
-| M0 Plan (this PRD and the ADRs) | ☐ Approved ☐ Changes requested | |
+| M0 Plan (this PRD and the ADRs) | ☑ Approved | 2026-10-13 |
 | M1 Hosting decision | ☐ Approved ☐ Changes requested | |
 | M2 Visual design | ☐ Approved ☐ Changes requested | |
 | M6 Production cutover | ☐ Approved ☐ Changes requested | |

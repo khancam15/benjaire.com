@@ -1,6 +1,6 @@
 # ADR-0002: Hosting platform
 
-- **Status:** Proposed (infrastructure facts confirmed 2026-10-13; awaiting owner approval)
+- **Status:** Accepted (owner approval 2026-10-13)
 - **Date:** 2026-10-13
 
 ## Context
