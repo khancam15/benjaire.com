@@ -1,1 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><title>Benjaire</title><defs><linearGradient id="fv-g" gradientUnits="userSpaceOnUse" x1="138" y1="126" x2="662" y2="674"><stop offset="0" stop-color="#5a3a22"/><stop offset=".35" stop-color="#8a5a36"/><stop offset=".55" stop-color="#b58357"/><stop offset=".75" stop-color="#8a5a36"/><stop offset="1" stop-color="#5a3a22"/></linearGradient><mask id="fv-m" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="800"><g transform="translate(400,400) scale(0.9) translate(-291.5,-304)"><path fill="#fff" d="M3,3 H405 C478,3 518,45 518,122 C518,178 510,224 490,258 C548,286 580,335 580,410 V462 C580,556 540,605 482,605 H88 V265 L168,335 V530 H432 C474,530 495,508 495,466 V405 C495,355 470,315 430,315 H323 V450 H243 V235 H378 C415,235 438,212 438,175 V140 C438,105 418,80 395,80 H88 V245 L8,180 V3 Z"/></g></mask></defs><rect width="800" height="800" rx="160" fill="#fdfaf5"/><rect width="800" height="800" fill="url(#fv-g)" mask="url(#fv-m)"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><title>Benjaire</title><defs><linearGradient id="fv" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="800" y2="800"><stop offset="0" stop-color="#5e3d24"/><stop offset="0.3" stop-color="#7f5232"/><stop offset="0.52" stop-color="#a5764b"/><stop offset="0.74" stop-color="#7f5232"/><stop offset="1" stop-color="#5e3d24"/></linearGradient></defs><rect width="800" height="800" rx="160" fill="#fdfaf5"/><path fill="url(#fv)" d="M188.18 179
+H483.33
+C536.93 179 566.3 209.84 566.3 266.37
+C566.3 307.49 560.42 341.26 545.74 366.23
+C588.33 386.78 611.82 422.76 611.82 477.83
+V516.01
+C611.82 585.02 582.45 621 539.87 621
+H250.59
+V371.37
+L309.33 422.76
+V565.93
+H503.16
+C533.99 565.93 549.41 549.78 549.41 518.94
+V474.16
+C549.41 437.44 531.06 408.08 501.69 408.08
+H423.13
+V507.19
+H364.39
+V349.34
+H463.51
+C490.68 349.34 507.56 332.45 507.56 305.29
+V279.59
+C507.56 253.89 492.88 235.54 475.99 235.54
+H250.59
+V356.68
+L191.85 308.96
+V179
+Z"/></svg>
