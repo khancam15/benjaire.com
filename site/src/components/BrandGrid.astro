@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props { featuredOnly?: boolean }
+const { featuredOnly = false } = Astro.props;
+
+const CATEGORY = { 'consumer-tech': 'Consumer tech', digital: 'Digital', lifestyle: 'Lifestyle' } as const;
+const all = (await getCollection('brands')).map((e) => e.data).sort((a, b) => a.order - b.order);
+const brands = featuredOnly ? all.filter((b) => b.featured) : all;
+---
+{brands.length === 0 ? (
+  <div class="empty">
+    <span class="badge">Portfolio in development</span>
+    <h3>Our first brands are on the way.</h3>
+    <p>Benjaire's brands will be announced here as they launch. In the meantime, we welcome conversations with partners, manufacturers and collaborators.</p>
+    <div class="actions center"><a class="btn primary" href="/contact?category=partnership">Start a conversation</a></div>
+  </div>
+) : (
+  <ul class="cards">
+    {brands.map((b) => (
+      <li class="card">
+        <div class="card-logo"><img src={b.logo} alt={`${b.name} logo`} loading="lazy" /></div>
+        <div class="card-meta"><span>{CATEGORY[b.category]}</span><span class="status">{b.status === 'live' ? 'Live' : 'Coming soon'}</span></div>
+        <h3>{b.name}</h3>
+        <p class="muted">{b.description}</p>
+        {b.status === 'live' && b.website ? (
+          <a class="card-link" href={b.website} target="_blank" rel="noopener noreferrer">Visit site &nearr;<span class="sr-only"> (opens {b.name} website in a new tab)</span></a>
+        ) : (
+          <span class="card-soon">Launching soon</span>
+        )}
+      </li>
+    ))}
+  </ul>
+)}

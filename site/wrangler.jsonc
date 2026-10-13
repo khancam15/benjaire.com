@@ -1,0 +1,15 @@
+// Cloudflare Workers static-assets deployment (ADR-0002).
+// Serves the Astro build in ./dist. Clean URLs: /about serves about.html,
+// and the legacy /about.html redirects to /about. No routes or custom
+// domains are configured here: benjaire.com stays on GitHub Pages until
+// the approved M6 cutover.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "benjaire-com",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

@@ -1,0 +1,38 @@
+// Company facts and shared settings. Company-first: never add a person's
+// name, photo, bio or private contact details here (PRD §3.2).
+export const SITE = {
+  name: 'Benjaire',
+  tagline: 'Brands for the modern era',
+  description:
+    'Benjaire is a New York based brand company that builds and operates consumer technology, digital and lifestyle brands focused on modern products, design and experiences.',
+  url: 'https://benjaire.com',
+  email: 'contact@benjaire.com',
+  location: 'New York, NY',
+  founded: 2022,
+} as const;
+
+export const NAV = [
+  { href: '/about', label: 'About' },
+  { href: '/brands', label: 'Brands' },
+  { href: '/contact', label: 'Contact' },
+] as const;
+
+// Inquiry categories (PRD §3.4). `value` is what the URL (?category=) and
+// the form handler use; routing to inboxes is configured server-side (M5).
+export const CATEGORIES = [
+  { value: 'general', label: 'General Inquiry' },
+  { value: 'partnership', label: 'Business Partnership' },
+  { value: 'supplier', label: 'Supplier / Manufacturing' },
+  { value: 'collaboration', label: 'Brand Collaboration' },
+  { value: 'other', label: 'Other' },
+] as const;
+
+// Supplier areas of interest (PRD §3.5). "Exploring" language only:
+// no MOQs, partner names or capability claims.
+export const SUPPLIER_AREAS = [
+  'Consumer technology accessories',
+  'Smartphone accessories',
+  'Laptop accessories',
+  'Audio device accessories',
+  'Lifestyle products',
+] as const;
