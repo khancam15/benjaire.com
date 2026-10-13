@@ -259,10 +259,10 @@ Contact form ──POST──► One serverless function ─┴─► Email API 
 
 | Decision | Recommendation | Status | ADR |
 |---|---|---|---|
-| Frontend framework | **Astro** (static output) with content collections | PROPOSED | [ADR-0001](adr/0001-frontend-framework.md) |
-| Hosting | **Cloudflare Pages** preferred, pending the infrastructure audit; alternatives evaluated | ACCEPTED | [ADR-0002](adr/0002-hosting-platform.md) |
+| Frontend framework | **Astro** (static output) with content collections | ACCEPTED | [ADR-0001](adr/0001-frontend-framework.md) |
+| Hosting | **Cloudflare Pages** (no nameserver change; cutover needs M6 approval) | ACCEPTED | [ADR-0002](adr/0002-hosting-platform.md) |
 | DNS & email preservation | Zone audit and a migration/rollback plan before any change | ACCEPTED | [ADR-0003](adr/0003-dns-and-email-preservation.md) |
-| Contact-form processing | Serverless function + Turnstile + transactional email API; replaces EmailJS | PROPOSED | [ADR-0004](adr/0004-contact-form-processing.md) |
+| Contact-form processing | Serverless function + Turnstile + transactional email API; replaces EmailJS | ACCEPTED | [ADR-0004](adr/0004-contact-form-processing.md) |
 
 ### 8.3 Fallback if the hosting migration is **not** approved
 Astro still builds for GitHub Pages. Trade-offs: no HTTP security headers (meta CSP only, no `frame-ancestors`/HSTS control), and the form must use a hosted form backend that offers server-side validation and spam protection (for example Formspree with Turnstile/reCAPTCHA) or EmailJS hardened with a CAPTCHA. The MVP still ships; only the security posture is weaker.
