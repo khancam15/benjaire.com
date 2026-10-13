@@ -24,9 +24,12 @@ const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePa
 let violations = 0;
 for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
   const context = await browser.newContext({ viewport });
+  // Test our own markup only: third-party widgets (Turnstile) keep network
+  // connections open, which would make runs slow and non-deterministic.
+  await context.route((url) => url.hostname !== 'localhost', (route) => route.abort());
   const page = await context.newPage();
   for (const f of pages) {
-    await page.goto(`${base}/${f}`, { waitUntil: 'networkidle' });
+    await page.goto(`${base}/${f}`, { waitUntil: 'load' });
     const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
     const serious = result.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
     for (const v of serious) console.error(`✗ [${viewport.width}px] ${f}: ${v.id} (${v.nodes.length}) ${v.help}`);
