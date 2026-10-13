@@ -10,6 +10,7 @@ const JSON_HEADERS = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
 };
 const MAX_BODY = 20_000;
+const GOOGLE_VERIFICATION_PATH = '/google16283c1e65acebfc.html';
 
 function respond(req: Request, status: number, body: Record<string, unknown>): Response {
   // Without JavaScript the browser posts a normal form: send it back to the
@@ -100,6 +101,13 @@ export default {
   async fetch(req, env): Promise<Response> {
     const { pathname } = new URL(req.url);
     if (pathname === '/api/contact') return handleContact(req, env);
+    // Google Search Console HTML-file verification must answer 200 at this
+    // exact .html path (the assets layer would redirect it to a clean URL).
+    if (pathname === GOOGLE_VERIFICATION_PATH) {
+      return new Response(`google-site-verification: ${GOOGLE_VERIFICATION_PATH.slice(1)}`, {
+        headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Content-Type-Options': 'nosniff' },
+      });
+    }
     return new Response('Not found', { status: 404, headers: { 'Cache-Control': 'no-store' } });
   },
 } satisfies ExportedHandler<Env>;
