@@ -1,0 +1,32 @@
+---
+import { NAV, SITE } from '../site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-col">
+        <a class="f-logo" href="/" aria-label="Benjaire home"><img src="/brand/benjaire-lockup-horizontal.svg" alt="Benjaire" width="168" height="30" /></a>
+        <span class="muted">Brands for the modern era. A New York based brand company.</span>
+      </div>
+      <nav class="f-col" aria-label="Company">
+        <span class="f-label">Company</span>
+        {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <div class="f-col">
+        <span class="f-label">Contact</span>
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <span class="muted">{SITE.location}</span>
+      </div>
+      <nav class="f-col" aria-label="Legal">
+        <span class="f-label">Legal</span>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <span>&copy; {year} Benjaire &middot; New York</span>
+      <span>{SITE.tagline}</span>
+    </div>
+  </div>
+</footer>

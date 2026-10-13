@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+---
+<Base title="About" description="Benjaire is a New York based company building and operating modern consumer brands across technology, digital and lifestyle.">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">About Benjaire</p>
+      <h1>A brand company for the modern era.</h1>
+      <p class="lead">Benjaire is a New York based company building and operating modern consumer brands across technology, digital and lifestyle.</p>
+    </div>
+  </section>
+
+  <section class="sec band-section">
+    <div class="wrap two">
+      <div><p class="eyebrow">Our mission</p><p class="statement">To build brands that make modern products, design and experiences part of everyday life.</p></div>
+      <div>
+        <p class="eyebrow">At a glance</p>
+        <dl class="facts">
+          <div class="fact"><dt>Headquarters</dt><dd>{SITE.location}</dd></div>
+          <div class="fact"><dt>Established</dt><dd>{SITE.founded}</dd></div>
+          <div class="fact"><dt>Focus</dt><dd>Consumer technology &middot; Digital &middot; Lifestyle</dd></div>
+          <div class="fact"><dt>Model</dt><dd>Builds and operates independent brands</dd></div>
+          <div class="fact"><dt>Contact</dt><dd>{SITE.email}</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec raised band-section" aria-labelledby="approach">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Our approach</p><h2 id="approach">How we work.</h2></div>
+        <p class="muted">Benjaire is the company behind the brands, so each brand can stay focused on its customers.</p>
+      </div>
+      <ol class="pillars">
+        <li class="pillar"><span class="num" aria-hidden="true">01</span><h3>Build</h3><p>Brand strategy, product development, design and launch.</p></li>
+        <li class="pillar"><span class="num" aria-hidden="true">02</span><h3>Operate</h3><p>Sourcing, partnerships, operations and customer experience.</p></li>
+        <li class="pillar"><span class="num" aria-hidden="true">03</span><h3>Grow</h3><p>Long-term stewardship and thoughtful expansion.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec band-section" aria-labelledby="principles">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow">Principles</p><h2 id="principles">What guides us.</h2></div></div>
+      <ul class="principles">
+        <li class="principle"><h3>Design-led</h3><p>Good design is how a brand earns trust before it says a word.</p></li>
+        <li class="principle"><h3>Quality first</h3><p>We would rather launch fewer things, done properly.</p></li>
+        <li class="principle"><h3>Independent brands</h3><p>Every brand has its own name, identity and voice.</p></li>
+        <li class="principle"><h3>Built to last</h3><p>We think in years, not launches.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band dark" aria-labelledby="together">
+    <div class="wrap">
+      <img class="band-mark" src="/brand/benjaire-monogram-cream.svg" alt="" width="54" height="56" />
+      <h2 id="together">Interested in working together?</h2>
+      <p>Tell us about your business, product or idea.</p>
+      <div class="actions center"><a class="btn primary" href="/contact">Contact Benjaire</a></div>
+    </div>
+  </section>
+</Base>

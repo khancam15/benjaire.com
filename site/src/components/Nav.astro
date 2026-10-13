@@ -1,0 +1,39 @@
+---
+import { NAV } from '../site';
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+---
+<header class="site-nav">
+  <div class="wrap">
+    <a class="nav-logo" href="/" aria-label="Benjaire home">
+      <img src="/brand/benjaire-lockup-horizontal.svg" alt="Benjaire" width="156" height="28" />
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      {NAV.map((item) => (
+        <li><a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a></li>
+      ))}
+      <li><a class="nav-cta" href="/contact?category=partnership">Partner with us</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  // Progressive enhancement: without JS the links render inline (see global.css).
+  document.documentElement.classList.add('js');
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const links = document.getElementById('nav-links');
+  if (toggle && links) {
+    const set = (open: boolean) => {
+      links.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    toggle.addEventListener('click', () => set(!links.classList.contains('open')));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && links.classList.contains('open')) { set(false); toggle.focus(); }
+    });
+    matchMedia('(min-width: 901px)').addEventListener('change', (e) => { if (e.matches) set(false); });
+  }
+</script>

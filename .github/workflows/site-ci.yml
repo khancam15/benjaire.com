@@ -1,0 +1,57 @@
+name: Site CI
+
+# Checks for the new Astro site in site/ (PRD M3). The legacy root pages
+# keep their own Security Audit workflow until the M6 cutover.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/site-ci.yml"
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/site-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  ASTRO_TELEMETRY_DISABLED: "1"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: site/.nvmrc
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npx astro check
+
+      - name: Build
+        run: npm run build
+
+      - name: Check internal links
+        run: npm run test:links
+
+      - name: Install Chromium for accessibility tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Accessibility (axe, WCAG 2.2 AA)
+        run: npm run test:a11y
