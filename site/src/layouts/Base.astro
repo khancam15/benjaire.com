@@ -9,6 +9,9 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../site';
+// Preload the two faces used above the fold so text doesn't re-wrap (layout shift).
+import archivo800 from '@fontsource/archivo/files/archivo-latin-800-normal.woff2?url';
+import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -62,6 +65,8 @@ const pageLd = noindex
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#fdfaf5" />
+    <link rel="preload" href={archivo800} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
