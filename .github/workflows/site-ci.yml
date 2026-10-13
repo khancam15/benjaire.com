@@ -41,8 +41,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Type check
+      - name: Type check (site)
         run: npx astro check
+
+      - name: Type check (contact-form Worker)
+        run: npm run check:worker
+
+      - name: Worker unit tests
+        run: npm run test:worker
 
       - name: Build
         run: npm run build

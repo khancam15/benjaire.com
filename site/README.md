@@ -23,7 +23,13 @@ npx astro check        # types
 npm run build
 npm run test:links     # internal links and assets
 npm run test:a11y      # axe, WCAG 2.2 AA, desktop and mobile widths
+npm run check:worker   # Worker types
+npm run test:worker    # Worker unit tests
 ```
+
+To run the form locally, create `site/.dev.vars` (git-ignored) with
+`TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA` (Cloudflare's always-pass test secret)
+and `CONTACT_TO=you@example.com`, then `npx wrangler dev`.
 
 ## Where things live
 
@@ -34,7 +40,10 @@ npm run test:a11y      # axe, WCAG 2.2 AA, desktop and mobile widths
 | `src/layouts/Base.astro` | Page shell: meta tags, nav, footer |
 | `src/pages/` | One file per page |
 | `src/content/brands/` | Brand entries (one JSON file per **publicly approved** brand) |
-| `src/scripts/contact.ts` | Contact form behaviour (sending switches on in M5) |
+| `src/scripts/contact.ts` | Contact form behaviour in the browser |
+| `worker/` | Cloudflare Worker for `/api/contact`: Turnstile check, validation, rate limit, email (`lib.ts` is unit-tested) |
+| `scripts/security-headers.mjs` | Writes `dist/_headers` (CSP with inline-script hashes, HSTS, etc.) after each build |
+| `public/_redirects` | Permanent redirects from the legacy `.html` URLs |
 | `public/brand/` | Logo files (bronze, textured, cream) |
 
 ## Adding a brand
@@ -56,6 +65,16 @@ configured by `wrangler.jsonc` in this folder.
 | Advanced settings → Path (root directory) | `site` |
 | Advanced settings → Build variables | `NODE_VERSION` = `22` |
 | Preview builds | On |
+
+### Worker secrets (Settings → Variables and secrets, type **Secret**)
+
+| Name | Value |
+|---|---|
+| `TURNSTILE_SECRET_KEY` | Secret key of the Turnstile widget |
+| `CONTACT_TO` | The verified Email Routing destination that receives inquiries |
+| `CATEGORY_RECIPIENTS` (optional) | JSON such as `{"supplier":"sourcing@benjaire.com"}` to route a category elsewhere; each address must be a verified destination |
+
+Never put these values in the repository; it is public.
 
 The deployment gets a `*.workers.dev` address only. No routes or custom
 domains are configured, so benjaire.com keeps pointing at GitHub Pages until
