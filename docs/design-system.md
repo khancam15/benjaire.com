@@ -33,6 +33,7 @@
 | A faint hairline grid behind the hero | A technology-forward hint that stays within the palette |
 | Footer gains Legal links and a tagline | Trust and compliance |
 | Form redesign: category chips, inline errors, consent, spam-protection slot | Meets PRD US-3 |
+| No background texture: paper grain was reviewed and declined by the owner (2026-10-13); surfaces stay flat |
 | `text-wrap: balance` on headings | Avoids awkward single-word last lines |
 | **Remove `hero-bg.png` (6.3 MB) and `hero-bg.webp`** | Neither file is referenced anywhere |
 
