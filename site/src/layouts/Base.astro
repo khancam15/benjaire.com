@@ -14,11 +14,43 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  /** schema.org WebPage subtype for this page, e.g. AboutPage, ContactPage */
+  pageType?: string;
 }
-const { title, description = SITE.description, noindex = false } = Astro.props;
+const { title, description = SITE.description, noindex = false, pageType = 'WebPage' } = Astro.props;
 const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | Brands for the Modern Era`;
-const canonical = new URL(Astro.url.pathname.replace(/\/index$/, '/'), SITE.url).href;
-const ogImage = new URL('/brand/benjaire-lockup-vertical.svg', SITE.url).href;
+// Clean URLs: /about (not /about.html), / (not /index.html).
+const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/';
+const canonical = new URL(cleanPath, SITE.url).href;
+const ogImage = new URL('/og/benjaire-og.png', SITE.url).href;
+
+const pageLd = noindex
+  ? null
+  : {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': pageType,
+          '@id': `${canonical}#webpage`,
+          url: canonical,
+          name: fullTitle,
+          description,
+          isPartOf: { '@id': `${SITE.url}/#website` },
+          about: { '@id': `${SITE.url}/#organization` },
+        },
+        ...(cleanPath === '/'
+          ? []
+          : [
+              {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                  { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+                  { '@type': 'ListItem', position: 2, name: title ?? SITE.name, item: canonical },
+                ],
+              },
+            ]),
+      ],
+    };
 ---
 <!doctype html>
 <html lang="en">
@@ -31,13 +63,18 @@ const ogImage = new URL('/brand/benjaire-lockup-vertical.svg', SITE.url).href;
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#fdfaf5" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Benjaire: Brands for the modern era" />
     <meta name="twitter:card" content="summary_large_image" />
+    {pageLd && <script type="application/ld+json" set:html={JSON.stringify(pageLd)} />}
     <slot name="head" />
   </head>
   <body>

@@ -1,18 +1,51 @@
 ---
+// DRAFT for counsel review (PRD V-10). Keep `noindex` and keep this page out
+// of the sitemap until the owner confirms legal review is complete.
 import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+const UPDATED = 'October 13, 2026';
 ---
-<Base title="Terms of Use" noindex>
+<Base title="Terms of Use" description="The terms that apply when you use benjaire.com, including intellectual property, submissions and governing law." noindex>
   <section class="page-head">
     <div class="wrap">
       <p class="eyebrow">Legal</p>
       <h1>Terms of Use</h1>
-      <p class="lead">These terms are being finalized and will be published before the new site launches.</p>
+      <p class="lead">The terms that apply when you use benjaire.com.</p>
     </div>
   </section>
   <section class="sec">
     <div class="wrap prose">
-      <p>Until then, all content on this site is the property of Benjaire and is provided for general information only.</p>
-      <p>Questions about these terms can be sent to <a href="mailto:contact@benjaire.com">contact@benjaire.com</a>.</p>
+      <p class="updated">Last updated: {UPDATED}</p>
+
+      <h2>Using this site</h2>
+      <p>By using benjaire.com, you agree to these terms. If you don't agree, please don't use the site. The site provides general information about Benjaire and its brands.</p>
+
+      <h2>Intellectual property</h2>
+      <p>The Benjaire name, logo, brand names, design and content on this site belong to Benjaire or its licensors. You may view and share pages for personal or informational purposes. Don't copy, modify or use them commercially without our written permission.</p>
+
+      <h2>Messages and ideas you send us</h2>
+      <p>Please don't send confidential information through the contact form or by email unless we've agreed to receive it under a written agreement. Benjaire develops its own brands and products, and may already be working on ideas similar to ones you send. Unsolicited ideas, proposals or materials are received without any obligation of confidentiality or compensation.</p>
+
+      <h2>Acceptable use</h2>
+      <p>Don't use the site to break the law, send spam, interfere with its operation, attempt to gain unauthorized access, or collect information about other people.</p>
+
+      <h2>Links to other sites</h2>
+      <p>This site links to brand websites and other sites. Each has its own terms and policies, and Benjaire isn't responsible for third-party sites.</p>
+
+      <h2>No warranties</h2>
+      <p>The site is provided "as is". We work to keep it accurate and available, but we don't guarantee that it will be error-free or uninterrupted, and information on it may change without notice.</p>
+
+      <h2>Limitation of liability</h2>
+      <p>To the fullest extent the law allows, Benjaire isn't liable for indirect, incidental or consequential damages arising from your use of this site.</p>
+
+      <h2>Governing law</h2>
+      <p>These terms are governed by the laws of the State of New York, without regard to its conflict-of-law rules.</p>
+
+      <h2>Changes</h2>
+      <p>We may update these terms. The date at the top shows when they last changed.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about these terms: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
     </div>
   </section>
 </Base>
