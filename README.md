@@ -2,6 +2,10 @@
 
 Website for Benjaire, a New York holding company. Three pages: home, about, and contact (plus a "Brands" nav item that anchors to a section on the home page). Benjaire owns and builds independent consumer product brands; each brand launches under its own name/trademark on its own domain rather than on benjaire.com.
 
+## New site in progress
+
+A rebuilt site (Astro) is being developed in [`site/`](site/) per the approved plan in [`docs/PRD.md`](docs/PRD.md). The pages at the repository root remain the live site on GitHub Pages until the planned cutover.
+
 ## Description
 
 This repository contains the source code for benjaire.com, a static website hosted on GitHub Pages.
