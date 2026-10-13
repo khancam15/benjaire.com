@@ -13,7 +13,7 @@ No DNS, email-routing, or production-hosting change happens without explicit own
 2. **Stage.** Deploy to Cloudflare Pages and verify the site at its `*.pages.dev` preview URL. Make no DNS changes yet.
 3. **Prepare.** If the website records are DNS-only, lower their TTL ahead of time. Proxied records switch almost instantly.
 4. **Test email before.** Send and receive test messages to and from `contact@benjaire.com` and record the results.
-5. **Cut over** after owner approval: attach `benjaire.com` and `www` as custom domains on the Pages project, which replaces only those records. Leave MX/TXT records alone.
+5. **Cut over** after owner approval: attach `benjaire.com` and `www` as custom domains on the Pages project, which replaces only those records. Leave every other record in the zone (email and unrelated services) alone.
 6. **Verify.** Check site, HTTPS, redirects, MX resolution, and send/receive tests, plus SPF/DKIM/DMARC pass results in the headers of a received message.
 7. **Rollback.** Restore the original website records from the export (GitHub Pages IPs/CNAME). GitHub Pages stays deployed until verification is complete. Keep the export privately.
 

@@ -47,7 +47,11 @@ Benjaire needs a credible, company-first home for the parent brand. It should ex
 | SEO | Titles, meta, Open Graph, `Organization` JSON-LD, sitemap, robots, Search Console verification file | Repo |
 | Assets | `hero-bg.png` is 6.3 MB and `hero-bg.webp` is 137 KB | Repo |
 
-> **What this means:** DNS is already on Cloudflare, so moving hosting to Cloudflare Pages does **not** need a nameserver change. MX and Email Routing records stay untouched, and the cutover only replaces the website records for `benjaire.com` (and `www`). That greatly lowers the email risk. The one item still to check is whether those website records are proxied (orange cloud) or DNS-only (V-3).
+> **What this means:** DNS is already on Cloudflare, so moving hosting to Cloudflare Pages does **not** need a nameserver change. MX and Email Routing records stay untouched, and the cutover only replaces the website records for `benjaire.com` (and `www`). That greatly lowers the email risk. DNS review completed with the owner on 2026-10-13. Record values are kept out of this public repository. Findings:
+1. The website records are **DNS only** (not proxied), so nothing adds security headers today.
+2. The site's apex record doesn't use GitHub's full recommended record set. This only matters if we stay on GitHub Pages.
+3. **No DMARC record exists. [PROPOSED]** Add one in monitoring mode (`p=none`), then tighten to `p=quarantine` after clean reports. This is a DNS change that needs approval and is independent of the website build.
+4. The zone also hosts records outside this project. The cutover changes **only** the two website records.
 
 ## 3. Confirmed Requirements
 
@@ -269,8 +273,10 @@ Astro still builds for GitHub Pages. Trade-offs: no HTTP security headers (meta 
 |---|---|---|---|---|
 | V-1 | ~~DNS provider~~: **Cloudflare [CONFIRMED]** | — | — | — |
 | V-2 | ~~Email provider~~: **Cloudflare Email Routing → private inbox [CONFIRMED]** | — | — | — |
-| V-3 | Whether the `benjaire.com` / `www` website records in Cloudflare are **proxied (orange cloud)** or DNS-only, and their current targets | Rollback baseline; whether Cloudflare rules already add headers | Owner (Cloudflare dashboard → DNS) | M1 |
-| V-4 | Existing SPF/DMARC TXT records (Email Routing adds SPF automatically) | Form-mail deliverability; these records are **not** touched by the hosting cutover | Owner (export the zone file from Cloudflare) | M1 |
+| V-3 | ~~Proxy status~~: website records are **DNS only [CONFIRMED]** | — | — | — |
+| V-4 | ~~Email authentication~~: SPF and DKIM present, **DMARC missing [CONFIRMED]** | — | — | — |
+| V-13 | Zone file exported and stored privately (rollback copy) | Rollback | Owner | Before M6 |
+| V-14 | Approve adding a DMARC record (`p=none` to start) | Spoofing protection | Owner | Any time |
 | V-5 | ~~Public brands~~: **none at launch [CONFIRMED]** | — | — | — |
 | V-6 | ~~Repository visibility~~: **public [CONFIRMED]** | — | — | — |
 | V-12 | Replies to inquiries currently come from the private inbox, which **exposes a personal address** to whoever writes in | Corporate anonymity | Owner | Not blocking; see §12 |
@@ -301,7 +307,7 @@ Each milestone ends in an approval gate. Nothing past a gate starts without your
 | Milestone | Scope | Deliverables | Exit criteria / gate |
 |---|---|---|---|
 | **M0. Plan approval** | This PRD and the ADRs | Approved PRD v0.2 or later; ADR statuses updated | **Owner approves the plan** |
-| **M1. Infrastructure audit** | Resolve V-3, V-4 (V-1, V-2, V-5, V-6 already confirmed) | An audit note in `docs/` covering the record inventory, a hosting recommendation confirmed or revised, and a migration/rollback runbook | **Owner approves the hosting decision.** No DNS, email, or hosting changes happen in M1. |
+| **M1. Infrastructure audit** (facts gathered) | V-1 to V-6 confirmed; hosting decision awaits approval | An audit note in `docs/` covering the record inventory, a hosting recommendation confirmed or revised, and a migration/rollback runbook | **Owner approves the hosting decision.** No DNS, email, or hosting changes happen in M1. |
 | **M2. Design system & visual proposal** | Design tokens, components, before/after mockups | `docs/design-system.md` plus screenshots | **Owner approves the visuals** |
 | **M3. Foundation build** | Astro scaffold; migrate the current pages with matching visuals; shared layout; CI (build, lint, link check, axe, Lighthouse, existing security audit); preview deploys on the approved host (no production change) | Preview URL | Preview matches the approved design; Lighthouse ≥ 95; CI green |
 | **M4. MVP features** | Brands model and page (empty state), About, Contact with categories and the supplier section, Privacy, Terms, 404, SEO, structured data | Feature-complete preview | Every acceptance criterion in §5 passes on preview |
