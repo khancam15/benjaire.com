@@ -1,5 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082 96" role="img" aria-label="Benjaire"><title>Benjaire</title><defs>
-<linearGradient id="bj-wordmark-g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1082" y2="96"><stop offset="0" stop-color="#5a3a22"/><stop offset=".35" stop-color="#8a5a36"/><stop offset=".55" stop-color="#b58357"/><stop offset=".75" stop-color="#8a5a36"/><stop offset="1" stop-color="#5a3a22"/></linearGradient>
-
-<mask id="bj-wordmark-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1082" height="96"><g transform="translate(3,3)"><g fill="none" stroke="#fff" stroke-width="15" stroke-linejoin="round"><path transform="translate(0,0)" d="M6,6 V84 H64 Q84,84 84,64 V64 Q84,45 64,45 H6 M6,6 H62 Q80,6 80,24 V27 Q80,45 62,45"/><path transform="translate(152,0)" d="M84,6 H6 V84 H84 M6,45 H76"/><path transform="translate(304,0)" d="M6,84 V6 L84,84 V6"/><path transform="translate(456,0)" d="M84,6 V64 Q84,84 64,84 H26 Q6,84 6,64 V58"/><path transform="translate(608,0)" d="M6,84 L45,6 L84,84"/><path transform="translate(760,0)" d="M6,6 V84"/><path transform="translate(834,0)" d="M6,84 V6 H64 Q84,6 84,26 V28 Q84,48 64,48 H6 M54,48 L84,84"/><path transform="translate(986,0)" d="M84,6 H6 V84 H84 M6,45 H76"/></g></g></mask></defs>
-<rect width="1082" height="96" fill="url(#bj-wordmark-g)" mask="url(#bj-wordmark-m)"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082 96" role="img" aria-label="Benjaire"><title>Benjaire</title><defs><linearGradient id="bj-wordmark" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1082" y2="96"><stop offset="0" stop-color="#5e3d24"/><stop offset="0.3" stop-color="#7f5232"/><stop offset="0.52" stop-color="#a5764b"/><stop offset="0.74" stop-color="#7f5232"/><stop offset="1" stop-color="#5e3d24"/></linearGradient></defs><path fill="none" stroke="url(#bj-wordmark)" stroke-width="18" stroke-linejoin="round" d="M9 9
+V87
+H67
+Q87 87 87 67
+V67
+Q87 48 67 48
+H9
+M9 9
+H65
+Q83 9 83 27
+V30
+Q83 48 65 48 M239 9
+H161
+V87
+H239
+M161 48
+H231 M313 87
+V9
+L391 87
+V9 M543 9
+V67
+Q543 87 523 87
+H485
+Q465 87 465 67
+V61 M617 87
+L656 9
+L695 87 M769 9
+V87 M843 87
+V9
+H901
+Q921 9 921 29
+V31
+Q921 51 901 51
+H843
+M891 51
+L921 87 M1073 9
+H995
+V87
+H1073
+M995 48
+H1065"/></svg>
