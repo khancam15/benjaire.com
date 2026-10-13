@@ -7,6 +7,11 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "benjaire-com",
   "compatibility_date": "2026-09-01",
+  // Preview addresses: <name>.<account>.workers.dev for main, plus a
+  // per-branch preview URL for pull requests. Search engines are pointed at
+  // benjaire.com by each page's canonical tag.
+  "workers_dev": true,
+  "preview_urls": true,
   "assets": {
     "directory": "./dist",
     "html_handling": "auto-trailing-slash",
