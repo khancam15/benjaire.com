@@ -275,7 +275,7 @@ Astro still builds for GitHub Pages. Trade-offs: no HTTP security headers (meta 
 | V-2 | ~~Email provider~~: **Cloudflare Email Routing → private inbox [CONFIRMED]** | — | — | — |
 | V-3 | ~~Proxy status~~: website records are **DNS only [CONFIRMED]** | — | — | — |
 | V-4 | ~~Email authentication~~: SPF and DKIM present, **DMARC missing [CONFIRMED]** | — | — | — |
-| V-13 | Zone file exported and stored privately (rollback copy) | Rollback | Owner | Before M6 |
+| V-13 | ~~Zone export~~: **exported 2026-10-13 and stored privately by the owner [CONFIRMED]** | — | — | — |
 | V-14 | Approve adding a DMARC record (`p=none` to start) | Spoofing protection | Owner | Any time |
 | V-5 | ~~Public brands~~: **none at launch [CONFIRMED]** | — | — | — |
 | V-6 | ~~Repository visibility~~: **public [CONFIRMED]** | — | — | — |
