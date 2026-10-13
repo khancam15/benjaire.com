@@ -1,9 +1,12 @@
-// Contact form: category prefill, client-side validation and submission.
-// Server-side validation, Turnstile and email delivery arrive in M5
-// (ADR-0004). Until FORM_ENABLED is true the form explains that and points
-// to the direct email address instead of pretending to send.
-const FORM_ENABLED = false;
+// Contact form: category prefill, client-side validation and submission to
+// the Worker at /api/contact (ADR-0004). The Worker repeats every check
+// server-side, verifies Turnstile and sends the email. Without JavaScript the
+// form still posts normally and the Worker redirects back with ?status=.
 const EMAIL = 'contact@benjaire.com';
+
+declare global {
+  interface Window { turnstile?: { reset: (el?: string | HTMLElement) => void } }
+}
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export function initContactForm(): void {
@@ -11,8 +14,9 @@ export function initContactForm(): void {
   if (!form) return;
   const status = document.getElementById('form-status') as HTMLElement;
 
+  const params = new URLSearchParams(location.search);
   // ?category=supplier preselects a chip.
-  const wanted = new URLSearchParams(location.search).get('category');
+  const wanted = params.get('category');
   if (wanted) {
     const chip = form.querySelector<HTMLInputElement>(`input[name="category"][value="${CSS.escape(wanted)}"]`);
     if (chip) chip.checked = true;
@@ -52,6 +56,10 @@ export function initContactForm(): void {
     status.hidden = false;
   };
 
+  // Result of a no-JavaScript submission (the Worker redirects back here).
+  if (params.get('status') === 'sent') show('ok', 'Thanks. Your message is on its way, and we reply within 24 hours.');
+  if (params.get('status') === 'error') show('error', `Your message couldn't be sent. Please try again, or email ${EMAIL}.`);
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const firstInvalid = validate();
@@ -61,8 +69,8 @@ export function initContactForm(): void {
     }
     if ((form.elements.namedItem('website') as HTMLInputElement).value) return; // honeypot
 
-    if (!FORM_ENABLED) {
-      show('error', `Online sending isn't switched on yet. Please email ${EMAIL}, and your message will reach the same inbox.`);
+    if (!form.querySelector<HTMLInputElement>('input[name="cf-turnstile-response"]')?.value) {
+      show('error', 'Please complete the spam check above the Send button.');
       return;
     }
 
@@ -70,13 +78,19 @@ export function initContactForm(): void {
     button.disabled = true;
     try {
       const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-      if (!res.ok) throw new Error(String(res.status));
-      form.reset();
-      show('ok', 'Thanks. Your message is on its way, and we reply within 24 hours.');
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; fields?: Record<string, string> };
+      if (res.ok && data.ok) {
+        form.reset();
+        show('ok', 'Thanks. Your message is on its way, and we reply within 24 hours.');
+      } else {
+        for (const [id, msg] of Object.entries(data.fields ?? {})) setError(id, msg);
+        show('error', `${data.error ?? "Your message couldn't be sent."} Your text is still here. You can also email ${EMAIL}.`);
+      }
     } catch {
       show('error', `Your message couldn't be sent. Your text is still here, so try again, or email ${EMAIL}.`);
     } finally {
       button.disabled = false;
+      window.turnstile?.reset();
     }
   });
 }

@@ -36,3 +36,7 @@ export const SUPPLIER_AREAS = [
   'Audio device accessories',
   'Lifestyle products',
 ] as const;
+
+// Cloudflare Turnstile site key (public by design). The secret key lives
+// only in the Worker's secrets as TURNSTILE_SECRET_KEY.
+export const TURNSTILE_SITE_KEY = '0x4AAAAAAFVZs6h_1DsCs70r';

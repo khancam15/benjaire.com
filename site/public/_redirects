@@ -1,0 +1,4 @@
+# Permanent redirects for the legacy GitHub Pages URLs (keeps search ranking).
+/index.html / 301
+/about.html /about 301
+/contact.html /contact 301

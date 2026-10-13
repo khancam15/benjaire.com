@@ -4,13 +4,15 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/security-headers.mjs dist",
     "preview": "astro preview",
     "check": "astro check",
     "test:links": "node scripts/check-links.mjs dist",
     "test:a11y": "node scripts/a11y.mjs dist",
-    "ci": "astro check && astro build && node scripts/check-links.mjs dist && node scripts/check-seo.mjs dist",
-    "test:seo": "node scripts/check-seo.mjs dist"
+    "ci": "astro check && npm run check:worker && npm run test:worker && npm run build && node scripts/check-links.mjs dist && node scripts/check-seo.mjs dist",
+    "test:seo": "node scripts/check-seo.mjs dist",
+    "test:worker": "node --test worker/lib.test.ts",
+    "check:worker": "wrangler types worker/worker-configuration.d.ts && tsc -p worker"
   },
   "dependencies": {
     "@fontsource/archivo": "5.3.0",

@@ -1,8 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import { CATEGORIES, SITE, SUPPLIER_AREAS } from '../site';
+import { CATEGORIES, SITE, SUPPLIER_AREAS, TURNSTILE_SITE_KEY } from '../site';
 ---
 <Base title="Contact" pageType="ContactPage" description="Company inquiries, partnerships, suppliers and collaborations for Benjaire in New York.">
+  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <section class="page-head">
     <div class="wrap">
       <p class="eyebrow">Get in touch</p>
@@ -73,6 +74,8 @@ import { CATEGORIES, SITE, SUPPLIER_AREAS } from '../site';
             </label>
             <span class="error" id="consent-err" aria-live="polite"></span>
           </div>
+
+          <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-action="contact" data-theme="light" data-size="flexible"></div>
 
           <div><button class="btn primary" type="submit">Send message &rarr;</button></div>
           <p class="form-status" id="form-status" role="status" hidden></p>
