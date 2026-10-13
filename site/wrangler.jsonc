@@ -17,6 +17,8 @@
   // benjaire.com by each page's canonical tag.
   "workers_dev": true,
   "preview_urls": true,
+  // Keep Worker logs (contact-form errors) in the dashboard. Free tier.
+  "observability": { "enabled": true },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
