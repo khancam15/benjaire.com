@@ -34,7 +34,7 @@ There is **no database**: submissions aren't stored, the inbox is the system of 
 - Adding per-category inboxes later is a config-only change.
 
 ## Implementation (2026-10-13)
-- Delivery uses option **(a)**, Cloudflare's `send_email` binding with its structured `send({ from, to, replyTo, subject, text })` API. No third-party email provider and no new DNS records.
+- Delivery uses option **(a)**, Cloudflare's `send_email` binding with the classic `EmailMessage` (raw MIME built in `worker/lib.ts`). The newer structured `send({ from, to, … })` API failed in production: it belongs to the beta Email Sending product, which needs separate domain onboarding. The classic path works with Email Routing verified destinations. No third-party provider and no new DNS records.
 - From `website@benjaire.com` to the verified destination in the `CONTACT_TO` secret. Reply-To is the sender, so replying answers them directly.
 - The Worker runs only for `/api/*` (`run_worker_first`); every page stays a static asset.
 - Defenses: Origin allow-list, 20 KB body cap, Workers rate limiting (5 per minute per IP), honeypot, server-side Turnstile verification with action `contact`, field validation, and control-character stripping (header-injection safe).
