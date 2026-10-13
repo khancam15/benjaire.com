@@ -105,7 +105,18 @@ Easing `cubic-bezier(.16, 1, .3, 1)`. Reveal: opacity plus a 20px rise over 0.9s
 | Brands (layout sample, never published) | — | `after-brands-sample-*` |
 | Contact | `before-contact-*` | `after-contact-*` |
 
-## 8. Logo usage (pending source files)
+## 8. Logo usage
+**Source:** the original vector files are lost, so the logo was **redrawn as SVG** from the owner's photo mockup (2026-10-13) and checked against an outline traced from the photo. It's pending owner approval; see `docs/design/logo/logo-proposal.png`.
+
+| File (`docs/design/logo/`) | Use |
+|---|---|
+| `benjaire-lockup-vertical.svg` / `-cream.svg` | Stacked logo: hero, about, social images; cream version on the cocoa band |
+| `benjaire-lockup-horizontal.svg` / `-cream.svg` | Nav and footer |
+| `benjaire-monogram.svg` | The "B" alone |
+| `benjaire-wordmark.svg` | Wordmark alone (monoline, stroke-based) |
+| `favicon.svg` | Browser tab icon (copper B on a cream rounded square) |
+
+Logo color: `--copper #9a5420`.
 - Nav: monogram plus wordmark, about 28px tall. Footer: the full lockup. Favicon: the monogram alone, on cream and in copper.
 - Logo color: copper on cream or white. Cream version on the cocoa band.
 - Minimum clear space: the height of the monogram's top notch on all sides.
