@@ -15,7 +15,7 @@
 |---|---|
 | Palette family | Warm neutrals with a single brown accent (now shifted warmer; see §4) |
 | Type | Archivo (display, 500/700/800) and Inter (body, 400/500/600) |
-| Wordmark | "BENJAIRE" in Archivo 800, uppercase, 0.1em tracking |
+| Logo | **Official logo (owner-supplied, 2026-10-13):** a copper geometric "B" monogram plus a wide-spaced geometric "BENJAIRE" wordmark. It replaces the typed Archivo wordmark in the nav and footer once vector files arrive. |
 | Structure | Full-width hairline rules, flat surfaces, no shadows, no rounded corners |
 | Labels | Wide-tracked uppercase eyebrows with a short accent rule |
 | Motion | Gentle fade-and-rise reveal, disabled under `prefers-reduced-motion` |
@@ -53,6 +53,7 @@ The palette shifts warmer and browner than the original near-black/umber. It's i
 | `--accent` | `#6b4226` | Saddle brown: buttons, links, numbers | 8.3:1 (white on it: 8.6:1) |
 | `--accent-hi` | `#8a5a36` | Hover | 5.6:1 |
 | `--caramel` | `#b58357` | Decorative rules only, **never** text | 3.2:1 |
+| `--copper` (proposed) | `#9a5420` | **Logo color**, sampled from the logo mockup (≈ `#a35e23`) and darkened slightly for contrast. Logo, eyebrow rules, and large accents. Text use OK on cream (5.5:1); pending the exact value from the logo files. | 5.5:1 |
 | `--cocoa` | `#2a1d14` | Dark closing band | Cream text on it: 15.7:1 |
 | `--danger` | `#8f2716` | Form errors | 8.2:1 |
 
@@ -103,3 +104,9 @@ Easing `cubic-bezier(.16, 1, .3, 1)`. Reveal: opacity plus a 20px rise over 0.9s
 | Brands (launch, empty) | — (no page today) | `after-brands-*` |
 | Brands (layout sample, never published) | — | `after-brands-sample-*` |
 | Contact | `before-contact-*` | `after-contact-*` |
+
+## 8. Logo usage (pending source files)
+- Nav: monogram plus wordmark, about 28px tall. Footer: the full lockup. Favicon: the monogram alone, on cream and in copper.
+- Logo color: copper on cream or white. Cream version on the cocoa band.
+- Minimum clear space: the height of the monogram's top notch on all sides.
+- No dark mode, so no dark-theme logo variant is needed beyond the cocoa band.

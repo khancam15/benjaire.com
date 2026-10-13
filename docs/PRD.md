@@ -232,7 +232,7 @@ Individual brand sites hosted here, e-commerce, customer accounts, partner colla
 - Self-hosted, subset fonts (faster, no Google Fonts call, simpler CSP).
 - Brand card, form, button, and badge components, with all states (hover, focus, disabled, error, success).
 - A restrained motion spec (opacity and translate under 300ms, disabled under reduced motion).
-- An optional dark theme. **[VERIFY]** whether you want one.
+- No dark theme (owner decision 2026-10-13).
 
 **Deliverables before implementation:**
 1. `docs/design-system.md`: tokens, type, spacing, components, motion, voice and tone.
@@ -285,7 +285,8 @@ Astro still builds for GitHub Pages. Trade-offs: no HTTP security headers (meta 
 | V-8 | Analytics: approve Cloudflare Web Analytics (cookieless) or none | Privacy policy content | Owner | M4 |
 | V-9 | Terms of Use at launch: yes or no | Page scope | Owner | M4 |
 | V-10 | Legal review of the Privacy and Terms text | Compliance | Owner (counsel) | Launch |
-| V-11 | Dark theme wanted? | Design scope | Owner | M2 |
+| V-11 | ~~Dark theme~~: **no dark mode [CONFIRMED 2026-10-13]** | — | — | — |
+| V-16 | **Logo source files**: an official logo exists (a copper geometric "B" monogram and a wide-spaced "BENJAIRE" wordmark), but only as a photo mockup. Need SVG (preferred) or a high-resolution transparent PNG, and the exact brand color values. | Nav, footer, favicon, social images | Owner | M3 |
 
 ### 9.1 How to verify V-3 and V-4 (read-only; changes nothing)
 In the Cloudflare dashboard, go to benjaire.com → **DNS → Records**, note the proxy status of the `benjaire.com` and `www` records, and use **Export** to save a zone file (keep it private; don't commit it). Or, from any terminal:
