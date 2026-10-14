@@ -16,14 +16,18 @@ for (const f of readdirSync(root).filter((n) => n.endsWith('.html'))) {
 }
 
 const turnstile = 'https://challenges.cloudflare.com';
+// Cloudflare Web Analytics: the edge injects its beacon script, which reports
+// to cloudflareinsights.com. Without these two hosts visits go uncounted.
+const insightsScript = 'https://static.cloudflareinsights.com';
+const insightsReport = 'https://cloudflareinsights.com';
 const csp = [
   "default-src 'self'",
-  `script-src 'self' ${[...hashes].join(' ')} ${turnstile}`.replace(/\s+/g, ' '),
+  `script-src 'self' ${[...hashes].join(' ')} ${turnstile} ${insightsScript}`.replace(/\s+/g, ' '),
   // Turnstile sizes its iframe with inline styles; scripts stay strict.
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self'",
-  "connect-src 'self'",
+  `connect-src 'self' ${insightsReport}`,
   `frame-src ${turnstile}`,
   "frame-ancestors 'none'",
   "base-uri 'self'",
