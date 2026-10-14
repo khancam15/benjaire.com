@@ -197,6 +197,7 @@ h1 span, h2 span { color: var(--silver-ink); }
 .pillar { padding: var(--s-5) var(--s-4) var(--s-5) 0; border-right: 1px solid var(--line); min-width: 0; }
 .pillar + .pillar { padding-left: var(--s-4); }
 .pillar:last-child { border-right: none; }
+.pillars.four { grid-template-columns: repeat(4, 1fr); }
 .pillar h3 { margin-bottom: var(--s-2); font-size: clamp(30px, 3vw, 44px); font-weight: 360; letter-spacing: -.04em; }
 .num {
   display: block; margin-bottom: var(--s-4);
@@ -321,6 +322,8 @@ textarea.input { min-height: 150px; resize: vertical; }
 
 /* ─── responsive ─── */
 @media (max-width: 1180px) {
+  .pillars.four { grid-template-columns: 1fr; }
+  .pillars.four .pillar { padding: var(--s-4) 0; border-right: none; border-bottom: 1px solid var(--line); }
   .title-block { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .title-block > * + * { border-left: 0; }
   .title-block > * { border-top: 1px solid var(--line-mid); }

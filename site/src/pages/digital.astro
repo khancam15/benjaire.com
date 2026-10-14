@@ -1,0 +1,123 @@
+---
+// Benjaire Digital, the primary operating division (approved 2026-10-14).
+// Built from existing components only: page-head, rows, pillars, facts, band.
+// Benjaire Intake is in development: never describe it as available.
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+
+const PROBLEMS = [
+  { name: 'Repetitive administrative tasks', text: 'Details copied by hand between email, forms and spreadsheets.' },
+  { name: 'Manual client onboarding', text: 'Welcome emails, documents and setup steps assembled from scratch for every new client.' },
+  { name: 'Disconnected business applications', text: 'Inquiries, CRM, calendar and project tools that don\'t share information.' },
+  { name: 'Inconsistent next steps', text: 'Replies and reminders that depend on someone remembering to send them.' },
+  { name: 'Limited operational visibility', text: 'No clear view of where each inquiry or client stands.' },
+];
+
+const CAPABILITIES = [
+  { name: 'Client inquiry capture', text: 'Website and email inquiries collected in one structured place.' },
+  { name: 'CRM integration', text: 'New contacts and their context sent to the CRM your firm already uses.' },
+  { name: 'Automated acknowledgments', text: 'A prompt, personal confirmation for every inquiry.' },
+  { name: 'Inquiry routing', text: 'Each request sent to the right person based on its type.' },
+  { name: 'Onboarding task creation', text: 'A ready checklist of tasks for every new client.' },
+  { name: 'Timely reminders', text: 'Prompts so no inquiry or onboarding step goes quiet.' },
+];
+
+// Discover → Configure → Deploy → Support is a real sequence, so it is numbered.
+const STEPS = [
+  { name: 'Discover', text: 'We map how inquiries, onboarding and client communication work in your firm today.' },
+  { name: 'Configure', text: 'We adapt a standard automation to your tools, wording and team.' },
+  { name: 'Deploy', text: 'We launch it alongside your existing systems and test it with real workflows.' },
+  { name: 'Support', text: 'We monitor, adjust and improve it as your firm grows.' },
+];
+
+const description = 'Benjaire Digital develops workflow automation solutions that help professional services firms simplify client onboarding and streamline business operations.';
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${SITE.url}/digital#service`,
+  name: 'Benjaire Digital workflow automation',
+  serviceType: 'Business process automation',
+  description,
+  url: `${SITE.url}/digital`,
+  provider: { '@id': `${SITE.url}/#organization` },
+  audience: { '@type': 'BusinessAudience', name: 'Professional services firms' },
+};
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<Base title="Digital Solutions" seoTitle="Business Automation Solutions | Benjaire Digital" description={description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Benjaire Digital</p>
+      <h1>Intelligent automation for <span>modern business.</span></h1>
+      <p class="lead mb-5">Benjaire Digital helps professional services firms simplify operations through intelligent, practical workflow automation.</p>
+      <div class="actions">
+        <a class="btn primary" href="/contact?category=digital#inquiry">Discuss your workflow <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#intake">See Benjaire Intake</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec raised band-section" aria-labelledby="solve">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">What we solve</p><h2 id="solve">The work behind the client work.</h2></div>
+        <p class="muted">Small firms often run on manual steps between tools that don't talk to each other. Business process automation starts there.</p>
+      </div>
+      <ul class="rows">
+        {PROBLEMS.map((p) => <li class="row"><h3>{p.name}</h3><p>{p.text}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec band-section" id="intake" aria-labelledby="intake-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Featured solution</p>
+          <span class="badge">In development</span>
+          <h2 id="intake-title">Benjaire Intake.</h2>
+        </div>
+        <p class="muted">An intelligent client intake and onboarding automation solution designed to help professional services businesses organize inquiries, streamline onboarding, and keep every next step on schedule. These are the planned capabilities; firms that talk to us now can help shape them.</p>
+      </div>
+      <ul class="rows">
+        {CAPABILITIES.map((c) => <li class="row"><h3>{c.name}</h3><p>{c.text}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec raised band-section" aria-labelledby="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">How it works</p><h2 id="how">Four steps, one standard.</h2></div>
+        <p class="muted">Productized workflow automation: proven building blocks, configured for your firm rather than built from scratch.</p>
+      </div>
+      <ol class="pillars four">
+        {STEPS.map((s, i) => <li class="pillar"><span class="num" aria-hidden="true">{pad(i + 1)}</span><h3>{s.name}</h3><p>{s.text}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec band-section" aria-labelledby="serve">
+    <div class="wrap two">
+      <div><p class="eyebrow">Who we serve</p><h2 id="serve" class="statement">Professional services firms that want more time for clients and less time on admin.</h2></div>
+      <dl class="facts">
+        <div class="fact"><dt>Primary focus</dt><dd>Boutique consulting firms</dd></div>
+        <div class="fact"><dt>Also</dt><dd>Small agencies and business advisory firms</dd></div>
+        <div class="fact"><dt>Team size</dt><dd>About 5 to 30 people</dd></div>
+        <div class="fact"><dt>Division of</dt><dd><a href="/about">Benjaire, {SITE.location}</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="band dark" aria-labelledby="build-smarter">
+    <div class="wrap">
+      <img class="band-mark" src="/brand/benjaire-monogram-cream.svg" alt="" width="54" height="56" />
+      <p class="eyebrow center">Get started</p>
+      <h2 id="build-smarter">Build smarter business operations.</h2>
+      <p>Tell us how your firm handles inquiries and onboarding today.</p>
+      <div class="actions center"><a class="btn primary" href="/contact?category=digital#inquiry">Contact Benjaire</a></div>
+    </div>
+  </section>
+</Base>
