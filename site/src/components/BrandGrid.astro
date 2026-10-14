@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 
-interface Props { featuredOnly?: boolean }
-const { featuredOnly = false } = Astro.props;
+// headingLevel keeps the outline valid: 3 when the grid sits under a section h2.
+interface Props { featuredOnly?: boolean; headingLevel?: 2 | 3 }
+const { featuredOnly = false, headingLevel = 2 } = Astro.props;
+const EmptyHeading = headingLevel === 3 ? 'h3' : 'h2';
 
 const CATEGORY = { 'consumer-tech': 'Consumer tech', digital: 'Digital', lifestyle: 'Lifestyle' } as const;
 const all = (await getCollection('brands')).map((e) => e.data).sort((a, b) => a.order - b.order);
@@ -11,7 +13,7 @@ const brands = featuredOnly ? all.filter((b) => b.featured) : all;
 {brands.length === 0 ? (
   <div class="empty">
     <span class="badge">Portfolio in development</span>
-    <h2 class="empty-title">Our first brands are on the way.</h2>
+    <EmptyHeading class="empty-title">Our first brands are on the way.</EmptyHeading>
     <p>Benjaire's brands will be announced here as they launch. In the meantime, we welcome conversations with partners, manufacturers and collaborators.</p>
     <div class="actions center"><a class="btn primary" href="/contact?category=partnership">Start a conversation</a></div>
   </div>

@@ -2,12 +2,12 @@
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
 ---
-<Base title="About" pageType="AboutPage" description="Benjaire is a New York based company building and operating modern consumer brands across technology, digital and lifestyle.">
+<Base title="About" seoTitle="About Benjaire | How We Build and Operate Brands" pageType="AboutPage" description="Founded in New York in 2022, Benjaire develops and operates independent brands. See how the company works, what guides it and how its brands are structured.">
   <section class="page-head">
     <div class="wrap">
       <p class="eyebrow">About Benjaire</p>
       <h1>A brand company for the modern era.</h1>
-      <p class="lead">Benjaire is a New York based company building and operating modern consumer brands across technology, digital and lifestyle.</p>
+      <p class="lead">Benjaire is a New York company that develops, owns and operates independent brands. It gives each one the strategy, operations and ownership it needs, so the brand itself can stay focused on its customers.</p>
     </div>
   </section>
 
@@ -20,24 +20,52 @@ import { SITE } from '../site';
           <div class="fact"><dt>Headquarters</dt><dd>{SITE.location}</dd></div>
           <div class="fact"><dt>Established</dt><dd>{SITE.founded}</dd></div>
           <div class="fact"><dt>Focus</dt><dd>Consumer technology &middot; Digital &middot; Lifestyle</dd></div>
-          <div class="fact"><dt>Model</dt><dd>Builds and operates independent brands</dd></div>
+          <div class="fact"><dt>Model</dt><dd>Develops, owns and operates independent brands</dd></div>
           <div class="fact"><dt>Contact</dt><dd>{SITE.email}</dd></div>
         </dl>
       </div>
     </div>
   </section>
 
-  <section class="sec raised band-section" aria-labelledby="approach">
+  <section class="sec raised band-section" aria-labelledby="structure">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Our structure</p><h2 id="structure">Benjaire and its brands.</h2></div>
+        <p class="muted">Benjaire is the company behind the brands. It doesn't sell under its own name; its brands do. <a href="/brands">See the portfolio</a></p>
+      </div>
+      <ul class="rows">
+        <li class="row"><h3>Benjaire owns</h3><p>Every brand in the portfolio is developed, owned and operated by Benjaire, and held with years in mind rather than a single launch.</p></li>
+        <li class="row"><h3>The brand leads</h3><p>Customers meet the brand: its own name, identity, voice and website. Benjaire stays in the background.</p></li>
+        <li class="row"><h3>Benjaire supports</h3><p>Brand strategy, product development, sourcing and operations sit with Benjaire, so each brand can concentrate on the people it serves.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec band-section" aria-labelledby="approach">
     <div class="wrap">
       <div class="sec-head">
         <div><p class="eyebrow">Our approach</p><h2 id="approach">How we work.</h2></div>
-        <p class="muted">Benjaire is the company behind the brands, so each brand can stay focused on its customers.</p>
+        <p class="muted">Each brand moves through the same three stages, with Benjaire accountable at every one.</p>
       </div>
       <ol class="pillars">
         <li class="pillar"><span class="num" aria-hidden="true">01</span><h3>Build</h3><p>Brand strategy, product development, design and launch.</p></li>
         <li class="pillar"><span class="num" aria-hidden="true">02</span><h3>Operate</h3><p>Sourcing, partnerships, operations and customer experience.</p></li>
         <li class="pillar"><span class="num" aria-hidden="true">03</span><h3>Grow</h3><p>Long-term stewardship and thoughtful expansion.</p></li>
       </ol>
+    </div>
+  </section>
+
+  <section class="sec raised band-section" aria-labelledby="focus">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Focus areas</p><h2 id="focus">Where we focus.</h2></div>
+        <p class="muted">Benjaire builds in three categories and keeps to them.</p>
+      </div>
+      <ul class="rows">
+        <li class="row"><h3>Consumer technology</h3><p>Accessories for the devices people carry every day. Benjaire is exploring smartphone, laptop and audio accessories.</p></li>
+        <li class="row"><h3>Digital</h3><p>Online products and experiences, each built and sold under its brand's own name.</p></li>
+        <li class="row"><h3>Lifestyle</h3><p>Everyday products where considered design makes a visible difference.</p></li>
+      </ul>
     </div>
   </section>
 

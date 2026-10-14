@@ -22,6 +22,12 @@ for (const f of pages) {
   if (!og?.endsWith('.png')) errors.push(`${f}: og:image must be a PNG (got ${og})`);
   else if (!existsSync(join(root, new URL(og).pathname))) errors.push(`${f}: og:image file not found`);
   if ((html.match(/<h1[\s>]/g) ?? []).length !== 1) errors.push(`${f}: must have exactly one <h1>`);
+  // Indexable pages: snippet-friendly lengths and a self-contained entity graph.
+  if (!/<meta name="robots" content="noindex"/.test(html)) {
+    if (title && title.length > 60) errors.push(`${f}: title is ${title.length} characters (max 60)`);
+    if (desc && (desc.length < 120 || desc.length > 160)) errors.push(`${f}: meta description is ${desc.length} characters (want 120 to 160)`);
+    if (!html.includes('"@id":"https://benjaire.com/#organization","name"')) errors.push(`${f}: Organization schema node missing`);
+  }
 }
 
 const sitemapPath = join(root, 'sitemap.xml');
