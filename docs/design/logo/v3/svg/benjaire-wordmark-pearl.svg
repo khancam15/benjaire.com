@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082 96" role="img" aria-label="Benjaire"><title>Benjaire</title><defs><linearGradient id="bj-wordmark" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1082" y2="96"><stop offset="0" stop-color="#bfc3c8"/><stop offset="0.3" stop-color="#e6e8ea"/><stop offset="0.52" stop-color="#ffffff"/><stop offset="0.74" stop-color="#e6e8ea"/><stop offset="1" stop-color="#bfc3c8"/></linearGradient></defs><path fill="none" stroke="url(#bj-wordmark)" stroke-width="18" stroke-linejoin="round" d="M9 9
+V87
+H67
+Q87 87 87 67
+V67
+Q87 48 67 48
+H9
+M9 9
+H65
+Q83 9 83 27
+V30
+Q83 48 65 48 M239 9
+H161
+V87
+H239
+M161 48
+H231 M313 87
+V9
+L391 87
+V9 M543 9
+V67
+Q543 87 523 87
+H485
+Q465 87 465 67
+V61 M617 87
+L656 9
+L695 87 M769 9
+V87 M843 87
+V9
+H901
+Q921 9 921 29
+V31
+Q921 51 901 51
+H843
+M891 51
+L921 87 M1073 9
+H995
+V87
+H1073
+M995 48
+H1065"/></svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1613 936" role="img" aria-label="Benjaire"><title>Benjaire</title><defs><linearGradient id="bj-lockup-vertical" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1613" y2="936"><stop offset="0" stop-color="#bfc3c8"/><stop offset="0.3" stop-color="#e6e8ea"/><stop offset="0.52" stop-color="#ffffff"/><stop offset="0.74" stop-color="#e6e8ea"/><stop offset="1" stop-color="#bfc3c8"/></linearGradient></defs><path fill="url(#bj-lockup-vertical)" d="M518 3
+H920
+C993 3 1033 45 1033 122
+C1033 178 1025 224 1005 258
+C1063 286 1095 335 1095 410
+V462
+C1095 556 1055 605 997 605
+H603
+V265
+L683 335
+V530
+H947
+C989 530 1010 508 1010 466
+V405
+C1010 355 985 315 945 315
+H838
+V450
+H758
+V235
+H893
+C930 235 953 212 953 175
+V140
+C953 105 933 80 910 80
+H603
+V245
+L523 180
+V3
+Z"/><path fill="none" stroke="url(#bj-lockup-vertical)" stroke-width="26.82" stroke-linejoin="round" d="M13.82 805.41
+V921.63
+H100.24
+Q130.04 921.63 130.04 891.83
+V891.83
+Q130.04 863.52 100.24 863.52
+H13.82
+M13.82 805.41
+H97.26
+Q124.08 805.41 124.08 832.23
+V836.7
+Q124.08 863.52 97.26 863.52 M356.52 805.41
+H240.3
+V921.63
+H356.52
+M240.3 863.52
+H344.6 M466.78 921.63
+V805.41
+L583 921.63
+V805.41 M809.48 805.41
+V891.83
+Q809.48 921.63 779.68 921.63
+H723.06
+Q693.26 921.63 693.26 891.83
+V882.89 M919.74 921.63
+L977.85 805.41
+L1035.96 921.63 M1146.22 805.41
+V921.63 M1256.48 921.63
+V805.41
+H1342.9
+Q1372.7 805.41 1372.7 835.21
+V838.19
+Q1372.7 867.99 1342.9 867.99
+H1256.48
+M1328 867.99
+L1372.7 921.63 M1599.18 805.41
+H1482.96
+V921.63
+H1599.18
+M1482.96 863.52
+H1587.26"/></svg>
