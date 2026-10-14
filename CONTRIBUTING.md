@@ -7,7 +7,8 @@ This repository follows a simple workflow so the history stays clean and easy to
 1. Create a branch from `main` named `type/short-description`, for example `docs/update-readme` or `fix/contrast-audit`.
 2. Commit your changes on that branch.
 3. Open a pull request into `main` with a Conventional Commits title.
-4. Squash merge the pull request. The commit on `main` takes the pull request title plus its number, for example `docs: update README (#12)`.
+4. Before merging, run `npm run ci` in `site/` and confirm it exits 0. Merging to `main` deploys to production.
+5. Squash merge the pull request. The commit on `main` takes the pull request title plus its number, for example `docs: update README (#12)`.
 
 ## Commit and pull request titles
 
