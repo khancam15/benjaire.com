@@ -2,11 +2,10 @@
 // with `node --test`. Keep the category list in sync with src/site.ts.
 
 export const CATEGORIES: Record<string, string> = {
-  general: 'General Inquiry',
-  partnership: 'Business Partnership',
+  digital: 'Digital Solutions',
+  general: 'General Business Inquiry',
+  partnership: 'Partnership',
   supplier: 'Supplier / Manufacturing',
-  collaboration: 'Brand Collaboration',
-  other: 'Other',
 };
 
 export const LIMITS = { name: 120, email: 254, company: 160, messageMin: 20, messageMax: 5000 } as const;

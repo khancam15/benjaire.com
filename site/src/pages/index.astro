@@ -1,5 +1,6 @@
 ---
-// Homepage, design v0.3 "The Pavilion" (approved 2026-10-14).
+// Homepage, design v0.3 "The Pavilion" (approved 2026-10-14). Digital first
+// positioning (2026-10-14): Benjaire Digital and Benjaire Intake lead.
 // Layout styles: src/styles/home.css. Interactions: src/scripts/home.ts.
 import { getCollection } from 'astro:content';
 import { getImage, Picture } from 'astro:assets';
@@ -38,6 +39,8 @@ const STEPS = [
     spec: ['Long horizons', 'New categories', 'Patient ownership'] },
 ];
 
+const INTAKE = ['Client inquiry capture', 'CRM integration', 'Automated acknowledgments', 'Inquiry routing', 'Onboarding task creation', 'Reminders'];
+
 const FOCUS = [
   { name: 'Consumer technology', text: 'Accessories and devices that fit seamlessly into everyday life.' },
   { name: 'Digital', text: 'Online products and experiences designed for how people live and work today.' },
@@ -47,11 +50,11 @@ const FOCUS = [
 const hasBrands = (await getCollection('brands')).some((e) => e.data.featured);
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
-<Base hero>
+<Base hero seoTitle="Benjaire | Digital Solutions & Modern Brands" description="Benjaire develops intelligent business automation solutions and modern consumer brands. Explore Benjaire Digital's workflow automation services.">
   <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={wideAvif.srcSet.attribute} imagesizes="100vw" media="(min-width: 900px)" />
 
   <ol class="rail" aria-hidden="true">
-    {['hero', 'philosophy', 'model', 'focus', 'portfolio', 'partner'].map((s, i) => <li data-rail={s} class={i === 0 ? 'on' : undefined}></li>)}
+    {['hero', 'digital', 'philosophy', 'model', 'focus', 'portfolio', 'partner'].map((s, i) => <li data-rail={s} class={i === 0 ? 'on' : undefined}></li>)}
   </ol>
 
   <!-- 1 · Hero -->
@@ -69,9 +72,12 @@ const pad = (n: number) => String(n).padStart(2, '0');
     <div class="hero-ui">
       <div class="hero-copy">
         <p class="mono reveal">Benjaire · New York · Est. {SITE.founded}</p>
-        <h1 id="hero-title" class="reveal">Brands for the <span>Modern Era.</span></h1>
-        <p class="lead hero-lead reveal">{SITE.metaDescription}</p>
-        <a class="link reveal" href="/brands">Explore our brands <span aria-hidden="true">→</span></a>
+        <h1 id="hero-title" class="reveal">Building brands. <span>Powering businesses.</span></h1>
+        <p class="lead hero-lead reveal">Benjaire is a New York company developing modern consumer brands and intelligent digital solutions that connect technology, design and business innovation.</p>
+        <div class="actions reveal">
+          <a class="btn primary" href="/digital">Explore Digital Solutions <span aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="/about">About Benjaire</a>
+        </div>
       </div>
 
       <nav class="pins" aria-label="The operating model">
@@ -83,16 +89,43 @@ const pad = (n: number) => String(n).padStart(2, '0');
         ))}
       </nav>
 
-      <aside class="glass hero-card" aria-label="Partnerships">
-        <p class="mono">Partnerships · Suppliers · Collaborations</p>
-        <p>Benjaire works with manufacturers, collaborators and partners who build for the long term.</p>
-        <a class="btn primary" href="/contact?category=partnership">Start an inquiry <span aria-hidden="true">→</span></a>
+      <aside class="glass hero-card" aria-label="Featured solution">
+        <p class="mono">Benjaire Digital · In development</p>
+        <p><strong>Benjaire Intake</strong> automates client intake and onboarding for professional services firms.</p>
+        <a class="btn primary" href="/digital#intake">Learn about Benjaire Intake <span aria-hidden="true">→</span></a>
       </aside>
     </div>
     <span class="scroll-cue mono" aria-hidden="true">Scroll</span>
   </section>
 
-  <!-- 2 · Philosophy -->
+  <!-- 2 · Benjaire Digital -->
+  <section class="sec digital" id="digital" data-section="digital" aria-labelledby="digital-title">
+    <div class="wrap grid-2">
+      <p class="mono">Benjaire Digital</p>
+      <div>
+        <h2 id="digital-title">Smarter systems. <span>Better business.</span></h2>
+        <div class="philo-foot">
+          <p>Benjaire Digital develops intelligent workflow automation solutions that simplify everyday business operations, reduce repetitive administrative tasks, and support more efficient client experiences.</p>
+          <a class="link" href="/digital">Explore Benjaire Digital <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="plinth">
+        <Picture src={operateImg} formats={['avif', 'webp']} widths={[900, 1600]} sizes="100vw" alt="" loading="lazy" />
+        <div class="glass plinth-card">
+          <span class="badge">In development</span>
+          <p class="mono">Featured solution</p>
+          <h3>Benjaire Intake</h3>
+          <p>An intelligent client intake and onboarding automation solution designed to help professional services businesses organize inquiries, streamline onboarding, and keep every next step on schedule.</p>
+          <ul class="spec">{INTAKE.map((x) => <li>{x}</li>)}</ul>
+          <a class="btn primary" href="/digital#intake">Learn about Benjaire Intake <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Philosophy -->
   <section class="sec philosophy" id="philosophy" data-section="philosophy" aria-labelledby="philosophy-title">
     <div class="wrap grid-2">
       <p class="mono">What we do</p>
@@ -113,7 +146,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </section>
 
-  <!-- 3 · Build, Operate, Grow -->
+  <!-- 4 · Build, Operate, Grow -->
   <section class="sec model" id="model" data-section="model" aria-labelledby="model-title">
     <div class="wrap">
       <div class="h-head">
@@ -145,7 +178,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </section>
 
-  <!-- 4 · Focus areas -->
+  <!-- 5 · Focus areas -->
   <section class="sec focus" id="focus" data-section="focus" aria-labelledby="focus-title">
     <div class="wrap">
       <div class="h-head">
@@ -175,7 +208,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </section>
 
-  <!-- 5 · Portfolio -->
+  <!-- 6 · Portfolio -->
   <section class="sec portfolio" id="portfolio" data-section="portfolio" aria-labelledby="portfolio-title">
     <div class="wrap">
       <div class="h-head">
@@ -196,14 +229,15 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </section>
 
-  <!-- 6 · Partnerships -->
+  <!-- 7 · Inquiry -->
   <section class="partner" id="partner" data-section="partner" aria-labelledby="partner-title">
     <div class="wrap grid-2">
       <div class="partner-intro">
         <img src="/brand/benjaire-monogram-cream.svg" alt="" width="54" height="56" />
-        <p class="mono">Partnerships</p>
-        <h2 id="partner-title">Partner with <span>Benjaire.</span></h2>
-        <p>Business partnerships, supplier and manufacturing inquiries, and brand collaborations all start with one message.</p>
+        <p class="mono">Get in touch</p>
+        <h2 id="partner-title">Let's simplify <span>your workflow.</span></h2>
+        <p>Explore how intelligent automation could improve your business operations. Partnerships, supplier inquiries and general questions start here too.</p>
+        <a class="btn primary" href="/contact?category=digital">Discuss your workflow <span aria-hidden="true">→</span></a>
         <p class="mono email">{SITE.email}</p>
       </div>
       <ul class="routes">

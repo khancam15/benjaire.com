@@ -20,6 +20,7 @@ export const SITE = {
 } as const;
 
 export const NAV = [
+  { href: '/digital', label: 'Digital Solutions' },
   { href: '/about', label: 'About' },
   { href: '/brands', label: 'Brands' },
   { href: '/contact', label: 'Contact' },
@@ -28,11 +29,10 @@ export const NAV = [
 // Inquiry categories (PRD §3.4). `value` is what the URL (?category=) and
 // the form handler use; routing to inboxes is configured server-side (M5).
 export const CATEGORIES = [
-  { value: 'general', label: 'General Inquiry' },
-  { value: 'partnership', label: 'Business Partnership' },
+  { value: 'digital', label: 'Digital Solutions' },
+  { value: 'general', label: 'General Business Inquiry' },
+  { value: 'partnership', label: 'Partnership' },
   { value: 'supplier', label: 'Supplier / Manufacturing' },
-  { value: 'collaboration', label: 'Brand Collaboration' },
-  { value: 'other', label: 'Other' },
 ] as const;
 
 // Supplier areas of interest (PRD §3.5). "Exploring" language only:
