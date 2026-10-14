@@ -316,7 +316,8 @@ textarea.input { min-height: 150px; resize: vertical; }
 .title-block > * + * { border-left: 1px solid var(--line-mid); }
 .tb-main img { height: 24px; width: auto; margin-bottom: 6px; }
 .tb-main p { color: var(--fg-mid); max-width: 40ch; }
-.tb-cell a { text-decoration: none; color: var(--fg); overflow-wrap: anywhere; }
+/* Padding keeps footer links at least 24px tall for touch (WCAG 2.5.8). */
+.tb-cell a { display: inline-block; padding-block: 3px; text-decoration: none; color: var(--fg); overflow-wrap: anywhere; }
 .tb-cell a:hover { text-decoration: underline; }
 .tb-cell .mono { font-size: 11px; }
 .f-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding-top: 18px; color: var(--fg-low); font-size: 13px; }
@@ -357,7 +358,7 @@ textarea.input { min-height: 150px; resize: vertical; }
   .row { grid-template-columns: 1fr; gap: 6px; }
   .principles { grid-template-columns: 1fr; }
   .principle:nth-child(even) { padding-left: 0; border-left: none; }
-  .contact-aside { padding-right: 0; border-right: none; border-bottom: 1px solid var(--line); padding-bottom: var(--s-5); }
+  .contact-aside { padding-right: 0; border-right: none; padding-bottom: 0; }
   .contact-form { padding-left: 0; }
   .f-row { grid-template-columns: 1fr; }
   .title-block { grid-template-columns: minmax(0, 1fr); }
