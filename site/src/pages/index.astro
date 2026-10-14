@@ -1,71 +1,220 @@
 ---
+// Homepage, design v0.3 "The Pavilion" (approved 2026-10-14).
+// Layout styles: src/styles/home.css. Interactions: src/scripts/home.ts.
+import { getCollection } from 'astro:content';
+import { getImage, Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import BrandGrid from '../components/BrandGrid.astro';
-import { SITE } from '../site';
+import { SITE, CATEGORIES } from '../site';
+import '../styles/home.css';
+import pavilion from '../assets/home/pavilion.jpg';
+import pavilionPortrait from '../assets/home/pavilion-portrait.jpg';
+import buildImg from '../assets/home/build.jpg';
+import operateImg from '../assets/home/operate.jpg';
+import growImg from '../assets/home/grow.jpg';
+import reflection from '../assets/home/reflection.jpg';
+
+// Art-directed hero: a wide render for desktop, a portrait crop for phones.
+const wide = { src: pavilion, widths: [1200, 1800, 2400] };
+const tall = { src: pavilionPortrait, widths: [480, 720, 864] };
+const [wideAvif, wideWebp, tallAvif, tallWebp, fallback] = await Promise.all([
+  getImage({ ...wide, format: 'avif', quality: 60 }),
+  getImage({ ...wide, format: 'webp', quality: 72 }),
+  getImage({ ...tall, format: 'avif', quality: 60 }),
+  getImage({ ...tall, format: 'webp', quality: 72 }),
+  getImage({ src: pavilion, width: 1800, format: 'jpg', quality: 76 }),
+]);
+
+// Build → Operate → Grow is a real sequence, so it is numbered.
+const STEPS = [
+  { id: 'build', name: 'Build', role: 'Brand development', img: buildImg, form: 'The canopy',
+    text: 'We develop brands from concept to launch: positioning, product, design and digital presence.',
+    spec: ['Positioning', 'Product', 'Identity', 'Launch'] },
+  { id: 'operate', name: 'Operate', role: 'Business infrastructure', img: operateImg, form: 'The arch',
+    text: 'Benjaire runs the operations behind each brand, from sourcing and partnerships to customer experience.',
+    spec: ['Sourcing', 'Partnerships', 'Technology', 'Customer experience'] },
+  { id: 'grow', name: 'Grow', role: 'Portfolio expansion', img: growImg, form: 'The ribbon',
+    text: 'We invest in brands for the long term, expanding thoughtfully as each one finds its audience.',
+    spec: ['Long horizons', 'New categories', 'Patient ownership'] },
+];
+
+const FOCUS = [
+  { name: 'Consumer technology', text: 'Accessories and devices that fit seamlessly into everyday life.' },
+  { name: 'Digital', text: 'Online products and experiences designed for how people live and work today.' },
+  { name: 'Lifestyle', text: 'Products and brands that bring modern design to the everyday.' },
+];
+
+const hasBrands = (await getCollection('brands')).some((e) => e.data.featured);
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
-<Base>
-  <section class="hero">
-    <div class="hero-grid" aria-hidden="true"></div>
-    <div class="wrap">
-      <img class="hero-mark" src="/brand/benjaire-monogram.svg" alt="" width="107" height="112" />
-      <p class="eyebrow center">Benjaire &middot; New York</p>
-      <h1>Brands for the modern era.</h1>
-      <p class="lead">{SITE.description}</p>
-      <div class="actions center">
-        <a class="btn primary" href="/contact?category=partnership">Partner with Benjaire</a>
-        <a class="btn ghost" href="/brands">Explore our brands</a>
+<Base hero>
+  <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={wideAvif.srcSet.attribute} imagesizes="100vw" media="(min-width: 900px)" />
+
+  <ol class="rail" aria-hidden="true">
+    {['hero', 'philosophy', 'model', 'focus', 'portfolio', 'partner'].map((s, i) => <li data-rail={s} class={i === 0 ? 'on' : undefined}></li>)}
+  </ol>
+
+  <!-- 1 · Hero -->
+  <section class="hero" id="hero" data-section="hero" aria-labelledby="hero-title">
+    <div class="hero-scene">
+      <picture>
+        <source media="(max-width: 899px)" type="image/avif" srcset={tallAvif.srcSet.attribute} sizes="100vw" />
+        <source media="(max-width: 899px)" type="image/webp" srcset={tallWebp.srcSet.attribute} sizes="100vw" />
+        <source type="image/avif" srcset={wideAvif.srcSet.attribute} sizes="100vw" />
+        <source type="image/webp" srcset={wideWebp.srcSet.attribute} sizes="100vw" />
+        <img src={fallback.src} width="2752" height="1536" alt="An abstract white pavilion of three curved shells, a low canopy, a ribbed arch and a reaching ribbon, rising from still water on one shared base" fetchpriority="high" loading="eager" decoding="async" />
+      </picture>
+    </div>
+
+    <div class="hero-ui">
+      <div class="hero-copy">
+        <p class="mono reveal">Benjaire · New York · Est. {SITE.founded}</p>
+        <h1 id="hero-title" class="reveal">Brands for the <span>Modern Era.</span></h1>
+        <p class="lead hero-lead reveal">{SITE.metaDescription}</p>
+        <a class="link reveal" href="/brands">Explore our brands <span aria-hidden="true">→</span></a>
+      </div>
+
+      <nav class="pins" aria-label="The operating model">
+        {STEPS.map((s) => (
+          <a class={`pin pin-${s.id}`} href={`#${s.id}`}>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="pin-label"><b>{s.name}</b><em>{s.role}</em></span>
+          </a>
+        ))}
+      </nav>
+
+      <aside class="glass hero-card" aria-label="Partnerships">
+        <p class="mono">Partnerships · Suppliers · Collaborations</p>
+        <p>Benjaire works with manufacturers, collaborators and partners who build for the long term.</p>
+        <a class="btn primary" href="/contact?category=partnership">Start an inquiry <span aria-hidden="true">→</span></a>
+      </aside>
+    </div>
+    <span class="scroll-cue mono" aria-hidden="true">Scroll</span>
+  </section>
+
+  <!-- 2 · Philosophy -->
+  <section class="sec philosophy" id="philosophy" data-section="philosophy" aria-labelledby="philosophy-title">
+    <div class="wrap grid-2">
+      <p class="mono">What we do</p>
+      <div>
+        <h2 id="philosophy-title" class="h-statement">
+          {'One company. Independent brands, built on one shared foundation.'.split(' ').map((w) => <span>{w} </span>)}
+        </h2>
+        <div class="philo-foot">
+          <p>Benjaire exists so each brand can focus on its customers while the company carries the work behind it. Every brand launches under its own name, with its own identity and home online.</p>
+          <a class="link" href="/about">How Benjaire works <span aria-hidden="true">→</span></a>
+        </div>
+        <dl class="h-facts">
+          <div><dt class="mono">Founded</dt><dd>{SITE.founded}</dd></div>
+          <div><dt class="mono">Based in</dt><dd>New York</dd></div>
+          <div><dt class="mono">Categories</dt><dd>Three</dd></div>
+        </dl>
       </div>
     </div>
   </section>
 
-  <section class="sec band-section" aria-labelledby="what-we-do">
+  <!-- 3 · Build, Operate, Grow -->
+  <section class="sec model" id="model" data-section="model" aria-labelledby="model-title">
     <div class="wrap">
-      <div class="sec-head">
-        <div><p class="eyebrow">What we do</p><h2 id="what-we-do">One company.<br />Independent brands.</h2></div>
-        <p class="muted">Benjaire exists so each brand can focus on its customers while the company carries the work behind it. Every brand launches under its own name, with its own identity and home online. <a href="/about">How Benjaire works</a></p>
+      <div class="h-head">
+        <p class="mono">Operating model</p>
+        <h2 id="model-title">Build. Operate. <span>Grow.</span></h2>
       </div>
-      <ol class="pillars">
-        <li class="pillar"><span class="num" aria-hidden="true">01</span><h3>Build</h3><p>We develop brands from concept to launch: positioning, product, design and digital presence.</p></li>
-        <li class="pillar"><span class="num" aria-hidden="true">02</span><h3>Operate</h3><p>Benjaire runs the operations behind each brand, from sourcing and partnerships to customer experience.</p></li>
-        <li class="pillar"><span class="num" aria-hidden="true">03</span><h3>Grow</h3><p>We invest in brands for the long term, expanding thoughtfully as each one finds its audience.</p></li>
-      </ol>
+      <div class="model-grid">
+        <ol class="steps">
+          {STEPS.map((s, i) => (
+            <li class="step" id={s.id} data-step={i}>
+              <Picture class="step-img" src={s.img} formats={['avif', 'webp']} widths={[420, 840]} sizes="100vw" alt="" loading="lazy" />
+              <p class="mono">{pad(i + 1)} · {s.form}</p>
+              <h3>{s.name}</h3>
+              <p class="role">{s.role}</p>
+              <p>{s.text}</p>
+              <ul class="spec">{s.spec.map((x) => <li>{x}</li>)}</ul>
+            </li>
+          ))}
+        </ol>
+        <div class="stage" aria-hidden="true">
+          <div class="stage-frame" data-stage data-active="0">
+            {STEPS.map((s, i) => (
+              <Picture class="stage-img" data-i={i} src={s.img} formats={['avif', 'webp']} widths={[560, 840]} sizes="(min-width: 900px) 42vw, 100vw" alt="" loading="lazy" />
+            ))}
+            <div class="stage-tag glass"><span class="mono" data-stage-label>01 · Build</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="sec raised band-section" aria-labelledby="focus">
+  <!-- 4 · Focus areas -->
+  <section class="sec focus" id="focus" data-section="focus" aria-labelledby="focus-title">
     <div class="wrap">
-      <div class="sec-head">
-        <div><p class="eyebrow">Focus areas</p><h2 id="focus">Consumer technology, digital and lifestyle.</h2></div>
-        <p class="muted">Three categories, one standard: modern products, considered design and great experiences. <a href="/brands">Explore the Benjaire portfolio</a></p>
+      <div class="h-head">
+        <p class="mono">Focus areas</p>
+        <h2 id="focus-title">Consumer technology, digital <span>and lifestyle.</span></h2>
       </div>
-      <ul class="rows">
-        <li class="row"><h3>Consumer technology</h3><p>Accessories and devices that fit seamlessly into everyday life.</p></li>
-        <li class="row"><h3>Digital</h3><p>Online products and experiences designed for how people live and work today.</p></li>
-        <li class="row"><h3>Lifestyle</h3><p>Products and brands that bring modern design to the everyday.</p></li>
+      <div class="focus-grid">
+        <ul class="index" data-index>
+          {FOCUS.map((f, i) => (
+            <li class={i === 0 ? 'on' : undefined} data-i={i} tabindex="0">
+              <span class="mono">{pad(i + 1)}</span>
+              <h3>{f.name}</h3>
+              <p>{f.text}</p>
+            </li>
+          ))}
+        </ul>
+        <div class="focus-visual" aria-hidden="true" data-tilt>
+          <Picture src={pavilion} formats={['avif', 'webp']} widths={[700, 1200]} sizes="(min-width: 900px) 50vw, 100vw" alt="" loading="lazy" />
+          <div class="glass focus-card">
+            <span class="mono" data-focus-count>Category 01 / 03</span>
+            <b data-focus-name>{FOCUS[0].name}</b>
+            <span data-focus-text>{FOCUS[0].text}</span>
+          </div>
+        </div>
+      </div>
+      <p class="muted center-note">Three categories, one standard: modern products, considered design and great experiences. <a href="/brands">Explore the Benjaire portfolio</a></p>
+    </div>
+  </section>
+
+  <!-- 5 · Portfolio -->
+  <section class="sec portfolio" id="portfolio" data-section="portfolio" aria-labelledby="portfolio-title">
+    <div class="wrap">
+      <div class="h-head">
+        <p class="mono">Our brands</p>
+        <h2 id="portfolio-title">The <span>portfolio.</span></h2>
+      </div>
+      {hasBrands ? <BrandGrid featuredOnly headingLevel={3} /> : (
+        <div class="plinth">
+          <Picture src={reflection} formats={['avif', 'webp']} widths={[900, 1600, 2400]} sizes="100vw" alt="" loading="lazy" />
+          <div class="glass plinth-card">
+            <span class="badge">Portfolio in development</span>
+            <h3>Our first brands are on the way.</h3>
+            <p>Benjaire's brands will be announced here as they launch. In the meantime, we welcome conversations with partners, manufacturers and collaborators.</p>
+            <a class="btn primary" href="/contact?category=partnership">Start a conversation <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- 6 · Partnerships -->
+  <section class="partner" id="partner" data-section="partner" aria-labelledby="partner-title">
+    <div class="wrap grid-2">
+      <div class="partner-intro">
+        <img src="/brand/benjaire-monogram-cream.svg" alt="" width="54" height="56" />
+        <p class="mono">Partnerships</p>
+        <h2 id="partner-title">Partner with <span>Benjaire.</span></h2>
+        <p>Business partnerships, supplier and manufacturing inquiries, and brand collaborations all start with one message.</p>
+        <p class="mono email">{SITE.email}</p>
+      </div>
+      <ul class="routes">
+        {CATEGORIES.map((c, i) => (
+          <li><a href={`/contact?category=${c.value}`}><span class="mono">{pad(i + 1)}</span><span>{c.label}</span><span aria-hidden="true">→</span></a></li>
+        ))}
       </ul>
     </div>
   </section>
-
-  <section class="sec band-section" aria-labelledby="portfolio">
-    <div class="wrap">
-      <div class="sec-head">
-        <div><p class="eyebrow">Our brands</p><h2 id="portfolio">The portfolio.</h2></div>
-        <p class="muted">Brands appear here once they're publicly launched.</p>
-      </div>
-      <BrandGrid featuredOnly headingLevel={3} />
-    </div>
-  </section>
-
-  <section class="band dark" aria-labelledby="work-with">
-    <div class="wrap">
-      <img class="band-mark" src="/brand/benjaire-monogram-cream.svg" alt="" width="54" height="56" />
-      <p class="eyebrow center">Partnerships</p>
-      <h2 id="work-with">Partner with Benjaire.</h2>
-      <p>Business partnerships, supplier and manufacturing inquiries, and brand collaborations all start with one message.</p>
-      <div class="actions center">
-        <a class="btn primary" href="/contact">Contact Benjaire</a>
-        <a class="btn ghost" href="/contact?category=supplier">Supplier inquiries</a>
-      </div>
-    </div>
-  </section>
 </Base>
+
+<script>
+  import '../scripts/home';
+</script>

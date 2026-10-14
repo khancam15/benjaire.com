@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082 96" role="img" aria-label="Benjaire"><title>Benjaire</title><defs><linearGradient id="bj-wordmark" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1082" y2="96"><stop offset="0" stop-color="#5e3d24"/><stop offset="0.3" stop-color="#7f5232"/><stop offset="0.52" stop-color="#a5764b"/><stop offset="0.74" stop-color="#7f5232"/><stop offset="1" stop-color="#5e3d24"/></linearGradient></defs><path fill="none" stroke="url(#bj-wordmark)" stroke-width="18" stroke-linejoin="round" d="M9 9
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082 96" role="img" aria-label="Benjaire"><title>Benjaire</title><defs><linearGradient id="bj-wordmark" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1082" y2="96"><stop offset="0" stop-color="#18191c"/><stop offset="0.3" stop-color="#34373c"/><stop offset="0.52" stop-color="#6e737a"/><stop offset="0.74" stop-color="#34373c"/><stop offset="1" stop-color="#18191c"/></linearGradient></defs><path fill="none" stroke="url(#bj-wordmark)" stroke-width="18" stroke-linejoin="round" d="M9 9
 V87
 H67
 Q87 87 87 67

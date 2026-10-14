@@ -3,8 +3,10 @@
 //
 // Rendering rules (crisp in every browser, including Safari/iOS):
 //  - no SVG filters and no masks in web assets
-//  - all geometry is baked into one coordinate system, so the bronze
+//  - all geometry is baked into one coordinate system, so the logo
 //    gradient (userSpaceOnUse) is applied directly to fills and strokes
+//  - "-cream" files are the light reverse for dark bands (pearl since v3;
+//    the file name is kept so existing links keep working)
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -52,16 +54,17 @@ function transform(d, s, tx, ty) {
 const mono = (s, tx, ty) => transform(MONO, s, tx, ty);
 const word = (s, tx, ty) => SEQ.map(([c, x]) => transform(G[c], s, tx + x * s, ty)).join(' ');
 
-const BRONZE = [
-  // Soft brushed-bronze sweep (a gentle highlight, not a stripe).
-  [0, '#5e3d24'], [0.3, '#7f5232'], [0.52, '#a5764b'], [0.74, '#7f5232'], [1, '#5e3d24'],
+// Identity v3 (2026-10-14): brushed graphite replaces brushed bronze.
+const GRAPHITE = [
+  // Satin aluminum sweep (a gentle highlight, not a stripe).
+  [0, '#18191c'], [0.3, '#34373c'], [0.52, '#6e737a'], [0.74, '#34373c'], [1, '#18191c'],
 ];
 const gradient = (id, w, h) =>
-  `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${w}" y2="${h}">${BRONZE.map(([o, c]) => `<stop offset="${o}" stop-color="${c}"/>`).join('')}</linearGradient>`;
+  `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${w}" y2="${h}">${GRAPHITE.map(([o, c]) => `<stop offset="${o}" stop-color="${c}"/>`).join('')}</linearGradient>`;
 
 function svg({ id, w, h, monoD, wordD, wordStroke, paint }) {
-  const fill = paint === 'bronze' ? `url(#${id})` : paint;
-  const defs = paint === 'bronze' ? `<defs>${gradient(id, w, h)}</defs>` : '';
+  const fill = paint === 'graphite' ? `url(#${id})` : paint;
+  const defs = paint === 'graphite' ? `<defs>${gradient(id, w, h)}</defs>` : '';
   const parts = [];
   if (monoD) parts.push(`<path fill="${fill}" d="${monoD}"/>`);
   if (wordD) parts.push(`<path fill="none" stroke="${fill}" stroke-width="${wordStroke}" stroke-linejoin="round" d="${wordD}"/>`);
@@ -96,16 +99,16 @@ function wordmark() {
 
 const layouts = { 'lockup-vertical': vertical(), 'lockup-horizontal': horizontal(), monogram: monogram(), wordmark: wordmark() };
 for (const [name, l] of Object.entries(layouts)) {
-  writeFileSync(join(out, `benjaire-${name}.svg`), svg({ id: `bj-${name}`, ...l, paint: 'bronze' }));
-  writeFileSync(join(out, `benjaire-${name}-cream.svg`), svg({ id: `bj-${name}-c`, ...l, paint: '#fdfaf5' }));
+  writeFileSync(join(out, `benjaire-${name}.svg`), svg({ id: `bj-${name}`, ...l, paint: 'graphite' }));
+  writeFileSync(join(out, `benjaire-${name}-cream.svg`), svg({ id: `bj-${name}-c`, ...l, paint: '#f3f3f1' }));
 }
 
-// Favicon: bronze monogram on a cream rounded square.
+// Favicon: graphite monogram on a pearl rounded square.
 const f = 0.9 * (800 * 0.62) / MONO_H; // monogram ≈ 56% of the tile height
 const fx = (800 - MONO_W * f) / 2;
 const fy = (800 - MONO_H * f) / 2;
 writeFileSync(
   join(out, '..', 'favicon.svg'),
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><title>Benjaire</title><defs>${gradient('fv', 800, 800)}</defs><rect width="800" height="800" rx="160" fill="#fdfaf5"/><path fill="url(#fv)" d="${mono(f, fx, fy)}"/></svg>\n`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><title>Benjaire</title><defs>${gradient('fv', 800, 800)}</defs><rect width="800" height="800" rx="160" fill="#f3f3f1"/><path fill="url(#fv)" d="${mono(f, fx, fy)}"/></svg>\n`,
 );
 console.log(`Logos written to ${out}: ${Object.keys(layouts).length * 2} files + favicon.`);
