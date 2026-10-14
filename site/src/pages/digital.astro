@@ -1,7 +1,8 @@
 ---
 // Digital Solutions: a business pillar offered directly by Benjaire (no
 // separate division brand). Built from existing components only.
-// The client intake solution is proposed: never describe it as available.
+// The first offer (client intake and workflow automation) is in development:
+// never describe it as available, and don't publish prices until validated.
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
 
@@ -14,21 +15,20 @@ const PROBLEMS = [
 ];
 
 const CAPABILITIES = [
-  { name: 'Client inquiry capture', text: 'Website and email inquiries collected in one structured place.' },
-  { name: 'CRM integration', text: 'New contacts and their context sent to the CRM your firm already uses.' },
-  { name: 'Automated acknowledgments', text: 'A prompt, personal confirmation for every inquiry.' },
-  { name: 'Inquiry routing', text: 'Each request sent to the right person based on its type.' },
-  { name: 'Onboarding task creation', text: 'A ready checklist of tasks for every new client.' },
+  { name: 'Inquiry capture', text: 'Website and email inquiries collected in one structured place, each with a prompt acknowledgment.' },
+  { name: 'Client onboarding', text: 'Welcome messages, documents and setup tasks prepared automatically for every new client.' },
+  { name: 'Internal notifications', text: 'The right person alerted when an inquiry or client step needs attention.' },
   { name: 'Timely reminders', text: 'Prompts so no inquiry or onboarding step goes quiet.' },
+  { name: 'CRM workflows', text: 'New contacts and their context kept current in the CRM your firm already uses.' },
 ];
 
-// Discover → Configure → Deploy → Support is a real sequence, so it is numbered.
 const SERVICES = [
   { name: 'Business Automation', text: 'Repetitive administrative work handled reliably by software, from data entry to document preparation.' },
   { name: 'AI Integration', text: 'Practical AI added to the tools your team already uses, where it saves real time.' },
   { name: 'Workflow Optimization', text: 'Connected applications and clear processes, so work moves from one step to the next without manual handoffs.' },
 ];
 
+// Discover → Configure → Deploy → Support is a real sequence, so it is numbered.
 const STEPS = [
   { name: 'Discover', text: 'We map how inquiries, onboarding and client communication work in your firm today.' },
   { name: 'Configure', text: 'We adapt a standard automation to your tools, wording and team.' },
@@ -60,19 +60,23 @@ const pad = (n: number) => String(n).padStart(2, '0');
       <p class="lead mb-5">Benjaire develops practical technology and automation solutions that help businesses streamline operations, improve efficiency, and simplify everyday workflows.</p>
       <div class="actions">
         <a class="btn primary" href="/contact?category=digital#inquiry">Discuss your workflow <span aria-hidden="true">→</span></a>
-        <a class="btn ghost" href="#services">See our services</a>
+        <a class="btn ghost" href="#intake">See our first offer</a>
       </div>
     </div>
   </section>
 
-  <section class="sec band-section" id="services" aria-labelledby="services-title">
+  <section class="sec band-section" id="intake" aria-labelledby="intake-title">
     <div class="wrap">
       <div class="sec-head">
-        <div><p class="eyebrow">Services</p><h2 id="services-title">Three service categories.</h2></div>
-        <p class="muted">Each category is delivered directly by Benjaire, starting with small professional services firms. Services are in business development and validation with early clients.</p>
+        <div>
+          <p class="eyebrow">Our first offer</p>
+          <span class="badge">In development</span>
+          <h2 id="intake-title">Client Intake &amp; Workflow Automation.</h2>
+        </div>
+        <p class="muted">A focused service for small consulting firms and agencies: we automate how inquiries arrive, how new clients are onboarded and what happens next. It is in development, and firms that talk to us now can help shape it.</p>
       </div>
       <ul class="rows">
-        {SERVICES.map((s) => <li class="row"><h3>{s.name}</h3><p>{s.text}</p></li>)}
+        {CAPABILITIES.map((c) => <li class="row"><h3>{c.name}</h3><p>{c.text}</p></li>)}
       </ul>
     </div>
   </section>
@@ -89,18 +93,14 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </section>
 
-  <section class="sec band-section" id="intake" aria-labelledby="intake-title">
+  <section class="sec band-section" id="services" aria-labelledby="services-title">
     <div class="wrap">
       <div class="sec-head">
-        <div>
-          <p class="eyebrow">Proposed solution</p>
-          <span class="badge">In development</span>
-          <h2 id="intake-title">Client intake automation.</h2>
-        </div>
-        <p class="muted">A proposed client intake and onboarding automation solution designed to help professional services businesses organize inquiries, streamline onboarding, and keep every next step on schedule. These are the planned capabilities; firms that talk to us now can help shape them.</p>
+        <div><p class="eyebrow">Service categories</p><h2 id="services-title">Where we can help.</h2></div>
+        <p class="muted">Our first offer draws on three broader capabilities, each delivered directly by Benjaire. All are in business development and service validation.</p>
       </div>
       <ul class="rows">
-        {CAPABILITIES.map((c) => <li class="row"><h3>{c.name}</h3><p>{c.text}</p></li>)}
+        {SERVICES.map((s) => <li class="row"><h3>{s.name}</h3><p>{s.text}</p></li>)}
       </ul>
     </div>
   </section>

@@ -57,7 +57,7 @@ export function initContactForm(): void {
   };
 
   // Result of a no-JavaScript submission (the Worker redirects back here).
-  if (params.get('status') === 'sent') show('ok', 'Thanks. Your message is on its way, and we reply within 24 hours.');
+  if (params.get('status') === 'sent') show('ok', 'Thanks. Your message is on its way, and we'll respond as soon as possible.');
   if (params.get('status') === 'error') show('error', `Your message couldn't be sent. Please try again, or email ${EMAIL}.`);
 
   form.addEventListener('submit', async (e) => {
@@ -81,7 +81,7 @@ export function initContactForm(): void {
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; fields?: Record<string, string> };
       if (res.ok && data.ok) {
         form.reset();
-        show('ok', 'Thanks. Your message is on its way, and we reply within 24 hours.');
+        show('ok', 'Thanks. Your message is on its way, and we'll respond as soon as possible.');
       } else {
         for (const [id, msg] of Object.entries(data.fields ?? {})) setError(id, msg);
         show('error', `${data.error ?? "Your message couldn't be sent."} Your text is still here. You can also email ${EMAIL}.`);
