@@ -1,6 +1,20 @@
 ---
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import PageBand from '../components/PageBand.astro';
+import bandImg from '../assets/pages/about.jpg';
 import { SITE } from '../site';
+// Pillar images reuse the approved Pavilion renders: the arch (systems) for
+// Digital Solutions, the canopy (where new brands take shape) for Consumer Brands.
+import archImg from '../assets/home/operate.jpg';
+import canopyImg from '../assets/home/build.jpg';
+
+const PILLARS = [
+  { name: 'Digital Solutions', status: 'In service validation', img: archImg, href: '/digital', link: 'Explore Digital Solutions',
+    text: 'Business automation, AI integration and workflow optimization for small professional services firms such as consulting firms and agencies. Currently in business development and service validation.' },
+  { name: 'Consumer Brands', status: 'In research and development', img: canopyImg, href: '/brands', link: 'See Consumer Brands',
+    text: 'Consumer technology, technology accessories, lifestyle products and ecommerce brands, each to launch under its own name. Currently in research and development.' },
+];
 ---
 <Base title="About" seoTitle="About Benjaire | Technology & Brand Development" pageType="AboutPage" description="Founded in New York in 2022, Benjaire develops digital solutions and consumer brands. See how the company works, what guides it and where it is focused.">
   <section class="page-head">
@@ -8,6 +22,7 @@ import { SITE } from '../site';
       <p class="eyebrow">About Benjaire</p>
       <h1>A company built around technology, design, and innovation.</h1>
       <p class="lead">Benjaire is a New York company focused on developing digital solutions and consumer brands. Through technology, design, and strategic innovation, we create products, services, and experiences for modern businesses and consumers.</p>
+      <PageBand src={bandImg} focus="right" alt="The Benjaire pavilion seen across still water: a low canopy, a ribbed arch and a reaching ribbon on one shared base" />
     </div>
   </section>
 
@@ -34,11 +49,22 @@ import { SITE } from '../site';
     <div class="wrap">
       <div class="sec-head">
         <div><p class="eyebrow">Our structure</p><h2 id="structure">One company. Two pillars.</h2></div>
-        <p class="muted">Both pillars operate directly under the Benjaire name, with one identity and one team accountable for each. <a href="/digital">Explore Digital Solutions</a></p>
+        <p class="muted">Both pillars operate directly under the Benjaire name, with one identity and one team accountable for each.</p>
       </div>
+      <ul class="pillar-cards">
+        {PILLARS.map((p) => (
+          <li>
+            <div class="pillar-media">
+              <Picture src={p.img} formats={['avif', 'webp']} widths={[480, 840]} sizes="(min-width: 900px) 44vw, 100vw" alt="" loading="lazy" />
+              <span class="glass pillar-status">{p.status}</span>
+            </div>
+            <h3>{p.name}</h3>
+            <p>{p.text}</p>
+            <a class="link" href={p.href}>{p.link} <span aria-hidden="true">→</span></a>
+          </li>
+        ))}
+      </ul>
       <ul class="rows">
-        <li class="row"><h3>Digital Solutions</h3><p>Business automation, AI integration and workflow optimization for small professional services firms such as consulting firms and agencies. Currently in business development and service validation.</p></li>
-        <li class="row"><h3>Consumer Brands</h3><p>Consumer technology, technology accessories, lifestyle products and ecommerce brands, each to launch under its own name. Currently in research and development.</p></li>
         <li class="row"><h3>One identity</h3><p>Strategy, design, operations and technology sit with Benjaire, so both pillars share the same standards and the same name behind them.</p></li>
       </ul>
     </div>
@@ -86,10 +112,24 @@ import { SITE } from '../site';
 
   <section class="band dark" aria-labelledby="together">
     <div class="wrap">
-      <img class="band-mark" src="/brand/benjaire-monogram-cream.svg" alt="" width="54" height="56" />
+      <img class="band-mark" src="/brand/benjaire-monogram-cream.svg" alt="" width="53" height="56" />
       <h2 id="together">Interested in working together?</h2>
       <p>Tell us about your business, product or idea.</p>
       <div class="actions center"><a class="btn primary" href="/contact">Contact Benjaire</a></div>
     </div>
   </section>
 </Base>
+
+<style>
+  /* Two pillar cards with Pavilion imagery; tokens and components from global.css. */
+  .pillar-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); list-style: none; margin-bottom: var(--s-6); }
+  .pillar-cards li { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; min-width: 0; }
+  .pillar-media { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; background: var(--surface); margin-bottom: 8px; }
+  .pillar-media :global(picture), .pillar-media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .pillar-media :global(img) { transition: transform 1.2s var(--ease); }
+  .pillar-cards li:hover .pillar-media :global(img) { transform: scale(1.03); }
+  .pillar-status { position: absolute; left: 16px; bottom: 16px; padding: 8px 12px; border-radius: 999px; font-family: var(--mono); font-size: 11px; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--fg); }
+  .pillar-cards h3 { font-size: clamp(28px, 2.6vw, 40px); font-weight: 360; letter-spacing: -.04em; }
+  .pillar-cards p { max-width: 52ch; }
+  @media (max-width: 900px) { .pillar-cards { grid-template-columns: minmax(0, 1fr); } }
+</style>
