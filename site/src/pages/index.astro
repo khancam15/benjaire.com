@@ -2,28 +2,8 @@
 import Base from '../layouts/Base.astro';
 import BrandGrid from '../components/BrandGrid.astro';
 import { SITE } from '../site';
-
-const orgLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': `${SITE.url}/#organization`,
-      name: SITE.name,
-      url: `${SITE.url}/`,
-      logo: `${SITE.url}/brand/benjaire-lockup-vertical.svg`,
-      description: SITE.description,
-      foundingDate: String(SITE.founded),
-      address: { '@type': 'PostalAddress', addressLocality: 'New York', addressRegion: 'NY', addressCountry: 'US' },
-      email: SITE.email,
-    },
-    { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: `${SITE.url}/`, name: SITE.name, publisher: { '@id': `${SITE.url}/#organization` } },
-  ],
-};
 ---
 <Base>
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(orgLd)} />
-
   <section class="hero">
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="wrap">
@@ -42,11 +22,11 @@ const orgLd = {
     <div class="wrap">
       <div class="sec-head">
         <div><p class="eyebrow">What we do</p><h2 id="what-we-do">One company.<br />Independent brands.</h2></div>
-        <p class="muted">Each Benjaire brand launches under its own name, with its own identity and home online. Benjaire provides the foundation behind them.</p>
+        <p class="muted">Benjaire exists so each brand can focus on its customers while the company carries the work behind it. Every brand launches under its own name, with its own identity and home online. <a href="/about">How Benjaire works</a></p>
       </div>
       <ol class="pillars">
         <li class="pillar"><span class="num" aria-hidden="true">01</span><h3>Build</h3><p>We develop brands from concept to launch: positioning, product, design and digital presence.</p></li>
-        <li class="pillar"><span class="num" aria-hidden="true">02</span><h3>Operate</h3><p>We run the operations behind each brand, from sourcing and partnerships to customer experience.</p></li>
+        <li class="pillar"><span class="num" aria-hidden="true">02</span><h3>Operate</h3><p>Benjaire runs the operations behind each brand, from sourcing and partnerships to customer experience.</p></li>
         <li class="pillar"><span class="num" aria-hidden="true">03</span><h3>Grow</h3><p>We invest in brands for the long term, expanding thoughtfully as each one finds its audience.</p></li>
       </ol>
     </div>
@@ -55,8 +35,8 @@ const orgLd = {
   <section class="sec raised band-section" aria-labelledby="focus">
     <div class="wrap">
       <div class="sec-head">
-        <div><p class="eyebrow">Focus areas</p><h2 id="focus">Where we build.</h2></div>
-        <p class="muted">Three categories, one standard: modern products, considered design and great experiences.</p>
+        <div><p class="eyebrow">Focus areas</p><h2 id="focus">Consumer technology, digital and lifestyle.</h2></div>
+        <p class="muted">Three categories, one standard: modern products, considered design and great experiences. <a href="/brands">Explore the Benjaire portfolio</a></p>
       </div>
       <ul class="rows">
         <li class="row"><h3>Consumer technology</h3><p>Accessories and devices that fit seamlessly into everyday life.</p></li>
@@ -72,15 +52,15 @@ const orgLd = {
         <div><p class="eyebrow">Our brands</p><h2 id="portfolio">The portfolio.</h2></div>
         <p class="muted">Brands appear here once they're publicly launched.</p>
       </div>
-      <BrandGrid featuredOnly />
+      <BrandGrid featuredOnly headingLevel={3} />
     </div>
   </section>
 
   <section class="band dark" aria-labelledby="work-with">
     <div class="wrap">
       <img class="band-mark" src="/brand/benjaire-monogram-cream.svg" alt="" width="54" height="56" />
-      <p class="eyebrow center">Work with Benjaire</p>
-      <h2 id="work-with">Let's build something modern.</h2>
+      <p class="eyebrow center">Partnerships</p>
+      <h2 id="work-with">Partner with Benjaire.</h2>
       <p>Business partnerships, supplier and manufacturing inquiries, and brand collaborations all start with one message.</p>
       <div class="actions center">
         <a class="btn primary" href="/contact">Contact Benjaire</a>

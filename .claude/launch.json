@@ -7,6 +7,12 @@
       "runtimeArgs": ["-m", "http.server", "3005"],
       "port": 3005,
       "autoPort": false
+    },
+    {
+      "name": "benjaire-astro",
+      "runtimeExecutable": "/opt/homebrew/opt/node@22/bin/node",
+      "runtimeArgs": ["site/node_modules/astro/bin/astro.mjs", "preview", "--root", "site", "--port", "4321"],
+      "port": 4321
     }
   ]
 }
