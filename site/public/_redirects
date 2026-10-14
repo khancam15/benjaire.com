@@ -2,3 +2,8 @@
 /index.html / 301
 /about.html /about 301
 /contact.html /contact 301
+# Pages from the previous build that no longer exist; their content now lives on /brands.
+/companies.html /brands 301
+/companies /brands 301
+/insights.html /brands 301
+/insights /brands 301

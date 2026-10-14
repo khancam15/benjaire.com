@@ -14,24 +14,46 @@ import archivo800 from '@fontsource/archivo/files/archivo-latin-800-normal.woff2
 import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 
 interface Props {
+  /** Short page name, used for the breadcrumb and the default "<title> | Benjaire" title */
   title?: string;
+  /** Full <title> override when the default pattern isn't descriptive enough */
+  seoTitle?: string;
   description?: string;
   noindex?: boolean;
   /** schema.org WebPage subtype for this page, e.g. AboutPage, ContactPage */
   pageType?: string;
 }
-const { title, description = SITE.description, noindex = false, pageType = 'WebPage' } = Astro.props;
-const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | Brands for the Modern Era`;
+const { title, seoTitle, description = SITE.metaDescription, noindex = false, pageType = 'WebPage' } = Astro.props;
+const brandTitle = `${SITE.name} | Brands for the Modern Era`;
+const fullTitle = seoTitle ?? (title ? `${title} | ${SITE.name}` : `${SITE.name} | Consumer Technology, Digital and Lifestyle Brands`);
+// Share cards carry the tagline on the homepage; other pages share their own title.
+const ogTitle = title || seoTitle ? fullTitle : brandTitle;
 // Clean URLs: /about (not /about.html), / (not /index.html).
 const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/';
 const canonical = new URL(cleanPath, SITE.url).href;
 const ogImage = new URL('/og/benjaire-og.png', SITE.url).href;
 
+// Organization and WebSite go on every indexable page so each page's
+// isPartOf / about references resolve within that page.
 const pageLd = noindex
   ? null
   : {
       '@context': 'https://schema.org',
       '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': `${SITE.url}/#organization`,
+          name: SITE.name,
+          url: `${SITE.url}/`,
+          logo: `${SITE.url}/brand/benjaire-lockup-vertical.svg`,
+          description: SITE.description,
+          slogan: 'Brands for the Modern Era',
+          foundingDate: String(SITE.founded),
+          address: { '@type': 'PostalAddress', addressLocality: 'New York', addressRegion: 'NY', addressCountry: 'US' },
+          email: SITE.email,
+          contactPoint: { '@type': 'ContactPoint', contactType: 'business inquiries', email: SITE.email, url: `${SITE.url}/contact` },
+        },
+        { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: `${SITE.url}/`, name: SITE.name, publisher: { '@id': `${SITE.url}/#organization` } },
         {
           '@type': pageType,
           '@id': `${canonical}#webpage`,
@@ -71,7 +93,7 @@ const pageLd = noindex
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
-    <meta property="og:title" content={fullTitle} />
+    <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />

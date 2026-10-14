@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import BrandGrid from '../components/BrandGrid.astro';
 ---
-<Base title="Brands" pageType="CollectionPage" description="The Benjaire portfolio: independent consumer technology, digital and lifestyle brands, each with its own name and home online.">
+<Base title="Brands" seoTitle="Our Brands | The Benjaire Portfolio" pageType="CollectionPage" description="The Benjaire portfolio of independent consumer technology, digital and lifestyle brands. Each launches under its own name, with Benjaire as owner and operator.">
   <section class="page-head">
     <div class="wrap">
       <p class="eyebrow">Our brands</p>
@@ -12,5 +12,18 @@ import BrandGrid from '../components/BrandGrid.astro';
   </section>
   <section class="sec">
     <div class="wrap"><BrandGrid /></div>
+  </section>
+  <section class="sec raised band-section" aria-labelledby="how-portfolio">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">How the portfolio works</p><h2 id="how-portfolio">One owner, separate brands.</h2></div>
+        <p class="muted">A brand joins this page when it publicly launches with its own name, identity and website. Every brand listed here is developed, owned and operated by Benjaire. <a href="/about">How Benjaire works</a></p>
+      </div>
+      <ul class="rows">
+        <li class="row"><h3>Consumer technology</h3><p>Accessories and devices for everyday use.</p></li>
+        <li class="row"><h3>Digital</h3><p>Online products and experiences.</p></li>
+        <li class="row"><h3>Lifestyle</h3><p>Everyday products shaped by modern design.</p></li>
+      </ul>
+    </div>
   </section>
 </Base>
