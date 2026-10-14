@@ -3,19 +3,38 @@
 //
 // Rendering rules (crisp in every browser, including Safari/iOS):
 //  - no SVG filters and no masks in web assets
-//  - all geometry is baked into one coordinate system, so the logo
-//    gradient (userSpaceOnUse) is applied directly to fills and strokes
+//  - all geometry is baked into one coordinate system, flat single color
 //  - "-cream" files are the light reverse for dark bands (pearl since v3;
 //    the file name is kept so existing links keep working)
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import sharp from 'sharp';
 
 const out = process.argv[2] ?? 'public/brand';
 mkdirSync(out, { recursive: true });
 
-// Monogram "B", traced from the owner's logo (583 × 608 box).
-const MONO = 'M3,3 H405 C478,3 518,45 518,122 C518,178 510,224 490,258 C548,286 580,335 580,410 V462 C580,556 540,605 482,605 H88 V265 L168,335 V530 H432 C474,530 495,508 495,466 V405 C495,355 470,315 430,315 H323 V450 H243 V235 H378 C415,235 438,212 438,175 V140 C438,105 418,80 395,80 H88 V245 L8,180 V3 Z';
-const MONO_W = 583;
+// Monogram "B", identity v4 (2026-10-14): rebuilt on an 80-unit grid,
+// Apple-style. One stroke weight (S) everywhere, corners are true circular
+// arcs from one radius family (outer R, inner R - S, so every curve is
+// concentric), the waist is the exact intersection of the two bowl circles,
+// and both stem cuts are parallel 45 degree shears. Box: 576 x 608.
+function buildMonogram({ S = 80, R = 152, gap = 40 } = {}) {
+  const r = R - S;
+  const bar = 236, bot = 608, xu = 512, xl = 576, stem2 = 240, cut = 160;
+  const c1 = [xu - R, bar + S - R], c2 = [xl - R, bar + R];
+  const dx = c2[0] - c1[0], dy = c2[1] - c1[1], d = Math.hypot(dx, dy), h = Math.sqrt(R * R - (d / 2) ** 2);
+  const w = [c1[0] + dx / 2 + (dy / d) * h, c1[1] + dy / 2 - (dx / d) * h].map((v) => Math.round(v * 100) / 100);
+  const A = (rad, x, y, sweep) => `A${rad},${rad} 0 0 ${sweep} ${x},${y}`;
+  return [
+    `M0,0 H${xu - R}`, A(R, xu, R, 1), `V${bar + S - R}`, A(R, w[0], w[1], 1), A(R, xl, bar + R, 1),
+    `V${bot - R}`, A(R, xl - R, bot, 1), `H${S} V${cut + S + gap} L${2 * S},${cut + 2 * S + gap} V${bot - S}`,
+    `H${xl - R}`, A(r, xl - S, bot - R, 0), `V${bar + R}`, A(r, xl - R, bar + S, 0),
+    `H${stem2 + S} V448 H${stem2} V${bar} H${xu - R}`, A(r, xu - S, bar + S - R, 0), `V${R}`, A(r, xu - R, S, 0),
+    `H${S} V${cut + S} L0,${cut} Z`,
+  ].join(' ');
+}
+const MONO = buildMonogram();
+const MONO_W = 576;
 const MONO_H = 608;
 
 // Wordmark glyph centerlines in a 90-unit cap box (monoline, extended).
@@ -33,9 +52,9 @@ const WORD_W = 1076;
 const STROKE = 18; // heavier than v1 (15): holds up at small sizes
 const PAD = STROKE / 2 - 6; // stroke overhang beyond the 0..90 box
 
-/** Scale and translate an absolute-coordinate path (M L H V Q C Z). */
+/** Scale and translate an absolute-coordinate path (M L H V Q C A Z). */
 function transform(d, s, tx, ty) {
-  const tokens = d.match(/[MLHVQCZ]|-?\d*\.?\d+/g);
+  const tokens = d.match(/[MLHVQCAZ]|-?\d*\.?\d+/g);
   const outTokens = [];
   let cmd = '';
   let axis = 0;
@@ -45,30 +64,29 @@ function transform(d, s, tx, ty) {
     let v;
     if (cmd === 'H') v = n * s + tx;
     else if (cmd === 'V') v = n * s + ty;
-    else { v = axis % 2 === 0 ? n * s + tx : n * s + ty; axis++; }
+    else if (cmd === 'A') { // rx ry rotation large-arc sweep x y
+      const k = axis++ % 7;
+      v = k < 2 ? n * s : k < 5 ? n : k === 5 ? n * s + tx : n * s + ty;
+    } else { v = axis % 2 === 0 ? n * s + tx : n * s + ty; axis++; }
     outTokens.push(String(Math.round(v * 100) / 100));
   }
-  return outTokens.join(' ').replace(/ ([MLHVQCZ])/g, '\n$1').replace(/([MLHVQCZ]) /g, '$1');
+  return outTokens.join(' ').replace(/ ([MLHVQCAZ])/g, '\n$1').replace(/([MLHVQCAZ]) /g, '$1');
 }
 
 const mono = (s, tx, ty) => transform(MONO, s, tx, ty);
 const word = (s, tx, ty) => SEQ.map(([c, x]) => transform(G[c], s, tx + x * s, ty)).join(' ');
 
-// Identity v3 (2026-10-14): brushed graphite replaces brushed bronze.
-const GRAPHITE = [
-  // Satin aluminum sweep (a gentle highlight, not a stripe).
-  [0, '#18191c'], [0.3, '#34373c'], [0.52, '#6e737a'], [0.74, '#34373c'], [1, '#18191c'],
-];
-const gradient = (id, w, h) =>
-  `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${w}" y2="${h}">${GRAPHITE.map(([o, c]) => `<stop offset="${o}" stop-color="${c}"/>`).join('')}</linearGradient>`;
+// Identity v4 (2026-10-14): flat, single-color marks (no gradients), the
+// way modern identities like Apple's are specified. Charcoal ink on light
+// grounds, pearl reverse on dark bands.
+const INK = '#1f2124';
+const PEARL = '#f3f3f1';
 
-function svg({ id, w, h, monoD, wordD, wordStroke, paint }) {
-  const fill = paint === 'graphite' ? `url(#${id})` : paint;
-  const defs = paint === 'graphite' ? `<defs>${gradient(id, w, h)}</defs>` : '';
+function svg({ w, h, monoD, wordD, wordStroke, paint }) {
   const parts = [];
-  if (monoD) parts.push(`<path fill="${fill}" d="${monoD}"/>`);
-  if (wordD) parts.push(`<path fill="none" stroke="${fill}" stroke-width="${wordStroke}" stroke-linejoin="round" d="${wordD}"/>`);
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="Benjaire"><title>Benjaire</title>${defs}${parts.join('')}</svg>\n`;
+  if (monoD) parts.push(`<path fill="${paint}" d="${monoD}"/>`);
+  if (wordD) parts.push(`<path fill="none" stroke="${paint}" stroke-width="${wordStroke}" stroke-linejoin="round" d="${wordD}"/>`);
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="Benjaire"><title>Benjaire</title>${parts.join('')}</svg>\n`;
 }
 
 // Layouts (all numbers in the output's own units).
@@ -99,16 +117,45 @@ function wordmark() {
 
 const layouts = { 'lockup-vertical': vertical(), 'lockup-horizontal': horizontal(), monogram: monogram(), wordmark: wordmark() };
 for (const [name, l] of Object.entries(layouts)) {
-  writeFileSync(join(out, `benjaire-${name}.svg`), svg({ id: `bj-${name}`, ...l, paint: 'graphite' }));
-  writeFileSync(join(out, `benjaire-${name}-cream.svg`), svg({ id: `bj-${name}-c`, ...l, paint: '#f3f3f1' }));
+  writeFileSync(join(out, `benjaire-${name}.svg`), svg({ ...l, paint: INK }));
+  writeFileSync(join(out, `benjaire-${name}-cream.svg`), svg({ ...l, paint: PEARL }));
 }
 
-// Favicon: graphite monogram on a pearl rounded square.
-const f = 0.9 * (800 * 0.62) / MONO_H; // monogram ≈ 56% of the tile height
-const fx = (800 - MONO_W * f) / 2;
-const fy = (800 - MONO_H * f) / 2;
+// Inline symbol for the nav (apple.com pattern: symbol only, inherits the
+// link color through currentColor so hover and reverse states are CSS-only).
+const MONO_D = mono(1, 0, 0).replace(/\n/g, ' ');
+writeFileSync(
+  join(out, '..', '..', 'src', 'components', 'LogoMark.astro'),
+  `---
+// Generated by scripts/build-logos.mjs. Do not edit by hand.
+interface Props { class?: string; size?: number }
+const { class: className, size = 22 } = Astro.props;
+---
+<svg class={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${MONO_W} ${MONO_H}" height={size} width={Math.round((size * ${MONO_W}) / ${MONO_H})} aria-hidden="true" focusable="false"><path fill="currentColor" d="${MONO_D}"/></svg>
+`,
+);
+
+// Favicon: the bare symbol, ink in light browser chrome and pearl in dark.
+const pad = 64;
+const fvBox = `${-pad - (MONO_H - MONO_W) / 2} ${-pad} ${MONO_H + 2 * pad} ${MONO_H + 2 * pad}`;
 writeFileSync(
   join(out, '..', 'favicon.svg'),
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><title>Benjaire</title><defs>${gradient('fv', 800, 800)}</defs><rect width="800" height="800" rx="160" fill="#f3f3f1"/><path fill="url(#fv)" d="${mono(f, fx, fy)}"/></svg>\n`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${fvBox}"><title>Benjaire</title><style>path{fill:${INK}}@media (prefers-color-scheme:dark){path{fill:${PEARL}}}</style><path d="${MONO_D}"/></svg>\n`,
 );
-console.log(`Logos written to ${out}: ${Object.keys(layouts).length * 2} files + favicon.`);
+
+// Raster icons. The touch icon is full-bleed (iOS applies its own mask).
+const tile = (size, bg, fg, ratio) => {
+  const s = (size * ratio) / MONO_H;
+  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><rect width="${size}" height="${size}" fill="${bg}"/><path fill="${fg}" d="${mono(s, (size - MONO_W * s) / 2, (size - MONO_H * s) / 2)}"/></svg>`);
+};
+const pub = join(out, '..');
+await sharp(tile(180, INK, PEARL, 0.5)).png().toFile(join(pub, 'apple-touch-icon.png'));
+await sharp(tile(32, PEARL, INK, 0.72)).png().toFile(join(pub, 'favicon-32.png'));
+const ico = await sharp(tile(48, PEARL, INK, 0.72)).png().toBuffer();
+const head = Buffer.alloc(22);
+head.writeUInt16LE(0, 0); head.writeUInt16LE(1, 2); head.writeUInt16LE(1, 4);
+head.writeUInt8(48, 6); head.writeUInt8(48, 7); head.writeUInt16LE(1, 10); head.writeUInt16LE(32, 12);
+head.writeUInt32LE(ico.length, 14); head.writeUInt32LE(22, 18);
+writeFileSync(join(pub, 'favicon.ico'), Buffer.concat([head, ico]));
+
+console.log(`Logos written to ${out}: ${Object.keys(layouts).length * 2} files, LogoMark.astro, favicons.`);
