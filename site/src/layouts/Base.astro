@@ -1,16 +1,15 @@
 ---
-import '@fontsource/archivo/latin-500.css';
-import '@fontsource/archivo/latin-700.css';
-import '@fontsource/archivo/latin-800.css';
+import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../site';
 // Preload the two faces used above the fold so text doesn't re-wrap (layout shift).
-import archivo800 from '@fontsource/archivo/files/archivo-latin-800-normal.woff2?url';
+import archivoVar from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 
 interface Props {
@@ -22,8 +21,10 @@ interface Props {
   noindex?: boolean;
   /** schema.org WebPage subtype for this page, e.g. AboutPage, ContactPage */
   pageType?: string;
+  /** Homepage: the nav floats over a full-bleed hero image */
+  hero?: boolean;
 }
-const { title, seoTitle, description = SITE.metaDescription, noindex = false, pageType = 'WebPage' } = Astro.props;
+const { title, seoTitle, description = SITE.metaDescription, noindex = false, pageType = 'WebPage', hero = false } = Astro.props;
 const brandTitle = `${SITE.name} | Brands for the Modern Era`;
 const fullTitle = seoTitle ?? (title ? `${title} | ${SITE.name}` : `${SITE.name} | Consumer Technology, Digital and Lifestyle Brands`);
 // Share cards carry the tagline on the homepage; other pages share their own title.
@@ -86,8 +87,8 @@ const pageLd = noindex
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#fdfaf5" />
-    <link rel="preload" href={archivo800} as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#f3f3f1" />
+    <link rel="preload" href={archivoVar} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -102,9 +103,10 @@ const pageLd = noindex
     <meta property="og:image:alt" content="Benjaire: Brands for the modern era" />
     <meta name="twitter:card" content="summary_large_image" />
     {pageLd && <script type="application/ld+json" set:html={JSON.stringify(pageLd)} />}
+    <script is:inline>document.documentElement.classList.add('js')</script>
     <slot name="head" />
   </head>
-  <body>
+  <body class={hero ? 'has-hero' : undefined}>
     <a class="skip" href="#main">Skip to content</a>
     <Nav />
     <main id="main" tabindex="-1">

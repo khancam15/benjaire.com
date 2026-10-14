@@ -30,6 +30,8 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
   const page = await context.newPage();
   for (const f of pages) {
     await page.goto(`${base}/${f}`, { waitUntil: 'load' });
+    // Let entrance animations (the homepage hero fades in) settle before measuring contrast.
+    await page.waitForTimeout(1600);
     const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
     const serious = result.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
     for (const v of serious) console.error(`✗ [${viewport.width}px] ${f}: ${v.id} (${v.nodes.length}) ${v.help}`);

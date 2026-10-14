@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 608" role="img" aria-label="Benjaire"><title>Benjaire</title><defs><linearGradient id="bj-monogram" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="583" y2="608"><stop offset="0" stop-color="#5e3d24"/><stop offset="0.3" stop-color="#7f5232"/><stop offset="0.52" stop-color="#a5764b"/><stop offset="0.74" stop-color="#7f5232"/><stop offset="1" stop-color="#5e3d24"/></linearGradient></defs><path fill="url(#bj-monogram)" d="M3 3
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 608" role="img" aria-label="Benjaire"><title>Benjaire</title><defs><linearGradient id="bj-monogram" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="583" y2="608"><stop offset="0" stop-color="#18191c"/><stop offset="0.3" stop-color="#34373c"/><stop offset="0.52" stop-color="#6e737a"/><stop offset="0.74" stop-color="#34373c"/><stop offset="1" stop-color="#18191c"/></linearGradient></defs><path fill="url(#bj-monogram)" d="M3 3
 H405
 C478 3 518 45 518 122
 C518 178 510 224 490 258
