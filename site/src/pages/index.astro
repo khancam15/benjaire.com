@@ -29,18 +29,19 @@ const [wideAvif, wideWebp, tallAvif, tallWebp, fallback] = await Promise.all([
 
 // Build → Operate → Grow is a real sequence, so it is numbered.
 const STEPS = [
-  { id: 'build', name: 'Build', role: 'Brand development', img: buildImg, form: 'The canopy',
-    text: 'We develop brands from concept to launch: positioning, product, design and digital presence.',
-    spec: ['Positioning', 'Product', 'Identity', 'Launch'] },
-  { id: 'operate', name: 'Operate', role: 'Business infrastructure', img: operateImg, form: 'The arch',
-    text: 'Benjaire runs the operations behind each brand, from sourcing and partnerships to customer experience.',
-    spec: ['Sourcing', 'Partnerships', 'Technology', 'Customer experience'] },
-  { id: 'grow', name: 'Grow', role: 'Portfolio expansion', img: growImg, form: 'The ribbon',
-    text: 'We invest in brands for the long term, expanding thoughtfully as each one finds its audience.',
-    spec: ['Long horizons', 'New categories', 'Patient ownership'] },
+  { id: 'build', name: 'Build', role: 'Solutions and brands', img: buildImg, form: 'The canopy',
+    text: 'We develop technology solutions for businesses and consumer brands, from research and design to launch.',
+    spec: ['Research', 'Design', 'Product', 'Launch'] },
+  { id: 'operate', name: 'Operate', role: 'Systems and delivery', img: operateImg, form: 'The arch',
+    text: 'We run lean, repeatable systems to deliver services and manage operations, from client projects to sourcing and partnerships.',
+    spec: ['Service delivery', 'Operations', 'Sourcing', 'Automation'] },
+  { id: 'grow', name: 'Grow', role: 'Validation and expansion', img: growImg, form: 'The ribbon',
+    text: 'We validate demand before investing, strengthen what works and expand into new services, markets and product categories.',
+    spec: ['Validation', 'Ongoing support', 'New categories'] },
 ];
 
-const INTAKE = ['Client inquiry capture', 'CRM integration', 'Automated acknowledgments', 'Inquiry routing', 'Onboarding task creation', 'Reminders'];
+// Same capability list as the example on /digital.
+const INTAKE = ['Inquiry capture', 'Client onboarding', 'Internal notifications', 'Timely reminders', 'CRM workflows'];
 
 const FOCUS = [
   { name: 'Consumer technology', text: 'Accessories and devices that fit seamlessly into everyday life.' },
@@ -51,7 +52,7 @@ const FOCUS = [
 const hasBrands = (await getCollection('brands')).some((e) => e.data.featured);
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
-<Base hero seoTitle="Benjaire | Technology, Digital Solutions and Consumer Brands">
+<Base hero seoTitle="Benjaire">
   <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={wideAvif.srcSet.attribute} imagesizes="100vw" media="(min-width: 900px)" />
 
   <ol class="rail" aria-hidden="true">
@@ -92,7 +93,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
       <aside class="glass hero-card" aria-label="Featured solution">
         <p class="mono">Digital Solutions · In development</p>
-        <p>Exploring intelligent automation solutions that simplify client intake and onboarding for professional services firms.</p>
+        <p>Exploring practical automation and AI integration solutions for modern businesses.</p>
         <a class="btn primary" href="/digital">Explore Digital Solutions <span aria-hidden="true">→</span></a>
       </aside>
     </div>
@@ -116,11 +117,11 @@ const pad = (n: number) => String(n).padStart(2, '0');
         <Picture src={operateImg} formats={['avif', 'webp']} widths={[900, 1600]} sizes="100vw" alt="" loading="lazy" />
         <div class="glass plinth-card">
           <span class="badge">In development</span>
-          <p class="mono">Proposed solution</p>
-          <h3>Client Intake &amp; Workflow Automation</h3>
-          <p>A proposed client intake and onboarding automation solution designed to help professional services businesses organize inquiries, streamline onboarding, and keep every next step on schedule.</p>
+          <p class="mono">Example use case</p>
+          <h3>Client intake &amp; onboarding</h3>
+          <p>One example of our Business Automation work: a client intake and onboarding solution that helps professional services firms organize inquiries, streamline onboarding, and keep every next step on schedule.</p>
           <ul class="spec">{INTAKE.map((x) => <li>{x}</li>)}</ul>
-          <a class="btn primary" href="/digital#intake">See our first offer <span aria-hidden="true">→</span></a>
+          <a class="btn primary" href="/digital#intake">See the example <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -132,16 +133,16 @@ const pad = (n: number) => String(n).padStart(2, '0');
       <p class="mono">What we do</p>
       <div>
         <h2 id="philosophy-title" class="h-statement">
-          {'One company. Independent brands, built on one shared foundation.'.split(' ').map((w) => <span>{w} </span>)}
+          {'One company. Two pillars, built on one shared foundation.'.split(' ').map((w) => <span>{w} </span>)}
         </h2>
         <div class="philo-foot">
-          <p>Benjaire exists so each brand can focus on its customers while the company carries the work behind it. Every brand launches under its own name, with its own identity and home online.</p>
+          <p>Benjaire develops digital solutions for businesses and consumer brands for everyday life. Both share the same standards, systems and name, and we validate demand before we expand.</p>
           <a class="link" href="/about">How Benjaire works <span aria-hidden="true">→</span></a>
         </div>
         <dl class="h-facts">
           <div><dt class="mono">Founded</dt><dd>{SITE.founded}</dd></div>
           <div><dt class="mono">Based in</dt><dd>New York</dd></div>
-          <div><dt class="mono">Categories</dt><dd>Three</dd></div>
+          <div><dt class="mono">Pillars</dt><dd>Two</dd></div>
         </dl>
       </div>
     </div>

@@ -1,7 +1,7 @@
 ---
 // Digital Solutions: a business pillar offered directly by Benjaire (no
 // separate division brand). Built from existing components only.
-// The first offer (client intake and workflow automation) is in development:
+// Service categories lead; client intake is one example use case, in development:
 // never describe it as available, and don't publish prices until validated.
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
@@ -23,9 +23,12 @@ const CAPABILITIES = [
 ];
 
 const SERVICES = [
-  { name: 'Business Automation', text: 'Repetitive administrative work handled reliably by software, from data entry to document preparation.' },
-  { name: 'AI Integration', text: 'Practical AI added to the tools your team already uses, where it saves real time.' },
-  { name: 'Workflow Optimization', text: 'Connected applications and clear processes, so work moves from one step to the next without manual handoffs.' },
+  { name: 'Business Automation', text: 'Streamline repetitive processes, improve information flow, and reduce manual administrative work.',
+    uses: ['Client intake', 'Onboarding workflows', 'CRM updates', 'Reminders', 'Internal notifications'] },
+  { name: 'AI Integration', text: 'Explore practical ways to incorporate AI into existing business workflows and digital systems.',
+    uses: ['Document classification', 'Information organization', 'Workflow assistance', 'Administrative support'] },
+  { name: 'Workflow Optimization', text: 'Identify operational bottlenecks and develop more efficient digital processes.',
+    uses: ['Process mapping', 'Workflow analysis', 'Systems integration', 'Operational improvements'] },
 ];
 
 // Discover → Configure → Deploy → Support is a real sequence, so it is numbered.
@@ -33,7 +36,7 @@ const STEPS = [
   { name: 'Discover', text: 'We map how inquiries, onboarding and client communication work in your firm today.' },
   { name: 'Configure', text: 'We adapt a standard automation to your tools, wording and team.' },
   { name: 'Deploy', text: 'We launch it alongside your existing systems and test it with real workflows.' },
-  { name: 'Support', text: 'We monitor, adjust and improve it as your firm grows.' },
+  { name: 'Support', text: 'Optional ongoing support: we monitor, adjust and improve it as your firm grows.' },
 ];
 
 const description = 'Benjaire develops practical automation and AI solutions that help professional services firms streamline operations and simplify client onboarding.';
@@ -60,23 +63,19 @@ const pad = (n: number) => String(n).padStart(2, '0');
       <p class="lead mb-5">Benjaire develops practical technology and automation solutions that help businesses streamline operations, improve efficiency, and simplify everyday workflows.</p>
       <div class="actions">
         <a class="btn primary" href="/contact?category=digital#inquiry">Discuss your workflow <span aria-hidden="true">→</span></a>
-        <a class="btn ghost" href="#intake">See our first offer</a>
+        <a class="btn ghost" href="#services">See service categories</a>
       </div>
     </div>
   </section>
 
-  <section class="sec band-section" id="intake" aria-labelledby="intake-title">
+  <section class="sec band-section" id="services" aria-labelledby="services-title">
     <div class="wrap">
       <div class="sec-head">
-        <div>
-          <p class="eyebrow">Our first offer</p>
-          <span class="badge">In development</span>
-          <h2 id="intake-title">Client Intake &amp; Workflow Automation.</h2>
-        </div>
-        <p class="muted">A focused service for small consulting firms and agencies: we automate how inquiries arrive, how new clients are onboarded and what happens next. It is in development, and firms that talk to us now can help shape it.</p>
+        <div><p class="eyebrow">Service categories</p><h2 id="services-title">Where we can help.</h2></div>
+        <p class="muted">Three capability areas, each delivered directly by Benjaire as a defined scope project with optional ongoing support. All are in business development and service validation.</p>
       </div>
       <ul class="rows">
-        {CAPABILITIES.map((c) => <li class="row"><h3>{c.name}</h3><p>{c.text}</p></li>)}
+        {SERVICES.map((s) => <li class="row"><h3>{s.name}</h3><div><p>{s.text}</p><ul class="taglist" aria-label={`${s.name} use cases`}>{s.uses.map((u) => <li>{u}</li>)}</ul></div></li>)}
       </ul>
     </div>
   </section>
@@ -93,14 +92,18 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </section>
 
-  <section class="sec band-section" id="services" aria-labelledby="services-title">
+  <section class="sec band-section" id="intake" aria-labelledby="intake-title">
     <div class="wrap">
       <div class="sec-head">
-        <div><p class="eyebrow">Service categories</p><h2 id="services-title">Where we can help.</h2></div>
-        <p class="muted">Our first offer draws on three broader capabilities, each delivered directly by Benjaire. All are in business development and service validation.</p>
+        <div>
+          <p class="eyebrow">Example use case</p>
+          <span class="badge">In development</span>
+          <h2 id="intake-title">Client intake &amp; workflow automation.</h2>
+        </div>
+        <p class="muted">One example of what Business Automation can do for a small consulting firm or agency: we automate how inquiries arrive, how new clients are onboarded and what happens next. It is in development, and firms that talk to us now can help shape it.</p>
       </div>
       <ul class="rows">
-        {SERVICES.map((s) => <li class="row"><h3>{s.name}</h3><p>{s.text}</p></li>)}
+        {CAPABILITIES.map((c) => <li class="row"><h3>{c.name}</h3><p>{c.text}</p></li>)}
       </ul>
     </div>
   </section>
@@ -109,7 +112,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     <div class="wrap">
       <div class="sec-head">
         <div><p class="eyebrow">How it works</p><h2 id="how">Four steps, one standard.</h2></div>
-        <p class="muted">Productized workflow automation: proven building blocks, configured for your firm rather than built from scratch.</p>
+        <p class="muted">Defined scope projects built from standard building blocks, configured for your firm rather than built from scratch, with optional ongoing support after launch.</p>
       </div>
       <ol class="pillars four">
         {STEPS.map((s, i) => <li class="pillar"><span class="num" aria-hidden="true">{pad(i + 1)}</span><h3>{s.name}</h3><p>{s.text}</p></li>)}
