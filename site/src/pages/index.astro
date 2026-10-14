@@ -1,6 +1,7 @@
 ---
 // Homepage, design v0.3 "The Pavilion" (approved 2026-10-14). Digital first
-// positioning (2026-10-14): Benjaire Digital and Benjaire Intake lead.
+// positioning (2026-10-14): one company, two pillars (Digital Solutions and
+// Consumer Brands). Digital Solutions leads; no separate division branding.
 // Layout styles: src/styles/home.css. Interactions: src/scripts/home.ts.
 import { getCollection } from 'astro:content';
 import { getImage, Picture } from 'astro:assets';
@@ -50,7 +51,7 @@ const FOCUS = [
 const hasBrands = (await getCollection('brands')).some((e) => e.data.featured);
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
-<Base hero seoTitle="Benjaire | Digital Solutions & Modern Brands" description="Benjaire develops intelligent business automation solutions and modern consumer brands. Explore Benjaire Digital's workflow automation services.">
+<Base hero seoTitle="Benjaire | Technology, Digital Solutions and Consumer Brands">
   <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={wideAvif.srcSet.attribute} imagesizes="100vw" media="(min-width: 900px)" />
 
   <ol class="rail" aria-hidden="true">
@@ -73,7 +74,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
       <div class="hero-copy">
         <p class="mono reveal">Benjaire · New York · Est. {SITE.founded}</p>
         <h1 id="hero-title" class="reveal">Building brands. <span>Powering businesses.</span></h1>
-        <p class="lead hero-lead reveal">Benjaire is a New York company developing modern consumer brands and intelligent digital solutions that connect technology, design and business innovation.</p>
+        <p class="lead hero-lead reveal">{SITE.metaDescription}</p>
         <div class="actions reveal">
           <a class="btn primary" href="/digital">Explore Digital Solutions <span aria-hidden="true">→</span></a>
           <a class="btn ghost" href="/about">About Benjaire</a>
@@ -90,23 +91,23 @@ const pad = (n: number) => String(n).padStart(2, '0');
       </nav>
 
       <aside class="glass hero-card" aria-label="Featured solution">
-        <p class="mono">Benjaire Digital · In development</p>
-        <p><strong>Benjaire Intake</strong> automates client intake and onboarding for professional services firms.</p>
-        <a class="btn primary" href="/digital#intake">Learn about Benjaire Intake <span aria-hidden="true">→</span></a>
+        <p class="mono">Digital Solutions · In development</p>
+        <p>Exploring intelligent automation solutions that simplify client intake and onboarding for professional services firms.</p>
+        <a class="btn primary" href="/digital">Explore Digital Solutions <span aria-hidden="true">→</span></a>
       </aside>
     </div>
     <span class="scroll-cue mono" aria-hidden="true">Scroll</span>
   </section>
 
-  <!-- 2 · Benjaire Digital -->
+  <!-- 2 · Digital Solutions -->
   <section class="sec digital" id="digital" data-section="digital" aria-labelledby="digital-title">
     <div class="wrap grid-2">
-      <p class="mono">Benjaire Digital</p>
+      <p class="mono">Digital Solutions</p>
       <div>
         <h2 id="digital-title">Smarter systems. <span>Better business.</span></h2>
         <div class="philo-foot">
-          <p>Benjaire Digital develops intelligent workflow automation solutions that simplify everyday business operations, reduce repetitive administrative tasks, and support more efficient client experiences.</p>
-          <a class="link" href="/digital">Explore Benjaire Digital <span aria-hidden="true">→</span></a>
+          <p>Benjaire develops intelligent workflow automation solutions that simplify everyday business operations, reduce repetitive administrative tasks, and support more efficient client experiences.</p>
+          <a class="link" href="/digital">Explore Digital Solutions <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -115,11 +116,11 @@ const pad = (n: number) => String(n).padStart(2, '0');
         <Picture src={operateImg} formats={['avif', 'webp']} widths={[900, 1600]} sizes="100vw" alt="" loading="lazy" />
         <div class="glass plinth-card">
           <span class="badge">In development</span>
-          <p class="mono">Featured solution</p>
-          <h3>Benjaire Intake</h3>
-          <p>An intelligent client intake and onboarding automation solution designed to help professional services businesses organize inquiries, streamline onboarding, and keep every next step on schedule.</p>
+          <p class="mono">Proposed solution</p>
+          <h3>Client intake automation</h3>
+          <p>A proposed client intake and onboarding automation solution designed to help professional services businesses organize inquiries, streamline onboarding, and keep every next step on schedule.</p>
           <ul class="spec">{INTAKE.map((x) => <li>{x}</li>)}</ul>
-          <a class="btn primary" href="/digital#intake">Learn about Benjaire Intake <span aria-hidden="true">→</span></a>
+          <a class="btn primary" href="/digital#intake">Learn about client intake automation <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
