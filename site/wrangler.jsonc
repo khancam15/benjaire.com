@@ -33,5 +33,18 @@
   // Cloudflare Email Routing: may only send to verified destination addresses.
   "send_email": [{ "name": "SEND_EMAIL" }],
   // 5 submissions per minute per visitor IP.
-  "ratelimits": [{ "name": "CONTACT_LIMITER", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }]
+  "ratelimits": [{ "name": "CONTACT_LIMITER", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }],
+  // Pull request previews (`wrangler preview` in Workers Builds). Bindings are
+  // not inherited, so each one is restated. Preview hostnames already pass the
+  // origin check (worker/lib.ts), and previews get their own rate-limit
+  // namespace. Email Routing only delivers to verified addresses, so a preview
+  // form submission reaches the same inbox as production.
+  "previews": {
+    "vars": {
+      "MAIL_FROM": "website@benjaire.com",
+      "ALLOWED_HOSTS": "benjaire-com.benjaireco.workers.dev"
+    },
+    "send_email": [{ "name": "SEND_EMAIL" }],
+    "ratelimits": [{ "name": "CONTACT_LIMITER", "namespace_id": "1002", "simple": { "limit": 5, "period": 60 } }]
+  }
 }
