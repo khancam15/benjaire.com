@@ -1,7 +1,7 @@
 name: Site CI
 
-# Checks for the new Astro site in site/ (PRD M3). The legacy root pages
-# keep their own Security Audit workflow until the M6 cutover.
+# Checks for the live Astro site in site/. The retired root pages keep the
+# legacy Security Audit workflow until the post launch cleanup.
 on:
   pull_request:
     branches: [main]

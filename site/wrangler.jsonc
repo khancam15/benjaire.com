@@ -1,8 +1,9 @@
 // Cloudflare Workers deployment (ADR-0002, ADR-0004).
 // Static pages are served straight from ./dist. Only /api/* reaches the
 // Worker script (the contact-form handler). Clean URLs: /about serves
-// about.html and /about.html redirects to /about. No routes or custom
-// domains here: benjaire.com stays on GitHub Pages until the M6 cutover.
+// about.html and /about.html redirects to /about. benjaire.com and
+// www.benjaire.com are attached as custom domains in the Cloudflare
+// dashboard, not here; a Redirect Rule sends www to the apex.
 //
 // Secrets (set in the dashboard, never in this public repo):
 //   TURNSTILE_SECRET_KEY  Turnstile secret for the contact form

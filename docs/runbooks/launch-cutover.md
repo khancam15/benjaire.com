@@ -1,5 +1,10 @@
 # Runbook: benjaire.com launch cutover (M6)
 
+> **Status: completed.** benjaire.com and www.benjaire.com are served by the
+> Cloudflare Worker `benjaire-com`; Always Use HTTPS and the www to apex 301
+> were turned on 2026-10-14. Sections A to E are kept as the record and as the
+> rollback procedure. Section F lists what is still open.
+
 Moves benjaire.com from the legacy GitHub Pages site to the new site on the
 Cloudflare Worker `benjaire-com`. **Email is not affected:** MX, SPF, DKIM, DMARC
 and Email Routing records are not touched. The procedure follows ADR-0003.
@@ -44,7 +49,7 @@ Current website records (DNS only, not proxied):
 
 | # | Check | Expected |
 |---|---|---|
-| D1 | Open https://benjaire.com | New design, bronze logo |
+| D1 | Open https://benjaire.com | Pavilion design (v0.3), identity v4 logo |
 | D2 | https://benjaire.com/about.html | 301 → `/about` |
 | D3 | https://www.benjaire.com/contact | 301 → `https://benjaire.com/contact` |
 | D4 | http://benjaire.com | Redirects to HTTPS |

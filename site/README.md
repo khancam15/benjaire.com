@@ -1,8 +1,8 @@
-# benjaire.com: new site (Astro)
+# benjaire.com (Astro)
 
-The rebuilt Benjaire website (PRD milestones M3 onward). It lives in this
-folder so the current site at the repository root keeps serving benjaire.com
-from GitHub Pages until the approved cutover (M6, ADR-0002).
+The Benjaire website, live at https://benjaire.com. It is built with Astro and
+deployed to Cloudflare Workers static assets (ADR-0002). The pages at the
+repository root are the retired GitHub Pages site.
 
 ## Run locally
 
@@ -18,13 +18,18 @@ npm run preview    # serve the build
 
 ## Checks (also run in CI: `.github/workflows/site-ci.yml`)
 
+Run `npm run ci` before pushing to `main` and make sure it exits 0. It runs
+everything below except the accessibility tests, which need Chromium
+(`npx playwright install chromium`).
+
 ```bash
 npx astro check        # types
-npm run build
-npm run test:links     # internal links and assets
-npm run test:a11y      # axe, WCAG 2.2 AA, desktop and mobile widths
 npm run check:worker   # Worker types
 npm run test:worker    # Worker unit tests
+npm run build
+npm run test:links     # internal links and assets
+npm run test:seo       # titles <= 60 chars, meta descriptions 120 to 160
+npm run test:a11y      # axe, WCAG 2.2 AA, desktop and mobile widths
 ```
 
 To run the form locally, create `site/.dev.vars` (git-ignored) with
@@ -37,14 +42,17 @@ and `CONTACT_TO=you@example.com`, then `npx wrangler dev`.
 |---|---|
 | `src/site.ts` | Company facts, nav, inquiry categories, supplier areas |
 | `src/styles/global.css` | Design tokens and styles (see `docs/design-system.md`) |
-| `src/layouts/Base.astro` | Page shell: meta tags, nav, footer |
+| `src/styles/home.css`, `src/scripts/home.ts` | Homepage layout and motion |
+| `src/layouts/Base.astro` | Page shell: meta tags, JSON-LD, nav, footer |
+| `src/components/` | Shared components, including `LogoMark.astro` and `PageBand.astro` |
+| `src/assets/` | Pavilion renders for the homepage and inner pages |
 | `src/pages/` | One file per page |
 | `src/content/brands/` | Brand entries (one JSON file per **publicly approved** brand) |
 | `src/scripts/contact.ts` | Contact form behaviour in the browser |
 | `worker/` | Cloudflare Worker for `/api/contact`: Turnstile check, validation, rate limit, email (`lib.ts` is unit-tested) |
 | `scripts/security-headers.mjs` | Writes `dist/_headers` (CSP with inline-script hashes, HSTS, etc.) after each build |
 | `public/_redirects` | Permanent redirects from the legacy `.html` URLs |
-| `public/brand/` | Logo files (bronze, textured, cream) |
+| `public/brand/` | Identity v4 logo files: charcoal, plus `-cream` (pearl) reverses. Regenerate with `node scripts/build-logos.mjs public/brand` |
 
 ## Adding a brand
 
@@ -60,8 +68,8 @@ configured by `wrangler.jsonc` in this folder.
 |---|---|
 | Project name | `benjaire-com` (must match `name` in `wrangler.jsonc`) |
 | Build command | `npm run build` |
-| Deploy command | `npx wrangler deploy` |
-| Non-production branch deploy command | default (`npx wrangler versions upload`) |
+| Deploy command | `npx wrangler deploy` (production branch `main`) |
+| Non-production branch deploy command | `npx wrangler preview` (uses the `previews` block in `wrangler.jsonc`) |
 | Advanced settings → Path (root directory) | `site` |
 | Advanced settings → Build variables | `NODE_VERSION` = `22` |
 | Preview builds | On |
@@ -76,6 +84,11 @@ configured by `wrangler.jsonc` in this folder.
 
 Never put these values in the repository; it is public.
 
-The deployment gets a `*.workers.dev` address only. No routes or custom
-domains are configured, so benjaire.com keeps pointing at GitHub Pages until
-the M6 cutover is approved.
+## Domains
+
+`benjaire.com` and `www.benjaire.com` are attached to the Worker as custom
+domains in the Cloudflare dashboard (not in `wrangler.jsonc`). A Redirect Rule
+sends `www` to the apex with a 301, and Always Use HTTPS is on. Pull request
+previews live at `<branch>-benjaire-com.benjaireco.workers.dev`. Preview
+bindings are not inherited, so any new binding must also be added to the
+`previews` block.

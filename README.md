@@ -1,100 +1,73 @@
 # Benjaire.com
 
-Website for Benjaire, a New York company. Three pages: home, about, and contact (plus a "Brands" nav item that anchors to a section on the home page). Benjaire owns and builds independent consumer product brands; each brand launches under its own name/trademark on its own domain rather than on benjaire.com.
+Website for Benjaire, a New York company developing consumer brands and digital solutions that combine technology, design, and business innovation. Benjaire is one company with two business pillars, **Digital Solutions** and **Consumer Brands**, under one identity.
 
-## New site in progress
+Live at **https://benjaire.com**.
 
-A rebuilt site (Astro) is being developed in [`site/`](site/) per the approved plan in [`docs/PRD.md`](docs/PRD.md). The pages at the repository root remain the live site on GitHub Pages until the planned cutover.
+## Pages
 
-## Description
+| Path | Page |
+|---|---|
+| `/` | Home |
+| `/digital` | Digital Solutions |
+| `/about` | About |
+| `/brands` | Consumer Brands |
+| `/contact` | Contact form (Digital Solutions, general, partnership, supplier inquiries) |
+| `/privacy`, `/terms` | Legal drafts, `noindex` and out of the sitemap until reviewed |
 
-This repository contains the source code for benjaire.com, a static website hosted on GitHub Pages.
+Legacy `.html` URLs (for example `/about.html`) redirect permanently to the clean paths.
 
-## Technologies Used
+## Stack
 
-- HTML5
-- CSS3 (shared stylesheet in `assets/site.css`)
-- Google Fonts
+- [Astro](https://astro.build) static site in [`site/`](site/)
+- Hosted on **Cloudflare Workers** static assets (`site/wrangler.jsonc`), with `www` redirecting to the apex domain
+- Contact form handled by a small Worker at `/api/contact` (Turnstile, validation, rate limit, Cloudflare Email Routing)
+- Security headers (CSP with script hashes, HSTS, `X-Frame-Options: DENY`) generated at build time
+- Design system v0.3 "The Pavilion": see [`docs/design-system.md`](docs/design-system.md)
 
-## Getting Started
+Setup, commands, file layout and Cloudflare settings are in [`site/README.md`](site/README.md).
 
-To view the website locally:
+## Quick start
 
-1. Clone the repository
-2. Start a local static server from the project root:
-
-```bash
-python3 -m http.server 5501
-```
-
-3. Open `http://localhost:5501` in your browser
-
-## Development Best Practices
-
-Use this repository as a lightweight static site. Keep changes simple, reviewable, and easy to deploy through GitHub Pages.
-
-- Benjaire stays anonymous by design: do not add a founder name, personal bio, photo, or personal social links to any page.
-- This site is intentionally just three pages (home, about, contact). Consumer product brands Benjaire owns live on their own domains, not here — don't add product/shop content to this repo unless explicitly asked.
-- Preserve the current page content unless a change is explicitly about copy, positioning, or messaging.
-- Keep UI changes consistent across pages: navigation, typography, spacing, colors, responsive breakpoints, and footer treatment should feel like one system.
-- Prefer semantic HTML elements such as `main`, `section`, `article`, `nav`, `button`, `details`, and `summary`.
-- Add descriptive `alt` text to meaningful images. Decorative images should use empty `alt=""`.
-- Include `width` and `height` on images when known to reduce layout shift.
-- Use responsive CSS with stable layout constraints such as `grid`, `max-width`, `minmax()`, `clamp()`, and media queries.
-- Keep JavaScript small and progressive. If JavaScript fails, core navigation and page content should still be usable.
-- Avoid inline event attributes like `onclick`; use `addEventListener` in scripts.
-- Add keyboard support for interactive UI, including visible focus states and Escape-to-close behavior for menus or overlays.
-- Respect `prefers-reduced-motion` when adding transitions, scroll effects, or reveal animations.
-- Test changed pages on desktop and mobile widths before deploying.
-
-Recommended local checks after editing:
+Requires Node 22.12 or newer.
 
 ```bash
-python3 scripts/ui_audit.py .
-python3 scripts/security_audit.py .
-./security-audit.sh .
+cd site
+npm ci
+npm run dev
 ```
 
-## Security Audit
+Then open http://localhost:4321.
 
-Run the security checker before pushing changes:
+## Before pushing
+
+Run the full check suite from `site/` and make sure it exits 0:
 
 ```bash
-./security-audit.sh
+npm run ci
 ```
 
-Python audit utilities are also available:
-
-```bash
-python3 scripts/security_audit.py .
-python3 scripts/ui_audit.py .
-```
-
-Run it against a custom directory:
-
-```bash
-./security-audit.sh /path/to/html-dir
-python3 scripts/security_audit.py /path/to/html-dir
-python3 scripts/ui_audit.py /path/to/html-dir
-```
-
-## Security Best Practices
-
-This is a static website, so security work is mostly about reducing browser attack surface, avoiding accidental secret exposure, and keeping deploys predictable.
-
-- Keep the Content Security Policy on every HTML page.
-- Avoid adding third-party scripts. If a dependency is required, document why it is needed and load it only from a trusted HTTPS source.
-- Do not commit secrets, API keys, private certificates, analytics tokens, service account files, or `.env` files.
-- Do not use `eval()`, `document.write()`, unsafe `innerHTML` assignments, or `javascript:` URLs.
-- Use `rel="noopener noreferrer"` for every `target="_blank"` link.
-- Keep external resources on HTTPS only.
-- Keep `frame-ancestors 'none'`, `base-uri 'self'`, and `connect-src 'none'` in the CSP unless the page truly needs a broader policy (the form on `contact.html` needs `connect-src https://api.emailjs.com`).
-- Treat forms as high-risk. If forms are added, validate server-side, protect against spam, and review CSRF behavior for the destination service.
-- Review image and font sources before adding them to the CSP.
-- Run the security audits before pushing to `main`.
-
-Current note: pages use inline CSS and JavaScript, so the CSP currently includes `'unsafe-inline'`. A stricter future improvement would move styles and scripts into external files or use CSP hashes.
+It runs type checks, Worker tests, the build, internal link checks and SEO checks. GitHub Actions ([`site-ci.yml`](.github/workflows/site-ci.yml)) runs the same checks plus axe accessibility tests (WCAG 2.2 AA).
 
 ## Deployment
 
-The website is automatically deployed via GitHub Pages from the `main` branch. Changes reach `main` through squash merged pull requests; see [CONTRIBUTING.md](CONTRIBUTING.md).
+Cloudflare Workers Builds deploys `main` to production automatically (`npx wrangler deploy`). Pull request branches get a preview at `<branch>-benjaire-com.benjaireco.workers.dev`. Changes reach `main` through pull requests; see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Content rules
+
+- Benjaire stays company first: no founder name, personal bio, photo or personal social links anywhere on the site.
+- Shared company copy lives in `site/src/site.ts`. Reuse the canonical description word for word rather than paraphrasing it per page.
+- Brands appear only once they are publicly approved (`site/src/content/brands/`). This repository is public, so never commit unreleased brands.
+- House style: "a New York company", US spelling, no em dashes and no hyphenated compounds in visible copy. Meta descriptions are 120 to 160 characters.
+- Never commit secrets. Worker secrets are set in the Cloudflare dashboard only.
+
+## Documentation
+
+- [`docs/PRD.md`](docs/PRD.md): product requirements
+- [`docs/adr/`](docs/adr/): architecture decision records
+- [`docs/design-system.md`](docs/design-system.md): visual language, tokens and logo rules
+- [`docs/runbooks/launch-cutover.md`](docs/runbooks/launch-cutover.md): the completed move from GitHub Pages to Cloudflare
+
+## Legacy files
+
+The `.html` files, `assets/`, `CNAME`, `_config.yml`, `scripts/` and `security-audit.sh` at the repository root belong to the retired GitHub Pages site. They no longer serve benjaire.com and are kept only until the post launch cleanup (runbook section F).
