@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageBand from '../components/PageBand.astro';
+import bandImg from '../assets/pages/brands.jpg';
 import BrandGrid from '../components/BrandGrid.astro';
 ---
 <Base title="Brands" seoTitle="Consumer Brands | Benjaire" pageType="CollectionPage" description="Benjaire's consumer brands, now in research and development across consumer technology, accessories, lifestyle products and ecommerce, each under its own name.">
@@ -8,6 +10,7 @@ import BrandGrid from '../components/BrandGrid.astro';
       <p class="eyebrow">Our brands</p>
       <h1>Consumer Brands.</h1>
       <p class="lead">Developing consumer brands through technology, design, and thoughtful product innovation. Consumer Brands is one of Benjaire's two business pillars, and our first brands are in research and development across consumer technology, technology accessories, lifestyle products and ecommerce.</p>
+      <PageBand src={bandImg} alt="View from under the pavilion's canopy shell, looking out through a glass wall to the water and the arch beyond" />
     </div>
   </section>
   <section class="sec">

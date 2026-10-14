@@ -4,6 +4,8 @@
 // Service categories lead; client intake is one example use case, in development:
 // never describe it as available, and don't publish prices until validated.
 import Base from '../layouts/Base.astro';
+import PageBand from '../components/PageBand.astro';
+import bandImg from '../assets/pages/digital.jpg';
 import { SITE } from '../site';
 
 const PROBLEMS = [
@@ -65,6 +67,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
         <a class="btn primary" href="/contact?category=digital#inquiry">Discuss your workflow <span aria-hidden="true">→</span></a>
         <a class="btn ghost" href="#services">See service categories</a>
       </div>
+      <PageBand src={bandImg} focus="right" alt="Detail of the pavilion's ribbed aluminum arch with a glass bridge passing through it" />
     </div>
   </section>
 
@@ -135,7 +138,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
   <section class="band dark" aria-labelledby="build-smarter">
     <div class="wrap">
-      <img class="band-mark" src="/brand/benjaire-monogram-cream.svg" alt="" width="54" height="56" />
+      <img class="band-mark" src="/brand/benjaire-monogram-cream.svg" alt="" width="53" height="56" />
       <p class="eyebrow center">Get started</p>
       <h2 id="build-smarter">Build smarter business operations.</h2>
       <p>Tell us how your firm handles inquiries and onboarding today.</p>
