@@ -6,13 +6,13 @@ export const SITE = {
   // Canonical company description: homepage lead and Organization schema.
   // Reuse it word for word on company profiles; don't paraphrase per page.
   description:
-    'Benjaire is a New York company that develops, owns and operates independent brands in consumer technology, digital products and lifestyle. Each brand carries its own name and identity, with Benjaire providing the strategy, operations and patient ownership behind it.',
+    'Benjaire is a New York company developing consumer brands and digital solutions that combine technology, design, and business innovation. It operates two business pillars, Digital Solutions and Consumer Brands, under one identity.',
   // Default meta description (120 to 160 characters).
   metaDescription:
-    'Benjaire is a New York company that develops, owns and operates independent brands in consumer technology, digital products and lifestyle.',
+    'Benjaire is a New York company developing consumer brands and digital solutions that combine technology, design, and business innovation.',
   // Short boilerplate for footers, social bios and directories.
   boilerplate:
-    'Benjaire develops, owns and operates independent consumer technology, digital and lifestyle brands. Based in New York.',
+    'Benjaire develops digital solutions and consumer brands that combine technology, design and business innovation. Based in New York.',
   url: 'https://benjaire.com',
   email: 'contact@benjaire.com',
   location: 'New York, NY',

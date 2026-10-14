@@ -1,7 +1,7 @@
 ---
-// Benjaire Digital, the primary operating division (approved 2026-10-14).
-// Built from existing components only: page-head, rows, pillars, facts, band.
-// Benjaire Intake is in development: never describe it as available.
+// Digital Solutions: a business pillar offered directly by Benjaire (no
+// separate division brand). Built from existing components only.
+// The client intake solution is proposed: never describe it as available.
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
 
@@ -23,6 +23,12 @@ const CAPABILITIES = [
 ];
 
 // Discover → Configure → Deploy → Support is a real sequence, so it is numbered.
+const SERVICES = [
+  { name: 'Business Automation', text: 'Repetitive administrative work handled reliably by software, from data entry to document preparation.' },
+  { name: 'AI Integration', text: 'Practical AI added to the tools your team already uses, where it saves real time.' },
+  { name: 'Workflow Optimization', text: 'Connected applications and clear processes, so work moves from one step to the next without manual handoffs.' },
+];
+
 const STEPS = [
   { name: 'Discover', text: 'We map how inquiries, onboarding and client communication work in your firm today.' },
   { name: 'Configure', text: 'We adapt a standard automation to your tools, wording and team.' },
@@ -30,12 +36,12 @@ const STEPS = [
   { name: 'Support', text: 'We monitor, adjust and improve it as your firm grows.' },
 ];
 
-const description = 'Benjaire Digital develops workflow automation solutions that help professional services firms simplify client onboarding and streamline business operations.';
+const description = 'Benjaire develops practical automation and AI solutions that help professional services firms streamline operations and simplify client onboarding.';
 const serviceLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': `${SITE.url}/digital#service`,
-  name: 'Benjaire Digital workflow automation',
+  name: 'Digital Solutions by Benjaire',
   serviceType: 'Business process automation',
   description,
   url: `${SITE.url}/digital`,
@@ -44,18 +50,30 @@ const serviceLd = {
 };
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
-<Base title="Digital Solutions" seoTitle="Business Automation Solutions | Benjaire Digital" description={description}>
+<Base title="Digital Solutions" seoTitle="Digital Solutions | Business Automation & AI | Benjaire" description={description}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
 
   <section class="page-head">
     <div class="wrap">
-      <p class="eyebrow">Benjaire Digital</p>
-      <h1>Intelligent automation for <span>modern business.</span></h1>
-      <p class="lead mb-5">Benjaire Digital helps professional services firms simplify operations through intelligent, practical workflow automation.</p>
+      <p class="eyebrow">Digital Solutions by Benjaire</p>
+      <h1>Intelligent solutions for <span>modern business.</span></h1>
+      <p class="lead mb-5">Benjaire develops practical technology and automation solutions that help businesses streamline operations, improve efficiency, and simplify everyday workflows.</p>
       <div class="actions">
         <a class="btn primary" href="/contact?category=digital#inquiry">Discuss your workflow <span aria-hidden="true">→</span></a>
-        <a class="btn ghost" href="#intake">See Benjaire Intake</a>
+        <a class="btn ghost" href="#services">See our services</a>
       </div>
+    </div>
+  </section>
+
+  <section class="sec band-section" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Services</p><h2 id="services-title">Three service categories.</h2></div>
+        <p class="muted">Each category is delivered directly by Benjaire, starting with small professional services firms. Services are in business development and validation with early clients.</p>
+      </div>
+      <ul class="rows">
+        {SERVICES.map((s) => <li class="row"><h3>{s.name}</h3><p>{s.text}</p></li>)}
+      </ul>
     </div>
   </section>
 
@@ -75,11 +93,11 @@ const pad = (n: number) => String(n).padStart(2, '0');
     <div class="wrap">
       <div class="sec-head">
         <div>
-          <p class="eyebrow">Featured solution</p>
+          <p class="eyebrow">Proposed solution</p>
           <span class="badge">In development</span>
-          <h2 id="intake-title">Benjaire Intake.</h2>
+          <h2 id="intake-title">Client intake automation.</h2>
         </div>
-        <p class="muted">An intelligent client intake and onboarding automation solution designed to help professional services businesses organize inquiries, streamline onboarding, and keep every next step on schedule. These are the planned capabilities; firms that talk to us now can help shape them.</p>
+        <p class="muted">A proposed client intake and onboarding automation solution designed to help professional services businesses organize inquiries, streamline onboarding, and keep every next step on schedule. These are the planned capabilities; firms that talk to us now can help shape them.</p>
       </div>
       <ul class="rows">
         {CAPABILITIES.map((c) => <li class="row"><h3>{c.name}</h3><p>{c.text}</p></li>)}
@@ -103,10 +121,11 @@ const pad = (n: number) => String(n).padStart(2, '0');
     <div class="wrap two">
       <div><p class="eyebrow">Who we serve</p><h2 id="serve" class="statement">Professional services firms that want more time for clients and less time on admin.</h2></div>
       <dl class="facts">
-        <div class="fact"><dt>Primary focus</dt><dd>Boutique consulting firms</dd></div>
-        <div class="fact"><dt>Also</dt><dd>Small agencies and business advisory firms</dd></div>
+        <div class="fact"><dt>Primary focus</dt><dd>Consulting firms and agencies</dd></div>
+        <div class="fact"><dt>Also</dt><dd>Business advisory firms</dd></div>
         <div class="fact"><dt>Team size</dt><dd>About 5 to 30 people</dd></div>
-        <div class="fact"><dt>Division of</dt><dd><a href="/about">Benjaire, {SITE.location}</a></dd></div>
+        <div class="fact"><dt>Status</dt><dd>Business development and service validation</dd></div>
+        <div class="fact"><dt>Offered by</dt><dd><a href="/about">Benjaire, {SITE.location}</a></dd></div>
       </dl>
     </div>
   </section>
