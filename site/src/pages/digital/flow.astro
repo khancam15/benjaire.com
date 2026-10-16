@@ -1,0 +1,270 @@
+---
+// Benjaire Flow: the first Digital Solutions product, a self install n8n
+// workflow kit. Only list what v1.0 actually does (see the product package
+// README and CHANGELOG). Checkout is not connected yet, so every purchase
+// button leads to the contact form until a checkout link replaces it.
+import Base from '../../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import heroImg from '../../assets/flow/10-site-hero.png';
+import archImg from '../../assets/flow/02-workflow-architecture.png';
+import autoImg from '../../assets/flow/03-automation-interface.png';
+import caseImg from '../../assets/flow/04-business-use-case.png';
+import kitImg from '../../assets/flow/05-whats-included.png';
+import setupImg from '../../assets/flow/06-setup-process.png';
+import { SITE } from '../../site';
+
+const BUY = '/contact?category=digital&product=flow#inquiry';
+
+const FEATURES = [
+  { wf: 'Flow 1 · Intake', name: 'AI sorting with Claude', text: 'Each inquiry is matched to your services and tagged with urgency and budget, with a one sentence summary and a suggested reply for you to review.' },
+  { wf: 'Flow 1 · Intake', name: 'Branded acknowledgement', text: 'The sender gets your logo, a reference number, your real reply window and, if you like, your booking link.' },
+  { wf: 'Flow 1 · Intake', name: 'Duplicate and spam guards', text: 'A secret intake key, a hidden honeypot field and a duplicate check. Spam is saved but never answered.' },
+  { wf: 'Flow 2 · Status', name: 'One tap status buttons', text: 'Replied, became a client or close. A confirm step stops email link scanners from pressing them, and links expire after 30 days.' },
+  { wf: 'Flow 2 · Status', name: 'Automatic onboarding email', text: 'The first time you mark a win, the new client gets your welcome email with the documents to send and a kickoff booking link.' },
+  { wf: 'Flow 3 · Reminders', name: 'Reply reminders', text: 'Weekdays at 9am, 1pm and 5pm, any inquiry past your reply target gets one reminder with the same buttons.' },
+  { wf: 'Flow 4 · Digest', name: 'Monday digest', text: 'New inquiries, wins, losses, median time to handle, who is still waiting and what people asked about.' },
+  { wf: 'Flow 0 · Errors', name: 'Error alerts', text: 'If a step fails you get the workflow, the step and a link to the run, with no customer data in the email.' },
+  { wf: 'Flow 5 · Retention', name: 'Data retention', text: 'Optional daily cleanup of records older than the number of days you choose. Off until you turn it on.' },
+];
+
+const REQUIREMENTS = [
+  { name: 'n8n', text: 'Cloud, or a recent self hosted version with Data Tables' },
+  { name: 'Anthropic API key', text: 'Pay as you go; Claude sorts each inquiry' },
+  { name: 'Resend', text: 'Sends every email from your verified domain' },
+  { name: 'Your domain', text: 'A sending address with SPF, DKIM and DMARC' },
+  { name: 'Cloudflare', text: 'Optional, for the protected form endpoint' },
+];
+
+const INCLUDED = [
+  { name: 'Workflows', text: '6 importable n8n files' },
+  { name: 'Form endpoint', text: 'Cloudflare Worker with bot protection and an offline fallback' },
+  { name: 'Templates', text: 'Data table schemas, settings and 4 business presets' },
+  { name: 'Guides', text: 'Setup, Cloudflare, email, forms, architecture, troubleshooting, tests, security' },
+  { name: 'Examples', text: 'Contact form, server forwarder and a curl test' },
+];
+
+const TIERS = [
+  { name: 'Starter', price: '$79', unit: 'one time', label: 'Self install', pick: false, cta: 'Get Starter',
+    text: 'For owners comfortable in n8n who want the whole system ready to import.',
+    items: ['All 6 workflows and the Cloudflare Worker', 'Setup guide and 7 more guides', '4 business presets and example forms', 'Bug fix updates to v1.x for 12 months', 'Email help with setup errors for 14 days'] },
+  { name: 'Professional', price: '$199', unit: 'one time', label: 'Most complete', pick: true, cta: 'Get Professional',
+    text: 'Everything in Starter, plus a person to check your setup with you.',
+    items: ['Everything in Starter', 'One 45 minute setup call on video', 'Claude’s sorting tuned to your services', 'Email support for 60 days', 'Replies within one business day'] },
+  { name: 'Done for you', price: '$750', unit: 'from, one time', label: 'We install it', pick: false, cta: 'Book a setup',
+    text: 'We install and test Flow in your own n8n and connect your website form.',
+    items: ['All six workflows installed and configured', 'Your branding, emails and onboarding checklist', 'Form connected, or the Worker deployed for you', 'All 17 test scenarios run, then 30 days of support', 'Optional care plan at $49 a month'] },
+];
+
+const DELIVERY = [
+  { name: 'Order', text: 'Choose a tier. Your receipt shows your license and support level.' },
+  { name: 'Download', text: 'The package link arrives by email right after purchase.' },
+  { name: 'Set up', text: 'Follow the setup guide, or book your included call.' },
+  { name: 'Go live', text: 'Run the test scenarios, then point your form at Flow.' },
+];
+
+const FAQ = [
+  { q: 'Do I need to know n8n?', a: 'You need to be comfortable importing a workflow and adding a credential. The setup guide walks through every screen and ends each step with a check. If you would rather not, choose Done for you.' },
+  { q: 'Will Claude email my prospects?', a: 'No. Claude’s reply is a suggestion only you see. The only automatic messages to outsiders are the acknowledgement and, after you mark a win, your welcome email.' },
+  { q: 'Does it work with my website?', a: 'Yes, if your form can send a request with a custom header from a server, or if you use the included Cloudflare Worker. Webflow, Framer, WordPress, Next.js and plain HTML sites all fit one of those routes.' },
+  { q: 'What does it cost to run?', a: 'You pay n8n, Anthropic and Resend directly. Flow uses a fast, low cost Claude model with short prompts, so the AI cost per inquiry is small. Check each provider’s current pricing for your volume.' },
+  { q: 'Where is my clients’ data stored?', a: 'In your own n8n account. Message text is sent to Anthropic for sorting and emails go through Resend. Benjaire never has access, and you can turn on automatic deletion.' },
+  { q: 'Can I change the emails and branding?', a: 'Yes. Your logo, address, booking link, reply targets and onboarding checklist live in one settings table, and the wording sits in clearly labeled steps you can edit.' },
+  { q: 'Can I install it for my clients?', a: 'Starter and Professional cover one business. Agencies that install Flow for clients need an agency license. Contact us for terms.' },
+];
+
+const description = 'Benjaire Flow is an n8n workflow kit that sorts website inquiries with Claude, alerts you with one tap status buttons and reminds you before leads go cold.';
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': `${SITE.url}/digital/flow#product`,
+  name: 'Benjaire Flow',
+  description,
+  brand: { '@id': `${SITE.url}/#organization` },
+  category: 'Business automation software template',
+  sku: 'BJ-FLOW-1',
+  offers: TIERS.map((t) => ({ '@type': 'Offer', name: t.name, price: t.price.replace('$', ''), priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: `${SITE.url}/digital/flow#pricing` })),
+};
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<Base title="Benjaire Flow" seoTitle="Benjaire Flow | AI Inquiry Automation for n8n" description={description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(productLd)} />
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/digital">Digital Solutions</a> · Benjaire Flow</p>
+      <span class="badge">Available now · v1.0</span>
+      <h1>Every inquiry, <span>answered on time.</span></h1>
+      <p class="lead mb-5">Six ready to import n8n workflows. Claude sorts each website inquiry and drafts a reply for you to review. You get one email with one tap status buttons, the sender gets a branded confirmation, and you get a reminder before anyone waits too long.</p>
+      <div class="actions">
+        <a class="btn primary" href="#pricing">Get Benjaire Flow <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#included">See what’s included</a>
+      </div>
+      <figure class="shot hero-shot">
+        <Picture src={heroImg} formats={['avif', 'webp']} widths={[800, 1400, 2000]} sizes="(min-width: 1320px) 1208px, 92vw" alt="Flow’s owner alert email with a summary, a suggested reply and three status buttons, beside a phone showing the sender’s confirmation" fetchpriority="high" loading="eager" />
+        <figcaption class="mono">Illustrative mockup with sample data. Flow sends these emails from your own domain.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec band-section" aria-labelledby="problem">
+    <div class="wrap two">
+      <div><p class="eyebrow">The problem</p><h2 id="problem" class="statement">Leads go cold in a busy inbox, and nobody is sure who replied.</h2></div>
+      <dl class="facts">
+        <div class="fact"><dt>Arrives</dt><dd>Inquiries land between client work and sit unread</dd></div>
+        <div class="fact"><dt>Sorted</dt><dd>Spam and real buyers look the same at a glance</dd></div>
+        <div class="fact"><dt>Answered</dt><dd>Some people get two replies and others none</dd></div>
+        <div class="fact"><dt>Onboarded</dt><dd>A yes starts with a blank email every time</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec raised band-section" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Features in v1.0</p><h2 id="features-title">What it actually does.</h2></div>
+        <p class="muted">Every item below is built and tested. Flow never sends AI written replies to prospects, doesn’t read your inbox and doesn’t sync with a CRM.</p>
+      </div>
+      <ul class="rows">
+        {FEATURES.map((f) => <li class="row"><div><p class="mono">{f.wf}</p><h3>{f.name}</h3></div><p>{f.text}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec band-section" aria-labelledby="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">How it works</p><h2 id="how">Your form, your n8n, <span>your domain.</span></h2></div>
+        <p class="muted">Your form posts to Flow through the included Cloudflare Worker or your own server. Flow sorts the inquiry with Claude, keeps the record in your n8n and sends every email through Resend from your address.</p>
+      </div>
+      <figure class="shot">
+        <Picture src={archImg} formats={['avif', 'webp']} widths={[800, 1400, 2000]} sizes="(min-width: 1320px) 1208px, 92vw" alt="Architecture: contact form, optional Cloudflare Worker, six n8n workflows with three data tables, Claude, Resend and inboxes, with a fallback email path" />
+      </figure>
+      <div class="shots">
+        <figure class="shot">
+          <Picture src={autoImg} formats={['avif', 'webp']} widths={[800, 1200]} sizes="(min-width: 900px) 46vw, 92vw" alt="Table of every trigger Flow listens for and the actions it takes" />
+          <figcaption class="mono">Every trigger and what follows</figcaption>
+        </figure>
+        <figure class="shot">
+          <Picture src={caseImg} formats={['avif', 'webp']} widths={[800, 1200]} sizes="(min-width: 900px) 46vw, 92vw" alt="Four step example of a design studio receiving and winning an inquiry" />
+          <figcaption class="mono">Example with a fictional studio</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec raised band-section" id="included" aria-labelledby="included-title">
+    <div class="wrap two">
+      <div>
+        <p class="eyebrow">What’s included</p>
+        <h2 id="included-title" class="statement mb-5">Everything to go live, in one download.</h2>
+        <dl class="facts">
+          {INCLUDED.map((i) => <div class="fact"><dt>{i.name}</dt><dd>{i.text}</dd></div>)}
+        </dl>
+      </div>
+      <figure class="shot">
+        <Picture src={kitImg} formats={['avif', 'webp']} widths={[800, 1200]} sizes="(min-width: 900px) 46vw, 92vw" alt="Folders in the Benjaire Flow package" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec band-section" aria-labelledby="needs">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Requirements</p><h2 id="needs">What you need first.</h2></div>
+        <p class="muted">Flow runs on accounts you own and pay for directly. Benjaire never sees your inquiries or your keys. Typical first setup takes 45 to 90 minutes, by our estimate.</p>
+      </div>
+      <ul class="rows">
+        {REQUIREMENTS.map((r) => <li class="row"><h3>{r.name}</h3><p>{r.text}</p></li>)}
+      </ul>
+      <figure class="shot mt-4">
+        <Picture src={setupImg} formats={['avif', 'webp']} widths={[800, 1400, 2000]} sizes="(min-width: 1320px) 1208px, 92vw" alt="Five setup steps: create tables, add settings, add credentials, activate, test" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec raised band-section" id="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Pricing</p><h2 id="pricing-title">Pay once. <span>Keep it.</span></h2></div>
+        <p class="muted">One time purchase in US dollars. Bug fix updates to v1.x are included for 12 months.</p>
+      </div>
+      <ul class="tiers">
+        {TIERS.map((t) => (
+          <li class:list={['tier', { pick: t.pick }]}>
+            <span class="badge">{t.label}</span>
+            <h3>{t.name}</h3>
+            <p class="price"><span class="amt">{t.price}</span> <span class="mono">{t.unit}</span></p>
+            <p>{t.text}</p>
+            <ul class="ticks">{t.items.map((i) => <li>{i}</li>)}</ul>
+            <a class:list={['btn', t.pick ? 'primary' : 'ghost']} href={BUY}>{t.cta}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec band-section" aria-labelledby="delivery">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Purchase and delivery</p><h2 id="delivery">From order to first inquiry.</h2></div>
+        <p class="muted">Ordering, downloading, setting up and going live happen in that order, so the steps are numbered.</p>
+      </div>
+      <ol class="pillars four">
+        {DELIVERY.map((s, i) => <li class="pillar"><span class="num" aria-hidden="true">{pad(i + 1)}</span><h3>{s.name}</h3><p>{s.text}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec band-section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap two">
+      <div><p class="eyebrow">FAQ</p><h2 id="faq-title" class="statement">Questions buyers ask.</h2></div>
+      <div class="faq">
+        {FAQ.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark" aria-labelledby="start">
+    <div class="wrap">
+      <img class="band-mark" src="/brand/benjaire-monogram-pearl.svg" alt="" width="53" height="56" />
+      <p class="eyebrow center">Benjaire Flow</p>
+      <h2 id="start">Answer every inquiry on time.</h2>
+      <p>Get the kit and set it up yourself, or have us install it for you.</p>
+      <div class="actions center"><a class="btn primary" href="#pricing">See pricing</a><a class="btn ghost" href="/contact?category=digital#inquiry">Ask a question</a></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line-mid); }
+  .eyebrow a:hover { border-bottom-color: var(--fg); }
+  .shot { margin: 0; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .shot :global(picture), .shot :global(img) { display: block; width: 100%; height: auto; border-radius: 4px; background: var(--surface); }
+  .shot figcaption { font-size: 11px; }
+  .hero-shot { margin-top: clamp(48px, 6vw, 80px); }
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); margin-top: var(--s-4); }
+  .row .mono { font-size: 11px; margin-bottom: 6px; }
+
+  .tiers { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-3); }
+  .tier { background: var(--paper); border: 1px solid var(--line); border-radius: 24px; padding: var(--s-4); display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+  .tier.pick { border-color: var(--fg); box-shadow: 0 30px 60px -40px rgba(18, 19, 21, .45); }
+  .tier .badge { align-self: flex-start; margin-bottom: 0; }
+  .tier h3 { margin-top: var(--s-1); }
+  .price { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .amt { font-family: var(--display); font-stretch: 112%; font-weight: 330; font-size: clamp(44px, 4vw, 60px); line-height: 1; letter-spacing: -.04em; color: var(--fg); font-variant-numeric: tabular-nums; }
+  .ticks { list-style: none; display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: var(--s-2); margin-bottom: var(--s-2); }
+  .ticks li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; font-size: 15px; }
+  .ticks li::before { content: ""; width: 10px; height: 1px; background: var(--fg); margin-top: .8em; }
+  .tier .btn { margin-top: auto; }
+
+  .faq { border-top: 1px solid var(--line-mid); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: var(--s-3); padding-block: 20px; color: var(--fg); font-weight: 500; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: var(--mono); color: var(--fg-low); }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details p { padding-bottom: 22px; max-width: 60ch; }
+
+  @media (max-width: 1000px) { .tiers { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 900px) { .shots { grid-template-columns: minmax(0, 1fr); } }
+</style>
