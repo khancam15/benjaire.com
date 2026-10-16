@@ -48,3 +48,12 @@ export const SUPPLIER_AREAS = [
 // Cloudflare Turnstile site key (public by design). The secret key lives
 // only in the Worker's secrets as TURNSTILE_SECRET_KEY.
 export const TURNSTILE_SITE_KEY = '0x4AAAAAAFVZs6h_1DsCs70r';
+
+// Benjaire Flow checkout (Stripe Payment Links, public by design). Paste each
+// live link here; an empty link sends that tier's button to the contact form.
+// Each link should redirect after payment to /digital/flow-thanks?tier=<key>.
+export const FLOW_CHECKOUT = {
+  starter: '',
+  professional: '',
+  done_for_you: '',
+} as const;

@@ -1,0 +1,29 @@
+---
+// Where each Stripe Payment Link redirects after a successful payment
+// (/digital/flow-thanks?tier=starter|professional|done_for_you). Not indexed. Fulfillment is by
+// email from contact@, so this page only confirms and sets expectations.
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../site';
+---
+<Base title="Thank you" seoTitle="Order confirmed | Benjaire Flow" description="Your Benjaire Flow order is confirmed. Your receipt is on its way from Stripe and your download link follows by email." noindex>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Benjaire Flow · Order confirmed</p>
+      <h1>Thank you. <span>You’re all set.</span></h1>
+      <p class="lead mb-5">Your payment went through and Stripe has emailed your receipt. Here is what happens next.</p>
+    </div>
+  </section>
+
+  <section class="sec band-section" aria-labelledby="next">
+    <div class="wrap">
+      <h2 id="next" class="sr-only">Next steps</h2>
+      <ol class="pillars">
+        <li class="pillar"><span class="num" aria-hidden="true">01</span><h3>Check your email</h3><p>Your download link arrives from {SITE.email} within one business day. It goes to the address you used at checkout.</p></li>
+        <li class="pillar"><span class="num" aria-hidden="true">02</span><h3>Open the setup guide</h3><p>Start with the README, then follow the setup guide. Each step ends with a quick check so you know it worked.</p></li>
+        <li class="pillar" data-tier-note><span class="num" aria-hidden="true">03</span><h3>Book your session</h3><p>Professional and Done for you orders: we’ll email you within one business day to schedule your call or installation.</p></li>
+      </ol>
+      <p class="note mt-4">Nothing after a business day? Write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with the email address you paid with.</p>
+      <div class="actions mt-4"><a class="btn ghost" href="/digital/flow">Back to Benjaire Flow</a></div>
+    </div>
+  </section>
+</Base>

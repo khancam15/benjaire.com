@@ -1,8 +1,8 @@
 ---
 // Benjaire Flow: the first Digital Solutions product, a self install n8n
 // workflow kit. Only list what v1.0 actually does (see the product package
-// README and CHANGELOG). Checkout is not connected yet, so every purchase
-// button leads to the contact form until a checkout link replaces it.
+// README and CHANGELOG). Buy buttons use the Stripe Payment Links in
+// FLOW_CHECKOUT (site.ts); a tier without a link falls back to the contact form.
 import Base from '../../layouts/Base.astro';
 import { Picture } from 'astro:assets';
 import heroImg from '../../assets/flow/10-site-hero.png';
@@ -11,7 +11,7 @@ import autoImg from '../../assets/flow/03-automation-interface.png';
 import caseImg from '../../assets/flow/04-business-use-case.png';
 import kitImg from '../../assets/flow/05-whats-included.png';
 import setupImg from '../../assets/flow/06-setup-process.png';
-import { SITE } from '../../site';
+import { SITE, FLOW_CHECKOUT } from '../../site';
 
 const BUY = '/contact?category=digital&product=flow#inquiry';
 
@@ -43,21 +43,21 @@ const INCLUDED = [
   { name: 'Examples', text: 'Contact form, server forwarder and a curl test' },
 ];
 
-const TIERS = [
-  { name: 'Starter', price: '$79', unit: 'one time', label: 'Self install', pick: false, cta: 'Get Starter',
+const TIERS: { key: keyof typeof FLOW_CHECKOUT; name: string; price: string; unit: string; label: string; pick: boolean; cta: string; text: string; items: string[] }[] = [
+  { key: 'starter', name: 'Starter', price: '$79', unit: 'one time', label: 'Self install', pick: false, cta: 'Get Starter',
     text: 'For owners comfortable in n8n who want the whole system ready to import.',
     items: ['All 6 workflows and the Cloudflare Worker', 'Setup guide and 7 more guides', '4 business presets and example forms', 'Bug fix updates to v1.x for 12 months', 'Email help with setup errors for 14 days'] },
-  { name: 'Professional', price: '$199', unit: 'one time', label: 'Most complete', pick: true, cta: 'Get Professional',
+  { key: 'professional', name: 'Professional', price: '$199', unit: 'one time', label: 'Most complete', pick: true, cta: 'Get Professional',
     text: 'Everything in Starter, plus a person to check your setup with you.',
     items: ['Everything in Starter', 'One 45 minute setup call on video', 'Claude’s sorting tuned to your services', 'Email support for 60 days', 'Replies within one business day'] },
-  { name: 'Done for you', price: '$750', unit: 'from, one time', label: 'We install it', pick: false, cta: 'Book a setup',
+  { key: 'done_for_you', name: 'Done for you', price: '$750', unit: 'from, one time', label: 'We install it', pick: false, cta: 'Book a setup',
     text: 'We install and test Flow in your own n8n and connect your website form.',
     items: ['All six workflows installed and configured', 'Your branding, emails and onboarding checklist', 'Form connected, or the Worker deployed for you', 'All 17 test scenarios run, then 30 days of support', 'Optional care plan at $49 a month'] },
 ];
 
 const DELIVERY = [
-  { name: 'Order', text: 'Choose a tier. Your receipt shows your license and support level.' },
-  { name: 'Download', text: 'The package link arrives by email right after purchase.' },
+  { name: 'Order', text: 'Pay securely through Stripe. Your receipt shows your tier and support level.' },
+  { name: 'Download', text: 'Your download link arrives by email within one business day.' },
   { name: 'Set up', text: 'Follow the setup guide, or book your included call.' },
   { name: 'Go live', text: 'Run the test scenarios, then point your form at Flow.' },
 ];
@@ -186,7 +186,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     <div class="wrap">
       <div class="sec-head">
         <div><p class="eyebrow">Pricing</p><h2 id="pricing-title">Pay once. <span>Keep it.</span></h2></div>
-        <p class="muted">One time purchase in US dollars. Bug fix updates to v1.x are included for 12 months.</p>
+        <p class="muted">One time purchase in US dollars, paid securely through Stripe. Bug fix updates to v1.x are included for 12 months.</p>
       </div>
       <ul class="tiers">
         {TIERS.map((t) => (
@@ -196,7 +196,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
             <p class="price"><span class="amt">{t.price}</span> <span class="mono">{t.unit}</span></p>
             <p>{t.text}</p>
             <ul class="ticks">{t.items.map((i) => <li>{i}</li>)}</ul>
-            <a class:list={['btn', t.pick ? 'primary' : 'ghost']} href={BUY}>{t.cta}</a>
+            <a class:list={['btn', t.pick ? 'primary' : 'ghost']} href={FLOW_CHECKOUT[t.key] || BUY} rel={FLOW_CHECKOUT[t.key] ? 'noopener' : undefined}>{t.cta}</a>
           </li>
         ))}
       </ul>
