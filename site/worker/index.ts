@@ -1,7 +1,7 @@
 // benjaire.com Worker. Static pages are served from ./dist by the assets
 // layer; only /api/* reaches this script (see wrangler.jsonc).
 import { EmailMessage } from 'cloudflare:email';
-import { buildMime, composeEmail, originAllowed, recipientFor, validate } from './lib';
+import { buildMime, composeEmail, flowPayload, originAllowed, recipientFor, validate, type Inquiry } from './lib';
 
 const JSON_HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
@@ -36,7 +36,25 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null)
   return data.success === true && (data.action === undefined || data.action === 'contact');
 }
 
-async function handleContact(req: Request, env: Env): Promise<Response> {
+// Forward a delivered inquiry to Benjaire Flow (n8n), which sorts it, alerts
+// the owner and acknowledges the sender. Runs after the response is sent and
+// never affects it: the email above stays the record if Flow is unreachable.
+async function forwardToFlow(inquiry: Inquiry, env: Env): Promise<void> {
+  if (!env.FLOW_INTAKE_URL || !env.FLOW_INTAKE_KEY) return;
+  try {
+    const res = await fetch(env.FLOW_INTAKE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-flow-key': env.FLOW_INTAKE_KEY },
+      body: JSON.stringify(flowPayload(inquiry)),
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!res.ok) console.error('Flow intake returned', res.status);
+  } catch (err) {
+    console.error('Flow intake failed', err instanceof Error ? err.message : err);
+  }
+}
+
+async function handleContact(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   if (req.method !== 'POST') {
     return new Response('Method not allowed', { status: 405, headers: { Allow: 'POST' } });
   }
@@ -94,13 +112,14 @@ async function handleContact(req: Request, env: Env): Promise<Response> {
     console.error('send_email failed', err instanceof Error ? err.message : err);
     return respond(req, 502, { ok: false, error: "Your message couldn't be sent." });
   }
+  ctx.waitUntil(forwardToFlow(inquiry, env));
   return respond(req, 200, { ok: true });
 }
 
 export default {
-  async fetch(req, env): Promise<Response> {
+  async fetch(req, env, ctx): Promise<Response> {
     const { pathname } = new URL(req.url);
-    if (pathname === '/api/contact') return handleContact(req, env);
+    if (pathname === '/api/contact') return handleContact(req, env, ctx);
     // Google Search Console HTML-file verification must answer 200 at this
     // exact .html path (the assets layer would redirect it to a clean URL).
     if (pathname === GOOGLE_VERIFICATION_PATH) {

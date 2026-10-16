@@ -73,6 +73,22 @@ export function recipientFor(category: string, fallback: string, mapJson?: strin
   return fallback;
 }
 
+/**
+ * Body for the Benjaire Flow intake webhook (n8n). Flow has no category field,
+ * so the category label leads the message where Claude and the owner see it.
+ */
+export function flowPayload(i: Inquiry) {
+  return {
+    name: i.name,
+    email: i.email,
+    company: i.company,
+    phone: '',
+    message: `Category: ${CATEGORIES[i.category]}\n\n${i.message}`,
+    source: 'website',
+    website: '',
+  };
+}
+
 /** Formats an ISO timestamp as New York local time, e.g. "Fri, Oct 16, 2026, 3:53 AM EDT". */
 export function formatNewYork(iso: string): string {
   const d = new Date(iso);
