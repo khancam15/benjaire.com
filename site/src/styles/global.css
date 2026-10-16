@@ -157,7 +157,7 @@ h1 span, h2 span { color: var(--silver-ink); }
 .has-hero .site-nav.scrolled { background: rgba(243, 243, 241, .84); box-shadow: 0 1px 0 var(--line); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 .site-nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--nav-h); max-width: 1600px; }
 .nav-logo { display: block; color: var(--fg); padding: 6px; margin: -6px; transition: opacity .2s var(--ease); }
-.nav-logo svg { display: block; }
+.nav-logo svg, .nav-logo img { display: block; }
 .nav-logo:hover { opacity: .72; }
 .nav-links { display: flex; gap: clamp(20px, 3vw, 40px); list-style: none; align-items: center; }
 .nav-links a {

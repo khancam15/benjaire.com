@@ -53,7 +53,7 @@ and `CONTACT_TO=you@example.com`, then `npx wrangler dev`.
 | `scripts/security-headers.mjs` | Writes `dist/_headers` (CSP with inline-script hashes, HSTS, etc.) after each build |
 | `public/_redirects` | Permanent redirects from the legacy `.html` URLs |
 | `public/brand/` | Identity v4 logo files: charcoal, plus `-cream` (pearl) reverses. Regenerate with `node scripts/build-logos.mjs public/brand` |
-| `public/brand/email/` | PNG logos for email clients that do not render SVG (header lockup, signature tile and wordmark, 512px avatar), rendered at 3× from the SVGs above. Referenced by absolute URL from outgoing emails, so keep the file names stable |
+| `public/brand/email/` | PNG logos for email clients that do not render SVG (header lockup, signature tile and wordmark, 512px avatar), rendered at 3× from the SVGs above. `email-header-lockup-pearl.png` is the pearl gradient lockup for the dark email header (`docs/design/logo/v3/svg/*-pearl.svg`); `email-header-lockup-graphite.png`, `email-mark-tile-pearl.png` and `benjaire-avatar-2048.png` follow the primary logo (graphite gradient on pearl, `docs/design/logo/v3/svg/*-graphite.svg`). Referenced by absolute URL from outgoing emails, so keep the file names stable |
 
 ## Adding a brand
 
