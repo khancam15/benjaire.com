@@ -1,12 +1,11 @@
 ---
 import { NAV } from '../site';
-import LogoMark from './LogoMark.astro';
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 ---
 <header class="site-nav" data-nav>
   <div class="wrap">
     <a class="nav-logo" href="/" aria-label="Benjaire home">
-      <LogoMark size={24} />
+      <img src="/brand/benjaire-monogram-graphite.svg" alt="" width="23" height="24" />
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
       <span></span><span></span>
