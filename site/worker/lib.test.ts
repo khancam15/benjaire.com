@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanLine, composeEmail, originAllowed, recipientFor, validate } from './lib.ts';
+import { cleanLine, composeEmail, formatNewYork, originAllowed, recipientFor, validate } from './lib.ts';
 
 const form = (fields: Record<string, string>) => {
   const f = new FormData();
@@ -37,6 +37,14 @@ test('subject carries the category label', () => {
   const { subject, text } = composeEmail(inquiry!, { receivedAt: '2026-10-13T00:00:00Z', host: 'benjaire.com' });
   assert.equal(subject, '[Supplier / Manufacturing] Alex Chen · Factory Co');
   assert.match(text, /Email:\s+alex@factory\.example/);
+});
+
+test('shows the received time in New York time', () => {
+  assert.equal(formatNewYork('2026-10-16T07:53:52.571Z'), 'Fri, Oct 16, 2026, 3:53 AM EDT');
+  assert.equal(formatNewYork('2026-12-01T17:05:00Z'), 'Tue, Dec 1, 2026, 12:05 PM EST');
+  const { inquiry } = validate(form(good));
+  const { text } = composeEmail(inquiry!, { receivedAt: '2026-10-16T07:53:52.571Z', host: 'benjaire.com' });
+  assert.match(text, /Received: Fri, Oct 16, 2026, 3:53 AM EDT/);
 });
 
 test('routes categories with an optional map and falls back otherwise', () => {

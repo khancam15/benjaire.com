@@ -73,6 +73,22 @@ export function recipientFor(category: string, fallback: string, mapJson?: strin
   return fallback;
 }
 
+/** Formats an ISO timestamp as New York local time, e.g. "Fri, Oct 16, 2026, 3:53 AM EDT". */
+export function formatNewYork(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZoneName: 'short',
+  }).format(d);
+}
+
 export function composeEmail(i: Inquiry, meta: { receivedAt: string; host: string }) {
   const label = CATEGORIES[i.category];
   const subject = `[${label}] ${i.name}${i.company ? ` · ${i.company}` : ''}`.slice(0, 200);
@@ -83,7 +99,7 @@ export function composeEmail(i: Inquiry, meta: { receivedAt: string; host: strin
     `Name:     ${i.name}`,
     `Email:    ${i.email}`,
     `Company:  ${i.company || '(not given)'}`,
-    `Received: ${meta.receivedAt}`,
+    `Received: ${formatNewYork(meta.receivedAt)}`,
     '',
     '--- Message ---',
     i.message,
