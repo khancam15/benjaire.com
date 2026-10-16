@@ -8,7 +8,6 @@
 //    the file name is kept so existing links keep working)
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import sharp from 'sharp';
 
 const out = process.argv[2] ?? 'public/brand';
 mkdirSync(out, { recursive: true });
@@ -135,27 +134,9 @@ const { class: className, size = 22 } = Astro.props;
 `,
 );
 
-// Favicon: the bare symbol, ink in light browser chrome and pearl in dark.
-const pad = 64;
-const fvBox = `${-pad - (MONO_H - MONO_W) / 2} ${-pad} ${MONO_H + 2 * pad} ${MONO_H + 2 * pad}`;
-writeFileSync(
-  join(out, '..', 'favicon.svg'),
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${fvBox}"><title>Benjaire</title><style>path{fill:${INK}}@media (prefers-color-scheme:dark){path{fill:${PEARL}}}</style><path d="${MONO_D}"/></svg>\n`,
-);
+// Favicons (favicon.ico, favicon-32.png, favicon.svg, apple-touch-icon.png
+// and public/icons/) use the primary logo, the v3 graphite gradient on pearl
+// from docs/design/logo/v3/svg, and are no longer generated here so this
+// script cannot overwrite them with the flat mark.
 
-// Raster icons. The touch icon is full-bleed (iOS applies its own mask).
-const tile = (size, bg, fg, ratio) => {
-  const s = (size * ratio) / MONO_H;
-  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><rect width="${size}" height="${size}" fill="${bg}"/><path fill="${fg}" d="${mono(s, (size - MONO_W * s) / 2, (size - MONO_H * s) / 2)}"/></svg>`);
-};
-const pub = join(out, '..');
-await sharp(tile(180, INK, PEARL, 0.5)).png().toFile(join(pub, 'apple-touch-icon.png'));
-await sharp(tile(32, PEARL, INK, 0.72)).png().toFile(join(pub, 'favicon-32.png'));
-const ico = await sharp(tile(48, PEARL, INK, 0.72)).png().toBuffer();
-const head = Buffer.alloc(22);
-head.writeUInt16LE(0, 0); head.writeUInt16LE(1, 2); head.writeUInt16LE(1, 4);
-head.writeUInt8(48, 6); head.writeUInt8(48, 7); head.writeUInt16LE(1, 10); head.writeUInt16LE(32, 12);
-head.writeUInt32LE(ico.length, 14); head.writeUInt32LE(22, 18);
-writeFileSync(join(pub, 'favicon.ico'), Buffer.concat([head, ico]));
-
-console.log(`Logos written to ${out}: ${Object.keys(layouts).length * 2} files, LogoMark.astro, favicons.`);
+console.log(`Logos written to ${out}: ${Object.keys(layouts).length * 2} files, LogoMark.astro.`);
