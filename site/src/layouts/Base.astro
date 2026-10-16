@@ -46,7 +46,7 @@ const pageLd = noindex
           '@id': `${SITE.url}/#organization`,
           name: SITE.name,
           url: `${SITE.url}/`,
-          logo: `${SITE.url}/brand/benjaire-lockup-vertical.svg`,
+          logo: { '@type': 'ImageObject', url: `${SITE.url}/icons/logo-512.png`, width: 512, height: 512 },
           description: SITE.description,
           slogan: 'Brands for the Modern Era',
           foundingDate: String(SITE.founded),
@@ -90,10 +90,13 @@ const pageLd = noindex
     <meta name="theme-color" content="#f3f3f1" />
     <link rel="preload" href={archivoVar} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin />
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Primary logo (graphite gradient on pearl). Google Search uses these
+         square icons (multiples of 48px) for the result favicon. -->
+    <link rel="icon" href="/icons/icon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/icons/icon-96.png" type="image/png" sizes="96x96" />
+    <link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={ogTitle} />
