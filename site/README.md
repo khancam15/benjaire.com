@@ -53,6 +53,7 @@ and `CONTACT_TO=you@example.com`, then `npx wrangler dev`.
 | `scripts/security-headers.mjs` | Writes `dist/_headers` (CSP with inline-script hashes, HSTS, etc.) after each build |
 | `public/_redirects` | Permanent redirects from the legacy `.html` URLs |
 | `public/brand/` | Identity v4 logo files: charcoal, plus `-cream` (pearl) reverses. Regenerate with `node scripts/build-logos.mjs public/brand` |
+| `public/brand/email/` | PNG logos for email clients that do not render SVG (header lockup, signature tile and wordmark, 512px avatar), rendered at 3× from the SVGs above. Referenced by absolute URL from outgoing emails, so keep the file names stable |
 
 ## Adding a brand
 
@@ -73,6 +74,8 @@ configured by `wrangler.jsonc` in this folder.
 | Advanced settings → Path (root directory) | `site` |
 | Advanced settings → Build variables | `NODE_VERSION` = `22` |
 | Preview builds | On |
+
+In the current dashboard these live under **Settings → Builds**: the **Production** tab holds the deploy command, and the **Previews Base** tab holds the preview command. A preview build that runs `npx wrangler versions upload` fails with "The name in your wrangler.jsonc file (benjaire-com) must match the name of your Worker"; set the Previews Base command to `npx wrangler preview`.
 
 ### Worker secrets (Settings → Variables and secrets, type **Secret**)
 
