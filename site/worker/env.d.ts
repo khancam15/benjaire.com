@@ -6,4 +6,8 @@ interface Env {
   CONTACT_TO: string;
   /** Optional JSON map of category → verified destination address. */
   CATEGORY_RECIPIENTS?: string;
+  /** Optional Benjaire Flow intake webhook (n8n). Both must be set to forward inquiries. */
+  FLOW_INTAKE_URL?: string;
+  /** Shared secret sent as the x-flow-key header. */
+  FLOW_INTAKE_KEY?: string;
 }

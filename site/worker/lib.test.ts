@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanLine, composeEmail, formatNewYork, originAllowed, recipientFor, validate } from './lib.ts';
+import { cleanLine, composeEmail, flowPayload, formatNewYork, originAllowed, recipientFor, validate } from './lib.ts';
 
 const form = (fields: Record<string, string>) => {
   const f = new FormData();
@@ -37,6 +37,19 @@ test('subject carries the category label', () => {
   const { subject, text } = composeEmail(inquiry!, { receivedAt: '2026-10-13T00:00:00Z', host: 'benjaire.com' });
   assert.equal(subject, '[Supplier / Manufacturing] Alex Chen · Factory Co');
   assert.match(text, /Email:\s+alex@factory\.example/);
+});
+
+test('builds the Flow intake payload with the category in the message', () => {
+  const { inquiry } = validate(form(good));
+  assert.deepEqual(flowPayload(inquiry!), {
+    name: 'Alex Chen',
+    email: 'alex@factory.example',
+    company: 'Factory Co',
+    phone: '',
+    message: 'Category: Supplier / Manufacturing\n\nWe make laptop stands and would like to talk.',
+    source: 'website',
+    website: '',
+  });
 });
 
 test('shows the received time in New York time', () => {
