@@ -1,8 +1,9 @@
 ---
 // Digital Solutions: a business pillar offered directly by Benjaire (no
 // separate division brand). Built from existing components only.
-// Service categories lead; client intake is one example use case, in development:
-// never describe it as available, and don't publish prices until validated.
+// Service categories lead. Benjaire Flow (the self install kit) is available
+// and has its own page at /digital/flow. The done for you intake service is
+// still in development: never describe it as available here.
 import Base from '../layouts/Base.astro';
 import PageBand from '../components/PageBand.astro';
 import bandImg from '../assets/pages/digital.jpg';
@@ -68,6 +69,20 @@ const pad = (n: number) => String(n).padStart(2, '0');
         <a class="btn ghost" href="#services">See service categories</a>
       </div>
       <PageBand src={bandImg} focus="right" alt="Detail of the pavilion's ribbed aluminum arch with a glass bridge passing through it" />
+    </div>
+  </section>
+
+  <section class="sec raised band-section" id="flow" aria-labelledby="flow-title">
+    <div class="wrap two">
+      <div>
+        <p class="eyebrow">Available now</p>
+        <span class="badge">New · v1.0</span>
+        <h2 id="flow-title">Benjaire Flow.</h2>
+      </div>
+      <div>
+        <p class="lead mb-5">Our first product: six n8n workflows that sort website inquiries with Claude, alert you with one tap status buttons, confirm receipt to the sender and remind you before leads go cold.</p>
+        <div class="actions"><a class="btn primary" href="/digital/flow">See Benjaire Flow <span aria-hidden="true">→</span></a></div>
+      </div>
     </div>
   </section>
 
