@@ -10,6 +10,8 @@ Live at **https://benjaire.com**.
 |---|---|
 | `/` | Home |
 | `/digital` | Digital Solutions |
+| `/digital/flow` | Benjaire Flow, the first Digital Solutions product (self install n8n inquiry automation kit) |
+| `/digital/flow-thanks` | Post purchase page the Stripe Payment Link redirects to, `noindex` |
 | `/about` | About |
 | `/brands` | Consumer Brands |
 | `/contact` | Contact form (Digital Solutions, general, partnership, supplier inquiries) |
@@ -21,7 +23,8 @@ Legacy `.html` URLs (for example `/about.html`) redirect permanently to the clea
 
 - [Astro](https://astro.build) static site in [`site/`](site/)
 - Hosted on **Cloudflare Workers** static assets (`site/wrangler.jsonc`), with `www` redirecting to the apex domain
-- Contact form handled by a small Worker at `/api/contact` (Turnstile, validation, rate limit, Cloudflare Email Routing)
+- Contact form handled by a small Worker at `/api/contact` (Turnstile, validation, rate limit). Valid inquiries are forwarded to the Benjaire Flow intake in n8n (`FLOW_INTAKE_URL`, `FLOW_KEY` secret), with Cloudflare Email Routing as the fallback
+- Benjaire Flow checkout uses Stripe Payment Links set in `FLOW_CHECKOUT` (`site/src/site.ts`); a tier without a link falls back to the contact form. Payment verification, order records and the download email run in n8n, outside this repository
 - Security headers (CSP with script hashes, HSTS, `X-Frame-Options: DENY`) generated at build time
 - Design system v0.3 "The Pavilion": see [`docs/design-system.md`](docs/design-system.md)
 
@@ -60,6 +63,7 @@ Cloudflare Workers Builds deploys `main` to production automatically (`npx wrang
 - Brands appear only once they are publicly approved (`site/src/content/brands/`). This repository is public, so never commit unreleased brands.
 - House style: "a New York company", US spelling, no em dashes and no hyphenated compounds in visible copy. Meta descriptions are 120 to 160 characters.
 - Never commit secrets. Worker secrets are set in the Cloudflare dashboard only.
+- Never commit n8n workflow JSON or the Benjaire Flow product files; they are sold separately.
 
 ## Documentation
 
