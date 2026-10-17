@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 import { getImage, Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import BrandGrid from '../components/BrandGrid.astro';
-import { SITE, CATEGORIES } from '../site';
+import { SITE, CATEGORIES, FLOW_CHECKOUT } from '../site';
 import '../styles/home.css';
 import pavilion from '../assets/home/pavilion.jpg';
 import pavilionPortrait from '../assets/home/pavilion-portrait.jpg';
@@ -40,8 +40,9 @@ const STEPS = [
     spec: ['Validation', 'Ongoing support', 'New categories'] },
 ];
 
-// Same capability list as the example on /digital.
-const INTAKE = ['Inquiry capture', 'Client onboarding', 'Internal notifications', 'Timely reminders', 'CRM workflows'];
+// Benjaire Flow v1.0, the first Digital Solutions product (see /digital/flow).
+// Only list what v1.0 actually does.
+const FLOW = ['Inquiry capture', 'Sorted by Claude', 'One tap status', 'Reply reminders', 'Monday digest'];
 
 const FOCUS = [
   { name: 'Consumer technology', text: 'Accessories and devices that fit seamlessly into everyday life.' },
@@ -92,9 +93,9 @@ const pad = (n: number) => String(n).padStart(2, '0');
       </nav>
 
       <aside class="glass hero-card" aria-label="Featured solution">
-        <p class="mono">Digital Solutions · In development</p>
-        <p>Exploring practical automation and AI integration solutions for modern businesses.</p>
-        <a class="btn primary" href="/digital">Explore Digital Solutions <span aria-hidden="true">→</span></a>
+        <p class="mono">New · Benjaire Flow v1.0</p>
+        <p>Turn your website contact form into a managed inquiry pipeline that runs in your own n8n.</p>
+        <a class="btn primary" href="/digital/flow">Meet Benjaire Flow <span aria-hidden="true">→</span></a>
       </aside>
     </div>
     <span class="scroll-cue mono" aria-hidden="true">Scroll</span>
@@ -116,12 +117,15 @@ const pad = (n: number) => String(n).padStart(2, '0');
       <div class="plinth">
         <Picture src={operateImg} formats={['avif', 'webp']} widths={[900, 1600]} sizes="100vw" alt="" loading="lazy" />
         <div class="glass plinth-card">
-          <span class="badge">In development</span>
-          <p class="mono">Example use case</p>
-          <h3>Client intake &amp; onboarding</h3>
-          <p>One example of our Business Automation work: a client intake and onboarding solution that helps professional services firms organize inquiries, streamline onboarding, and keep every next step on schedule.</p>
-          <ul class="spec">{INTAKE.map((x) => <li>{x}</li>)}</ul>
-          <a class="btn primary" href="/digital#intake">See the example <span aria-hidden="true">→</span></a>
+          <span class="badge">Available now</span>
+          <p class="mono">Benjaire Flow · From $79</p>
+          <h3>Every inquiry, answered on time.</h3>
+          <p>Flow checks each website inquiry, sorts it with Claude and sends it to you with a suggested reply and one tap status buttons. The sender gets a branded acknowledgement, and nothing waits too long.</p>
+          <ul class="spec">{FLOW.map((x) => <li>{x}</li>)}</ul>
+          <div class="actions">
+            <a class="btn primary" href="/digital/flow">Meet Benjaire Flow <span aria-hidden="true">→</span></a>
+            {FLOW_CHECKOUT.starter && <a class="btn ghost" href={FLOW_CHECKOUT.starter} rel="noopener">Get Starter · $79</a>}
+          </div>
         </div>
       </div>
     </div>
