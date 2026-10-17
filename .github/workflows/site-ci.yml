@@ -1,12 +1,11 @@
 name: Site CI
 
-# Checks for the live Astro site in site/.
+# Checks for the live Astro site in site/. Runs on every pull request, not
+# only site/ changes, because build-and-test is a required check on main and
+# a required check that never runs blocks the merge.
 on:
   pull_request:
     branches: [main]
-    paths:
-      - "site/**"
-      - ".github/workflows/site-ci.yml"
   push:
     branches: [main]
     paths:
