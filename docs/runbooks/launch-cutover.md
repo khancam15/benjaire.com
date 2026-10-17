@@ -70,7 +70,7 @@ Note: the new site sends HSTS (`max-age` 1 year). After a rollback, browsers tha
 ## F. After launch (Claude, via PR)
 
 1. Submit `https://benjaire.com/sitemap.xml` in Google Search Console. Optionally add a DNS-verified **Domain** property for sturdier verification.
-2. Cleanup PR:
+2. Cleanup PR (done 2026-10-17):
    - Remove the legacy root site: `index.html`, `about.html`, `contact.html`, `assets/`, `CNAME`, the root `sitemap.xml` and `robots.txt`, the root verification file, `_config.yml`.
    - Retire or retarget the legacy `security-audit.yml` workflow (its checks expect meta-tag CSP on root HTML).
    - Update the README to describe the new site only.

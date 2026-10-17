@@ -94,3 +94,6 @@ node_modules/
 # Personal photos / raw camera files (not web assets)
 *.heic
 *.HEIC
+
+# Private business research (repo is public)
+research/
