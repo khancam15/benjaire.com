@@ -1,8 +1,8 @@
 ---
 // Benjaire Flow: the first Digital Solutions product, a self install n8n
 // workflow kit. Only list what v1.0 actually does (see the product package
-// README and CHANGELOG). Checkout is not connected yet, so every purchase
-// button leads to the contact form until a checkout link replaces it.
+// README and CHANGELOG). Paid tiers go straight to Stripe Checkout; a tier
+// without a checkout link falls back to the contact form.
 import Base from '../../layouts/Base.astro';
 import { Picture } from 'astro:assets';
 import heroImg from '../../assets/flow/10-site-hero.png';
@@ -14,6 +14,13 @@ import setupImg from '../../assets/flow/06-setup-process.png';
 import { SITE } from '../../site';
 
 const BUY = '/contact?category=digital&product=flow#inquiry';
+
+// Stripe Payment Links. After payment, n8n emails the buyer a private download
+// link. Leave a value empty to send that tier to the contact form instead.
+const CHECKOUT = {
+  starter: 'https://buy.stripe.com/5kQfZjd5C99Qf7Ta0R5AQ02',
+  professional: '',
+};
 
 const FEATURES = [
   { wf: 'Flow 1 · Intake', name: 'AI sorting with Claude', text: 'Each inquiry is matched to your services and tagged with urgency and budget, with a one sentence summary and a suggested reply for you to review.' },
@@ -44,13 +51,13 @@ const INCLUDED = [
 ];
 
 const TIERS = [
-  { name: 'Starter', price: '$79', unit: 'one time', label: 'Self install', pick: false, cta: 'Get Starter',
+  { name: 'Starter', price: '$79', unit: 'one time', label: 'Self install', pick: false, cta: 'Get Starter', href: CHECKOUT.starter || BUY,
     text: 'For owners comfortable in n8n who want the whole system ready to import.',
     items: ['All 6 workflows and the Cloudflare Worker', 'Setup guide and 7 more guides', '4 business presets and example forms', 'Bug fix updates to v1.x for 12 months', 'Email help with setup errors for 14 days'] },
-  { name: 'Professional', price: '$199', unit: 'one time', label: 'Most complete', pick: true, cta: 'Get Professional',
+  { name: 'Professional', price: '$199', unit: 'one time', label: 'Most complete', pick: true, cta: 'Get Professional', href: CHECKOUT.professional || BUY,
     text: 'Everything in Starter, plus a person to check your setup with you.',
     items: ['Everything in Starter', 'One 45 minute setup call on video', 'Claude’s sorting tuned to your services', 'Email support for 60 days', 'Replies within one business day'] },
-  { name: 'Done for you', price: '$750', unit: 'from, one time', label: 'We install it', pick: false, cta: 'Book a setup',
+  { name: 'Done for you', price: '$750', unit: 'from, one time', label: 'We install it', pick: false, cta: 'Book a setup', href: BUY,
     text: 'We install and test Flow in your own n8n and connect your website form.',
     items: ['All six workflows installed and configured', 'Your branding, emails and onboarding checklist', 'Form connected, or the Worker deployed for you', 'All 17 test scenarios run, then 30 days of support', 'Optional care plan at $49 a month'] },
 ];
@@ -196,7 +203,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
             <p class="price"><span class="amt">{t.price}</span> <span class="mono">{t.unit}</span></p>
             <p>{t.text}</p>
             <ul class="ticks">{t.items.map((i) => <li>{i}</li>)}</ul>
-            <a class:list={['btn', t.pick ? 'primary' : 'ghost']} href={BUY}>{t.cta}</a>
+            <a class:list={['btn', t.pick ? 'primary' : 'ghost']} href={t.href}>{t.cta}</a>
           </li>
         ))}
       </ul>
