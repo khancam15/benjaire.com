@@ -35,3 +35,7 @@ Guidelines:
 ## Commit identity
 
 Commit with your GitHub private noreply address (GitHub Settings → Emails) so a personal email address never appears in the history, and keep this site's anonymity rules in mind: no personal names or details in commit titles or messages.
+
+## Security
+
+Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md), never in a public issue.

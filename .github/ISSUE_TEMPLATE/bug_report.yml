@@ -1,0 +1,28 @@
+name: Bug report
+description: Something on benjaire.com is broken or looks wrong.
+title: "fix: "
+labels: [bug]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Page URL
+      placeholder: https://benjaire.com/...
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open ...\n2. Click ..."
+  - type: input
+    id: env
+    attributes:
+      label: Browser and device
+      placeholder: Safari 26, iPhone 17
