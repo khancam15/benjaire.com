@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: https://github.com/khancam15/benjaire.com/blob/main/SECURITY.md
+    about: Report vulnerabilities privately by email, not in a public issue.
+  - name: Business inquiry
+    url: https://benjaire.com/contact
+    about: For Digital Solutions, partnerships and supplier inquiries.
