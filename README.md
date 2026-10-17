@@ -72,6 +72,6 @@ Cloudflare Workers Builds deploys `main` to production automatically (`npx wrang
 - [`docs/design-system.md`](docs/design-system.md): visual language, tokens and logo rules
 - [`docs/runbooks/launch-cutover.md`](docs/runbooks/launch-cutover.md): the completed move from GitHub Pages to Cloudflare
 
-## Legacy files
+## Legacy site
 
-The `.html` files, `assets/`, `CNAME`, `_config.yml`, `scripts/` and `security-audit.sh` at the repository root belong to the retired GitHub Pages site. They no longer serve benjaire.com and are kept only until the post launch cleanup (runbook section F).
+The retired GitHub Pages site (root `.html` files, `assets/`, `CNAME` and its audit scripts) was removed in the post launch cleanup. It remains in git history before that commit.

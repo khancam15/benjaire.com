@@ -1,7 +1,6 @@
 name: Site CI
 
-# Checks for the live Astro site in site/. The retired root pages keep the
-# legacy Security Audit workflow until the post launch cleanup.
+# Checks for the live Astro site in site/.
 on:
   pull_request:
     branches: [main]
