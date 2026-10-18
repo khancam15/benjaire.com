@@ -11,6 +11,7 @@ import autoImg from '../../assets/flow/03-automation-interface.png';
 import caseImg from '../../assets/flow/04-business-use-case.png';
 import kitImg from '../../assets/flow/05-whats-included.png';
 import setupImg from '../../assets/flow/06-setup-process.png';
+import FlowDemo from '../../components/FlowDemo.astro';
 import { SITE, FLOW_CHECKOUT } from '../../site';
 
 const BUY = '/contact?category=digital&product=flow#inquiry';
@@ -86,23 +87,39 @@ const productLd = {
 };
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
-<Base title="Benjaire Flow" seoTitle="Benjaire Flow | AI Inquiry Automation for n8n" description={description}>
+<Base title="Benjaire Flow" seoTitle="Benjaire Flow | AI Inquiry Automation for n8n" description={description} ogImage="/og/flow-og.png" ogImageAlt="Benjaire Flow: every inquiry, answered on time. From $79, one time.">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(productLd)} />
 
-  <section class="page-head">
+  <section class="page-head product-head">
     <div class="wrap">
       <p class="eyebrow"><a href="/digital">Digital Solutions</a> · Benjaire Flow</p>
-      <span class="badge">Available now · v1.0</span>
+      <span class="badge product-badge">Available now · v1.0</span>
       <h1>Every inquiry, <span>answered on time.</span></h1>
       <p class="lead mb-5">Six ready to import n8n workflows. Claude sorts each website inquiry and drafts a reply for you to review. You get one email with one tap status buttons, the sender gets a branded confirmation, and you get a reminder before anyone waits too long.</p>
       <div class="actions">
-        <a class="btn primary" href="#pricing">Get Benjaire Flow <span aria-hidden="true">→</span></a>
-        <a class="btn ghost" href="#included">See what’s included</a>
+        <a class="btn primary" href="#pricing">Get Flow · from $79 <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#try">Try the alert</a>
       </div>
       <figure class="shot hero-shot">
         <Picture src={heroImg} formats={['avif', 'webp']} widths={[800, 1400, 2000]} sizes="(min-width: 1320px) 1208px, 92vw" alt="Flow’s owner alert email with a summary, a suggested reply and three status buttons, beside a phone showing the sender’s confirmation" fetchpriority="high" loading="eager" />
         <figcaption class="mono">Illustrative mockup with sample data. Flow sends these emails from your own domain.</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <section class="sec try" id="try" aria-labelledby="try-title">
+    <div class="wrap try-grid">
+      <div class="try-copy">
+        <p class="eyebrow">Try it</p>
+        <h2 id="try-title">This is the email you get.</h2>
+        <p class="muted">Press a button the way you would from your inbox. Flow asks you to confirm, then saves the status and handles the follow up.</p>
+        <ol class="try-steps mono">
+          <li>Alert arrives, already sorted</li>
+          <li>Confirm step blocks link scanners</li>
+          <li>Status saved, follow up handled</li>
+        </ol>
+      </div>
+      <FlowDemo />
     </div>
   </section>
 
@@ -264,6 +281,17 @@ const pad = (n: number) => String(n).padStart(2, '0');
   .faq summary::after { content: "+"; font-family: var(--mono); color: var(--fg-low); }
   .faq details[open] summary::after { content: "−"; }
   .faq details p { padding-bottom: 22px; max-width: 60ch; }
+
+  /* product layer (B on A): denser product type, one signal accent */
+  .product-head h1 { font-stretch: 100%; font-weight: 500; letter-spacing: -.035em; }
+  .product-badge { background: var(--signal-tint); color: var(--signal-hi); border-color: transparent; }
+  .try { background: var(--canvas); border-block: 1px solid var(--line); }
+  .try-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .try-copy h2 { font-stretch: 100%; font-weight: 500; letter-spacing: -.035em; margin-bottom: var(--s-2); }
+  .try-steps { list-style: none; counter-reset: s; display: grid; gap: 12px; margin-top: var(--s-4); font-size: 12px; text-transform: uppercase; letter-spacing: var(--track-label); color: var(--fg); }
+  .try-steps li { counter-increment: s; display: flex; align-items: center; gap: 12px; }
+  .try-steps li::before { content: counter(s); width: 28px; height: 28px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--accent); color: var(--on-accent); flex: none; }
+  @media (max-width: 900px) { .try-grid { grid-template-columns: minmax(0, 1fr); } }
 
   @media (max-width: 1000px) { .tiers { grid-template-columns: minmax(0, 1fr); } }
   @media (max-width: 900px) { .shots { grid-template-columns: minmax(0, 1fr); } }

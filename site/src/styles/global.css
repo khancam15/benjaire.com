@@ -43,6 +43,15 @@
   --glass: rgba(255, 255, 255, .64);
   --glass-edge: rgba(255, 255, 255, .9);
 
+  /* product layer (B on A, design system v1, preview): product pages only */
+  --canvas:      #f7f6f3;  /* inside product mockups and demos */
+  --signal:      #2f55c8;  /* one interactive highlight per view; 6.4:1 on white */
+  --signal-hi:   #2443a3;  /* hover, and text on --signal-tint */
+  --signal-tint: #eef1fb;
+  --won:         #1d6b48;  /* status: client, available; always with a word */
+  --won-tint:    #e8f2ec;
+  --waiting:     #8a5a12;  /* status: reply due */
+
   /* type */
   --display: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
   --sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
