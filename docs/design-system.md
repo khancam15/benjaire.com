@@ -16,7 +16,7 @@
 | Homepage | `site/src/pages/index.astro` + `site/src/styles/home.css` + `site/src/scripts/home.ts`. |
 
 ## v1 product layer ("B on A", preview, 2026-10-18)
-- **Status:** direction approved by the owner 2026-10-18; this layer is in preview until the owner approves it for production.
+- **Status:** direction approved by the owner 2026-10-18; ships to production when PR #43 merges.
 - **Rule:** brand pages (home hero, About, Brands) keep the Pavilion. Product pages lead with real interface states.
 - **Tokens added to `global.css`:** `--canvas #f7f6f3`, `--signal #2f55c8` (one interactive highlight per view, product pages only; proposed), `--signal-hi #2443a3`, `--signal-tint #eef1fb`, `--won #1d6b48`, `--won-tint #e8f2ec`, `--waiting #8a5a12`. Status colors always travel with a word.
 - **Type:** product headings use Archivo at width 100, weight 500.

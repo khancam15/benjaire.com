@@ -7,7 +7,8 @@ import { join } from 'node:path';
 
 const root = process.argv[2] ?? 'dist';
 const hashes = new Set();
-for (const f of readdirSync(root).filter((n) => n.endsWith('.html'))) {
+// Recursive: pages in subfolders (dist/digital/*.html) carry inline scripts too.
+for (const f of readdirSync(root, { recursive: true }).filter((n) => String(n).endsWith('.html'))) {
   const html = readFileSync(join(root, f), 'utf8');
   for (const [, attrs, body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
     if (/\bsrc=/.test(attrs) || /type="application\/ld\+json"/.test(attrs) || !body.trim()) continue;

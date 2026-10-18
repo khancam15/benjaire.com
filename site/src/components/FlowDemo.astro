@@ -1,11 +1,13 @@
 ---
 // Interactive owner alert (sample data). Shows what pressing a status button
-// does: a confirm step, then the saved status and its follow up. Without JS the
-// outcomes are listed as text, so nothing depends on the script.
+// does: a confirm step, then the saved status and its follow up. Copy states
+// only what Flow v1.0 does (see FEATURES in pages/digital/flow.astro). The
+// script is a normal bundled module (no inline code), so the strict CSP allows
+// it; without JS the outcomes are listed as text instead of the buttons.
 const OUTCOMES = [
-  { key: 'replied', label: 'I replied to them', badge: 'Replied', tone: 'signal', effect: 'Reply reminders stop for this inquiry, and it counts toward your Monday digest.' },
-  { key: 'client', label: 'Became a client', badge: 'Became a client', tone: 'won', effect: 'Your welcome email goes to the new client with the documents to send and your kickoff booking link.' },
-  { key: 'close', label: 'Close: no deal', badge: 'Closed: no deal', tone: 'plain', effect: 'The inquiry is closed and counted as a loss in your Monday digest. No email goes out.' },
+  { key: 'replied', label: 'I replied to them', badge: 'Replied', tone: 'signal', effect: 'Marked as replied, so it no longer shows as waiting in your reminders or Monday digest.' },
+  { key: 'client', label: 'Became a client', badge: 'Became a client', tone: 'won', effect: 'On a first win, your welcome email goes to the new client with the documents to send and your kickoff booking link.' },
+  { key: 'close', label: 'Close: no deal', badge: 'Closed: no deal', tone: 'plain', effect: 'Closed and counted as a loss in your Monday digest. No email goes out.' },
 ];
 ---
 <div class="demo" data-flow-demo>
@@ -22,7 +24,10 @@ const OUTCOMES = [
     </dl>
     <blockquote class="demo-reply"><p class="mono">Suggested reply · review before sending</p><p>Hi Dana, thank you for reaching out. A launch next week is a tight window, and we’d love to help you get there…</p></blockquote>
     <div class="actions demo-buttons">
-      {OUTCOMES.map((o, i) => <button type="button" class:list={['btn', i < 2 ? 'primary' : 'ghost']} data-pick={o.key}>{o.label}</button>)}
+      {OUTCOMES.map((o, i) => (
+        <button type="button" class:list={['btn', i < 2 ? 'primary' : 'ghost']}
+          data-pick={o.key} data-badge={o.badge} data-tone={o.tone} data-effect={o.effect}>{o.label}</button>
+      ))}
     </div>
     <ul class="demo-outcomes">
       {OUTCOMES.map((o) => <li><b>{o.label}:</b> {o.effect}</li>)}
@@ -48,36 +53,44 @@ const OUTCOMES = [
   <p class="sr-only" aria-live="polite" data-demo-live></p>
 </div>
 
-<script define:vars={{ OUTCOMES }}>
-  const root = document.querySelector('[data-flow-demo]');
-  if (root) {
-    const panels = root.querySelectorAll('[data-stage]');
-    const bar = root.querySelector('[data-demo-bar]');
-    const live = root.querySelector('[data-demo-live]');
-    const titles = { alert: 'Owner alert', confirm: 'Status link', done: 'Record updated' };
-    let choice = OUTCOMES[0];
-    const show = (stage) => {
+<script>
+  const TITLES: Record<string, string> = { alert: 'Owner alert', confirm: 'Status link', done: 'Record updated' };
+
+  document.querySelectorAll<HTMLElement>('[data-flow-demo]').forEach((root) => {
+    const q = <T extends HTMLElement>(sel: string) => root.querySelector<T>(sel)!;
+    const panels = root.querySelectorAll<HTMLElement>('[data-stage]');
+    const live = q('[data-demo-live]');
+    let picked: HTMLButtonElement | null = null;
+
+    const show = (stage: string, focus?: HTMLElement | null) => {
       panels.forEach((p) => { p.hidden = p.dataset.stage !== stage; });
-      bar.textContent = titles[stage];
-      const focus = root.querySelector(`[data-stage="${stage}"] button`);
-      if (focus) focus.focus({ preventScroll: true });
+      q('[data-demo-bar]').textContent = TITLES[stage];
+      (focus ?? root.querySelector<HTMLElement>(`[data-stage="${stage}"] button`))?.focus({ preventScroll: true });
     };
-    root.querySelectorAll('[data-pick]').forEach((b) => b.addEventListener('click', () => {
-      choice = OUTCOMES.find((o) => o.key === b.dataset.pick);
-      root.querySelector('[data-demo-label]').textContent = choice.badge;
+
+    root.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((b) => b.addEventListener('click', () => {
+      picked = b;
+      q('[data-demo-label]').textContent = b.dataset.badge ?? '';
       show('confirm');
-      live.textContent = `Confirm marking the inquiry as ${choice.badge}.`;
+      live.textContent = `Confirm page: mark the inquiry as ${b.dataset.badge}?`;
     }));
-    root.querySelector('[data-confirm]').addEventListener('click', () => {
-      const badge = root.querySelector('[data-demo-badge]');
-      badge.textContent = choice.badge;
-      badge.className = `status ${choice.tone}`;
-      root.querySelector('[data-demo-effect]').textContent = choice.effect;
+
+    q('[data-confirm]').addEventListener('click', () => {
+      if (!picked) return;
+      const badge = q('[data-demo-badge]');
+      badge.textContent = picked.dataset.badge ?? '';
+      badge.className = `status ${picked.dataset.tone ?? 'plain'}`;
+      q('[data-demo-effect]').textContent = picked.dataset.effect ?? '';
       show('done');
-      live.textContent = `Saved as ${choice.badge}. ${choice.effect}`;
+      live.textContent = `Saved as ${picked.dataset.badge}. ${picked.dataset.effect}`;
     });
-    root.querySelectorAll('[data-reset]').forEach((b) => b.addEventListener('click', () => { show('alert'); live.textContent = 'Back to the owner alert.'; }));
-  }
+
+    root.querySelectorAll<HTMLButtonElement>('[data-reset]').forEach((b) => b.addEventListener('click', () => {
+      const back = b.closest('[data-stage="confirm"]') ? picked : null;
+      show('alert', back);
+      live.textContent = 'Back to the owner alert.';
+    }));
+  });
 </script>
 
 <style>
@@ -89,10 +102,10 @@ const OUTCOMES = [
   .demo-title { font-size: clamp(18px, 1.6vw, 22px); font-weight: 600; color: var(--fg); }
   .demo-meta { font-size: 14px; color: var(--fg-mid); margin-top: -10px; }
   .demo-need { font-size: clamp(16px, 1.4vw, 19px); font-weight: 500; color: var(--fg); }
-  .demo-tags { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-  .demo-tags div { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .demo-tags { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .demo-tags div { border: 1px solid var(--line); border-radius: 12px; padding: clamp(10px, 1.4vw, 12px) clamp(10px, 1.4vw, 14px); min-width: 0; }
   .demo-tags dt { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: var(--track-label); color: var(--fg-low); }
-  .demo-tags dd { font-weight: 600; color: var(--fg); }
+  .demo-tags dd { font-weight: 600; color: var(--fg); overflow-wrap: anywhere; }
   .demo-tags dd.urgent { color: var(--danger); }
   .demo-tags dd.urgent::before { content: "● "; }
   .demo-reply { margin: 0; border-left: 2px solid var(--line-mid); padding-left: 16px; display: grid; gap: 6px; font-size: 15px; color: var(--fg-mid); }
@@ -106,5 +119,4 @@ const OUTCOMES = [
   .demo-outcomes { list-style: none; display: grid; gap: 8px; font-size: 14px; color: var(--fg-mid); }
   :global(html.js) .demo-outcomes { display: none; }
   :global(html:not(.js)) .demo-buttons { display: none; }
-  @media (max-width: 640px) { .demo-tags { grid-template-columns: minmax(0, 1fr); } }
 </style>
