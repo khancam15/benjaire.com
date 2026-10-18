@@ -1,0 +1,110 @@
+---
+// Interactive owner alert (sample data). Shows what pressing a status button
+// does: a confirm step, then the saved status and its follow up. Without JS the
+// outcomes are listed as text, so nothing depends on the script.
+const OUTCOMES = [
+  { key: 'replied', label: 'I replied to them', badge: 'Replied', tone: 'signal', effect: 'Reply reminders stop for this inquiry, and it counts toward your Monday digest.' },
+  { key: 'client', label: 'Became a client', badge: 'Became a client', tone: 'won', effect: 'Your welcome email goes to the new client with the documents to send and your kickoff booking link.' },
+  { key: 'close', label: 'Close: no deal', badge: 'Closed: no deal', tone: 'plain', effect: 'The inquiry is closed and counted as a loss in your Monday digest. No email goes out.' },
+];
+---
+<div class="demo" data-flow-demo>
+  <div class="demo-bar mono"><span data-demo-bar>Owner alert</span><span>Sample data</span></div>
+
+  <div class="demo-panel" data-stage="alert">
+    <p class="demo-title">[Urgent] New inquiry: Dana Lee, Lee &amp; Co</p>
+    <p class="demo-meta">Northwind Studio · Reply due Fri 16 Oct, 2:02 PM</p>
+    <p class="demo-need">Needs a refreshed logo and website before a product launch next week.</p>
+    <dl class="demo-tags">
+      <div><dt>Topic</dt><dd>Branding</dd></div>
+      <div><dt>Urgency</dt><dd class="urgent">Urgent</dd></div>
+      <div><dt>Budget</dt><dd>$5,000</dd></div>
+    </dl>
+    <blockquote class="demo-reply"><p class="mono">Suggested reply · review before sending</p><p>Hi Dana, thank you for reaching out. A launch next week is a tight window, and we’d love to help you get there…</p></blockquote>
+    <div class="actions demo-buttons">
+      {OUTCOMES.map((o, i) => <button type="button" class:list={['btn', i < 2 ? 'primary' : 'ghost']} data-pick={o.key}>{o.label}</button>)}
+    </div>
+    <ul class="demo-outcomes">
+      {OUTCOMES.map((o) => <li><b>{o.label}:</b> {o.effect}</li>)}
+    </ul>
+  </div>
+
+  <div class="demo-panel center" data-stage="confirm" hidden>
+    <p class="mono">Confirm page · opens in your browser</p>
+    <p class="demo-q">Mark Dana Lee as “<span data-demo-label></span>”?</p>
+    <p class="muted">This step stops email link scanners from pressing the button. The link expires after 30 days.</p>
+    <div class="actions center">
+      <button type="button" class="btn primary" data-confirm>Confirm</button>
+      <button type="button" class="btn ghost" data-reset>Go back</button>
+    </div>
+  </div>
+
+  <div class="demo-panel center" data-stage="done" hidden>
+    <span class="status" data-demo-badge></span>
+    <p class="demo-q">Saved.</p>
+    <p class="muted" data-demo-effect></p>
+    <div class="actions center"><button type="button" class="btn ghost" data-reset>Replay the demo</button></div>
+  </div>
+  <p class="sr-only" aria-live="polite" data-demo-live></p>
+</div>
+
+<script define:vars={{ OUTCOMES }}>
+  const root = document.querySelector('[data-flow-demo]');
+  if (root) {
+    const panels = root.querySelectorAll('[data-stage]');
+    const bar = root.querySelector('[data-demo-bar]');
+    const live = root.querySelector('[data-demo-live]');
+    const titles = { alert: 'Owner alert', confirm: 'Status link', done: 'Record updated' };
+    let choice = OUTCOMES[0];
+    const show = (stage) => {
+      panels.forEach((p) => { p.hidden = p.dataset.stage !== stage; });
+      bar.textContent = titles[stage];
+      const focus = root.querySelector(`[data-stage="${stage}"] button`);
+      if (focus) focus.focus({ preventScroll: true });
+    };
+    root.querySelectorAll('[data-pick]').forEach((b) => b.addEventListener('click', () => {
+      choice = OUTCOMES.find((o) => o.key === b.dataset.pick);
+      root.querySelector('[data-demo-label]').textContent = choice.badge;
+      show('confirm');
+      live.textContent = `Confirm marking the inquiry as ${choice.badge}.`;
+    }));
+    root.querySelector('[data-confirm]').addEventListener('click', () => {
+      const badge = root.querySelector('[data-demo-badge]');
+      badge.textContent = choice.badge;
+      badge.className = `status ${choice.tone}`;
+      root.querySelector('[data-demo-effect]').textContent = choice.effect;
+      show('done');
+      live.textContent = `Saved as ${choice.badge}. ${choice.effect}`;
+    });
+    root.querySelectorAll('[data-reset]').forEach((b) => b.addEventListener('click', () => { show('alert'); live.textContent = 'Back to the owner alert.'; }));
+  }
+</script>
+
+<style>
+  .demo { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 24px 60px rgba(18, 19, 21, .1); overflow: hidden; min-width: 0; }
+  .demo-bar { display: flex; justify-content: space-between; gap: 16px; padding: 14px clamp(16px, 3vw, 28px); border-bottom: 1px solid var(--line); font-size: 11px; text-transform: uppercase; letter-spacing: var(--track-label); color: var(--fg-low); }
+  .demo-panel { padding: clamp(20px, 3vw, 32px); display: grid; gap: 16px; min-height: 360px; align-content: start; }
+  .demo-panel[hidden] { display: none; }
+  .demo-panel.center { justify-items: center; align-content: center; text-align: center; background: var(--canvas); }
+  .demo-title { font-size: clamp(18px, 1.6vw, 22px); font-weight: 600; color: var(--fg); }
+  .demo-meta { font-size: 14px; color: var(--fg-mid); margin-top: -10px; }
+  .demo-need { font-size: clamp(16px, 1.4vw, 19px); font-weight: 500; color: var(--fg); }
+  .demo-tags { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .demo-tags div { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .demo-tags dt { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: var(--track-label); color: var(--fg-low); }
+  .demo-tags dd { font-weight: 600; color: var(--fg); }
+  .demo-tags dd.urgent { color: var(--danger); }
+  .demo-tags dd.urgent::before { content: "● "; }
+  .demo-reply { margin: 0; border-left: 2px solid var(--line-mid); padding-left: 16px; display: grid; gap: 6px; font-size: 15px; color: var(--fg-mid); }
+  .demo-reply .mono { font-size: 11px; text-transform: uppercase; letter-spacing: var(--track-label); color: var(--fg-low); }
+  .demo-q { font-family: var(--display); font-stretch: 100%; font-weight: 500; font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -.03em; color: var(--fg); }
+  .demo-panel.center .muted { max-width: 46ch; }
+  .status { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 14px; font-weight: 500; }
+  .status.signal { background: var(--signal-tint); color: var(--signal-hi); }
+  .status.won { background: var(--won-tint); color: var(--won); }
+  .status.plain { background: var(--bg-raised); color: var(--fg); }
+  .demo-outcomes { list-style: none; display: grid; gap: 8px; font-size: 14px; color: var(--fg-mid); }
+  :global(html.js) .demo-outcomes { display: none; }
+  :global(html:not(.js)) .demo-buttons { display: none; }
+  @media (max-width: 640px) { .demo-tags { grid-template-columns: minmax(0, 1fr); } }
+</style>

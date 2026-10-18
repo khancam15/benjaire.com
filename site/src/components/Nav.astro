@@ -14,7 +14,7 @@ const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/'
       {NAV.map((item) => (
         <li><a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a></li>
       ))}
-      <li><a class="nav-cta" href="/contact?category=partnership">Partner with us <span aria-hidden="true">+</span></a></li>
+      <li><a class="nav-cta" href="/digital/flow#pricing">Get Flow <span aria-hidden="true">·</span> $79</a></li>
     </ul>
   </div>
 </header>
