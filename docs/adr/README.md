@@ -12,3 +12,4 @@ Short records of significant technical decisions: the context, the options consi
 | [0002](0002-hosting-platform.md) | Hosting platform | Accepted |
 | [0003](0003-dns-and-email-preservation.md) | DNS and email preservation | Accepted |
 | [0004](0004-contact-form-processing.md) | Contact-form processing | Accepted |
+| [0005](0005-business-dashboard.md) | Private business dashboard | Proposed |
