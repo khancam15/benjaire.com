@@ -1,6 +1,6 @@
 # ADR-0005: Private business dashboard
 
-- **Status:** Proposed (awaiting owner approval)
+- **Status:** Accepted (owner approval 2026-10-18)
 - **Date:** 2026-10-18
 
 ## Context
@@ -38,4 +38,12 @@ The owner wants one private place to see website traffic, product sales and down
 - No change to the public site, its Worker or its DNS records.
 - Expected incremental cost is $0 on Cloudflare's free tiers. The n8n metrics workflow uses n8n executions, so its schedule must fit the n8n plan's monthly execution quota.
 - Financial figures that have no integration (expenses) are entered by hand, and every change is recorded in the audit log.
-- The dashboard source location (this public repository or a private one) is an open decision for the owner.
+- The dashboard source lives in a separate private repository (`benjaire-dashboard`), not in this public one.
+
+## Owner decisions (2026-10-18)
+- Architecture: Option B, as above.
+- Source code: a new private repository.
+- n8n: the push design (aggregates only, signed). The new n8n workflow is a production n8n change and gets its own approval when built.
+- Sign-in: Cloudflare Access with Google login, allow list of one address. Sessions last 24 hours.
+- Domain: `dashboard.benjaire.com` is attached only after the dashboard is built and tested, under a separate approval (ADR-0003).
+- Not adopted for now: automatic deletion of old inquiries in n8n.
