@@ -47,16 +47,15 @@ const INCLUDED = [
   { name: 'Examples', text: 'Contact form, server forwarder and a curl test' },
 ];
 
-const TIERS: { key: keyof typeof FLOW_CHECKOUT; name: string; price: string; unit: string; label: string; pick: boolean; cta: string; text: string; note?: string; href?: string; items: string[] }[] = [
+const TIERS: { key: keyof typeof FLOW_CHECKOUT; name: string; price: string; unit: string; label: string; pick: boolean; cta: string; text: string; href?: string; items: string[] }[] = [
   { key: 'starter', name: 'Starter', price: '$79', unit: 'one time', label: 'Self install', pick: false, cta: 'Get Starter',
     text: 'For owners comfortable in n8n who want the whole system ready to import.',
     items: ['All 6 workflows and the Cloudflare Worker', 'Setup guide and 7 more guides', '4 business presets and example forms', 'Bug fix updates to v1.x for 12 months', 'Email help with setup errors for 14 days'] },
   { key: 'professional', name: 'Professional', price: '$199', unit: 'one time', label: 'Most complete', pick: true, cta: 'Get Professional',
     text: 'Everything in Starter, plus a person to check your setup with you.',
     items: ['Everything in Starter', 'One 45 minute setup call on video', 'Claude’s sorting tuned to your services', 'Email support for 60 days', 'Replies within one business day'] },
-  { key: 'done_for_you', name: 'Flow Installed', price: '$750', unit: 'one time', label: 'We install it', pick: false, cta: 'Book a fit call', href: FIT_CALL,
+  { key: 'done_for_you', name: 'Flow Installed', price: '$500', unit: 'one time', label: 'We install it', pick: false, cta: 'Book a fit call', href: FIT_CALL,
     text: 'We install, brand and test Flow in your own accounts and connect your website form, usually within five business days.',
-    note: 'Founding price $495 for our first three clients who agree to a short case study.',
     items: ['All six workflows installed in your own n8n', 'Your branding, emails, reply targets and onboarding checklist', 'One website form connected, or the Worker deployed for you', 'All 17 test scenarios run before you go live', '30 days of support, then an optional $49 a month care plan'] },
 ];
 
@@ -217,7 +216,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
             <h3>{t.name}</h3>
             <p class="price"><span class="amt">{t.price}</span> <span class="mono">{t.unit}</span></p>
             <p>{t.text}</p>
-            {t.note && <p class="tier-note">{t.note}</p>}
             <ul class="ticks">{t.items.map((i) => <li>{i}</li>)}</ul>
             <a class:list={['btn', t.pick ? 'primary' : 'ghost']} href={FLOW_CHECKOUT[t.key] || t.href || BUY} rel={FLOW_CHECKOUT[t.key] ? 'noopener' : undefined}>{t.cta}</a>
           </li>
@@ -278,7 +276,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
   .ticks { list-style: none; display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: var(--s-2); margin-bottom: var(--s-2); }
   .ticks li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; font-size: 15px; }
   .ticks li::before { content: ""; width: 10px; height: 1px; background: var(--fg); margin-top: .8em; }
-  .tier-note { font-size: 14px; border: 1px solid var(--line-mid); border-radius: 12px; padding: 10px 14px; }
   .tier .btn { margin-top: auto; }
 
   .faq { border-top: 1px solid var(--line-mid); }
