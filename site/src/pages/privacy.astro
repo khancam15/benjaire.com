@@ -1,11 +1,23 @@
 ---
-// DRAFT for counsel review (PRD V-10). Keep `noindex` and keep this page out
-// of the sitemap until the owner confirms legal review is complete.
+// DRAFT v2 for counsel review (PRD V-10). Rewritten 2026-10-19 to match the
+// live systems: contact form → Cloudflare Worker → n8n (Claude sorting),
+// Stripe checkout and n8n order delivery, Resend and Email Routing for mail.
+// Keep `noindex` and keep this page out of the sitemap until the owner
+// confirms legal review is complete. When a processor is added or removed,
+// update the "Service providers" list in the same pull request.
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
-const UPDATED = 'October 13, 2026';
+const UPDATED = 'October 19, 2026';
+const PROVIDERS = [
+  { name: 'Cloudflare', role: 'Website hosting, security, bot protection (Turnstile), rate limiting and email forwarding.' },
+  { name: 'n8n', role: 'Workflow automation. Stores inquiry and order records and runs order delivery.' },
+  { name: 'Anthropic', role: 'Its Claude AI model sorts and summarizes contact form inquiries, as described below.' },
+  { name: 'Stripe', role: 'Payment processing, tax calculation and receipts.' },
+  { name: 'Resend', role: 'Sends order, download and inquiry emails.' },
+  { name: 'Google', role: 'Business email inbox.' },
+];
 ---
-<Base title="Privacy Policy" description="How Benjaire collects, uses and protects personal information." noindex>
+<Base title="Privacy Policy" description="How Benjaire LLC collects, uses, shares and protects personal information on benjaire.com, including inquiries and purchases." noindex>
   <section class="page-head">
     <div class="wrap">
       <p class="eyebrow">Legal</p>
@@ -18,44 +30,62 @@ const UPDATED = 'October 13, 2026';
       <p class="updated">Last updated: {UPDATED}</p>
 
       <h2>Who we are</h2>
-      <p>Benjaire is a brand company based in New York, NY. This policy covers benjaire.com. Each Benjaire brand operates its own website with its own privacy policy.</p>
+      <p>Benjaire LLC ("Benjaire", "we", "us") is a New York company. This policy covers benjaire.com, the contact form, and purchases of Benjaire digital products and services made through the site. Each Benjaire brand that operates its own website has its own privacy policy.</p>
 
       <h2>Information we collect</h2>
       <ul>
-        <li><strong>What you send us.</strong> When you use the contact form or email us, we receive your name, email address, company (if you add one), the inquiry category you choose and your message.</li>
-        <li><strong>Technical information.</strong> Our hosting and security provider processes standard request data, such as IP address, browser type and the pages requested, to deliver the site and protect it from abuse.</li>
-        <li><strong>Cookies.</strong> We don't use advertising or tracking cookies. Our spam protection may use strictly necessary technical data to tell people from automated bots.</li>
+        <li><strong>Inquiries.</strong> When you use the contact form or email us, we receive your name, email address, company (if you add one), the inquiry category you choose, your message and your agreement to this policy.</li>
+        <li><strong>Purchases.</strong> When you buy a product, Stripe collects your payment details on its own checkout page. We receive your name, email address, billing country and postal code, what you bought, the amount and tax paid, and a payment reference. We never receive or store your full card number.</li>
+        <li><strong>Downloads.</strong> For each order we keep a private download link, its expiry date, and how many times and when it was used.</li>
+        <li><strong>Calls and support.</strong> If your purchase includes a call or support, we keep the scheduling details and our email correspondence with you.</li>
+        <li><strong>Technical information.</strong> Our hosting and security provider processes standard request data, such as IP address, browser type and the pages requested, to deliver the site, prevent abuse and limit repeated form submissions.</li>
       </ul>
 
       <h2>How we use it</h2>
       <ul>
-        <li>To read and respond to your inquiry.</li>
-        <li>To manage business relationships that follow from your inquiry.</li>
-        <li>To keep the site secure and prevent spam and abuse.</li>
-        <li>To meet legal obligations.</li>
+        <li>To read, prioritize and respond to your inquiry.</li>
+        <li>To process your order, deliver your download, send receipts and provide the support included with your purchase.</li>
+        <li>To provide services you hire us for, such as installing Benjaire Flow.</li>
+        <li>To keep the site secure and prevent spam, fraud and abuse.</li>
+        <li>To keep business, tax and accounting records and meet legal obligations.</li>
       </ul>
-      <p>We don't sell your personal information, and we don't share it for cross-context behavioral advertising.</p>
+      <p>We don't sell your personal information, and we don't share it for cross context behavioral advertising.</p>
 
-      <h2>Who we share it with</h2>
-      <p>We use service providers to run this site: website hosting and security, spam protection, and email delivery. They process information only on our behalf and under their own security commitments. We may also disclose information if the law requires it.</p>
+      <h2>How we use AI</h2>
+      <p>When you send an inquiry through the contact form, its text is processed by Claude, an AI model provided by Anthropic. Claude assigns a category and urgency, writes a short summary, and drafts a suggested reply. A person at Benjaire reviews every inquiry and decides how to respond. Claude doesn't make decisions about you and doesn't send messages to you on our behalf. Anthropic processes this text as our service provider under its commercial terms.</p>
+
+      <h2>Service providers</h2>
+      <p>We use these providers to run the site and our business. They process information on our behalf and under their own security and privacy commitments.</p>
+      <ul>
+        {PROVIDERS.map((p) => <li><strong>{p.name}.</strong> {p.role}</li>)}
+      </ul>
+      <p>We may also disclose information if the law requires it, to protect our rights or the safety of others, or as part of a merger, sale or reorganization of our business.</p>
+
+      <h2>Cookies</h2>
+      <p>We don't use advertising or tracking cookies. Our bot protection uses strictly necessary technical data to tell people from automated bots. Stripe sets its own cookies on its checkout pages, as described in Stripe's privacy policy.</p>
 
       <h2>How long we keep it</h2>
-      <p>We keep inquiry messages for as long as needed to respond and maintain business records, generally no longer than 24 months unless an ongoing business relationship or legal requirement calls for longer.</p>
+      <ul>
+        <li><strong>Inquiries and support email:</strong> as long as needed to respond and maintain business records, generally no longer than 24 months, unless an ongoing business relationship calls for longer.</li>
+        <li><strong>Orders and payment records:</strong> as long as tax and accounting laws require, generally seven years.</li>
+        <li><strong>Download links:</strong> stop working 14 days after purchase. The order record that holds them follows the rule above.</li>
+      </ul>
 
       <h2>Your choices and rights</h2>
-      <p>You can ask us to access, correct or delete the personal information you've sent us by emailing <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Depending on where you live, including California, you may have additional rights under local law. We won't treat you differently for exercising them.</p>
+      <p>You can ask us to access, correct or delete the personal information we hold about you, or to tell you what we have shared and with whom, by emailing <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. We may need to confirm your identity first, and we may keep records that the law requires us to keep. Depending on where you live, including California and other US states, the European Economic Area and the United Kingdom, you may have additional rights under local law, including the right to appeal our decision or to complain to a regulator. We won't treat you differently for exercising your rights.</p>
+      <p>If you are in the European Economic Area or the United Kingdom: we process inquiries based on our legitimate interest in responding to you, orders to perform our contract with you, and records to meet our legal obligations. Our providers may process your information in the United States.</p>
 
       <h2>Security</h2>
-      <p>We use encrypted connections (HTTPS) and reputable providers to protect your information. No method of transmission or storage is completely secure.</p>
+      <p>We use encrypted connections (HTTPS), access controls and reputable providers to protect your information. No method of transmission or storage is completely secure.</p>
 
       <h2>Children</h2>
-      <p>This site is intended for business and general audiences and isn't directed to children under 13. We don't knowingly collect their information.</p>
+      <p>This site is intended for businesses and adults. It isn't directed to children under 13, and we don't knowingly collect their information.</p>
 
       <h2>Changes to this policy</h2>
-      <p>We may update this policy. The date at the top shows when it last changed.</p>
+      <p>We may update this policy. The date at the top shows when it last changed. If a change materially affects how we use information we already hold, we will tell affected customers by email.</p>
 
       <h2>Contact</h2>
-      <p>Questions about privacy: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>, Benjaire, New York, NY.</p>
+      <p>Questions about privacy: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>, Benjaire LLC, New York, NY.</p>
     </div>
   </section>
 </Base>

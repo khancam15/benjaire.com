@@ -1,0 +1,48 @@
+---
+// DRAFT for counsel review (PRD V-10), added 2026-10-19. Owner decisions:
+// 14 day money back guarantee on the Starter and Professional kit; Flow
+// Installed refunded in full before setup starts, half after setup starts,
+// none after delivery; care plan cancels at the end of the paid month.
+// Keep `noindex` and out of the sitemap until legal review is complete.
+// Refunds are issued manually in the Stripe Dashboard; after refunding a kit,
+// also set the order's token_expires_at in n8n shop_orders to the past so the
+// download link stops working.
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+const UPDATED = 'October 19, 2026';
+const mail = `mailto:${SITE.email}`;
+---
+<Base title="Refund Policy" description="Refunds for Benjaire Flow: a 14 day money back guarantee on Starter and Professional, plus terms for Flow Installed and the care plan." noindex>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Legal</p>
+      <h1>Refund Policy</h1>
+      <p class="lead">What happens if Benjaire Flow isn't right for you.</p>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="wrap prose">
+      <p class="updated">Last updated: {UPDATED}</p>
+
+      <h2>Starter and Professional: 14 day money back guarantee</h2>
+      <p>If Flow doesn't work for you, email <a href={mail}>{SITE.email}</a> within 14 days of purchase with your order reference (it starts with BJ). We will refund the full price, including for Professional if your setup call has already taken place. You don't need to give a reason, although it helps us improve.</p>
+      <p>When we issue the refund, your download link stops working and your license ends, so please delete your copies of the kit. The guarantee applies once per customer for each tier.</p>
+
+      <h2>Flow Installed</h2>
+      <ul>
+        <li><strong>Before setup starts:</strong> full refund. Setup starts when we first sign in to your accounts to install Flow.</li>
+        <li><strong>After setup starts, before delivery:</strong> refund of half the price.</li>
+        <li><strong>After delivery:</strong> no refund. Delivery is when we confirm that Flow is live and its tests pass. If something we installed doesn't work as described, we will fix it during your 30 days of included support.</li>
+      </ul>
+
+      <h2>Care plan</h2>
+      <p>You can cancel the $49 monthly care plan at any time. Cancellation takes effect at the end of the month you have already paid for, and you won't be charged again. We don't refund partial months.</p>
+
+      <h2>How refunds are paid</h2>
+      <p>Refunds go back to your original payment method through Stripe, usually within five business days of approval. Your bank may take a few more days to show it. Please contact us before disputing a charge with your bank; we can usually resolve it faster.</p>
+
+      <h2>Your legal rights</h2>
+      <p>This policy doesn't limit any rights you have under the law where you live. It forms part of our <a href="/terms">Terms of Use and Sale</a>.</p>
+    </div>
+  </section>
+</Base>
