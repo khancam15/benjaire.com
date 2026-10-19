@@ -2,7 +2,8 @@
 // Digital Solutions: a business pillar offered directly by Benjaire (no
 // separate division brand). Built from existing components only.
 // Service categories lead. Benjaire Flow (the self install kit) is available
-// and has its own page at /digital/flow. The done for you intake service is
+// and has its own page at /digital/flow, as is Flow Installed (the kit set up
+// for the client). The wider intake service below, with CRM workflows, is
 // still in development: never describe it as available here.
 import Base from '../layouts/Base.astro';
 import PageBand from '../components/PageBand.astro';
@@ -118,7 +119,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
           <span class="badge">In development</span>
           <h2 id="intake-title">Client intake &amp; workflow automation.</h2>
         </div>
-        <p class="muted">One example of what Business Automation can do for a small consulting firm or agency: we automate how inquiries arrive, how new clients are onboarded and what happens next. It is in development, and firms that talk to us now can help shape it.</p>
+        <p class="muted">One example of what Business Automation can do for a small consulting firm or agency: we automate how inquiries arrive, how new clients are onboarded and what happens next. It is in development, and firms that talk to us now can help shape it. Its first part is available today as <a href="/digital/flow#pricing">Flow Installed</a>.</p>
       </div>
       <ul class="rows">
         {CAPABILITIES.map((c) => <li class="row"><h3>{c.name}</h3><p>{c.text}</p></li>)}

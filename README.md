@@ -10,7 +10,7 @@ Live at **https://benjaire.com**.
 |---|---|
 | `/` | Home |
 | `/digital` | Digital Solutions |
-| `/digital/flow` | Benjaire Flow, the first Digital Solutions product (self install n8n inquiry automation kit) |
+| `/digital/flow` | Benjaire Flow, the first Digital Solutions product (self install n8n inquiry automation kit), and Flow Installed, the kit set up for the client after a fit call |
 | `/digital/flow-thanks` | Post purchase page the Stripe Payment Link redirects to, `noindex` |
 | `/about` | About |
 | `/brands` | Consumer Brands |

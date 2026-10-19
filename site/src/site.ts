@@ -51,6 +51,8 @@ export const TURNSTILE_SITE_KEY = '0x4AAAAAAFVZs6h_1DsCs70r';
 // Benjaire Flow checkout (Stripe Payment Links, public by design). Paste each
 // live link here; an empty link sends that tier's button to the contact form.
 // Each link should redirect after payment to /digital/flow-thanks?tier=<key>.
+// done_for_you is Flow Installed: keep it empty, since a fit call comes before
+// payment and the client is invoiced through Stripe.
 export const FLOW_CHECKOUT = {
   starter: 'https://buy.stripe.com/5kQfZjd5C99Qf7Ta0R5AQ02',
   professional: '',
