@@ -21,10 +21,10 @@ export function initContactForm(): void {
     const chip = form.querySelector<HTMLInputElement>(`input[name="category"][value="${CSS.escape(wanted)}"]`);
     if (chip) chip.checked = true;
   }
-  // ?product=flow-installed starts the message for a Flow Installed fit call.
+  // ?product=flow-installed starts the message for a fit call to have Flow set up.
   const message = form.querySelector<HTMLTextAreaElement>('#message');
   if (params.get('product') === 'flow-installed' && message && !message.value) {
-    message.value = 'I would like a fit call for Flow Installed. Our website runs on: ';
+    message.value = 'I would like a fit call to have Benjaire Flow set up for us. Our website runs on: ';
   }
 
   const setError = (id: string, msg: string) => {
