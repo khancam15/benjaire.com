@@ -36,7 +36,7 @@ const REQUIREMENTS = [
   { name: 'Anthropic API key', text: 'Pay as you go; Claude sorts each inquiry' },
   { name: 'Resend', text: 'Sends every email from your verified domain' },
   { name: 'Your domain', text: 'A sending address with SPF, DKIM and DMARC' },
-  { name: 'Cloudflare', text: 'Optional, for the protected form endpoint' },
+  { name: 'Cloudflare', text: 'A free account; it runs the protected form endpoint' },
 ];
 
 const INCLUDED = [
@@ -44,7 +44,7 @@ const INCLUDED = [
   { name: 'Form endpoint', text: 'Cloudflare Worker with bot protection and an offline fallback' },
   { name: 'Templates', text: 'Data table schemas, settings and 4 business presets' },
   { name: 'Guides', text: 'Setup, Cloudflare, email, forms, architecture, troubleshooting, tests, security' },
-  { name: 'Examples', text: 'Contact form, server forwarder and a curl test' },
+  { name: 'Examples', text: 'Contact form and a curl test' },
 ];
 
 const TIERS: { key: keyof typeof FLOW_CHECKOUT; name: string; price: string; unit: string; label: string; pick: boolean; cta: string; text: string; href?: string; items: string[] }[] = [
@@ -56,7 +56,7 @@ const TIERS: { key: keyof typeof FLOW_CHECKOUT; name: string; price: string; uni
     items: ['Everything in Starter', 'One 45 minute setup call on video', 'Claude’s sorting tuned to your services', 'Email support for 60 days', 'Replies within one business day'] },
   { key: 'done_for_you', name: 'Flow Installed', price: '$700', unit: 'one time', label: 'We install it', pick: false, cta: 'Book a fit call', href: FIT_CALL,
     text: 'We install, brand and test Flow in your own accounts and connect your website form, usually within five business days.',
-    items: ['All six workflows installed in your own n8n', 'Your branding, emails, reply targets and onboarding checklist', 'One website form connected, or the Worker deployed for you', 'All 17 test scenarios run before you go live', '30 days of support, then an optional $49 a month care plan'] },
+    items: ['All six workflows installed in your own n8n', 'Your branding, emails, reply targets and onboarding checklist', 'The Cloudflare Worker deployed and your website form connected to it', 'All 17 test scenarios run before you go live', '30 days of support, then an optional $49 a month care plan'] },
 ];
 
 const DELIVERY = [
@@ -69,11 +69,11 @@ const DELIVERY = [
 const FAQ = [
   { q: 'Do I need to know n8n?', a: 'You need to be comfortable importing a workflow and adding a credential. The setup guide walks through every screen and ends each step with a check. If you would rather not, choose Flow Installed and we set it up for you.' },
   { q: 'Will Claude email my prospects?', a: 'No. Claude’s reply is a suggestion only you see. The only automatic messages to outsiders are the acknowledgement and, after you mark a win, your welcome email.' },
-  { q: 'Does it work with my website?', a: 'Yes, if your form can send a request with a custom header from a server, or if you use the included Cloudflare Worker. Webflow, Framer, WordPress, Next.js and plain HTML sites all fit one of those routes.' },
+  { q: 'Does it work with my website?', a: 'Yes. Your form sends each inquiry to the included Cloudflare Worker, which checks it and passes it to Flow. Webflow, Framer, WordPress, Next.js and plain HTML sites all work this way. Your domain does not need to move to Cloudflare; a free Cloudflare account is enough.' },
   { q: 'What does it cost to run?', a: 'You pay n8n, Anthropic and Resend directly. Flow uses a fast, low cost Claude model with short prompts, so the AI cost per inquiry is small. Check each provider’s current pricing for your volume.' },
   { q: 'Where is my clients’ data stored?', a: 'In your own n8n account. Message text is sent to Anthropic for sorting and emails go through Resend. Benjaire never has access, and you can turn on automatic deletion.' },
   { q: 'Can I change the emails and branding?', a: 'Yes. Your logo, address, booking link, reply targets and onboarding checklist live in one settings table, and the wording sits in clearly labeled steps you can edit.' },
-  { q: 'How does Flow Installed work?', a: 'Start with a 20 minute fit call to check your website form and domain. If Flow fits, we send a Stripe invoice. You create your n8n, Anthropic and Resend accounts and give us access; we install, brand and test Flow, walk you through it, and you remove our access when we finish. It covers one business and one website form. Healthcare and other regulated data are not included.' },
+  { q: 'How does Flow Installed work?', a: 'Start with a 20 minute fit call to check your website form and domain. If Flow fits, we send a Stripe invoice. You create your n8n, Anthropic, Resend and free Cloudflare accounts and give us access; we install, brand and test Flow, walk you through it, and you remove our access when we finish. It covers one business and one website form. Healthcare and other regulated data are not included.' },
   { q: 'Can I install it for my clients?', a: 'Starter and Professional cover one business. Agencies that install Flow for clients need an agency license. Contact us for terms.' },
 ];
 
@@ -155,10 +155,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
     <div class="wrap">
       <div class="sec-head">
         <div><p class="eyebrow">How it works</p><h2 id="how">Your form, your n8n, <span>your domain.</span></h2></div>
-        <p class="muted">Your form posts to Flow through the included Cloudflare Worker or your own server. Flow sorts the inquiry with Claude, keeps the record in your n8n and sends every email through Resend from your address.</p>
+        <p class="muted">Your form posts to Flow through the included Cloudflare Worker. Flow sorts the inquiry with Claude, keeps the record in your n8n and sends every email through Resend from your address.</p>
       </div>
       <figure class="shot">
-        <Picture src={archImg} formats={['avif', 'webp']} widths={[800, 1400, 2000]} sizes="(min-width: 1320px) 1208px, 92vw" alt="Architecture: contact form, optional Cloudflare Worker, six n8n workflows with three data tables, Claude, Resend and inboxes, with a fallback email path" />
+        <Picture src={archImg} formats={['avif', 'webp']} widths={[800, 1400, 2000]} sizes="(min-width: 1320px) 1208px, 92vw" alt="Architecture: contact form, Cloudflare Worker, six n8n workflows with three data tables, Claude, Resend and inboxes, with a fallback email path" />
       </figure>
       <div class="shots">
         <figure class="shot">
