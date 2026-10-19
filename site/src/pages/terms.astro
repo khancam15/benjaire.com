@@ -1,51 +1,96 @@
 ---
-// DRAFT for counsel review (PRD V-10). Keep `noindex` and keep this page out
-// of the sitemap until the owner confirms legal review is complete.
+// DRAFT v2 for counsel review (PRD V-10). Rewritten 2026-10-19 to cover sales:
+// Benjaire Flow Starter and Professional (digital kit), Flow Installed
+// (service) and the optional monthly care plan. Keep `noindex` and keep this
+// page out of the sitemap until the owner confirms legal review is complete.
+// Promises here must match the tier lists in src/pages/digital/flow.astro and
+// the refund page; change them together.
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
-const UPDATED = 'October 13, 2026';
+const UPDATED = 'October 19, 2026';
+const mail = `mailto:${SITE.email}`;
 ---
-<Base title="Terms of Use" description="The terms that apply when you use benjaire.com, including intellectual property, submissions and governing law." noindex>
+<Base title="Terms of Use and Sale" description="The terms for using benjaire.com and buying Benjaire products and services, including licenses, payment, the care plan and liability." noindex>
   <section class="page-head">
     <div class="wrap">
       <p class="eyebrow">Legal</p>
-      <h1>Terms of Use</h1>
-      <p class="lead">The terms that apply when you use benjaire.com.</p>
+      <h1>Terms of Use and Sale</h1>
+      <p class="lead">The terms that apply when you use benjaire.com or buy from Benjaire.</p>
     </div>
   </section>
   <section class="sec">
     <div class="wrap prose">
       <p class="updated">Last updated: {UPDATED}</p>
 
-      <h2>Using this site</h2>
-      <p>By using benjaire.com, you agree to these terms. If you don't agree, please don't use the site. The site provides general information about Benjaire and its brands.</p>
+      <h2>1. Agreement</h2>
+      <p>These terms are an agreement between you and Benjaire LLC ("Benjaire", "we", "us"), a New York company. By using benjaire.com you agree to Part A. By buying a product or service you also agree to Part B, our <a href="/refunds">Refund Policy</a> and the description of what you bought as shown on our site when you paid. If you buy for a business, you confirm that you can bind it to these terms, and "you" means that business. You must be at least 18 to buy.</p>
 
-      <h2>Intellectual property</h2>
+      <h2>Part A. Using the site</h2>
+
+      <h2>2. Intellectual property</h2>
       <p>The Benjaire name, logo, brand names, design and content on this site belong to Benjaire or its licensors. You may view and share pages for personal or informational purposes. Don't copy, modify or use them commercially without our written permission.</p>
 
-      <h2>Messages and ideas you send us</h2>
-      <p>Please don't send confidential information through the contact form or by email unless we've agreed to receive it under a written agreement. Benjaire develops its own brands and products, and may already be working on ideas similar to ones you send. Unsolicited ideas, proposals or materials are received without any obligation of confidentiality or compensation.</p>
+      <h2>3. Messages and ideas you send us</h2>
+      <p>Please don't send confidential information through the contact form or by email unless we've agreed in writing to receive it. Benjaire develops its own brands and products and may already be working on ideas similar to ones you send. Unsolicited ideas, proposals or materials are received without any obligation of confidentiality or compensation.</p>
 
-      <h2>Acceptable use</h2>
-      <p>Don't use the site to break the law, send spam, interfere with its operation, attempt to gain unauthorized access, or collect information about other people.</p>
+      <h2>4. Acceptable use</h2>
+      <p>Don't use the site to break the law, send spam, interfere with its operation, attempt to gain unauthorized access, or collect information about other people. Links to other sites are provided for convenience; each has its own terms, and we aren't responsible for them.</p>
 
-      <h2>Links to other sites</h2>
-      <p>This site links to brand websites and other sites. Each has its own terms and policies, and Benjaire isn't responsible for third-party sites.</p>
+      <h2>Part B. Buying from Benjaire</h2>
 
-      <h2>No warranties</h2>
-      <p>The site is provided "as is". We work to keep it accurate and available, but we don't guarantee that it will be error-free or uninterrupted, and information on it may change without notice.</p>
+      <h2>5. What we sell</h2>
+      <ul>
+        <li><strong>Benjaire Flow Starter and Professional</strong> are a downloadable kit: n8n workflow files, a Cloudflare Worker, guides, presets and examples. Professional adds the setup call, tuning and email support described on the product page.</li>
+        <li><strong>Flow Installed</strong> is a service: we install, brand and test Flow in accounts you own.</li>
+        <li><strong>The care plan</strong> is an optional monthly service available after Flow Installed.</li>
+      </ul>
 
-      <h2>Limitation of liability</h2>
-      <p>To the fullest extent the law allows, Benjaire isn't liable for indirect, incidental or consequential damages arising from your use of this site.</p>
+      <h2>6. Prices and payment</h2>
+      <p>Prices are in US dollars. Payments are processed by Stripe, and sales tax is added where the law requires it. Starter and Professional are paid at checkout. Flow Installed is invoiced through Stripe after a fit call confirms Flow suits your website and domain. We may change prices at any time; a change doesn't affect an order you have already paid for.</p>
 
-      <h2>Governing law</h2>
-      <p>These terms are governed by the laws of the State of New York, without regard to its conflict-of-law rules.</p>
+      <h2>7. Delivery of the kit</h2>
+      <p>After payment we email a private download link to the address you gave at checkout. The link works for 14 days and up to five downloads. If it doesn't arrive or stops working, email <a href={mail}>{SITE.email}</a> and we will send a new one.</p>
 
-      <h2>Changes</h2>
-      <p>We may update these terms. The date at the top shows when they last changed.</p>
+      <h2>8. Your license</h2>
+      <p>The kit is licensed, not sold. We grant you a nonexclusive, nontransferable license to install, use, copy and modify the kit for one business that you own or operate. You may not resell, share, sublicense or publish the kit or any part of it, install it for other businesses, or use it to build a competing product. Installing Flow for clients requires a separate agency license; contact us for terms. Benjaire keeps all rights in the kit that this license doesn't grant. The data that passes through your installation belongs to you, and we have no access to it.</p>
 
-      <h2>Contact</h2>
-      <p>Questions about these terms: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+      <h2>9. Services you need to run Flow</h2>
+      <p>Flow runs in your own accounts with third party services, including n8n, Anthropic, Resend and Cloudflare. You are responsible for creating those accounts, paying their charges and following their terms. They aren't controlled by Benjaire, and changes they make may require updates to Flow.</p>
+
+      <h2>10. AI suggestions and your responsibilities</h2>
+      <p>Flow uses Claude to categorize inquiries and draft suggested replies. These suggestions can be wrong or incomplete, so review them before you act on them. You are responsible for the messages you send, for giving your own website visitors any privacy notice the law requires, and for using Flow in line with the laws that apply to your business.</p>
+
+      <h2>11. Updates and support</h2>
+      <p>Starter and Professional include bug fix updates to version 1.x for 12 months from purchase, and email support for the period shown on the product page (14 days for Starter, 60 days for Professional). Support means help with setup errors and with Flow working as described. It doesn't include custom development or changes to your other systems.</p>
+
+      <h2>12. Flow Installed</h2>
+      <p>To install Flow, you give us access to the accounts it runs in. You own those accounts. We use the access only to install, configure and test Flow and to provide support, and you can remove it at any time once installation is done. We usually finish within five business days of receiving access and the details we ask for. Installation is delivered when we confirm that Flow is live and that its tests pass. It includes 30 days of support from delivery.</p>
+
+      <h2>13. The care plan</h2>
+      <p>The care plan costs $49 per month, plus any tax. <strong>It renews automatically every month and is charged to your payment method until you cancel.</strong> You can cancel at any time by emailing <a href={mail}>{SITE.email}</a> or through the billing link in your receipt. Cancellation takes effect at the end of the month you have already paid for, and you won't be charged again. We don't refund partial months. We will email a confirmation when your plan starts, explaining how to cancel, and will give you at least 30 days' notice before any price change.</p>
+
+      <h2>14. Refunds</h2>
+      <p>Refunds are covered by our <a href="/refunds">Refund Policy</a>, which is part of these terms.</p>
+
+      <h2>Part C. General terms</h2>
+
+      <h2>15. No warranties</h2>
+      <p>Except as stated in these terms and our Refund Policy, the site, the kit and our services are provided "as is" and "as available". To the fullest extent the law allows, we disclaim implied warranties, including merchantability, fitness for a particular purpose and noninfringement. We don't guarantee any particular business result, such as more clients or faster replies.</p>
+
+      <h2>16. Limitation of liability</h2>
+      <p>To the fullest extent the law allows, Benjaire isn't liable for indirect, incidental, special or consequential damages, or for lost profits, revenue or data, arising from the site, the kit or our services. Our total liability for any claim is limited to the amount you paid us for the product or service in question in the 12 months before the claim. Some places don't allow these limits, so they may not apply to you.</p>
+
+      <h2>17. Indemnity</h2>
+      <p>If you use Flow or the site in breach of these terms or the law, and a third party makes a claim against Benjaire as a result, you agree to cover our reasonable costs of that claim.</p>
+
+      <h2>18. Governing law and disputes</h2>
+      <p>These terms are governed by the laws of the State of New York, without regard to its conflict of law rules. Disputes will be resolved in the state or federal courts located in New York County, New York, except that either of us may bring a qualifying claim in small claims court. Please contact us first; most problems can be solved by email.</p>
+
+      <h2>19. Changes</h2>
+      <p>We may update these terms. The date at the top shows when they last changed. The terms in effect when you paid apply to that purchase.</p>
+
+      <h2>20. Contact</h2>
+      <p>Benjaire LLC, New York, NY. <a href={mail}>{SITE.email}</a>.</p>
     </div>
   </section>
 </Base>
