@@ -55,6 +55,6 @@ export const TURNSTILE_SITE_KEY = '0x4AAAAAAFVZs6h_1DsCs70r';
 // payment and the client is invoiced through Stripe.
 export const FLOW_CHECKOUT = {
   starter: 'https://buy.stripe.com/5kQfZjd5C99Qf7Ta0R5AQ02',
-  professional: '',
+  professional: 'https://buy.stripe.com/aFabJ31mUdq63pb0qh5AQ03',
   done_for_you: '',
 } as const;
