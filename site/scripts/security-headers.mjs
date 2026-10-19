@@ -17,6 +17,8 @@ for (const f of readdirSync(root, { recursive: true }).filter((n) => String(n).e
 }
 
 const turnstile = 'https://challenges.cloudflare.com';
+// The Flow Installed thanks page embeds the Calendly kickoff booking.
+const calendly = 'https://calendly.com';
 // Cloudflare Web Analytics: the edge injects its beacon script, which reports
 // to cloudflareinsights.com. Without these two hosts visits go uncounted.
 const insightsScript = 'https://static.cloudflareinsights.com';
@@ -29,7 +31,7 @@ const csp = [
   "img-src 'self' data:",
   "font-src 'self'",
   `connect-src 'self' ${insightsReport}`,
-  `frame-src ${turnstile}`,
+  `frame-src ${turnstile} ${calendly}`,
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",

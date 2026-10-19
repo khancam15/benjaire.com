@@ -2,9 +2,12 @@
 // Where each Stripe Payment Link redirects after a successful payment
 // (/digital/flow-thanks?tier=starter|professional|done_for_you). Not indexed. Fulfillment is by
 // email from contact@, so this page only confirms and sets expectations. Step 03 depends on the tier;
-// without JS (or with an unknown tier) the general version shows.
+// without JS (or with an unknown tier) the general version shows. Flow Installed buyers
+// (tier=done_for_you) get the Calendly kickoff booking instead of the kit steps.
 import Base from '../../layouts/Base.astro';
-import { SITE } from '../../site';
+import { SITE, FLOW_INSTALLED_KICKOFF } from '../../site';
+
+const kickoffEmbed = `${FLOW_INSTALLED_KICKOFF}?embed_domain=benjaire.com&embed_type=Inline&hide_gdpr_banner=1&background_color=ffffff&text_color=1f2124&primary_color=1f2124`;
 ---
 <Base title="Thank you" seoTitle="Order confirmed | Benjaire Flow" description="Your Benjaire Flow order is confirmed. Your receipt is on its way from Stripe and your download link follows by email." noindex>
   <section class="page-head">
@@ -18,24 +21,41 @@ import { SITE } from '../../site';
   <section class="sec band-section" aria-labelledby="next">
     <div class="wrap">
       <h2 id="next" class="sr-only">Next steps</h2>
-      <ol class="pillars">
+      <div data-tier-panel="installed" hidden>
+        <h2 class="statement mb-3">Book your kickoff call</h2>
+        <p class="lead mb-4">Pick a time for your 30 minute kickoff call. We confirm your website form and domain, agree your branding and emails, and set your go live date. Installation usually takes five business days after the call.</p>
+        <iframe class="kickoff" title="Book your Flow Installed kickoff call" data-src={kickoffEmbed} loading="lazy"></iframe>
+        <p class="note mt-4">Calendar not loading? <a href={FLOW_INSTALLED_KICKOFF} rel="noopener">Open the booking page</a>, or reply to your Stripe receipt and we will find a time with you.</p>
+      </div>
+      <ol class="pillars" data-tier-panel="kit">
         <li class="pillar"><span class="num" aria-hidden="true">01</span><h3>Check your email</h3><p>Your download link arrives from {SITE.email} within a few minutes. It goes to the address you used at checkout.</p></li>
         <li class="pillar"><span class="num" aria-hidden="true">02</span><h3>Open the setup guide</h3><p>Unzip the kit and open 00-START-HERE.pdf, then work through folders 1 to 5 in order. Each step ends with a quick check so you know it worked.</p></li>
         <li class="pillar"><span class="num" aria-hidden="true">03</span>
           <div data-tier-step="any"><h3>Get help when you need it</h3><p>Reply to your download email with the step number and what you see. Professional orders include a setup call; the booking link is in that email.</p></div>
           <div data-tier-step="starter" hidden><h3>Get help when you need it</h3><p>Stuck on a step? Reply to your download email with the step number and what you see. Email help with setup errors is included for 14 days.</p></div>
-          <div data-tier-step="professional" hidden><h3>Book your setup call</h3><p>Your download email has the link to pick a time for your 45 minute call. Reply to it with the services you offer so we can tune Claude’s sorting before the call. Email support runs for 60 days.</p></div>
+          <div data-tier-step="professional" hidden><h3>Book your setup call</h3><p>Your download email has the link to pick a time for your 60 minute call. Reply to it with the services you offer so we can tune Claude’s sorting before the call. Email support runs for 60 days.</p></div>
         </li>
       </ol>
-      <p class="note mt-4">No email within an hour? Check spam, then write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with the email address you paid with.</p>
+      <p class="note mt-4" data-tier-panel="kit">No email within an hour? Check spam, then write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with the email address you paid with.</p>
       <div class="actions mt-4"><a class="btn ghost" href="/digital/flow">Back to Benjaire Flow</a></div>
     </div>
   </section>
 </Base>
 
+<style>
+  [data-tier-panel][hidden] { display: none; }
+  .kickoff { display: block; width: 100%; min-height: 720px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+</style>
+
 <script>
   // Show the step 03 that matches the tier Stripe redirected with.
   const tier = new URLSearchParams(location.search).get('tier');
+  // Flow Installed: swap the kit steps for the Calendly kickoff booking.
+  if (tier === 'done_for_you') {
+    document.querySelectorAll<HTMLElement>('[data-tier-panel]').forEach((el) => { el.hidden = el.dataset.tierPanel !== 'installed'; });
+    const frame = document.querySelector<HTMLIFrameElement>('iframe.kickoff');
+    if (frame?.dataset.src) frame.src = frame.dataset.src;
+  }
   const match = document.querySelector<HTMLElement>(`[data-tier-step="${tier === 'starter' || tier === 'professional' ? tier : 'any'}"]`);
   if (match) {
     document.querySelectorAll<HTMLElement>('[data-tier-step]').forEach((el) => { el.hidden = el !== match; });
