@@ -92,7 +92,14 @@ const productLd = {
   brand: { '@id': `${SITE.url}/#organization` },
   category: 'Business automation software template',
   sku: 'BJ-FLOW-1',
-  offers: TIERS.map((t) => ({ '@type': 'Offer', name: t.name, price: t.price.replace('$', ''), priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: `${SITE.url}/digital/flow#pricing` })),
+  offers: TIERS.map((t) => ({
+    '@type': 'Offer', name: t.name, price: t.price.replace('$', ''), priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: `${SITE.url}/digital/flow#pricing`,
+    // Starter and Professional carry the 14 day money back guarantee (/refunds).
+    ...(t.key === 'done_for_you' ? {} : { hasMerchantReturnPolicy: {
+      '@type': 'MerchantReturnPolicy', applicableCountry: 'US', returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+      merchantReturnDays: 14, returnFees: 'https://schema.org/FreeReturn', merchantReturnLink: `${SITE.url}/refunds`,
+    } }),
+  })),
 };
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
