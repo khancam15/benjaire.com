@@ -18,10 +18,11 @@ import caseImg from '../../assets/flow/04-business-use-case.png';
 import kitImg from '../../assets/flow/05-whats-included.png';
 import setupImg from '../../assets/flow/06-setup-process.png';
 import FlowDemo from '../../components/FlowDemo.astro';
+import Booking from '../../components/Booking.astro';
 import { SITE, FLOW_CHECKOUT } from '../../site';
 
 const BUY = '/contact?category=digital&product=flow#inquiry';
-const FIT_CALL = '/contact?category=digital&product=flow-installed#inquiry';
+const FIT_CALL = '#book';
 
 const FEATURES = [
   { wf: 'Flow 1 · Intake', name: 'AI sorting with Claude', text: 'Each inquiry is matched to your services and tagged with urgency and budget, with a one sentence summary and a suggested reply for you to review.' },
@@ -77,7 +78,7 @@ const FAQ = [
   { q: 'What does it cost to run?', a: 'You pay n8n, Anthropic and Resend directly. Flow uses a fast, low cost Claude model with short prompts, so the AI cost per inquiry is small. Check each provider’s current pricing for your volume.' },
   { q: 'Where is my clients’ data stored?', a: 'In your own n8n account. Message text is sent to Anthropic for sorting and emails go through Resend. Benjaire never has access, and you can turn on automatic deletion.' },
   { q: 'Can I change the emails and branding?', a: 'Yes. Your logo, address, booking link, reply targets and onboarding checklist live in one settings table, and the wording sits in clearly labeled steps you can edit.' },
-  { q: 'What happens when you set Flow up for me?', a: (FLOW_CHECKOUT.done_for_you ? 'Pay securely through Stripe, then book a 30 minute kickoff call on the next page to confirm your website form and domain.' : 'Start with a 20 minute fit call to check your website form and domain. If Flow fits, we send a Stripe invoice.') + ' You create your n8n, Anthropic, Resend and free Cloudflare accounts and give us access; we install, brand and test Flow, walk you through it, and you remove our access when we finish. It covers one business and one website form. Healthcare and other regulated data are not included.' },
+  { q: 'What happens when you set Flow up for me?', a: (FLOW_CHECKOUT.done_for_you ? 'Pay securely through Stripe, then book a 30 minute kickoff call on the next page to confirm your website form and domain.' : 'Start with a short fit call, booked on this page, to check your website form and domain. If Flow fits, we send a Stripe invoice.') + ' You create your n8n, Anthropic, Resend and free Cloudflare accounts and give us access; we install, brand and test Flow, walk you through it, and you remove our access when we finish. It covers one business and one website form. Healthcare and other regulated data are not included.' },
   { q: 'Can I install it for my clients?', a: 'Starter and Professional cover one business. Agencies that install Flow for clients need an agency license. Contact us for terms.' },
 ];
 
@@ -239,6 +240,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
       </ol>
     </div>
   </section>
+
+  <Booking eyebrow="Book a fit call" title="Want us to install it?" text="Book a short call. We check your website form and domain, answer your questions and tell you plainly whether Flow Installed fits your business." />
 
   <section class="sec band-section" id="faq" aria-labelledby="faq-title">
     <div class="wrap two">

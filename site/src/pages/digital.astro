@@ -7,6 +7,7 @@
 // still in development: never describe it as available here.
 import Base from '../layouts/Base.astro';
 import PageBand from '../components/PageBand.astro';
+import Booking from '../components/Booking.astro';
 import bandImg from '../assets/pages/digital.jpg';
 import { SITE } from '../site';
 
@@ -152,13 +153,15 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </section>
 
+  <Booking />
+
   <section class="band dark" aria-labelledby="build-smarter">
     <div class="wrap">
       <img class="band-mark" src="/brand/benjaire-monogram-pearl.svg" alt="" width="53" height="56" />
       <p class="eyebrow center">Get started</p>
       <h2 id="build-smarter">Build smarter business operations.</h2>
       <p>Tell us how your firm handles inquiries and onboarding today.</p>
-      <div class="actions center"><a class="btn primary" href="/contact?category=digital#inquiry">Contact Benjaire</a></div>
+      <div class="actions center"><a class="btn primary" href="#book">Book a call</a><a class="btn ghost" href="/contact?category=digital#inquiry">Contact Benjaire</a></div>
     </div>
   </section>
 </Base>
