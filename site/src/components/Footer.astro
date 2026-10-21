@@ -11,11 +11,11 @@ const year = new Date().getFullYear();
       </div>
       <nav class="tb-cell" aria-label="Company"><span class="mono">Company</span>{NAV.map((item) => <a href={item.href}>{item.label}</a>)}</nav>
       <div class="tb-cell"><span class="mono">Contact</span><a href={`mailto:${SITE.email}`}>{SITE.email}</a><a href="/contact?category=partnership">Partner with us</a><span>{SITE.location}</span></div>
-      <nav class="tb-cell" aria-label="Legal"><span class="mono">Legal</span><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a></nav>
+      <nav class="tb-cell" aria-label="Legal"><span class="mono">Legal</span><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="/refunds">Refund Policy</a></nav>
       <div class="tb-cell"><span class="mono">Established</span><span>{SITE.founded}</span><span class="mono">40.71° N 74.01° W</span></div>
     </div>
     <div class="f-bottom">
-      <span>&copy; {year} Benjaire &middot; New York</span>
+      <span>&copy; {year} {SITE.legalName} &middot; New York</span>
     </div>
   </div>
 </footer>

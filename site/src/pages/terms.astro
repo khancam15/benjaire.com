@@ -2,8 +2,9 @@
 // DRAFT for counsel review (PRD V-10). Keep `noindex` and keep this page out
 // of the sitemap until the owner confirms legal review is complete.
 import Base from '../layouts/Base.astro';
+import LegalDraft from '../components/LegalDraft.astro';
 import { SITE } from '../site';
-const UPDATED = 'October 13, 2026';
+const UPDATED = 'October 21, 2026';
 ---
 <Base title="Terms of Use" description="The terms that apply when you use benjaire.com, including intellectual property, submissions and governing law." noindex>
   <section class="page-head">
@@ -15,10 +16,17 @@ const UPDATED = 'October 13, 2026';
   </section>
   <section class="sec">
     <div class="wrap prose">
+      <LegalDraft />
       <p class="updated">Last updated: {UPDATED}</p>
 
+      <h2>Who we are</h2>
+      <p>benjaire.com is operated by {SITE.legalName} ("Benjaire", "we"), a New York limited liability company.</p>
+
       <h2>Using this site</h2>
-      <p>By using benjaire.com, you agree to these terms. If you don't agree, please don't use the site. The site provides general information about Benjaire and its brands.</p>
+      <p>By using benjaire.com, you agree to these terms. If you don't agree, please don't use the site. The site provides general information about Benjaire, its products and services.</p>
+
+      <h2>Purchases</h2>
+      <p>Benjaire Flow is sold through Stripe in US dollars. Starter and Professional are licensed for use by one business; installing Flow for other businesses needs an agency license. Refunds follow our <a href="/refunds">Refund Policy</a>.</p>
 
       <h2>Intellectual property</h2>
       <p>The Benjaire name, logo, brand names, design and content on this site belong to Benjaire or its licensors. You may view and share pages for personal or informational purposes. Don't copy, modify or use them commercially without our written permission.</p>

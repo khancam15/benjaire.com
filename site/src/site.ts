@@ -2,6 +2,8 @@
 // name, photo, bio or private contact details here (PRD §3.2).
 export const SITE = {
   name: 'Benjaire',
+  // Legal entity: legal pages and Organization schema.
+  legalName: 'Benjaire LLC',
   // Canonical company description: homepage lead and Organization schema.
   // Reuse it word for word on company profiles; don't paraphrase per page.
   description:

@@ -2,8 +2,9 @@
 // DRAFT for counsel review (PRD V-10). Keep `noindex` and keep this page out
 // of the sitemap until the owner confirms legal review is complete.
 import Base from '../layouts/Base.astro';
+import LegalDraft from '../components/LegalDraft.astro';
 import { SITE } from '../site';
-const UPDATED = 'October 13, 2026';
+const UPDATED = 'October 21, 2026';
 ---
 <Base title="Privacy Policy" description="How Benjaire collects, uses and protects personal information." noindex>
   <section class="page-head">
@@ -15,21 +16,25 @@ const UPDATED = 'October 13, 2026';
   </section>
   <section class="sec">
     <div class="wrap prose">
+      <LegalDraft />
       <p class="updated">Last updated: {UPDATED}</p>
 
       <h2>Who we are</h2>
-      <p>Benjaire is a brand company based in New York, NY. This policy covers benjaire.com. Each Benjaire brand operates its own website with its own privacy policy.</p>
+      <p>{SITE.legalName} ("Benjaire", "we") is a New York limited liability company. This policy covers benjaire.com and purchases made through it. Each Benjaire brand operates its own website with its own privacy policy.</p>
 
       <h2>Information we collect</h2>
       <ul>
         <li><strong>What you send us.</strong> When you use the contact form or email us, we receive your name, email address, company (if you add one), the inquiry category you choose and your message.</li>
+        <li><strong>Purchases.</strong> When you buy Benjaire Flow, Stripe collects your payment details and shares your name, email address, billing address and order with us. We never see or store your full card number.</li>
+        <li><strong>Bookings.</strong> When you book a call, Calendly collects your name, email address, the time you choose and any answers you add.</li>
         <li><strong>Technical information.</strong> Our hosting and security provider processes standard request data, such as IP address, browser type and the pages requested, to deliver the site and protect it from abuse.</li>
-        <li><strong>Cookies.</strong> We don't use advertising or tracking cookies. Our spam protection may use strictly necessary technical data to tell people from automated bots.</li>
+        <li><strong>Cookies.</strong> We don't use advertising or tracking cookies. Our visitor statistics are cookieless, and our spam protection may use strictly necessary technical data to tell people from automated bots. The booking calendar is only loaded when you choose to open it, and Calendly may then set its own cookies.</li>
       </ul>
 
       <h2>How we use it</h2>
       <ul>
-        <li>To read and respond to your inquiry.</li>
+        <li>To read, sort and respond to your inquiry.</li>
+        <li>To process orders, deliver Benjaire Flow, provide support and handle refunds.</li>
         <li>To manage business relationships that follow from your inquiry.</li>
         <li>To keep the site secure and prevent spam and abuse.</li>
         <li>To meet legal obligations.</li>
@@ -37,7 +42,16 @@ const UPDATED = 'October 13, 2026';
       <p>We don't sell your personal information, and we don't share it for cross-context behavioral advertising.</p>
 
       <h2>Who we share it with</h2>
-      <p>We use service providers to run this site: website hosting and security, spam protection, and email delivery. They process information only on our behalf and under their own security commitments. We may also disclose information if the law requires it.</p>
+      <p>We use these service providers. They process information on our behalf and under their own security commitments:</p>
+      <ul>
+        <li><strong>Cloudflare:</strong> website hosting, security, spam protection (Turnstile), email routing and cookieless visitor statistics.</li>
+        <li><strong>n8n:</strong> runs our inquiry workflow, which stores contact form messages so we can track and answer them.</li>
+        <li><strong>Anthropic:</strong> its Claude AI model reads contact form messages to sort them and suggest a reply for our team. It does not reply to you on its own.</li>
+        <li><strong>Email delivery providers:</strong> send our replies and the confirmation you receive after contacting us.</li>
+        <li><strong>Stripe:</strong> processes payments and sends receipts.</li>
+        <li><strong>Calendly:</strong> schedules calls you book with us.</li>
+      </ul>
+      <p>We may also disclose information if the law requires it.</p>
 
       <h2>How long we keep it</h2>
       <p>We keep inquiry messages for as long as needed to respond and maintain business records, generally no longer than 24 months unless an ongoing business relationship or legal requirement calls for longer.</p>
@@ -55,7 +69,7 @@ const UPDATED = 'October 13, 2026';
       <p>We may update this policy. The date at the top shows when it last changed.</p>
 
       <h2>Contact</h2>
-      <p>Questions about privacy: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>, Benjaire, New York, NY.</p>
+      <p>Questions about privacy: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>, {SITE.legalName}, New York, NY.</p>
     </div>
   </section>
 </Base>

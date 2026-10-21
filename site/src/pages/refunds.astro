@@ -1,0 +1,46 @@
+---
+// DRAFT for counsel review (PRD V-10). Keep `noindex` and keep this page out
+// of the sitemap until the owner confirms legal review is complete. The
+// Stripe checkout note (CHECKOUT_NOTE in worker/lib.ts) points here.
+import Base from '../layouts/Base.astro';
+import LegalDraft from '../components/LegalDraft.astro';
+import { SITE } from '../site';
+const UPDATED = 'October 21, 2026';
+---
+<Base title="Refund Policy" description="Refunds for Benjaire Flow Starter, Professional, Flow Installed and the Flow care plan." noindex>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Legal</p>
+      <h1>Refund Policy</h1>
+      <p class="lead">How refunds work for Benjaire Flow purchases from {SITE.legalName}.</p>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="wrap prose">
+      <LegalDraft />
+      <p class="updated">Last updated: {UPDATED}</p>
+
+      <h2>Benjaire Flow Starter and Professional</h2>
+      <p>Both include a 14 day money back guarantee. If Benjaire Flow isn't right for you, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> within 14 days of your purchase from the address you paid with, and we will refund the full price. You don't need to give a reason.</p>
+
+      <h2>Flow Installed</h2>
+      <ul>
+        <li><strong>Before setup starts:</strong> fully refundable. Setup starts when we begin work in your accounts after your kickoff call.</li>
+        <li><strong>After setup starts, before delivery:</strong> a partial refund for the work not yet completed.</li>
+        <li><strong>After delivery:</strong> no refund. Delivery is when we hand Flow over to you, installed and tested in your accounts.</li>
+      </ul>
+
+      <h2>Flow care plan</h2>
+      <p>You can cancel the monthly care plan at any time. Cancellation takes effect at the end of the month you have already paid for, and we don't refund partial months.</p>
+
+      <h2>How refunds are paid</h2>
+      <p>Approved refunds go back to your original payment method through Stripe. Your bank usually shows them within 5 to 10 business days.</p>
+
+      <h2>Your rights</h2>
+      <p>Nothing in this policy limits any rights you have under applicable law.</p>
+
+      <h2>Contact</h2>
+      <p>Refund requests and questions: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>, {SITE.legalName}, New York, NY.</p>
+    </div>
+  </section>
+</Base>
