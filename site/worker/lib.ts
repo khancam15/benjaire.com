@@ -125,14 +125,23 @@ export function composeEmail(i: Inquiry, meta: { receivedAt: string; host: strin
   return { subject, text };
 }
 
-/** Only accept POSTs whose Origin is one of our own hosts. */
-export function originAllowed(origin: string | null, allowedHosts: string): boolean {
+/** True for one of our own hosts, including per-branch preview hosts. */
+export function hostAllowed(hostname: string, allowedHosts: string): boolean {
+  const hosts = allowedHosts.split(',').map((h) => h.trim()).filter(Boolean);
+  return hosts.includes(hostname) || hostname.endsWith('-benjaire-com.benjaireco.workers.dev');
+}
+
+/**
+ * Only accept POSTs whose Origin is one of our own hosts. A localhost Origin
+ * is accepted only when the request itself is to localhost (wrangler dev).
+ */
+export function originAllowed(origin: string | null, allowedHosts: string, requestHost = ''): boolean {
   if (!origin) return false;
   try {
     const url = new URL(origin);
-    const hosts = allowedHosts.split(',').map((h) => h.trim()).filter(Boolean);
-    if (url.protocol !== 'https:' && url.hostname !== 'localhost') return false;
-    return url.hostname === 'localhost' || hosts.includes(url.hostname) || url.hostname.endsWith('-benjaire-com.benjaireco.workers.dev');
+    if (url.hostname === 'localhost') return requestHost === 'localhost';
+    if (url.protocol !== 'https:') return false;
+    return hostAllowed(url.hostname, allowedHosts);
   } catch {
     return false;
   }
@@ -179,4 +188,42 @@ export function buildMime(opts: {
     '',
     body,
   ].join('\r\n');
+}
+
+/**
+ * Stripe Payment Links for each Flow tier. The Worker falls back to these
+ * when Checkout Sessions aren't configured (no STRIPE_SECRET_KEY or no price
+ * for the tier) or Stripe errors, so a buy button always reaches a checkout.
+ * Must match FLOW_CHECKOUT in src/site.ts (a unit test checks this).
+ */
+export const PAYMENT_LINKS: Record<string, string> = {
+  starter: 'https://buy.stripe.com/5kQfZjd5C99Qf7Ta0R5AQ02',
+  professional: 'https://buy.stripe.com/aFabJ31mUdq63pb0qh5AQ03',
+};
+
+export interface CheckoutTier {
+  price: string;
+  automaticTax?: boolean;
+}
+
+/** Shown above Stripe's pay button. Keep in step with /refunds. */
+export const CHECKOUT_NOTE =
+  'Benjaire Flow Starter and Professional include a 14 day money back guarantee. Full terms: benjaire.com/refunds';
+
+/**
+ * Form body for POST /v1/checkout/sessions. The success page receives the
+ * tier and session id; the cancel page receives the tier.
+ */
+export function checkoutParams(tier: string, cfg: CheckoutTier, origin: string): URLSearchParams {
+  return new URLSearchParams({
+    mode: 'payment',
+    'line_items[0][price]': cfg.price,
+    'line_items[0][quantity]': '1',
+    success_url: `${origin}/digital/flow-thanks?tier=${tier}&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${origin}/digital/flow-cancel?tier=${tier}`,
+    'automatic_tax[enabled]': cfg.automaticTax ? 'true' : 'false',
+    'custom_text[submit][message]': CHECKOUT_NOTE,
+    'metadata[tier]': tier,
+    'payment_intent_data[metadata][tier]': tier,
+  });
 }

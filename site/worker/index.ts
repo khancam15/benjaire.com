@@ -1,7 +1,7 @@
 // benjaire.com Worker. Static pages are served from ./dist by the assets
 // layer; only /api/* reaches this script (see wrangler.jsonc).
 import { EmailMessage } from 'cloudflare:email';
-import { buildMime, composeEmail, flowPayload, originAllowed, recipientFor, validate, type Inquiry } from './lib';
+import { buildMime, checkoutParams, composeEmail, flowPayload, hostAllowed, originAllowed, PAYMENT_LINKS, recipientFor, validate, type CheckoutTier, type Inquiry } from './lib';
 
 const JSON_HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
@@ -58,7 +58,7 @@ async function handleContact(req: Request, env: Env, ctx: ExecutionContext): Pro
   if (req.method !== 'POST') {
     return new Response('Method not allowed', { status: 405, headers: { Allow: 'POST' } });
   }
-  if (!originAllowed(req.headers.get('Origin'), env.ALLOWED_HOSTS)) {
+  if (!originAllowed(req.headers.get('Origin'), env.ALLOWED_HOSTS, new URL(req.url).hostname)) {
     return respond(req, 403, { ok: false, error: 'This form can only be sent from benjaire.com.' });
   }
   const length = Number(req.headers.get('Content-Length') ?? '0');
@@ -72,7 +72,10 @@ async function handleContact(req: Request, env: Env, ctx: ExecutionContext): Pro
 
   let form: FormData;
   try {
-    form = await req.formData();
+    // Content-Length is absent on chunked bodies, so measure what arrived.
+    const body = await req.arrayBuffer();
+    if (body.byteLength > MAX_BODY) return respond(req, 413, { ok: false, error: 'Your message is too long.' });
+    form = await new Response(body, { headers: { 'Content-Type': req.headers.get('Content-Type') ?? '' } }).formData();
   } catch {
     return respond(req, 400, { ok: false, error: 'The form could not be read. Please try again.' });
   }
@@ -116,10 +119,45 @@ async function handleContact(req: Request, env: Env, ctx: ExecutionContext): Pro
   return respond(req, 200, { ok: true });
 }
 
+// GET /api/checkout?tier=starter|professional: creates a Stripe Checkout
+// Session (success and cancel pages on this site) and redirects to it. Without
+// a secret key or a price for the tier, or if Stripe errors, the buyer goes to
+// the tier's Payment Link instead, so the buy button always works.
+async function handleCheckout(req: Request, env: Env): Promise<Response> {
+  const url = new URL(req.url);
+  const tier = url.searchParams.get('tier') ?? '';
+  const fallback = PAYMENT_LINKS[tier];
+  if (!fallback) return Response.redirect(new URL('/digital/flow#pricing', url).toString(), 303);
+
+  const cfg = (env.STRIPE_TIERS as Record<string, CheckoutTier> | undefined)?.[tier];
+  const ip = req.headers.get('CF-Connecting-IP') ?? 'unknown';
+  if (!env.STRIPE_SECRET_KEY || !cfg?.price) return Response.redirect(fallback, 303);
+  const { success: underLimit } = await env.CONTACT_LIMITER.limit({ key: `checkout:${ip}` });
+  if (!underLimit) return Response.redirect(fallback, 303);
+
+  // Return buyers to the host they came from, but only one of ours.
+  const origin = hostAllowed(url.hostname, env.ALLOWED_HOSTS) ? url.origin : 'https://benjaire.com';
+  try {
+    const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: checkoutParams(tier, cfg, origin),
+      signal: AbortSignal.timeout(10_000),
+    });
+    const data = (await res.json()) as { url?: string; error?: { message?: string } };
+    if (res.ok && data.url) return Response.redirect(data.url, 303);
+    console.error('Stripe checkout failed', res.status, data.error?.message);
+  } catch (err) {
+    console.error('Stripe checkout failed', err instanceof Error ? err.message : err);
+  }
+  return Response.redirect(fallback, 303);
+}
+
 export default {
   async fetch(req, env, ctx): Promise<Response> {
     const { pathname } = new URL(req.url);
     if (pathname === '/api/contact') return handleContact(req, env, ctx);
+    if (pathname === '/api/checkout') return handleCheckout(req, env);
     // Google Search Console HTML-file verification must answer 200 at this
     // exact .html path (the assets layer would redirect it to a clean URL).
     if (pathname === GOOGLE_VERIFICATION_PATH) {

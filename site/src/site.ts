@@ -48,8 +48,10 @@ export const SUPPLIER_AREAS = [
 // only in the Worker's secrets as TURNSTILE_SECRET_KEY.
 export const TURNSTILE_SITE_KEY = '0x4AAAAAAFVZs6h_1DsCs70r';
 
-// Benjaire Flow checkout (Stripe Payment Links, public by design). Paste each
-// live link here; an empty link sends that tier's button to the contact form.
+// Benjaire Flow checkout (Stripe Payment Links, public by design). A tier with
+// a link gets a buy button to /api/checkout, which opens a Stripe Checkout
+// Session and falls back to this link; an empty link sends that tier's button
+// to the contact form. Keep in sync with PAYMENT_LINKS in worker/lib.ts.
 // Each link should redirect after payment to /digital/flow-thanks?tier=<key>.
 // done_for_you is Flow Installed: with a link, buyers pay first and book their
 // kickoff call on the thanks page; while it is empty the button books a fit call.
@@ -58,6 +60,10 @@ export const FLOW_CHECKOUT = {
   professional: 'https://buy.stripe.com/aFabJ31mUdq63pb0qh5AQ03',
   done_for_you: '',
 } as const;
+
+// Calendly booking page for prospects (fit and discovery calls), embedded by
+// the Booking component. Swap for a single event's link to skip the event list.
+export const BOOKING_URL = 'https://calendly.com/benjaireco';
 
 // Calendly event Flow Installed buyers book on the thanks page after paying.
 export const FLOW_INSTALLED_KICKOFF = 'https://calendly.com/benjaireco/flow-installed-kickoff-call';

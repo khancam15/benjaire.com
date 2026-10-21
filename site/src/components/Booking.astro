@@ -1,0 +1,53 @@
+---
+// Calendly booking, loaded only when the visitor asks for it: no third-party
+// requests or cookies before that, and no cost to page speed. Without
+// JavaScript the button is a plain link to the booking page.
+import { BOOKING_URL } from '../site';
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  text?: string;
+}
+const {
+  id = 'book',
+  eyebrow = 'Book a call',
+  title = 'Talk it through with us.',
+  text = 'Pick a time that suits you. We will look at how your business handles inquiries and tools today and tell you plainly whether we can help.',
+} = Astro.props;
+const embed = `${BOOKING_URL}?embed_domain=benjaire.com&embed_type=Inline&hide_gdpr_banner=1&background_color=ffffff&text_color=1f2124&primary_color=1f2124`;
+---
+<section class="sec band-section booking" id={id} aria-labelledby={`${id}-title`}>
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">{eyebrow}</p><h2 id={`${id}-title`}>{title}</h2></div>
+      <p class="muted">{text}</p>
+    </div>
+    <div class="actions" data-booking-actions>
+      <a class="btn primary" href={BOOKING_URL} target="_blank" rel="noopener" data-booking-open data-src={embed}>Pick a time <span aria-hidden="true">→</span></a>
+    </div>
+    <iframe class="booking-frame" title="Book a call with Benjaire" hidden></iframe>
+  </div>
+</section>
+
+<style>
+  .booking-frame { display: block; width: 100%; min-height: 720px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+  .booking-frame[hidden], [data-booking-actions][hidden] { display: none; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('[data-booking-open]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const section = link.closest('.booking');
+      const frame = section?.querySelector<HTMLIFrameElement>('.booking-frame');
+      const actions = section?.querySelector<HTMLElement>('[data-booking-actions]');
+      if (!frame || !link.dataset.src) return;
+      e.preventDefault();
+      frame.src = link.dataset.src;
+      frame.hidden = false;
+      if (actions) actions.hidden = true;
+      frame.focus();
+    });
+  });
+</script>
