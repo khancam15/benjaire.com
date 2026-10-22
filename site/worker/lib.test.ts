@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanLine, composeEmail, flowPayload, formatNewYork, originAllowed, recipientFor, validate } from './lib.ts';
+import { checkoutParams, cleanLine, composeEmail, flowPayload, formatNewYork, originAllowed, PAYMENT_LINKS, paymentLinkFor, recipientFor, validate } from './lib.ts';
+import { FLOW_CHECKOUT } from '../src/site.ts';
 
 const form = (fields: Record<string, string>) => {
   const f = new FormData();
@@ -75,6 +76,9 @@ test('only our own origins may post', () => {
   assert.ok(!originAllowed('https://evil.example', hosts));
   assert.ok(!originAllowed('http://benjaire.com', hosts));
   assert.ok(!originAllowed(null, hosts));
+  // localhost only counts when the request itself is to localhost (wrangler dev).
+  assert.ok(!originAllowed('http://localhost:4321', hosts, 'benjaire.com'));
+  assert.ok(originAllowed('http://localhost:8787', hosts, 'localhost'));
 });
 
 test('builds a valid plain-text MIME message', async () => {
@@ -99,4 +103,27 @@ test('builds a valid plain-text MIME message', async () => {
   assert.equal(decoded, 'Hola — línea uno\nline two');
   const subject = head.match(/^Subject: =\?UTF-8\?B\?(.+)\?=$/m)![1];
   assert.equal(new TextDecoder().decode(Uint8Array.from(atob(subject), (c) => c.charCodeAt(0))), '[Brand Collaboration] José Pérez');
+});
+
+test('fallback payment links match the site buy buttons', () => {
+  for (const [tier, link] of Object.entries(FLOW_CHECKOUT)) {
+    if (link) assert.equal(PAYMENT_LINKS[tier], link, tier);
+  }
+});
+
+test('checkout session returns to our success and cancel pages', () => {
+  const p = checkoutParams('starter', { price: 'price_123', automaticTax: true }, 'https://benjaire.com');
+  assert.equal(p.get('mode'), 'payment');
+  assert.equal(p.get('line_items[0][price]'), 'price_123');
+  assert.equal(p.get('success_url'), 'https://benjaire.com/digital/flow-thanks?tier=starter&session_id={CHECKOUT_SESSION_ID}');
+  assert.equal(p.get('cancel_url'), 'https://benjaire.com/digital/flow-cancel?tier=starter');
+  assert.equal(p.get('automatic_tax[enabled]'), 'true');
+  assert.equal(p.get('metadata[tier]'), 'starter');
+});
+
+test('checkout only accepts known tiers', () => {
+  assert.equal(paymentLinkFor('starter'), PAYMENT_LINKS.starter);
+  for (const tier of ['', 'done_for_you', 'constructor', '__proto__', 'toString', 'STARTER']) {
+    assert.equal(paymentLinkFor(tier), undefined, tier);
+  }
 });

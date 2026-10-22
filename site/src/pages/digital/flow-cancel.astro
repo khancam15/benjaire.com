@@ -1,0 +1,20 @@
+---
+// Where Stripe Checkout returns a buyer who backs out
+// (/digital/flow-cancel?tier=starter|professional). Not indexed.
+import Base from '../../layouts/Base.astro';
+import Booking from '../../components/Booking.astro';
+---
+<Base title="Checkout cancelled" seoTitle="Checkout cancelled | Benjaire Flow" description="Your Benjaire Flow checkout was cancelled and no payment was taken." noindex>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Benjaire Flow · Checkout cancelled</p>
+      <h1>No payment was taken. <span>Nothing is lost.</span></h1>
+      <p class="lead mb-5">You left checkout before paying, so your card was not charged. You can pick up where you left off, or ask us anything first.</p>
+      <div class="actions">
+        <a class="btn primary" href="/digital/flow#pricing">Back to pricing</a>
+        <a class="btn ghost" href="/contact?category=digital&product=flow#inquiry">Ask a question</a>
+      </div>
+    </div>
+  </section>
+  <Booking title="Not sure which tier fits?" text="Book a short call and we will help you choose between Starter, Professional and having us install Flow for you." />
+</Base>

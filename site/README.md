@@ -84,7 +84,8 @@ In the current dashboard these live under **Settings → Builds**: the **Product
 | `TURNSTILE_SECRET_KEY` | Secret key of the Turnstile widget |
 | `CONTACT_TO` | The verified Email Routing destination that receives inquiries |
 | `CATEGORY_RECIPIENTS` (optional) | JSON such as `{"supplier":"sourcing@benjaire.com"}` to route a category elsewhere; each address must be a verified destination |
-| `FLOW_INTAKE_URL` (optional) | Benjaire Flow intake webhook, `https://khancam15.app.n8n.cloud/webhook/flow-intake`. With `FLOW_INTAKE_KEY` set, each delivered inquiry is also forwarded to Flow (AI sorting, owner alert with status buttons, acknowledgement to the sender) |
+| `FLOW_INTAKE_URL` (optional) | Benjaire Flow intake webhook, `https://<your-n8n-instance>/webhook/flow-intake`. With `FLOW_INTAKE_KEY` set, each delivered inquiry is also forwarded to Flow (AI sorting, owner alert with status buttons, acknowledgement to the sender) |
+| `STRIPE_SECRET_KEY` (optional) | Stripe secret key for `/api/checkout`. Use a **restricted key** with only *Checkout Sessions: Write*. Production gets the live key; previews get an `sk_test_` key plus test-mode price IDs in `previews.vars.STRIPE_TIERS`. Without it, buy buttons fall back to the Stripe Payment Links (no cancel page) |
 | `FLOW_INTAKE_KEY` (optional) | The Flow intake key (the `intake_key` in n8n's `flow_settings` table), sent as the `x-flow-key` header |
 
 Never put these values in the repository; it is public.

@@ -25,7 +25,8 @@ let broken = 0;
 for (const page of pages) {
   const html = readFileSync(page, 'utf8');
   for (const [, url] of html.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
-    if (url.startsWith('//')) continue;
+    // /api/* is answered by the Worker, not a built file (tested in worker/).
+    if (url.startsWith('//') || url.startsWith('/api/')) continue;
     if (!resolve(url)) {
       broken++;
       console.error(`✗ ${relative(root, page)} → ${url}`);
