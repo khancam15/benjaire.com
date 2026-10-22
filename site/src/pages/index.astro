@@ -53,7 +53,7 @@ const FOCUS = [
 const hasBrands = (await getCollection('brands')).some((e) => e.data.featured);
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
-<Base hero seoTitle="Benjaire | Building brands. Powering businesses.">
+<Base hero>
   <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={wideAvif.srcSet.attribute} imagesizes="100vw" media="(min-width: 900px)" />
 
   <ol class="rail" aria-hidden="true">

@@ -13,10 +13,12 @@ import archivoVar from '@fontsource-variable/archivo/files/archivo-latin-wdth-no
 import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 
 interface Props {
-  /** Short page name, used for the breadcrumb and the default "<title> | Benjaire" title */
+  /** Short page name, matching its nav or footer label. Used for the breadcrumb and
+   *  the tab title "<title> · Benjaire" (the homepage, with no title, is just "Benjaire") */
   title?: string;
-  /** Full <title> override when the default pattern isn't descriptive enough */
-  seoTitle?: string;
+  /** Longer, descriptive title for share cards (og:title) and the WebPage schema name.
+   *  Kept out of <title> so tabs stay short and every page follows one pattern. */
+  shareTitle?: string;
   description?: string;
   noindex?: boolean;
   /** schema.org WebPage subtype for this page, e.g. AboutPage, ContactPage */
@@ -27,11 +29,11 @@ interface Props {
   ogImage?: string;
   ogImageAlt?: string;
 }
-const { title, seoTitle, description = SITE.metaDescription, noindex = false, pageType = 'WebPage', hero = false, ogImage: ogPath = '/og/benjaire-og.png', ogImageAlt = 'Benjaire: Building brands. Powering businesses.' } = Astro.props;
+const { title, shareTitle, description = SITE.metaDescription, noindex = false, pageType = 'WebPage', hero = false, ogImage: ogPath = '/og/benjaire-og.png', ogImageAlt = 'Benjaire: Building brands. Powering businesses.' } = Astro.props;
 const brandTitle = `${SITE.name} | Building brands. Powering businesses.`;
-const fullTitle = seoTitle ?? (title ? `${title} | ${SITE.name}` : `${SITE.name} | Consumer Technology, Digital and Lifestyle Brands`);
-// Share cards carry the tagline on the homepage; other pages share their own title.
-const ogTitle = title || seoTitle ? fullTitle : brandTitle;
+const tabTitle = title ? `${title} · ${SITE.name}` : SITE.name;
+// Share cards carry the tagline on the homepage; other pages share their descriptive title.
+const ogTitle = shareTitle ?? (title ? tabTitle : brandTitle);
 // Clean URLs: /about (not /about.html), / (not /index.html).
 const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/';
 const canonical = new URL(cleanPath, SITE.url).href;
@@ -63,7 +65,7 @@ const pageLd = noindex
           '@type': pageType,
           '@id': `${canonical}#webpage`,
           url: canonical,
-          name: fullTitle,
+          name: ogTitle,
           description,
           isPartOf: { '@id': `${SITE.url}/#website` },
           about: { '@id': `${SITE.url}/#organization` },
@@ -87,7 +89,7 @@ const pageLd = noindex
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{fullTitle}</title>
+    <title>{tabTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
