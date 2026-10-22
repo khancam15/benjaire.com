@@ -140,6 +140,8 @@
 .partner :focus-visible { outline-color: var(--on-cocoa); }
 .partner .btn.primary { background: var(--on-cocoa); color: var(--cocoa); border-color: var(--on-cocoa); }
 .partner .btn.primary:hover { background: #ffffff; }
+.partner .btn.ghost { color: var(--on-cocoa); border-color: rgba(233, 234, 236, .35); }
+.partner .btn.ghost:hover { border-color: var(--on-cocoa); }
 
 /* ── Tablet ──────────────────────────────────────── */
 @media (max-width: 1180px) {

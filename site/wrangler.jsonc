@@ -29,7 +29,15 @@
   },
   "vars": {
     "MAIL_FROM": "website@benjaire.com",
-    "ALLOWED_HOSTS": "benjaire.com,www.benjaire.com,benjaire-com.benjaireco.workers.dev"
+    "ALLOWED_HOSTS": "benjaire.com,www.benjaire.com,benjaire-com.benjaireco.workers.dev",
+    // Live Stripe prices for /api/checkout (public IDs, not secrets). Sessions
+    // are only created once STRIPE_SECRET_KEY is set; until then, and on any
+    // Stripe error, buyers go to the tier's Payment Link. Sales tax is collected
+    // on every tier (Stripe Tax); turn it on in each Payment Link to match.
+    "STRIPE_TIERS": {
+      "starter": { "price": "price_1URQGtPiFF3Kq67q3qVj08sB", "automaticTax": true },
+      "professional": { "price": "price_1US9cXPiFF3Kq67qIvlS2lwb", "automaticTax": true }
+    }
   },
   // Cloudflare Email Routing: may only send to verified destination addresses.
   "send_email": [{ "name": "SEND_EMAIL" }],
@@ -43,7 +51,10 @@
   "previews": {
     "vars": {
       "MAIL_FROM": "website@benjaire.com",
-      "ALLOWED_HOSTS": "benjaire-com.benjaireco.workers.dev"
+      "ALLOWED_HOSTS": "benjaire-com.benjaireco.workers.dev",
+      // Test-mode prices go here (with an sk_test_ STRIPE_SECRET_KEY preview
+      // secret) to run checkout end to end on a preview. Empty: Payment Links.
+      "STRIPE_TIERS": {}
     },
     "send_email": [{ "name": "SEND_EMAIL" }],
     "ratelimits": [{ "name": "CONTACT_LIMITER", "namespace_id": "1002", "simple": { "limit": 5, "period": 60 } }]

@@ -2,10 +2,11 @@
 // DRAFT for counsel review (PRD V-10). Keep `noindex` and keep this page out
 // of the sitemap until the owner confirms legal review is complete.
 import Base from '../layouts/Base.astro';
+import LegalDraft from '../components/LegalDraft.astro';
 import { SITE } from '../site';
-const UPDATED = 'October 13, 2026';
+const UPDATED = 'October 22, 2026';
 ---
-<Base title="Terms of Use" description="The terms that apply when you use benjaire.com, including intellectual property, submissions and governing law." noindex>
+<Base title="Terms of Use" description="The terms that apply when you use benjaire.com, including purchases, licenses, intellectual property and governing law." noindex>
   <section class="page-head">
     <div class="wrap">
       <p class="eyebrow">Legal</p>
@@ -15,10 +16,27 @@ const UPDATED = 'October 13, 2026';
   </section>
   <section class="sec">
     <div class="wrap prose">
+      <LegalDraft />
       <p class="updated">Last updated: {UPDATED}</p>
 
+      <h2>Who we are</h2>
+      <p>benjaire.com is operated by {SITE.legalName} ("Benjaire", "we"), a New York limited liability company.</p>
+
       <h2>Using this site</h2>
-      <p>By using benjaire.com, you agree to these terms. If you don't agree, please don't use the site. The site provides general information about Benjaire and its brands.</p>
+      <p>By using benjaire.com, you agree to these terms. If you don't agree, please don't use the site. The site provides general information about Benjaire, its products and services.</p>
+
+      <h2>Buying Benjaire Flow</h2>
+      <p>These purchase terms apply when you buy Benjaire Flow from us, along with the rest of these terms.</p>
+      <ul>
+        <li><strong>Prices and tax.</strong> Prices are one time amounts in US dollars, shown on the <a href="/digital/flow#pricing">Flow page</a>. Sales tax is added at checkout where it applies. Payment is processed by Stripe.</li>
+        <li><strong>Delivery.</strong> Starter and Professional are digital downloads. Your download link is emailed to the address you pay with, usually within minutes. If it doesn't arrive within an hour, write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</li>
+        <li><strong>License.</strong> Each purchase gives one business a non-exclusive, non-transferable license to install and use Flow for its own inquiries, and to edit it for that use. You may not resell, share or publish the kit, or install it for other businesses, without an agency license from us.</li>
+        <li><strong>Updates and support.</strong> Bug fix updates to v1.x are included for 12 months. Starter includes email help with setup errors for 14 days. Professional includes one 60 minute setup call and email support for 60 days. Support covers Flow as delivered, not your own changes to it.</li>
+        <li><strong>Flow Installed.</strong> We install, brand and test Flow in accounts you own, for one business and one website form, usually within five business days of the kickoff call. You give us the access we need and remove it when we finish. Healthcare and other regulated data are not included. Support runs for 30 days, then the optional care plan is billed monthly until you cancel.</li>
+        <li><strong>Services you pay for directly.</strong> Flow runs on n8n, Anthropic, Resend and Cloudflare accounts that you open and pay for. Their terms, prices and availability are set by them, and we aren't responsible for changes they make.</li>
+        <li><strong>Results.</strong> Flow helps you sort and answer inquiries. We don't promise any particular number of clients, sales or time saved.</li>
+        <li><strong>Refunds.</strong> Refunds follow our <a href="/refunds">Refund Policy</a>, including the 14 day money back guarantee on Starter and Professional.</li>
+      </ul>
 
       <h2>Intellectual property</h2>
       <p>The Benjaire name, logo, brand names, design and content on this site belong to Benjaire or its licensors. You may view and share pages for personal or informational purposes. Don't copy, modify or use them commercially without our written permission.</p>
@@ -36,7 +54,7 @@ const UPDATED = 'October 13, 2026';
       <p>The site is provided "as is". We work to keep it accurate and available, but we don't guarantee that it will be error-free or uninterrupted, and information on it may change without notice.</p>
 
       <h2>Limitation of liability</h2>
-      <p>To the fullest extent the law allows, Benjaire isn't liable for indirect, incidental or consequential damages arising from your use of this site.</p>
+      <p>To the fullest extent the law allows, Benjaire isn't liable for indirect, incidental or consequential damages arising from your use of this site or our products. For a purchase, our total liability is limited to the amount you paid for it.</p>
 
       <h2>Governing law</h2>
       <p>These terms are governed by the laws of the State of New York, without regard to its conflict-of-law rules.</p>

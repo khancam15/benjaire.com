@@ -10,4 +10,6 @@ interface Env {
   FLOW_INTAKE_URL?: string;
   /** Shared secret sent as the x-flow-key header. */
   FLOW_INTAKE_KEY?: string;
+  /** Stripe secret key for Checkout Sessions (sk_live_ in production, sk_test_ in previews). */
+  STRIPE_SECRET_KEY?: string;
 }

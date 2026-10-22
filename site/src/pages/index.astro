@@ -243,7 +243,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
         <p class="mono">Get in touch</p>
         <h2 id="partner-title">Let's simplify <span>your workflow.</span></h2>
         <p>Explore how intelligent automation could improve your business operations. Partnerships, supplier inquiries and general questions start here too.</p>
-        <a class="btn primary" href="/contact?category=digital">Discuss your workflow <span aria-hidden="true">→</span></a>
+        <div class="actions">
+          <a class="btn primary" href="/contact?category=digital">Discuss your workflow <span aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="/contact#book">Book a call</a>
+        </div>
         <p class="mono email">{SITE.email}</p>
       </div>
       <ul class="routes">

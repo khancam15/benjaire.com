@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageBand from '../components/PageBand.astro';
 import bandImg from '../assets/pages/contact.jpg';
 import { CATEGORIES, SITE, SUPPLIER_AREAS, TURNSTILE_SITE_KEY } from '../site';
+import Booking from '../components/Booking.astro';
 ---
 <Base title="Contact" seoTitle="Contact Benjaire | Digital Solutions and Partnerships" pageType="ContactPage" description="Contact Benjaire in New York about digital solutions, business partnerships, supplier and manufacturing inquiries, or general questions about the company.">
   <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -86,6 +87,8 @@ import { CATEGORIES, SITE, SUPPLIER_AREAS, TURNSTILE_SITE_KEY } from '../site';
       </div>
     </div>
   </section>
+
+  <Booking eyebrow="Prefer to talk?" title="Book a call instead." text="Pick a time that suits you and tell us what you would like to cover. We will come prepared." />
 
   <section class="sec raised" aria-labelledby="suppliers">
     <div class="wrap supplier">
