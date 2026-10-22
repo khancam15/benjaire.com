@@ -214,9 +214,9 @@ export interface CheckoutTier {
   automaticTax?: boolean;
 }
 
-/** Shown above Stripe's pay button. Keep in step with /refunds. */
+/** Shown above Stripe's pay button. Keep in step with /refunds and /terms. */
 export const CHECKOUT_NOTE =
-  'Benjaire Flow Starter and Professional include a 14 day money back guarantee. Full terms: benjaire.com/refunds';
+  'Benjaire Flow Starter and Professional include a 14 day money back guarantee (benjaire.com/refunds). By paying you agree to our terms: benjaire.com/terms';
 
 /**
  * Form body for POST /v1/checkout/sessions. The success page receives the
