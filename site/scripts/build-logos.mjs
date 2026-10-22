@@ -1,5 +1,6 @@
 // Generates the Benjaire logo SVGs (docs/design-system.md §8).
 // Usage: node scripts/build-logos.mjs <outDir>
+// Archive: the primary logo is the v3 graphite mark (docs/design/logo/v3).
 //
 // Rendering rules (crisp in every browser, including Safari/iOS):
 //  - no SVG filters and no masks in web assets
