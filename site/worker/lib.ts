@@ -201,6 +201,14 @@ export const PAYMENT_LINKS: Record<string, string> = {
   professional: 'https://buy.stripe.com/aFabJ31mUdq63pb0qh5AQ03',
 };
 
+/**
+ * The Payment Link for a tier, or undefined for anything else. Own keys only,
+ * so a query like ?tier=constructor can't pick up an Object.prototype member.
+ */
+export function paymentLinkFor(tier: string): string | undefined {
+  return Object.hasOwn(PAYMENT_LINKS, tier) ? PAYMENT_LINKS[tier] : undefined;
+}
+
 export interface CheckoutTier {
   price: string;
   automaticTax?: boolean;

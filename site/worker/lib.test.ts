@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkoutParams, cleanLine, composeEmail, flowPayload, formatNewYork, originAllowed, PAYMENT_LINKS, recipientFor, validate } from './lib.ts';
+import { checkoutParams, cleanLine, composeEmail, flowPayload, formatNewYork, originAllowed, PAYMENT_LINKS, paymentLinkFor, recipientFor, validate } from './lib.ts';
 import { FLOW_CHECKOUT } from '../src/site.ts';
 
 const form = (fields: Record<string, string>) => {
@@ -119,4 +119,11 @@ test('checkout session returns to our success and cancel pages', () => {
   assert.equal(p.get('cancel_url'), 'https://benjaire.com/digital/flow-cancel?tier=starter');
   assert.equal(p.get('automatic_tax[enabled]'), 'true');
   assert.equal(p.get('metadata[tier]'), 'starter');
+});
+
+test('checkout only accepts known tiers', () => {
+  assert.equal(paymentLinkFor('starter'), PAYMENT_LINKS.starter);
+  for (const tier of ['', 'done_for_you', 'constructor', '__proto__', 'toString', 'STARTER']) {
+    assert.equal(paymentLinkFor(tier), undefined, tier);
+  }
 });

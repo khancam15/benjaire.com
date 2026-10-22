@@ -1,7 +1,7 @@
 // benjaire.com Worker. Static pages are served from ./dist by the assets
 // layer; only /api/* reaches this script (see wrangler.jsonc).
 import { EmailMessage } from 'cloudflare:email';
-import { buildMime, checkoutParams, composeEmail, flowPayload, hostAllowed, originAllowed, PAYMENT_LINKS, recipientFor, validate, type CheckoutTier, type Inquiry } from './lib';
+import { buildMime, checkoutParams, composeEmail, flowPayload, hostAllowed, originAllowed, paymentLinkFor, recipientFor, validate, type CheckoutTier, type Inquiry } from './lib';
 
 const JSON_HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
@@ -126,10 +126,11 @@ async function handleContact(req: Request, env: Env, ctx: ExecutionContext): Pro
 async function handleCheckout(req: Request, env: Env): Promise<Response> {
   const url = new URL(req.url);
   const tier = url.searchParams.get('tier') ?? '';
-  const fallback = PAYMENT_LINKS[tier];
+  const fallback = paymentLinkFor(tier);
   if (!fallback) return Response.redirect(new URL('/digital/flow#pricing', url).toString(), 303);
 
-  const cfg = (env.STRIPE_TIERS as Record<string, CheckoutTier> | undefined)?.[tier];
+  const tiers = (env.STRIPE_TIERS ?? {}) as Record<string, CheckoutTier>;
+  const cfg = Object.hasOwn(tiers, tier) ? tiers[tier] : undefined;
   const ip = req.headers.get('CF-Connecting-IP') ?? 'unknown';
   if (!env.STRIPE_SECRET_KEY || !cfg?.price) return Response.redirect(fallback, 303);
   const { success: underLimit } = await env.CONTACT_LIMITER.limit({ key: `checkout:${ip}` });
