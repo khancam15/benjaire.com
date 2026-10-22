@@ -63,9 +63,11 @@ export const FLOW_CHECKOUT = {
   done_for_you: '',
 } as const;
 
-// Calendly booking page for prospects (fit and discovery calls), embedded by
-// the Booking component. Swap for a single event's link to skip the event list.
-export const BOOKING_URL = 'https://calendly.com/benjaireco';
+// Calendly event for prospects (fit and discovery calls), embedded by the
+// Booking component: the free 30 minute "Benjaire workflow review". Link one
+// event, not the profile page, so buyer-only events (the Professional setup
+// call, the Flow Installed kickoff) are never offered to prospects.
+export const BOOKING_URL = 'https://calendly.com/benjaireco/free-consultation-benjaire';
 
 // Calendly event Flow Installed buyers book on the thanks page after paying.
 export const FLOW_INSTALLED_KICKOFF = 'https://calendly.com/benjaireco/flow-installed-kickoff-call';
