@@ -32,11 +32,11 @@
     "ALLOWED_HOSTS": "benjaire.com,www.benjaire.com,benjaire-com.benjaireco.workers.dev",
     // Live Stripe prices for /api/checkout (public IDs, not secrets). Sessions
     // are only created once STRIPE_SECRET_KEY is set; until then, and on any
-    // Stripe error, buyers go to the tier's Payment Link. automaticTax mirrors
-    // each Payment Link's current setting.
+    // Stripe error, buyers go to the tier's Payment Link. Sales tax is collected
+    // on every tier (Stripe Tax); turn it on in each Payment Link to match.
     "STRIPE_TIERS": {
       "starter": { "price": "price_1URQGtPiFF3Kq67q3qVj08sB", "automaticTax": true },
-      "professional": { "price": "price_1US9cXPiFF3Kq67qIvlS2lwb", "automaticTax": false }
+      "professional": { "price": "price_1US9cXPiFF3Kq67qIvlS2lwb", "automaticTax": true }
     }
   },
   // Cloudflare Email Routing: may only send to verified destination addresses.
