@@ -1,7 +1,7 @@
 // benjaire.com Worker. Static pages are served from ./dist by the assets
 // layer; only /api/* reaches this script (see wrangler.jsonc).
 import { EmailMessage } from 'cloudflare:email';
-import { atlasRun, buildMime, checkoutParams, composeEmail, flowPayload, hostAllowed, originAllowed, paymentLinkFor, postWithRetry, recipientFor, reportToAtlas, SITE_CAP_KEYS, underSiteCap, validate, type CheckoutTier, type Inquiry } from './lib';
+import { atlasInboxUrl, atlasInquiry, atlasRun, buildMime, checkoutParams, composeEmail, flowPayload, hostAllowed, originAllowed, paymentLinkFor, postWithRetry, recipientFor, reportToAtlas, SITE_CAP_KEYS, underSiteCap, validate, type CheckoutTier, type Inquiry } from './lib';
 
 const JSON_HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
@@ -63,6 +63,23 @@ async function forwardToFlow(inquiry: Inquiry, env: Env, ctx: ExecutionContext):
   }
 }
 
+// Copy a delivered inquiry into the Atlas inbox, where KC drafts the reply
+// and tracks follow-ups. Like Flow, it runs after the response and never
+// affects it; the owner email stays the record if Atlas is unreachable.
+async function sendToAtlasInbox(inquiry: Inquiry, receivedAt: string, host: string, env: Env, ctx: ExecutionContext): Promise<void> {
+  const url = atlasInboxUrl(env.ATLAS_FEED_URL);
+  if (!url || !env.ATLAS_FEED_TOKEN) return;
+  const result = await postWithRetry(url, {
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.ATLAS_FEED_TOKEN}` },
+    body: JSON.stringify(atlasInquiry(inquiry, crypto.randomUUID(), receivedAt, host)),
+  });
+  if (!result.ok) {
+    console.error('Atlas inbox failed', { attempts: result.attempts, status: result.status, error: result.error });
+    report(env, ctx, atlasRun('benjaire-inquiry-to-client', 'Atlas inbox', 'failed',
+      `${result.attempts} attempt(s), ${result.status ? `HTTP ${result.status}` : result.error ?? 'no response'}`));
+  }
+}
+
 async function handleContact(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   if (req.method !== 'POST') {
     return new Response('Method not allowed', { status: 405, headers: { Allow: 'POST' } });
@@ -111,7 +128,9 @@ async function handleContact(req: Request, env: Env, ctx: ExecutionContext): Pro
     return respond(req, 503, { ok: false, error: 'The form is temporarily unavailable.' });
   }
 
-  const { subject, text } = composeEmail(inquiry, { receivedAt: new Date().toISOString(), host: new URL(req.url).hostname });
+  const receivedAt = new Date().toISOString();
+  const host = new URL(req.url).hostname;
+  const { subject, text } = composeEmail(inquiry, { receivedAt, host });
   const to = recipientFor(inquiry.category, env.CONTACT_TO, env.CATEGORY_RECIPIENTS);
   const domain = env.MAIL_FROM.split('@')[1];
   const raw = buildMime({
@@ -133,6 +152,7 @@ async function handleContact(req: Request, env: Env, ctx: ExecutionContext): Pro
   }
   report(env, ctx, atlasRun('benjaire-contact-worker', 'Contact form', 'ok'));
   ctx.waitUntil(forwardToFlow(inquiry, env, ctx));
+  ctx.waitUntil(sendToAtlasInbox(inquiry, receivedAt, host, env, ctx));
   return respond(req, 200, { ok: true });
 }
 

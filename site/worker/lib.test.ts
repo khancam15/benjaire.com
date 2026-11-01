@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkoutParams, cleanLine, composeEmail, flowPayload, formatNewYork, originAllowed, PAYMENT_LINKS, paymentLinkFor, postWithRetry, recipientFor, reportToAtlas, atlasRun, SITE_CAP_KEYS, underSiteCap, validate } from './lib.ts';
+import { atlasInboxUrl, atlasInquiry, checkoutParams, cleanLine, composeEmail, flowPayload, formatNewYork, originAllowed, PAYMENT_LINKS, paymentLinkFor, postWithRetry, recipientFor, reportToAtlas, atlasRun, SITE_CAP_KEYS, underSiteCap, validate } from './lib.ts';
 import { FLOW_CHECKOUT } from '../src/site.ts';
 
 const form = (fields: Record<string, string>) => {
@@ -195,4 +195,21 @@ test('Atlas report is skipped without settings and never throws', async () => {
   await reportToAtlas('https://atlas.example/api/hooks/agents', 'k', run, (async (_u: unknown, init?: RequestInit) => { sent = init; return new Response(null, { status: 401 }); }) as typeof fetch);
   assert.equal((sent?.headers as Record<string, string>).Authorization, 'Bearer k');
   await reportToAtlas('https://atlas.example/api/hooks/agents', 'k', run, (async () => { throw new Error('down'); }) as typeof fetch);
+});
+
+test('Atlas inbox sits beside the run feed and only on https', () => {
+  assert.equal(atlasInboxUrl('https://ai-ops-atlas.pages.dev/api/hooks/agents'), 'https://ai-ops-atlas.pages.dev/api/hooks/inquiries');
+  assert.equal(atlasInboxUrl('https://atlas.example/api/hooks/agents?x=1#y'), 'https://atlas.example/api/hooks/inquiries');
+  assert.equal(atlasInboxUrl('http://atlas.example/api/hooks/agents'), undefined);
+  assert.equal(atlasInboxUrl('https://atlas.example/api/hooks/reports'), undefined);
+  assert.equal(atlasInboxUrl('not a url'), undefined);
+  assert.equal(atlasInboxUrl(undefined), undefined);
+});
+
+test('Atlas inquiry carries the reply details and nothing about the visitor', () => {
+  const { inquiry } = validate(form(good));
+  const body = atlasInquiry(inquiry!, 'id-1', '2026-11-01T06:00:00.000Z', 'benjaire.com');
+  assert.deepEqual(Object.keys(body).sort(), ['category', 'category_label', 'company', 'email', 'host', 'id', 'message', 'name', 'received_at']);
+  assert.equal(body.category_label, 'Supplier / Manufacturing');
+  assert.equal(body.email, 'alex@factory.example');
 });

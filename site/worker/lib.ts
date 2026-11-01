@@ -327,3 +327,41 @@ export async function reportToAtlas(
     console.error('Atlas report failed', err instanceof Error ? err.message : err);
   }
 }
+
+// Atlas inquiry inbox (Inquiry to Client). The run feed URL ends in
+// /api/hooks/agents; the inbox sits beside it at /api/hooks/inquiries and takes
+// the same write-only ATLAS_FEED_TOKEN, so no new setting is needed.
+export const ATLAS_INBOX_PATH = '/api/hooks/inquiries';
+
+/** The inbox URL next to the run feed, or undefined when the feed isn't an https Atlas hook. */
+export function atlasInboxUrl(feedUrl: string | undefined): string | undefined {
+  if (!feedUrl) return undefined;
+  try {
+    const u = new URL(feedUrl);
+    if (u.protocol !== 'https:' || !u.pathname.endsWith('/api/hooks/agents')) return undefined;
+    u.pathname = u.pathname.slice(0, -'/api/hooks/agents'.length) + ATLAS_INBOX_PATH;
+    u.search = '';
+    u.hash = '';
+    return u.toString();
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * One delivered inquiry for the Atlas inbox. The id lets Atlas ignore a retried
+ * copy. Only what KC needs to reply: no IP address, no Turnstile data.
+ */
+export function atlasInquiry(i: Inquiry, id: string, receivedAt: string, host: string) {
+  return {
+    id,
+    received_at: receivedAt,
+    category: i.category,
+    category_label: CATEGORIES[i.category] ?? i.category,
+    name: i.name,
+    email: i.email,
+    company: i.company,
+    message: i.message,
+    host,
+  };
+}
