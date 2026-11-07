@@ -33,17 +33,6 @@ export const CATEGORIES = [
   { value: 'digital', label: 'Digital Solutions' },
   { value: 'general', label: 'General Business Inquiry' },
   { value: 'partnership', label: 'Partnership' },
-  { value: 'supplier', label: 'Supplier / Manufacturing' },
-] as const;
-
-// Supplier areas of interest (PRD §3.5). "Exploring" language only:
-// no MOQs, partner names or capability claims.
-export const SUPPLIER_AREAS = [
-  'Consumer technology accessories',
-  'Smartphone accessories',
-  'Laptop accessories',
-  'Audio device accessories',
-  'Lifestyle products',
 ] as const;
 
 // Cloudflare Turnstile site key (public by design). The secret key lives

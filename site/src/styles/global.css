@@ -339,9 +339,6 @@ textarea.input { min-height: 150px; resize: vertical; }
 .form-status[data-tone="error"] { border-color: var(--danger); color: var(--danger); }
 .form-status[data-tone="ok"] { border-color: var(--accent-line); color: var(--fg); }
 
-.supplier { display: grid; grid-template-columns: 1fr 1.25fr; gap: var(--s-6); }
-.taglist { display: flex; flex-wrap: wrap; gap: 8px; margin-block: var(--s-3); list-style: none; }
-.taglist li { font-size: 13px; border: 1px solid var(--line-mid); border-radius: var(--radius-pill); padding: 7px 14px; color: var(--fg-mid); background: var(--paper); }
 .note { font-size: 13px; color: var(--fg-low); border-left: 2px solid var(--accent-line); padding-left: 14px; }
 
 /* footer: laid out like the title block of an architectural drawing */
@@ -385,7 +382,7 @@ textarea.input { min-height: 150px; resize: vertical; }
   html:not(.js) .nav-links { position: static; flex-direction: row; flex-wrap: wrap; padding: 0 0 var(--s-1); box-shadow: none; background: none; gap: 4px 20px; }
   html:not(.js) .site-nav .wrap { flex-wrap: wrap; height: auto; padding-block: var(--s-2); }
 
-  .sec-head, .two, .supplier, .contact-grid { grid-template-columns: 1fr; gap: var(--s-4); }
+  .sec-head, .two, .contact-grid { grid-template-columns: 1fr; gap: var(--s-4); }
   .sec-head { margin-bottom: var(--s-5); }
   .two { gap: var(--s-6); }
   .pillars { grid-template-columns: 1fr; }
