@@ -98,6 +98,7 @@
 }
 
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--nav-h); }
+html:has(.flow-subnav) { scroll-padding-top: calc(var(--nav-h) + 48px); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   background: var(--bg); color: var(--fg-mid);
@@ -111,7 +112,7 @@ img, svg { max-width: 100%; display: block; }
 a { color: inherit; }
 strong { color: var(--fg); font-weight: 600; }
 ::selection { background: var(--fg); color: var(--on-accent); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
 
 .skip {
   position: absolute; left: var(--s-2); top: -100px; z-index: 200;
@@ -143,6 +144,7 @@ h1 span, h2 span { color: var(--silver-ink); }
 }
 .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: var(--s-3); }
 .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--graphite); flex: none; }
+.eyebrow.bare::before { display: none; }
 .eyebrow.center { justify-content: center; }
 
 .link {
@@ -323,7 +325,7 @@ textarea.input { min-height: 150px; resize: vertical; }
 }
 .chip input:hover + span { border-color: var(--fg); }
 .chip input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-.chip input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chip input:focus-visible + span { outline: 2px solid var(--signal); outline-offset: 2px; }
 
 .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; }
 .consent input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); flex: none; }

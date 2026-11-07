@@ -124,11 +124,11 @@ const PILLARS = [
   /* Two pillar cards with Pavilion imagery; tokens and components from global.css. */
   .pillar-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); list-style: none; margin-bottom: var(--s-6); }
   .pillar-cards li { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; min-width: 0; }
-  .pillar-media { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; background: var(--surface); margin-bottom: 8px; }
+  .pillar-media { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); margin-bottom: 8px; }
   .pillar-media :global(picture), .pillar-media :global(img) { width: 100%; height: 100%; object-fit: cover; }
   .pillar-media :global(img) { transition: transform 1.2s var(--ease); }
   .pillar-cards li:hover .pillar-media :global(img) { transform: scale(1.03); }
-  .pillar-status { position: absolute; left: 16px; bottom: 16px; padding: 8px 12px; border-radius: 999px; font-family: var(--mono); font-size: 11px; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--fg); }
+  .pillar-status { position: absolute; left: 16px; bottom: 16px; padding: 8px 12px; border-radius: var(--radius-pill); font-family: var(--mono); font-size: 11px; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--fg); }
   .pillar-cards h3 { font-size: clamp(28px, 2.6vw, 40px); font-weight: 360; letter-spacing: -.04em; }
   .pillar-cards p { max-width: 52ch; }
   @media (max-width: 900px) { .pillar-cards { grid-template-columns: minmax(0, 1fr); } }

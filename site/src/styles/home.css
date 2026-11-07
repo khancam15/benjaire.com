@@ -20,7 +20,7 @@
 .pin { pointer-events: auto; position: absolute; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--fg); transform: translate(-8px, -8px); }
 .pin .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 6px rgba(255, 255, 255, .45), 0 0 0 1px var(--line-mid); flex: none; position: relative; }
 .pin .dot::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .9); animation: ping 3.2s var(--ease) infinite; }
-.pin-label { display: grid; padding: 9px 14px; border-radius: 12px; background: var(--glass); border: 1px solid var(--glass-edge); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); white-space: nowrap; transition: transform .35s var(--ease), background .35s; }
+.pin-label { display: grid; padding: 9px 14px; border-radius: var(--radius-md); background: var(--glass); border: 1px solid var(--glass-edge); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); white-space: nowrap; transition: transform .35s var(--ease), background .35s; }
 .pin-label b { font: 600 13px var(--display); font-stretch: 118%; letter-spacing: .12em; text-transform: uppercase; }
 .pin-label em { font-style: normal; font-size: 12px; color: var(--fg-mid); }
 .pin:hover .pin-label, .pin:focus-visible .pin-label { background: rgba(255, 255, 255, .88); transform: translateX(3px); }
@@ -30,7 +30,7 @@
 .pin-grow:hover .pin-label, .pin-grow:focus-visible .pin-label { transform: translateX(-3px); }
 @keyframes ping { 0% { transform: scale(.6); opacity: 0; } 30% { opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
 
-.hero-card { position: absolute; left: var(--gutter); bottom: clamp(24px, 3vw, 40px); width: min(360px, 34%); display: grid; gap: 14px; padding: 22px 24px; border-radius: 22px; }
+.hero-card { position: absolute; left: var(--gutter); bottom: clamp(24px, 3vw, 40px); width: min(360px, 34%); display: grid; gap: 14px; padding: 22px 24px; border-radius: var(--radius-lg); }
 .hero-card p:not(.mono) { font-size: 14px; line-height: 1.55; color: var(--fg); }
 .hero-card .mono { font-size: 11px; }
 .hero-card .btn { justify-content: space-between; }
@@ -82,10 +82,10 @@
 .step .role { font-family: var(--display); font-stretch: 112%; font-size: 20px; color: var(--silver-ink); }
 .step > p:not(.mono):not(.role) { max-width: 44ch; }
 .spec { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; list-style: none; }
-.spec li { font-size: 12px; padding: 6px 12px; border: 1px solid var(--line-mid); border-radius: 999px; color: var(--fg); }
+.spec li { font-size: 12px; padding: 6px 12px; border: 1px solid var(--line-mid); border-radius: var(--radius-pill); color: var(--fg); }
 .step-img { display: none; }
 .stage { position: relative; }
-.stage-frame { position: sticky; top: calc(var(--nav-h) + 4vh); height: calc(100vh - var(--nav-h) - 8vh); max-height: 860px; border-radius: 4px; overflow: hidden; background: var(--bg-raised); }
+.stage-frame { position: sticky; top: calc(var(--nav-h) + 4vh); height: calc(100vh - var(--nav-h) - 8vh); max-height: 860px; border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-raised); }
 .stage-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 /* Astro's <Picture> puts the class on the <img> itself, so these target the img directly. */
 .stage-img { opacity: 0; transform: scale(1.06); transition: opacity 1s var(--ease), transform 1.6s var(--ease); }
@@ -95,7 +95,7 @@
 .stage-frame[data-active="0"] .stage-img[data-i="0"],
 .stage-frame[data-active="1"] .stage-img[data-i="1"],
 .stage-frame[data-active="2"] .stage-img[data-i="2"] { transform: scale(1); }
-.stage-tag { position: absolute; left: 18px; bottom: 18px; padding: 10px 14px; border-radius: 12px; }
+.stage-tag { position: absolute; left: 18px; bottom: 18px; padding: 10px 14px; border-radius: var(--radius-md); }
 .stage-tag .mono { color: var(--fg); }
 
 /* ── 4 · Focus ───────────────────────────────────── */
@@ -107,9 +107,9 @@
 .index p { grid-column: 2; max-width: 46ch; }
 .index li.on h3 { color: var(--fg); }
 .index .mono { padding-top: 10px; }
-.focus-visual { position: relative; aspect-ratio: 6 / 5; border-radius: 4px; overflow: hidden; perspective: 1200px; max-width: 100%; }
+.focus-visual { position: relative; aspect-ratio: 6 / 5; border-radius: var(--radius-sm); overflow: hidden; perspective: 1200px; max-width: 100%; }
 .focus-visual picture, .focus-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 66% 50%; }
-.focus-card { position: absolute; right: 22px; bottom: 22px; width: min(300px, 70%); display: grid; gap: 8px; padding: 20px 22px; border-radius: 18px; transform: rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg)); transition: transform .8s var(--ease); }
+.focus-card { position: absolute; right: 22px; bottom: 22px; width: min(300px, 70%); display: grid; gap: 8px; padding: 20px 22px; border-radius: var(--radius-lg); transform: rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg)); transition: transform .8s var(--ease); }
 .focus-card b { font: 500 22px/1.1 var(--display); font-stretch: 112%; letter-spacing: -.02em; color: var(--fg); }
 .focus-card span:last-child { font-size: 14px; color: var(--fg-mid); }
 .center-note { margin-top: 48px; max-width: 60ch; }
@@ -117,9 +117,9 @@
 
 /* ── 5 · Portfolio ───────────────────────────────── */
 .portfolio { background: var(--bg-raised); }
-.plinth { position: relative; border-radius: 4px; overflow: hidden; min-height: 520px; display: grid; place-items: center; padding: clamp(24px, 5vw, 64px) 16px; }
+.plinth { position: relative; border-radius: var(--radius-sm); overflow: hidden; min-height: 520px; display: grid; place-items: center; padding: clamp(24px, 5vw, 64px) 16px; }
 .plinth > picture, .plinth > picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.plinth-card { position: relative; width: min(560px, 100%); display: grid; gap: 16px; justify-items: start; padding: clamp(24px, 3vw, 40px); border-radius: 24px; }
+.plinth-card { position: relative; width: min(560px, 100%); display: grid; gap: 16px; justify-items: start; padding: clamp(24px, 3vw, 40px); border-radius: var(--radius-lg); }
 .plinth-card .badge { margin: 0; }
 .plinth-card h3 { font-size: clamp(28px, 3vw, 40px); line-height: 1.05; letter-spacing: -.03em; }
 .plinth-card p { color: var(--fg-mid); }
@@ -127,7 +127,7 @@
 /* ── 6 · Partnerships ────────────────────────────── */
 .partner { background: var(--cocoa); color: var(--on-cocoa); padding-block: var(--section); }
 .partner h2 { color: var(--on-cocoa); }
-.partner .mono, .partner h2 span { color: var(--on-cocoa-low); }
+.partner .mono, .partner .eyebrow, .partner h2 span { color: var(--on-cocoa-low); }
 .partner .grid-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
 .partner-intro { display: grid; gap: 20px; align-content: start; justify-items: start; }
 .partner-intro p:not(.mono) { color: var(--on-cocoa-low); max-width: 42ch; }
@@ -164,7 +164,7 @@
   .pins { order: 3; inset: auto; pointer-events: auto; position: relative; z-index: 1; margin-top: -68px; padding: 0 var(--gutter) 20px; display: flex; gap: 8px; }
   .pin, .pin-build, .pin-grow { position: static; flex: 1; transform: none; flex-direction: row; }
   .pin .dot { display: none; }
-  .pin-label { width: 100%; text-align: center; padding: 11px 6px; border-radius: 999px; }
+  .pin-label { width: 100%; text-align: center; padding: 11px 6px; border-radius: var(--radius-pill); }
   .pin-label b { font-size: 12px; }
   .hero-card { position: static; order: 4; width: auto; border-radius: 0; border: 0; border-bottom: 1px solid var(--line); background: var(--paper); padding: 28px var(--gutter); }
   .scroll-cue { display: none; }
@@ -175,7 +175,7 @@
   .model-grid, .focus-grid { grid-template-columns: minmax(0, 1fr); }
   .stage { display: none; }
   .step { min-height: 0; padding-block: 0 48px; border-top: 0; }
-  .step-img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; margin-bottom: 18px; }
+  .step-img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-sm); margin-bottom: 18px; }
   .focus-card { transform: none; }
 }
 @media (max-width: 520px) {
