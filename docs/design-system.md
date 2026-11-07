@@ -1,6 +1,6 @@
 # Benjaire Design System (v0.4, "Silver Blue")
 
-- **Status:** Palette chosen by the owner 2026-11-07; in review on this branch, not yet live. Supersedes v0.3 "The Pavilion" and the v1 product layer, which are kept below for history.
+- **Status:** Palette chosen by the owner 2026-11-07; in review on this branch, not yet live. Benjaire is Digital Solutions only from 2026-11-07 (Consumer Brands retired), slogan "Smarter systems. Better business." Supersedes v0.3 "The Pavilion" and the v1 product layer, which are kept below for history.
 - **Direction:** Benjaire reads as a digital solutions company. Benjaire and Benjaire Flow share every token and component; Flow is set apart only by its product UI. Visuals are code-built: live product UI, a canvas "signal field" (lines that converge and land in a Flow owner alert), outcome cards and a four-stop "how it works" path. No stock or generated photos, robots, glowing brains, circuit boards or invented metrics.
 - **Palette picker:** https://claude.ai/artifact/LK26bYHW3rZ68QZgCBp9sY · **Direction preview:** https://claude.ai/artifact/1KbaRypQ5SWvR5c2mhdHJR
 
@@ -38,12 +38,12 @@ Archivo (width 112%, light) for display, Inter for UI and body, IBM Plex Mono up
 ## Components
 Buttons (primary ink, ghost outline, text link; 44px targets), chips and badges, cards, one glass panel per view (on `.night` panels, cards are solid white instead of frosted), section head (eyebrow, title, lead), stats, nav and footer identical on every page, FAQ accordion, price cards.
 
-- **Brand architecture:** Flow pages add `FlowSubnav.astro`, a sticky sub-nav with the "Benjaire **Flow**" lockup (the B plus the word in Archivo, never a separate logo).
+- **Product architecture:** Flow pages add `FlowSubnav.astro`, a sticky sub-nav with the "Benjaire **Flow**" lockup (the B plus the word in Archivo, never a separate logo).
 - **Code-built visuals:** `OwnerAlert.astro` (sample owner alert), `ModelVisual.astro` (Build, Operate, Grow), `FlowHero.astro` (layered form, alert and phone), `FlowStory.astro` + `StoryScreen.astro` (one inquiry in four beats), `FlowPath.astro` (four-stop path; architecture image and an HTML trigger table behind "Technical detail"), `FlowOutcomes.astro` (reply ring, pipeline, Monday digest), `PageBand.astro` signal variant.
 - **Sample data:** every sample name, number and inquiry is labelled "Sample" on screen.
 
 ## Imagery
-The Pavilion render stays on About and Brands only (`src/assets/home/pavilion.jpg`, `reflection.jpg`). Flow keeps `05-whats-included.png`, `06-setup-process.png` and, inside Technical detail, `02-workflow-architecture.png`. Share cards: `node scripts/build-og.mjs` writes `public/og/benjaire-og.png` and `flow-og.png`.
+No photographic renders remain: the Pavilion images were retired with Consumer Brands (2026-11-07), and About uses the signal band. Flow keeps `05-whats-included.png`, `06-setup-process.png` and, inside Technical detail, `02-workflow-architecture.png`. Share cards: `node scripts/build-og.mjs` writes `public/og/benjaire-og.png` and `flow-og.png`.
 
 ## Motion
 - Home hero: `src/scripts/signal.ts` draws 18 lines on a canvas that converge, turn ice blue and land in the owner alert, which glows on arrival and cycles three samples. DPR capped at 2; pauses off screen and in hidden tabs.
