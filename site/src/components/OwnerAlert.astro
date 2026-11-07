@@ -2,11 +2,11 @@
 // A sample Flow owner alert, drawn in HTML so it stays sharp and readable at
 // any width. Decorative stand-in for the real email: every value is sample data.
 // The homepage cycles `data-alert` through more samples (src/scripts/home.ts).
-interface Props { class?: string }
-const { class: cls } = Astro.props;
+interface Props { class?: string; count?: string }
+const { class: cls, count = 'Sample 1 of 3' } = Astro.props;
 ---
 <figure class:list={['owner-alert', cls]} data-alert aria-label="Sample Benjaire Flow owner alert">
-  <header><i></i><i></i><i></i><span>Owner alert</span><span class="oa-count" data-alert-count>Sample 1 of 3</span></header>
+  <header><i></i><i></i><i></i><span>Owner alert</span><span class="oa-count" data-alert-count>{count}</span></header>
   <div class="oa-body" data-alert-body>
     <p class="oa-live"><b aria-hidden="true"></b>Sorted by Claude · just now</p>
     <p class="oa-title" data-alert-title>[Urgent] New inquiry: Dana Lee, Lee &amp; Co</p>
