@@ -159,6 +159,9 @@ h1 span, h2 span { color: var(--silver-ink); }
   background: var(--glass); border: 1px solid var(--glass-edge);
   -webkit-backdrop-filter: blur(16px) saturate(1.1); backdrop-filter: blur(16px) saturate(1.1);
 }
+/* Code-built night panels: cards float on black as solid white, not frosted. */
+.night { background: var(--cocoa); }
+.night .glass { background: var(--paper); border-color: rgba(255, 255, 255, .9); box-shadow: var(--shadow-3); -webkit-backdrop-filter: none; backdrop-filter: none; }
 
 /* ─── buttons ─── */
 .btn {

@@ -87,7 +87,6 @@
 .spec { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; list-style: none; }
 .spec li { font-size: 12px; padding: 6px 12px; border: 1px solid var(--line-mid); border-radius: var(--radius-pill); color: var(--fg); }
 .model .step-img { display: none; }
-.night { background: var(--cocoa); }
 .stage { position: relative; }
 .stage-frame { position: sticky; top: calc(var(--nav-h) + 4vh); height: calc(100vh - var(--nav-h) - 8vh); max-height: 860px; border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-raised); }
 .stage-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -173,6 +172,4 @@
   .js .reveal { transform: none; }
 }
 
-/* Code-built night panels: product cards float on black as solid white. */
-.night .glass { background: var(--paper); border-color: rgba(255, 255, 255, .9); box-shadow: var(--shadow-3); -webkit-backdrop-filter: none; backdrop-filter: none; }
 .has-hero .site-nav:not(.scrolled):not(:has(.nav-links.open)) .nav-toggle { background: var(--glass-night); border-color: var(--on-cocoa-line); }

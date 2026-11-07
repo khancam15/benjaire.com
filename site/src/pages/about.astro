@@ -2,17 +2,17 @@
 import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageBand from '../components/PageBand.astro';
-import bandImg from '../assets/pages/about.jpg';
+import bandImg from '../assets/home/pavilion.jpg';
 import { SITE } from '../site';
 // Pillar images reuse the approved Pavilion renders: the arch (systems) for
 // Digital Solutions, the canopy (where new brands take shape) for Consumer Brands.
-import archImg from '../assets/home/operate.jpg';
-import canopyImg from '../assets/home/build.jpg';
+import brandsImg from '../assets/home/reflection.jpg';
+import ModelVisual from '../components/ModelVisual.astro';
 
 const PILLARS = [
-  { name: 'Digital Solutions', status: 'In service validation', img: archImg, href: '/digital', link: 'Explore Digital Solutions',
+  { name: 'Digital Solutions', status: 'In service validation', img: null, href: '/digital', link: 'Explore Digital Solutions',
     text: 'Business automation, AI integration and workflow optimization for small professional services firms such as consulting firms and agencies. Currently in business development and service validation.' },
-  { name: 'Consumer Brands', status: 'In research and development', img: canopyImg, href: '/brands', link: 'See Consumer Brands',
+  { name: 'Consumer Brands', status: 'In research and development', img: brandsImg, href: '/brands', link: 'See Consumer Brands',
     text: 'Consumer technology, technology accessories, lifestyle products and ecommerce brands, each to launch under its own name. Currently in research and development.' },
 ];
 ---
@@ -22,7 +22,7 @@ const PILLARS = [
       <p class="eyebrow">About Benjaire</p>
       <h1>A company built around technology, design, and innovation.</h1>
       <p class="lead">Benjaire is a New York company focused on developing digital solutions and consumer brands. Through technology, design, and strategic innovation, we create products, services, and experiences for modern businesses and consumers.</p>
-      <PageBand src={bandImg} focus="right" alt="The Benjaire pavilion seen across still water: a low canopy, a ribbed arch and a reaching ribbon on one shared base" />
+      <PageBand src={bandImg} alt="The Benjaire pavilion seen across still water: a low canopy, a ribbed arch and a reaching ribbon on one shared base" />
     </div>
   </section>
 
@@ -54,8 +54,8 @@ const PILLARS = [
       <ul class="pillar-cards">
         {PILLARS.map((p) => (
           <li>
-            <div class="pillar-media">
-              <Picture src={p.img} formats={['avif', 'webp']} widths={[480, 840]} sizes="(min-width: 900px) 44vw, 100vw" alt="" loading="lazy" />
+            <div class:list={['pillar-media', { night: !p.img }]}>
+              {p.img ? <Picture src={p.img} formats={['avif', 'webp']} widths={[480, 840]} sizes="(min-width: 900px) 44vw, 100vw" alt="" loading="lazy" /> : <ModelVisual kind="operate" />}
               <span class="glass pillar-status">{p.status}</span>
             </div>
             <h3>{p.name}</h3>
