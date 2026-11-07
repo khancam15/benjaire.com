@@ -2,9 +2,9 @@
 
 /* ── Section rail ────────────────────────────────── */
 .rail { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 40; display: grid; gap: 8px; list-style: none; }
-.rail li { width: 3px; height: 22px; border-radius: 2px; background: rgba(31, 33, 36, .18); transition: background .3s, height .3s var(--ease); }
+.rail li { width: 3px; height: 22px; border-radius: 2px; background: var(--line-mid); transition: background .3s, height .3s var(--ease); }
 .rail li.on { background: var(--fg); height: 34px; }
-.rail.on-dark li { background: rgba(233, 234, 236, .25); }
+.rail.on-dark li { background: var(--on-cocoa-line); }
 .rail.on-dark li.on { background: var(--on-cocoa); }
 
 /* ── 1 · Hero ────────────────────────────────────── */
@@ -18,7 +18,7 @@
 
 .pins { position: absolute; inset: 0; pointer-events: none; }
 .pin { pointer-events: auto; position: absolute; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--fg); transform: translate(-8px, -8px); }
-.pin .dot { width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 6px rgba(255, 255, 255, .45), 0 0 0 1px var(--line-mid); flex: none; position: relative; }
+.pin .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 6px rgba(255, 255, 255, .45), 0 0 0 1px var(--line-mid); flex: none; position: relative; }
 .pin .dot::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .9); animation: ping 3.2s var(--ease) infinite; }
 .pin-label { display: grid; padding: 9px 14px; border-radius: 12px; background: var(--glass); border: 1px solid var(--glass-edge); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); white-space: nowrap; transition: transform .35s var(--ease), background .35s; }
 .pin-label b { font: 600 13px var(--display); font-stretch: 118%; letter-spacing: .12em; text-transform: uppercase; }
@@ -67,7 +67,7 @@
     .h-statement span { animation: ink linear both; animation-timeline: view(); animation-range: entry 20% cover 45%; }
   }
 }
-@keyframes ink { from { color: #c3c6ca; } to { color: var(--fg); } }
+@keyframes ink { from { color: var(--silver); } to { color: var(--fg); } }
 .philo-foot { display: grid; grid-template-columns: minmax(0, 52ch) auto; gap: 24px 48px; align-items: end; margin-top: clamp(32px, 4vw, 56px); }
 .h-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(48px, 6vw, 88px); border-top: 1px solid var(--line); }
 .h-facts div { padding-top: 18px; display: grid; gap: 6px; }
@@ -132,15 +132,15 @@
 .partner-intro { display: grid; gap: 20px; align-content: start; justify-items: start; }
 .partner-intro p:not(.mono) { color: var(--on-cocoa-low); max-width: 42ch; }
 .partner-intro .email { color: var(--on-cocoa); letter-spacing: .06em; text-transform: none; font-size: 14px; user-select: all; }
-.routes { align-self: end; border-top: 1px solid rgba(233, 234, 236, .16); list-style: none; }
-.routes a { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: baseline; gap: 16px; padding-block: 24px; border-bottom: 1px solid rgba(233, 234, 236, .16); text-decoration: none; font: 360 clamp(22px, 2.4vw, 34px)/1.1 var(--display); font-stretch: 112%; letter-spacing: -.03em; transition: padding .35s var(--ease); }
+.routes { align-self: end; border-top: 1px solid var(--on-cocoa-line); list-style: none; }
+.routes a { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: baseline; gap: 16px; padding-block: 24px; border-bottom: 1px solid var(--on-cocoa-line); text-decoration: none; font: 360 clamp(22px, 2.4vw, 34px)/1.1 var(--display); font-stretch: 112%; letter-spacing: -.03em; transition: padding .35s var(--ease); }
 .routes a > span:last-child { font-size: 20px; color: var(--on-cocoa-low); transition: transform .35s var(--ease); }
 .routes a:hover { padding-left: 10px; }
 .routes a:hover > span:last-child { transform: translateX(6px); color: var(--on-cocoa); }
 .partner :focus-visible { outline-color: var(--on-cocoa); }
 .partner .btn.primary { background: var(--on-cocoa); color: var(--cocoa); border-color: var(--on-cocoa); }
-.partner .btn.primary:hover { background: #ffffff; }
-.partner .btn.ghost { color: var(--on-cocoa); border-color: rgba(233, 234, 236, .35); }
+.partner .btn.primary:hover { background: var(--paper); }
+.partner .btn.ghost { color: var(--on-cocoa); border-color: var(--on-cocoa-line); }
 .partner .btn.ghost:hover { border-color: var(--on-cocoa); }
 
 /* ── Tablet ──────────────────────────────────────── */
