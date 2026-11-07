@@ -79,36 +79,6 @@ if (stage && steps.length) {
   steps.forEach((s) => io.observe(s));
 }
 
-// Focus areas: the active index row drives the annotation card.
-const index = document.querySelector<HTMLElement>('[data-index]');
-const fName = document.querySelector<HTMLElement>('[data-focus-name]');
-const fText = document.querySelector<HTMLElement>('[data-focus-text]');
-const fCount = document.querySelector<HTMLElement>('[data-focus-count]');
-if (index) {
-  const rows = [...index.querySelectorAll<HTMLElement>('li')];
-  const activate = (row: HTMLElement) => {
-    rows.forEach((r) => r.classList.toggle('on', r === row));
-    const i = rows.indexOf(row);
-    if (fName) fName.textContent = row.querySelector('h3')?.textContent ?? '';
-    if (fText) fText.textContent = row.querySelector('p')?.textContent ?? '';
-    if (fCount) fCount.textContent = `Category ${String(i + 1).padStart(2, '0')} / ${String(rows.length).padStart(2, '0')}`;
-  };
-  rows.forEach((r) => {
-    r.addEventListener('pointerenter', () => activate(r));
-    r.addEventListener('focus', () => activate(r));
-  });
-}
-const tilt = document.querySelector<HTMLElement>('[data-tilt]');
-const card = tilt?.querySelector<HTMLElement>('.focus-card');
-if (tilt && card && finePointer && !reduce) {
-  tilt.addEventListener('pointermove', (e) => {
-    const r = tilt.getBoundingClientRect();
-    card.style.setProperty('--ry', `${(((e.clientX - r.left) / r.width - 0.5) * 8).toFixed(2)}deg`);
-    card.style.setProperty('--rx', `${(((e.clientY - r.top) / r.height - 0.5) * -6).toFixed(2)}deg`);
-  });
-  tilt.addEventListener('pointerleave', () => { card.style.setProperty('--ry', '0deg'); card.style.setProperty('--rx', '0deg'); });
-}
-
 // Section rail: marks the section in view; turns light over the dark band.
 const rail = document.querySelector<HTMLElement>('.rail');
 if (rail) {
