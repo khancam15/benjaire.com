@@ -87,7 +87,7 @@ test('builds a valid plain-text MIME message', async () => {
     from: { name: 'Benjaire website', email: 'website@benjaire.com' },
     to: 'inbox@example.com',
     replyTo: { name: 'José "Q" Pérez', email: 'jose@example.com' },
-    subject: '[Brand Collaboration] José Pérez',
+    subject: '[Partnership] José Pérez',
     text: 'Hola — línea uno\nline two',
     messageId: '<abc@benjaire.com>',
     date: new Date('2026-10-13T00:00:00Z'),
@@ -102,7 +102,7 @@ test('builds a valid plain-text MIME message', async () => {
   const decoded = new TextDecoder().decode(Uint8Array.from(atob(body.replace(/\r\n/g, '')), (c) => c.charCodeAt(0)));
   assert.equal(decoded, 'Hola — línea uno\nline two');
   const subject = head.match(/^Subject: =\?UTF-8\?B\?(.+)\?=$/m)![1];
-  assert.equal(new TextDecoder().decode(Uint8Array.from(atob(subject), (c) => c.charCodeAt(0))), '[Brand Collaboration] José Pérez');
+  assert.equal(new TextDecoder().decode(Uint8Array.from(atob(subject), (c) => c.charCodeAt(0))), '[Partnership] José Pérez');
 });
 
 test('fallback payment links match the site buy buttons', () => {
