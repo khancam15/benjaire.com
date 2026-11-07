@@ -44,6 +44,7 @@
   --on-cocoa-line: rgba(232, 237, 243, .16);
   --ice:         #8fb3dc;  /* signal light on night, 8.9:1 */
   --danger:      #a3271a;
+  --danger-tint: #f8e9e7;  /* danger text on it 6.2:1 */
   --graphite: linear-gradient(90deg, #3d4651, #9fb1c6);
   --metal: linear-gradient(90deg, #e8edf3, #8fb3dc);  /* display highlight on night */
   --glass: rgba(255, 255, 255, .64);

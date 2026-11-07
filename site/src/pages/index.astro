@@ -4,38 +4,24 @@
 // Consumer Brands). Digital Solutions leads; no separate division branding.
 // Layout styles: src/styles/home.css. Interactions: src/scripts/home.ts.
 import { getCollection } from 'astro:content';
-import { getImage, Picture } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import BrandGrid from '../components/BrandGrid.astro';
+import OwnerAlert from '../components/OwnerAlert.astro';
+import ModelVisual from '../components/ModelVisual.astro';
 import { SITE, CATEGORIES, FLOW_CHECKOUT } from '../site';
 import '../styles/home.css';
-import pavilion from '../assets/home/pavilion.jpg';
-import pavilionPortrait from '../assets/home/pavilion-portrait.jpg';
-import buildImg from '../assets/home/build.jpg';
-import operateImg from '../assets/home/operate.jpg';
-import growImg from '../assets/home/grow.jpg';
 import reflection from '../assets/home/reflection.jpg';
-
-// Art-directed hero: a wide render for desktop, a portrait crop for phones.
-const wide = { src: pavilion, widths: [1200, 1800, 2400] };
-const tall = { src: pavilionPortrait, widths: [480, 720, 864] };
-const [wideAvif, wideWebp, tallAvif, tallWebp, fallback] = await Promise.all([
-  getImage({ ...wide, format: 'avif', quality: 60 }),
-  getImage({ ...wide, format: 'webp', quality: 72 }),
-  getImage({ ...tall, format: 'avif', quality: 60 }),
-  getImage({ ...tall, format: 'webp', quality: 72 }),
-  getImage({ src: pavilion, width: 1800, format: 'jpg', quality: 76 }),
-]);
 
 // Build → Operate → Grow is a real sequence, so it is numbered.
 const STEPS = [
-  { id: 'build', name: 'Build', role: 'Solutions and brands', img: buildImg, form: 'The canopy',
+  { id: 'build', name: 'Build', role: 'Solutions and brands', form: 'From brief to launch',
     text: 'We develop technology solutions for businesses and consumer brands, from research and design to launch.',
     spec: ['Research', 'Design', 'Product', 'Launch'] },
-  { id: 'operate', name: 'Operate', role: 'Systems and delivery', img: operateImg, form: 'The arch',
+  { id: 'operate', name: 'Operate', role: 'Systems and delivery', form: 'Systems that run daily',
     text: 'We run lean, repeatable systems to deliver services and manage operations, from client projects to sourcing and partnerships.',
     spec: ['Service delivery', 'Operations', 'Sourcing', 'Automation'] },
-  { id: 'grow', name: 'Grow', role: 'Validation and expansion', img: growImg, form: 'The ribbon',
+  { id: 'grow', name: 'Grow', role: 'Validation and expansion', form: 'Proof before scale',
     text: 'We validate demand before investing, strengthen what works and expand into new services, markets and product categories.',
     spec: ['Validation', 'Ongoing support', 'New categories'] },
 ];
@@ -54,51 +40,32 @@ const hasBrands = (await getCollection('brands')).some((e) => e.data.featured);
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
 <Base hero>
-  <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={wideAvif.srcSet.attribute} imagesizes="100vw" media="(min-width: 900px)" />
-
   <ol class="rail" aria-hidden="true">
     {['hero', 'digital', 'philosophy', 'model', 'focus', 'portfolio', 'partner'].map((s, i) => <li data-rail={s} class={i === 0 ? 'on' : undefined}></li>)}
   </ol>
 
-  <!-- 1 · Hero -->
+  <!-- 1 · Hero: inquiries (lines of light) are sorted and land in one owner alert -->
   <section class="hero" id="hero" data-section="hero" aria-labelledby="hero-title">
-    <div class="hero-scene">
-      <picture>
-        <source media="(max-width: 899px)" type="image/avif" srcset={tallAvif.srcSet.attribute} sizes="100vw" />
-        <source media="(max-width: 899px)" type="image/webp" srcset={tallWebp.srcSet.attribute} sizes="100vw" />
-        <source type="image/avif" srcset={wideAvif.srcSet.attribute} sizes="100vw" />
-        <source type="image/webp" srcset={wideWebp.srcSet.attribute} sizes="100vw" />
-        <img src={fallback.src} width="2752" height="1536" alt="An abstract white pavilion of three curved shells, a low canopy, a ribbed arch and a reaching ribbon, rising from still water on one shared base" fetchpriority="high" loading="eager" decoding="async" />
-      </picture>
-    </div>
-
-    <div class="hero-ui">
+    <canvas class="hero-signal" data-signal aria-hidden="true"></canvas>
+    <div class="hero-pane" aria-hidden="true"></div>
+    <div class="wrap hero-ui">
       <div class="hero-copy">
-        <p class="mono reveal">Benjaire · New York · Est. {SITE.founded}</p>
+        <p class="eyebrow reveal">Digital Solutions · New York · Est. {SITE.founded}</p>
         <h1 id="hero-title" class="reveal">Building brands. <span>Powering businesses.</span></h1>
-        <p class="lead hero-lead reveal">{SITE.metaDescription}</p>
+        <p class="lead hero-lead reveal">Benjaire builds workflow automation for service firms. Our first product, Benjaire Flow, sorts every website inquiry with Claude and hands you one email you can act on with a tap.</p>
         <div class="actions reveal">
           <a class="btn primary" href="/digital/flow">Meet Benjaire Flow <span aria-hidden="true">→</span></a>
           <a class="btn ghost" href="/digital">Explore Digital Solutions</a>
         </div>
+        <dl class="hero-proof reveal">
+          <div><dt>Ready-made workflows</dt><dd>6</dd></div>
+          <div><dt>Typical first setup</dt><dd>45–90 min</dd></div>
+          <div><dt>One time, from</dt><dd>$79</dd></div>
+        </dl>
       </div>
-
-      <nav class="pins" aria-label="The operating model">
-        {STEPS.map((s) => (
-          <a class={`pin pin-${s.id}`} href={`#${s.id}`}>
-            <span class="dot" aria-hidden="true"></span>
-            <span class="pin-label"><b>{s.name}</b><em>{s.role}</em></span>
-          </a>
-        ))}
-      </nav>
-
-      <aside class="glass hero-card" aria-label="Featured solution">
-        <p class="mono">New · Benjaire Flow v1.0</p>
-        <p>The inquiry system for service firms. Your website contact form becomes a managed inquiry pipeline in your own n8n.</p>
-        <a class="btn primary" href="/digital/flow#pricing">See pricing · from $79 <span aria-hidden="true">→</span></a>
-      </aside>
+      <OwnerAlert class="hero-alert" />
     </div>
-    <span class="scroll-cue mono" aria-hidden="true">Scroll</span>
+    <p class="wrap hero-legend" aria-hidden="true"><span><i></i>Inquiries arriving</span><span><i class="sorted"></i>Sorted by Flow</span></p>
   </section>
 
   <!-- 2 · Digital Solutions -->
@@ -114,8 +81,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
       </div>
     </div>
     <div class="wrap">
-      <div class="plinth">
-        <Picture src={operateImg} formats={['avif', 'webp']} widths={[900, 1600]} sizes="100vw" alt="" loading="lazy" />
+      <div class="plinth night">
         <div class="glass plinth-card">
           <span class="badge">Available now</span>
           <p class="mono">Benjaire Flow · From $79</p>
@@ -163,7 +129,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
         <ol class="steps">
           {STEPS.map((s, i) => (
             <li class="step" id={s.id} data-step={i}>
-              <Picture class="step-img" src={s.img} formats={['avif', 'webp']} widths={[420, 840]} sizes="100vw" alt="" loading="lazy" />
+              <ModelVisual class="step-img" kind={s.id as 'build' | 'operate' | 'grow'} />
               <p class="mono">{pad(i + 1)} · {s.form}</p>
               <h3>{s.name}</h3>
               <p class="role">{s.role}</p>
@@ -173,9 +139,9 @@ const pad = (n: number) => String(n).padStart(2, '0');
           ))}
         </ol>
         <div class="stage" aria-hidden="true">
-          <div class="stage-frame" data-stage data-active="0">
+          <div class="stage-frame night" data-stage data-active="0">
             {STEPS.map((s, i) => (
-              <Picture class="stage-img" data-i={i} src={s.img} formats={['avif', 'webp']} widths={[560, 840]} sizes="(min-width: 900px) 42vw, 100vw" alt="" loading="lazy" />
+              <ModelVisual class="stage-img" i={i} kind={s.id as 'build' | 'operate' | 'grow'} />
             ))}
             <div class="stage-tag glass"><span class="mono" data-stage-label>01 · Build</span></div>
           </div>
@@ -201,8 +167,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
             </li>
           ))}
         </ul>
-        <div class="focus-visual" aria-hidden="true" data-tilt>
-          <Picture src={pavilion} formats={['avif', 'webp']} widths={[700, 1200]} sizes="(min-width: 900px) 50vw, 100vw" alt="" loading="lazy" />
+        <div class="focus-visual night" aria-hidden="true" data-tilt>
+
           <div class="glass focus-card">
             <span class="mono" data-focus-count>Category 01 / 03</span>
             <b data-focus-name>{FOCUS[0].name}</b>
