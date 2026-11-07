@@ -39,7 +39,7 @@ const TRIGGERS: { n: string; when: string; src: string; steps: [string, boolean?
     <figure class="tech-fig">
       <Picture src={archImg} formats={['avif', 'webp']} widths={[800, 1400, 2000]} sizes="(min-width: 1320px) 1208px, 92vw" alt="Architecture: contact form, Cloudflare Worker, six n8n workflows with three data tables, Claude, Resend and inboxes, with a fallback email path" loading="lazy" />
     </figure>
-    <div class="tbl-wrap">
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="Every trigger and what Flow does next">
       <table class="triggers">
         <caption class="mono">Events in, actions out. Dark steps are the emails that leave the system. Flow 5, data retention, is not shown.</caption>
         <thead><tr><th scope="col">When this happens</th><th scope="col">Flow does this</th></tr></thead>
@@ -77,6 +77,7 @@ const TRIGGERS: { n: string; when: string; src: string; steps: [string, boolean?
   .tech-body { display: grid; gap: var(--s-4); padding-bottom: var(--s-4); }
   .tech-fig { margin: 0; }
   .tech-fig :global(img) { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+  .tbl-wrap:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
   .tbl-wrap { overflow-x: auto; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); }
   .triggers { width: 100%; border-collapse: collapse; min-width: 640px; }
   .triggers caption { caption-side: bottom; text-align: left; padding: 14px 20px; font-size: 11px; }

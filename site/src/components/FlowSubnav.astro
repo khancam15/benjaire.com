@@ -29,5 +29,6 @@ const LINKS = [
   .flow-subnav ul::-webkit-scrollbar { display: none; }
   .flow-subnav ul a { display: inline-block; padding-block: 12px; font-size: 13px; color: var(--fg-mid); text-decoration: none; white-space: nowrap; }
   .flow-subnav ul a:hover { color: var(--signal); }
-  @media (max-width: 560px) { .flow-lockup span { display: none; } }
+  /* Visually hidden on small phones; the link keeps its name. */
+  @media (max-width: 560px) { .flow-lockup span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } }
 </style>

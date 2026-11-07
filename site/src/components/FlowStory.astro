@@ -46,8 +46,10 @@ const BEATS = [
   @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
     :global(.js) .story { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 96px); }
     :global(.js) .beats { gap: 0; }
-    :global(.js) .beat { min-height: 62vh; align-content: center; border-top: 1px solid var(--line); opacity: .4; transition: opacity var(--dur-base) var(--ease); }
-    :global(.js) .beat.on { opacity: 1; }
+    :global(.js) .beat { min-height: 62vh; align-content: center; border-top: 1px solid var(--line); }
+    :global(.js) .beat h3 { color: var(--fg-low); transition: color var(--dur-base) var(--ease); }
+    :global(.js) .beat.on { border-top-color: var(--signal); }
+    :global(.js) .beat.on h3 { color: var(--fg); }
     :global(.js) .beat-screen { display: none; }
     :global(.js) .device { display: block; }
   }
