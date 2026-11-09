@@ -16,7 +16,7 @@ export const SITE = {
     'Benjaire builds workflow automation and digital systems for service firms. Based in New York.',
   // Company slogan: title tag, share card, Organization schema and home hero.
   // The hero splits it at the full stop. Keep scripts/build-og.mjs in sync.
-  slogan: ['Smarter systems.', 'Better business.'],
+  slogan: ['Building brands.', 'Powering businesses.'],
   url: 'https://benjaire.com',
   email: 'contact@benjaire.com',
   location: 'New York, NY',

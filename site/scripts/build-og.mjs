@@ -57,8 +57,8 @@ const field = (tx, ty, n = 22) => {
     <circle cx="${tx}" cy="${ty}" r="22" fill="none" stroke="${C.ice}" stroke-opacity=".45"/>
     <circle cx="${tx}" cy="${ty}" r="7" fill="${C.ice}"/>
     <path d="M${tx} ${ty}H${W + 10}" stroke="${C.ice}" stroke-opacity=".5"/>
-    <text font-family="ArchivoOG400" font-size="60" letter-spacing="-1.8" fill="${C.on}"><tspan x="62" y="430">Smarter systems.</tspan></text>
-    <text font-family="ArchivoOG400" font-size="60" letter-spacing="-1.8" fill="${C.ice}"><tspan x="62" y="500">Better business.</tspan></text>
+    <text font-family="ArchivoOG400" font-size="60" letter-spacing="-1.8" fill="${C.on}"><tspan x="62" y="430">Building brands.</tspan></text>
+    <text font-family="ArchivoOG400" font-size="60" letter-spacing="-1.8" fill="${C.ice}"><tspan x="62" y="500">Powering businesses.</tspan></text>
     <text x="64" y="566" font-family="IBM Plex Mono" font-size="15" letter-spacing="2.4" fill="${C.low}">DIGITAL SOLUTIONS · BENJAIRE.COM · NEW YORK</text>
   </svg>`;
   await sharp(Buffer.from(svg))

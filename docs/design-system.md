@@ -1,6 +1,6 @@
 # Benjaire Design System (v0.4, "Silver Blue")
 
-- **Status:** Palette chosen by the owner 2026-11-07; in review on this branch, not yet live. Benjaire is Digital Solutions only from 2026-11-07 (Consumer Brands retired), slogan "Smarter systems. Better business." Supersedes v0.3 "The Pavilion" and the v1 product layer, which are kept below for history.
+- **Status:** Palette chosen by the owner 2026-11-07; in review on this branch, not yet live. Benjaire is Digital Solutions only from 2026-11-07 (Consumer Brands retired), slogan kept as "Building brands. Powering businesses." (owner decision 2026-11-09) Supersedes v0.3 "The Pavilion" and the v1 product layer, which are kept below for history.
 - **Direction:** Benjaire reads as a digital solutions company. Benjaire and Benjaire Flow share every token and component; Flow is set apart only by its product UI. Visuals are code-built: live product UI, a canvas "signal field" (lines that converge and land in a Flow owner alert), outcome cards and a four-stop "how it works" path. No stock or generated photos, robots, glowing brains, circuit boards or invented metrics.
 - **Palette picker:** https://claude.ai/artifact/LK26bYHW3rZ68QZgCBp9sY · **Direction preview:** https://claude.ai/artifact/1KbaRypQ5SWvR5c2mhdHJR
 

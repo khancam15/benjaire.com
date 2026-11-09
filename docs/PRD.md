@@ -1,6 +1,6 @@
 # Benjaire.com — Product Requirements Document (v0.2)
 
-> **Update 2026-11-07: Consumer Brands retired.** Benjaire is now one business, **Digital Solutions** (workflow automation and digital systems for service firms; first product Benjaire Flow). Everything below about brands, the Brands page, the brand content model, suppliers and manufacturing is **retired** and kept only as history: §3.3, §3.5, §4.3, US-2, US-4 and the brand rows in §4.1, §11 and §12. `/brands` now redirects to `/digital`, and the contact categories are Digital Solutions, General Business Inquiry and Partnership. Slogan: "Smarter systems. Better business."
+> **Update 2026-11-07: Consumer Brands retired.** Benjaire is now one business, **Digital Solutions** (workflow automation and digital systems for service firms; first product Benjaire Flow). Everything below about brands, the Brands page, the brand content model, suppliers and manufacturing is **retired** and kept only as history: §3.3, §3.5, §4.3, US-2, US-4 and the brand rows in §4.1, §11 and §12. `/brands` now redirects to `/digital`, and the contact categories are Digital Solutions, General Business Inquiry and Partnership. Slogan unchanged: "Building brands. Powering businesses." (owner decision 2026-11-09, read as building clients' brands).
 
 | | |
 |---|---|
